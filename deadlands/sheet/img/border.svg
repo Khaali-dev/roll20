@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="163.93556mm"
+   height="164.52043mm"
+   viewBox="0 0 580.87403 582.94641"
+   id="svg11281"
+   version="1.1"
+   inkscape:version="0.91pre4 r13712"
+   sodipodi:docname="border.svg"
+   inkscape:export-filename="C:\Users\noelle.duvezin\Documents\deadlands\Dev\Deadlands Classic Anniversary\img\border.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs11283" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="124.5806"
+     inkscape:cy="294.57153"
+     inkscape:document-units="px"
+     inkscape:current-layer="g11873"
+     showgrid="false"
+     showguides="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="-0.6"
+     fit-margin-bottom="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid11841"
+       originx="-68.500004"
+       originy="-268.55358" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata11286">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-68.5,-200.8622)">
+    <g
+       id="g11873">
+      <g
+         style="stroke:#000000;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;fill:none"
+         id="g11857">
+        <g
+           style="stroke:#000000;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;fill:none"
+           id="g11847">
+          <path
+             style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers stroke fill"
+             d="m 200,772.79077 0,-80 -80,0 0,40 40,0 0,-80 -80,0 0,-160.21428 0,-160.21429 80,0 0,-80 -40,0 0,40 80,0 0,-80 159.5,0 159.5,0 0,80 80,0 0,-40 -40,0 0,80 80,0 0,160.21429 0,160.21428 -80,0 0,80 40,0 0,-40 -80,0 0,80 -159.5,0 z"
+             id="path11896"
+             inkscape:connector-curvature="0"
+             sodipodi:nodetypes="ccccccccccccccccccccccccccccccccc"
+             inkscape:export-xdpi="90"
+             inkscape:export-ydpi="90" />
+          <path
+             sodipodi:nodetypes="ccccccccccccccccccccccccccccccccc"
+             inkscape:connector-curvature="0"
+             id="path11843"
+             d="m 200,772.79077 0,-80 -80,0 0,40 40,0 0,-80 -80,0 0,-160.21428 0,-160.21429 80,0 0,-80 -40,0 0,40 80,0 0,-80 159.5,0 159.5,0 0,80 80,0 0,-40 -40,0 0,80 80,0 0,160.21429 0,160.21428 -80,0 0,80 40,0 0,-40 -80,0 0,80 -159.5,0 z"
+             style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers stroke fill" />
+        </g>
+        <g
+           style="stroke:#000000;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;fill:none"
+           id="g11851"
+           transform="matrix(1,0,0,-1,0,985.15297)" />
+      </g>
+      <path
+         sodipodi:nodetypes="cccccccccccccccccccccccccccccc"
+         style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers stroke fill"
+         d="m 650,492.30863 0,170 -80,0 0,60 20,0 0,-20 -60,0 0,80 -340,0 0,-80 -60,0 0,20 20,0 0,-60 -80,0 0,-339.94643 80,0 0,-60 -20,0 0,20 60,0 0,-80 340,0 0,80 60,0 0,-20 -20,0 0,60 80,0 0,170"
+         id="path11867"
+         inkscape:connector-curvature="0" />
+    </g>
+  </g>
+</svg>
