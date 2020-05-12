@@ -4,27 +4,31 @@
     <div class="sheet-col">
       <div>
         <div class="sheet-row">
-          <h2><span data-i18n="name">Name</span>:</h2>
+            <h3>
+                <span data-i18n="name">Name:</span></h3>
+            <input type="text" name="attr_charname" /> <br />
         </div>
-        <div class="sheet-row sheet-big buttons">
-          <input type="text" name="attr_charname" /> <br />
-          <h3><span data-i18n="gmRollToggle">GM Roll Toggle</span></h3>
+        <div class="sheet-row sheet-buttons sheet-big">
+            <h3>
+          <span data-i18n="gmRollToggle">GM Roll Toggle</span>
+            </h3>
           <input type="radio" name="attr_gmtoggle" value="/w gm " /><span data-i18n="on">On</span>
           <input type="radio" name="attr_gmtoggle" value="" checked="checked" /><span data-i18n="off">Off</span>
         </div>
       </div>
     </div>
     <div class="sheet-col">
-      <img src="http://i.imgur.com/IRCeOyE.png">
+      <img src="http://i.imgur.com/IRCeOyE.png" alt="banner"/>
     </div>
     <div class="sheet-col">
       <div>
         <div class="sheet-row">
-          <h2><span data-i18n="occupation">Occupation</span></h2>
+          <h3><span data-i18n="occupation">Occupation</span></h3>
         </div>
         <div class="sheet-row sheet-big">
-          <input type="text" name="attr_charocc"> <br />
-		  <h2><span data-i18n="bounty">Bounty</span> <span style="font-size: xx-small;"><span data-i18n="unspent">unspent</span></span></h3><br>
+          <input type="text" name="attr_charocc"/> <br />
+		  <h3><span data-i18n="bounty">Bounty</span> </h3>
+            <span style="font-size: xx-small;"></span><span data-i18n="unspent">unspent</span><br/>
 		  <span class="sheet-third"> <input type="text" name="attr_bountyunspent" class="sheet-third" /></span> /  <span class="sheet-third"><input type="text" name="attr_bountytotal" /></span>
         </div>
       </div>
@@ -33,122 +37,148 @@
   <br>
   <!-- Navigation -->
     <input type="radio" class="sheet-tab sheet-tab5" name="attr_core-tab" value="5" title="Core" checked="checked"/>
-    <span class="sheet-tab sheet-tab5" style='line-height: 40px;' data-i18n="core">Core</span>
+    <span class="sheet-tab sheet-tab5" style="line-height: 40px;" data-i18n="core">Core</span>
 
     <input type="radio" class="sheet-tab sheet-tab1" name="attr_core-tab" value="1" title="Traits &amp; Aptitudes" />
-    <span class="sheet-tab sheet-tab1" style='line-height: 40px;' data-i18n="traits">Traits &amp; Aptitudes</span>
+    <span class="sheet-tab sheet-tab1" style="line-height: 40px;" data-i18n="traits">Traits &amp; Aptitudes</span>
 
     <input type="radio" class="sheet-tab sheet-tab2" name="attr_core-tab" value="2" title="Combat Stuff"/>
-    <span class="sheet-tab sheet-tab2" style='line-height: 40px;' data-i18n="combat">Combat Stuff</span>
+    <span class="sheet-tab sheet-tab2" style="line-height: 40px;" data-i18n="combat">Combat</span>
 
-    <input type="radio" class="sheet-tab sheet-tab3" name="attr_core-tab" value="3" title="Arcane Ablities"/>
-    <span class="sheet-tab sheet-tab3" style='line-height: 40px;' data-i18n="arcane">Arcane Ablities</span>
+    <input type="radio" class="sheet-tab sheet-tab3" name="attr_core-tab" value="3" title="Arcane Abilities"/>
+    <span class="sheet-tab sheet-tab3" style="line-height: 40px;" data-i18n="arcane">Arcane</span>
 
-    <input type="radio" class="sheet-tab sheet-tab4" name="attr_core-tab" value="4" title="Misc"/>
-    <span class="sheet-tab sheet-tab4" style='line-height: 40px;' data-i18n="misc">Misc</span>
 
-    <input type="radio" class="sheet-tab sheet-tab6" name="attr_core-tab" value="6" title="Obsolete Data"/>
-    <span class="sheet-tab sheet-tab6" style='line-height: 40px;' data-i18n="obsolete">Obsolete Data</span>
 
   <!-- Navigation -->
   <br><br>
   <div class="sheet-section-core">
-    <div class="sheet-borderdiv">
-      <div class="sheet-row sheet-h1">
-        <div class="sheet-center" data-i18n="coreAttributes">Core Attributes</div>
+      <div class="sheet-2colrow">
+          <div class="sheet-col">
+              <div class="sheet-borderdiv">
+                  <div class="sheet-row">
+                      <div class="sheet-center">            
+                          <h2><span data-i18n="coreAttributes">Core Attributes</span></h2>
+                      </div>
+                  </div>
+                  <div class="sheet-4colrow">
+                          <div class="sheet-item">
+                              <span data-i18n="pace">Pace</span>
+                              <input type="number" name="attr_pace" placeholder="0"/>
+                          </div>
+                      
+                          <div class="sheet-item">
+                              <span data-i18n="size">Size</span>
+                              <input type="number" name="attr_size"  placeholder="0"/>
+                          </div>
+                      
+                          <div class="sheet-item">
+                              <span data-i18n="maxWind">Max Wind</span>
+                              <input type="number" name="attr_maxwind"  placeholder="0"/>
+                          </div>
+                      
+                          <div class="sheet-item">
+                              <span data-i18n="grit">Grit</span>
+                              <input type="number" name="attr_grit" placeholder="0"/>
+                          </div>
+                      
+                  </div>
+              </div>
+          </div>
+          <div class="sheet-col"><div class="sheet-borderdiv">
+              <div class="sheet-row">
+                  <div class="sheet-center">
+                      <h2>
+                          <span data-i18n="commonRolls">Common Rolls</span></h2>
+                  </div>
+              </div>
+              <div class="sheet-4colrow">
+                  <div class="sheet-col">
+                      <div class="sheet-item sheet-xxxlarge"><label><b>
+                          <span data-i18n="gutsAndGrit">Guts + Grit</span>
+                      </b></label></div>
+                      <div class="sheet-item sheet-small">
+                          <button type="roll" name="roll_GutsGrit" value="@{gmtoggle}&{template:simple}  {{rollname=@{gutsAndGritMacro}}} {{dice=[[@{gutslvl}@{spidtype}!!k1+@{gutsmod}+@{grit}]]}}"></button>
+                      </div>
+                  </div>
+              </div>
+          </div></div>
       </div>
-      <div class="sheet-4colrow">
-        <div class="sheet-col">
-          <div class="sheet-item">
-            <span data-i18n="pace">Pace</span>
-            <input type="number" name="attr_pace" placeholder="0">
-          </div>
+    
+      <br/>
+      <div class="sheet-borderdiv">
+      <div class="sheet-row">
+          <div class="sheet-center">
+              <h2>
+                  <span data-i18n="chips">Fate Chips</span></h2>
         </div>
-        <div class="sheet-col">
-          <div class="sheet-item">
-            <span data-i18n="size">Size</span>
-            <input type="number" name="attr_size"  placeholder="0">
-          </div>
-        </div>
-        <div class="sheet-col">
-          <div class="sheet-item">
-            <span data-i18n="maxWind">Max Wind</span>
-            <input type="number" name="attr_maxwind"  placeholder="0">
-          </div>
-        </div>
-        <div class="sheet-col">
-          <div class="sheet-item">
-            <span data-i18n="grit">Grit</span>
-            <input type="number" name="attr_grit" placeholder="0">
-          </div>
-        </div>
-      </div>
-      <br>
-      <div class="sheet-row sheet-h1">
-        <div class="sheet-center"><span data-i18n="chips">Fate Chips</span></div>
       </div>
       <div class="sheet-2colrow">
         <div class="sheet-col">
-          <div class="sheet-row sheet-h3">
-              <div class="sheet-center"><span data-i18n="chipsW">White Chips</span></div>
+          <div class="sheet-row">
+              <div class="sheet-center sheet-h3">
+                  <h3><span data-i18n="chipsW">White Chips</span></h3>
+              </div>
           </div>
-          <div class="sheet-row chiprow">
-            <div class="sheet-item buttons">
-              <input type="radio" name="attr_fatew" value="0" checked="checked"><span>0</span>
+            <div class="sheet-row sheet-chiprow">
+              <div class="sheet-item sheet-buttons">
+              <input type="radio" name="attr_fatew" value="0" checked="checked"/><span>0</span>
             </div>
-            <div class="sheet-item buttons">
-              <input type="radio" name="attr_fatew" value="1"><span>1</span>
+              <div class="sheet-item sheet-buttons">
+              <input type="radio" name="attr_fatew" value="1"/><span>1</span>
             </div>
-            <div class="sheet-item buttons">
-              <input type="radio" name="attr_fatew" value="2"><span>2</span>
+              <div class="sheet-item sheet-buttons">
+              <input type="radio" name="attr_fatew" value="2"/><span>2</span>
             </div>
-            <div class="sheet-item buttons">
-              <input type="radio" name="attr_fatew" value="3"><span>3</span>
+              <div class="sheet-item sheet-buttons">
+              <input type="radio" name="attr_fatew" value="3"/><span>3</span>
             </div>
-            <div class="sheet-item buttons">
-              <input type="radio" name="attr_fatew" value="4"><span>4</span>
+              <div class="sheet-item sheet-buttons">
+              <input type="radio" name="attr_fatew" value="4"/><span>4</span>
             </div>
-            <div class="sheet-item buttons">
+              <div class="sheet-item sheet-buttons">
               <input type="radio" name="attr_fatew" value="5"><span>5</span>
             </div>
-            <div class="sheet-item buttons">
+              <div class="sheet-item sheet-buttons">
               <input type="radio" name="attr_fatew" value="6"><span>6</span>
             </div>
-            <div class="sheet-item buttons">
+              <div class="sheet-item sheet-buttons">
               <input type="radio" name="attr_fatew" value="7"><span>7</span>
             </div>
-            <div class="sheet-item buttons">
+              <div class="sheet-item sheet-buttons">
               <input type="radio" name="attr_fatew" value="8"><span>8</span>
             </div>
-            <div class="sheet-item buttons">
+              <div class="sheet-item sheet-buttons">
               <input type="radio" name="attr_fatew" value="9"><span>9</span>
             </div>
-            <div class="sheet-item buttons">
+              <div class="sheet-item sheet-buttons">
               <input type="radio" name="attr_fatew" value="10"><span>10</span>
             </div>
           </div>
         </div>
         <div class="sheet-col">
-          <div class="sheet-row sheet-h3 chiprow">
-            <div class="sheet-center"><span data-i18n="chipsL">Legendary Chips</span></div>
-          </div>
-          <div class="sheet-row buttons chiprow">
-            <div class="sheet-item buttons buttonsleg">
-              <input type="radio" name="attr_fatel" value="0"><span>0</span>
+            <div class="sheet-row sheet-h3 sheet-chiprow">
+            <div class="sheet-center">
+                <h3><span data-i18n="chipsL">Legendary Chips</span></h3>
             </div>
-            <div class="sheet-item buttons buttonsleg">
+          </div>
+            <div class="sheet-row sheet-buttons sheet-chiprow">
+                <div class="sheet-item sheet-buttons sheet-buttonsleg">
+              <input type="radio" name="attr_fatel" value="0" checked="checked"><span>0</span>
+            </div>
+              <div class="sheet-item sheet-buttons sheet-buttonsleg">
               <input type="radio" name="attr_fatel" value="1"><span>1</span>
             </div>
-            <div class="sheet-item buttons buttonsleg">
+                <div class="sheet-item sheet-buttons sheet-buttonsleg">
               <input type="radio" name="attr_fatel" value="2"><span>2</span>
             </div>
-            <div class="sheet-item buttons buttonsleg">
+                <div class="sheet-item sheet-buttons sheet-buttonsleg">
               <input type="radio" name="attr_fatel" value="3"><span>3</span>
             </div>
-            <div class="sheet-item buttons buttonsleg">
+                <div class="sheet-item sheet-buttons sheet-buttonsleg">
               <input type="radio" name="attr_fatel" value="4"><span>4</span>
             </div>
-            <div class="sheet-item buttons buttonsleg">
+                <div class="sheet-item sheet-buttons sheet-buttonsleg">
               <input type="radio" name="attr_fatel" value="5"><span>5</span>
             </div>
           </div>
@@ -157,99 +187,92 @@
     <div class="sheet-2colrow">
         <div class="sheet-col">
           <div class="sheet-row sheet-h3">
-            <div class="sheet-center"><span data-i18n="chipsR">Red Chips</span></div>
+            <div class="sheet-center">
+                <h3><span data-i18n="chipsR">Red Chips</span></h3>
+            </div>
           </div>
-          <div class="sheet-row chiprow">
-            <div class="sheet-item buttons buttonsred">
+            <div class="sheet-row sheet-chiprow">
+                <div class="sheet-item sheet-buttons sheet-buttonsred">
               <input type="radio" name="attr_fater" value="0" checked="checked"><span>0</span>
             </div>
-            <div class="sheet-item buttons buttonsred">
+                <div class="sheet-item sheet-buttons sheet-buttonsred">
               <input type="radio" name="attr_fater" value="1"><span>1</span>
             </div>
-            <div class="sheet-item buttons buttonsred">
+                <div class="sheet-item sheet-buttons sheet-buttonsred">
               <input type="radio" name="attr_fater" value="2"><span>2</span>
             </div>
-            <div class="sheet-item buttons buttonsred">
+                <div class="sheet-item sheet-buttons sheet-buttonsred">
               <input type="radio" name="attr_fater" value="3"><span>3</span>
             </div>
-            <div class="sheet-item buttons buttonsred">
+                <div class="sheet-item sheet-buttons sheet-buttonsred">
               <input type="radio" name="attr_fater" value="4"><span>4</span>
             </div>
-            <div class="sheet-item buttons buttonsred">
+                <div class="sheet-item sheet-buttons sheet-buttonsred">
               <input type="radio" name="attr_fater" value="5"><span>5</span>
             </div>
-            <div class="sheet-item buttons buttonsred">
+                <div class="sheet-item sheet-buttons sheet-buttonsred">
               <input type="radio" name="attr_fater" value="6"><span>6</span>
             </div>
-            <div class="sheet-item buttons buttonsred">
+                <div class="sheet-item sheet-buttons sheet-buttonsred">
               <input type="radio" name="attr_fater" value="7"><span>7</span>
             </div>
-            <div class="sheet-item buttons buttonsred">
+                <div class="sheet-item sheet-buttons sheet-buttonsred">
               <input type="radio" name="attr_fater" value="8"><span>8</span>
             </div>
-            <div class="sheet-item buttons buttonsred">
+                <div class="sheet-item sheet-buttons sheet-buttonsred">
               <input type="radio" name="attr_fater" value="9"><span>9</span>
             </div>
-            <div class="sheet-item buttons buttonsred">
+                <div class="sheet-item sheet-buttons sheet-buttonsred">
               <input type="radio" name="attr_fater" value="10"><span>10</span>
             </div>
           </div>
         </div>
         <div class="sheet-col">
           <div class="sheet-row sheet-h3">
-            <div class="sheet-center"><span data-i18n="chipsB">Blue Chips</span></div>
+            <div class="sheet-center">
+                <h3><span data-i18n="chipsB">Blue Chips</span></h3></div>
           </div>
-          <div class="sheet-row chiprow">
-            <div class="sheet-item buttons buttonsblue">
+            <div class="sheet-row sheet-chiprow">
+                <div class="sheet-item sheet-buttons sheet-buttonsblue">
               <input type="radio" name="attr_fateb" value="0" checked="checked"><span>0</span>
             </div>
-            <div class="sheet-item buttons buttonsblue">
+                <div class="sheet-item sheet-buttons sheet-buttonsblue">
               <input type="radio" name="attr_fateb" value="1"><span>1</span>
             </div>
-            <div class="sheet-item buttons buttonsblue">
+                <div class="sheet-item sheet-buttons sheet-buttonsblue">
               <input type="radio" name="attr_fateb" value="2"><span>2</span>
             </div>
-            <div class="sheet-item buttons buttonsblue">
+                <div class="sheet-item sheet-buttons sheet-buttonsblue">
               <input type="radio" name="attr_fateb" value="3"><span>3</span>
             </div>
-            <div class="sheet-item buttons buttonsblue">
+                <div class="sheet-item sheet-buttons sheet-buttonsblue">
               <input type="radio" name="attr_fateb" value="4"><span>4</span>
             </div>
-            <div class="sheet-item buttons buttonsblue">
+                <div class="sheet-item sheet-buttons sheet-buttonsblue">
               <input type="radio" name="attr_fateb" value="5"><span>5</span>
             </div>
-            <div class="sheet-item buttons buttonsblue">
+                <div class="sheet-item sheet-buttons sheet-buttonsblue">
               <input type="radio" name="attr_fateb" value="6"><span>6</span>
             </div>
-             <div class="sheet-item buttons buttonsblue">
+                <div class="sheet-item sheet-buttons sheet-buttonsblue">
               <input type="radio" name="attr_fateb" value="7"><span>7</span>
             </div>
-            <div class="sheet-item buttons buttonsblue">
+                <div class="sheet-item sheet-buttons sheet-buttonsblue">
               <input type="radio" name="attr_fateb" value="8"><span>8</span>
             </div>
-            <div class="sheet-item buttons buttonsblue">
+                <div class="sheet-item sheet-buttons sheet-buttonsblue">
               <input type="radio" name="attr_fateb" value="9"><span>9</span>
             </div>
-            <div class="sheet-item buttons buttonsblue">
+                <div class="sheet-item sheet-buttons sheet-buttonsblue">
               <input type="radio" name="attr_fateb" value="10"><span>10</span>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="sheet-borderdiv">
-      <div class="sheet-row sheet-h1">
-        <div class="sheet-center"><span data-i18n="commonRolls">Common Rolls</span></div>
-      </div>
-      <div class="sheet-4colrow">
-        <div class="sheet-col">
-          <div class="sheet-item sheet-xxxlarge"><label><b><span data-i18n="gutsAndGrit">Guts + Grit</span></b></label></div>
-          <div class="sheet-item sheet-small">
-            <button type="roll" name="roll_GutsGrit" value="@{gmtoggle}&{template:simple}  {{rollname=@{gutsAndGritMacro}}} {{dice=[[@{gutslvl}@{spidtype}!!k1+@{gutsmod}+@{grit}]]}}"></button>
-          </div>
-        </div>
-      </div>
-    </div>
+      
+      <br/>
+    
   </div>
   <!-- Sheet Header -->
 
@@ -261,17 +284,26 @@
         
             <!-- Colonne 1 -->
             <div class="sheet-col">
-            
+                
+                <div class="sheet-row">                        
+                    <div class="sheet-center">  
+                        <h2>
+                            <span data-i18n="mental">Mental</span></h2>
+                    </div>   
+                </div>
                 <!-- Perception -->
                 <div class="sheet-borderdiv">    
                     <!-- Attribut -->
                     <div class="sheet-row">
-                        <div class="sheet-item sheet-xhuge sheet-h2 sheet-attribute" ><label><b><span data-i18n="cognition">Cognition</span></b></label></div>
+                        <div class="sheet-item sheet-xhuge sheet-attribute" >
+                            <h3><label>
+                            <span data-i18n="cognition">Cognition</span>
+                        </label></h3></div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_coglvl"></div>
                         <div class="sheet-item sheet-tiny">d</div>
                         <div class="sheet-item sheet-large">
                             <select name="attr_cogdtype" class="dtype" style="margin-bottom: 0px; width: 60px">
-                                <option select="selected" value="d4">4</option>
+                                <option selected="selected" value="d4">4</option>
                                 <option value="d6">6</option>
                                 <option value="d8">8</option>
                                 <option value="d10">10</option>
@@ -364,12 +396,14 @@
                 <div class="sheet-borderdiv">
                     <!-- Attribut -->
                     <div class="sheet-row">
-                        <div class="sheet-item sheet-xhuge sheet-h2 sheet-attribute"><label><b><span data-i18n="knowledge">Knowledge</span></b></label></div>
+                        <div class="sheet-item sheet-xhuge sheet-attribute">
+                            <h3><label><b><span data-i18n="knowledge">Knowledge</span></b></label></h3>
+                        </div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_knolvl"></div>
                         <div class="sheet-item sheet-tiny">d</div>
                         <div class="sheet-item sheet-large">
                             <select name="attr_knodtype" class="dtype" style="margin-bottom: 0px; width: 60px">
-                                <option select="selected" value="d4">4</option>
+                                <option selected="selected" value="d4">4</option>
                                 <option value="d6">6</option>
                                 <option value="d8">8</option>
                                 <option value="d10">10</option>
@@ -575,12 +609,14 @@
                 <div class="sheet-borderdiv">
                     <!-- Attribute -->
                     <div class="sheet-row">
-                        <div class="sheet-item sheet-xhuge sheet-h2 sheet-attribute"><label><b><span data-i18n="mine">Mine'</span></b></label></div>
+                        <div class="sheet-item sheet-xhuge sheet-attribute">
+                            <h3><label><b><span data-i18n="mine">Mine'</span></b></label></h3>
+                        </div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_mienlvl"></div>
                         <div class="sheet-item sheet-tiny">d</div>
                         <div class="sheet-item sheet-large">
                             <select name="attr_miendtype" class="dtype" style="margin-bottom: 0px; width: 60px">
-                                <option select="selected" value="d4">4</option>
+                                <option selected="selected" value="d4">4</option>
                                 <option value="d6">6</option>
                                 <option value="d8">8</option>
                                 <option value="d10">10</option>
@@ -690,12 +726,14 @@
                 <div class="sheet-borderdiv">
                     <!-- Attribut -->
                     <div class="sheet-row">
-                        <div class="sheet-item sheet-xhuge sheet-h2 sheet-attribute"><label><b><span data-i18n="spirit">Spirit</span></b></label></div>
+                        <div class="sheet-item sheet-xhuge sheet-attribute">
+                            <h3><label><b><span data-i18n="spirit">Spirit</span></b></label></h3>
+                        </div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_spilvl"></div>
                         <div class="sheet-item sheet-tiny">d</div>
                         <div class="sheet-item sheet-large">
                             <select name="attr_spidtype" class="dtype" style="margin-bottom: 0px; width: 60px">
-                                <option select="selected" value="d4">4</option>
+                                <option selected="selected" value="d4">4</option>
                                 <option value="d6">6</option>
                                 <option value="d8">8</option>
                                 <option value="d10">10</option>
@@ -749,16 +787,25 @@
             <!-- Colonne 2 -->
             <div class="sheet-col">
             
+            
+                <div class="sheet-row">                        
+                    <div class="sheet-center">     
+                        <h2>
+                            <span data-i18n="physique">Corporeal</span></h2>
+                    </div>   
+                </div>
                 <!-- Dexterite -->
                 <div class="sheet-borderdiv">
                     <!-- Attribut -->
                     <div class="sheet-row">
-                        <div class="sheet-item sheet-xhuge sheet-h2 sheet-attribute"><label><b><span data-i18n="deftness">Deftness</span></b></label></div>
+                        <div class="sheet-item sheet-xhuge sheet-attribute">
+                            <h3><label><b><span data-i18n="deftness">Deftness</span></b></label></h3>
+                        </div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_deflvl"></div>
                         <div class="sheet-item sheet-tiny">d</div>
                         <div class="sheet-item sheet-large">
                             <select name="attr_defdtype" class="dtype" style="margin-bottom: 0px; width: 60px">
-                                <option select="selected" value="d4">4</option>
+                                <option selected="selected" value="d4">4</option>
                                 <option value="d6">6</option>
                                 <option value="d8">8</option>
                                 <option value="d10">10</option>
@@ -879,12 +926,14 @@
                 <div class="sheet-borderdiv">
                     <!-- Attribut -->
                     <div class="sheet-row">
-                        <div class="sheet-item sheet-xhuge sheet-h2 sheet-attribute"><label><b><span data-i18n="nimbleness">Nimbleness</span></b></label></div>
+                        <div class="sheet-item sheet-xhuge sheet-attribute">
+                            <h3><label><b><span data-i18n="nimbleness">Nimbleness</span></b></label></h3>
+                        </div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_nimlvl"></div>
                         <div class="sheet-item sheet-tiny">d</div>
                         <div class="sheet-item sheet-large">
                             <select name="attr_nimdtype" class="dtype" style="margin-bottom: 0px; width: 60px">
-                                <option select="selected" value="d4">4</option>
+                                <option selected="selected" value="d4">4</option>
                                 <option value="d6">6</option>
                                 <option value="d8">8</option>
                                 <option value="d10">10</option>
@@ -1011,12 +1060,14 @@
                 <div class="sheet-borderdiv">
                     <!-- Attribut -->
                     <div class="sheet-row">
-                        <div class="sheet-item sheet-xhuge sheet-h2 sheet-attribute"><label><b><span data-i18n="smarts">Smarts</span></b></label></div>
+                        <div class="sheet-item sheet-xhuge  sheet-attribute">
+                            <h3><label><b><span data-i18n="smarts">Smarts</span></b></label></h3>
+                        </div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_smalvl"></div>
                         <div class="sheet-item sheet-tiny">d</div>
                         <div class="sheet-item sheet-large">
                             <select name="attr_smadtype" class="dtype" style="margin-bottom: 0px; width: 60px">
-                                <option select="selected" value="d4">4</option>
+                                <option selected="selected" value="d4">4</option>
                                 <option value="d6">6</option>
                                 <option value="d8">8</option>
                                 <option value="d10">10</option>
@@ -1131,12 +1182,16 @@
                 <div class="sheet-borderdiv">
                     <!-- Attribut -->
                     <div class="sheet-row">
-                        <div class="sheet-item sheet-xhuge sheet-h2 sheet-attribute"><label><b><span data-i18n="strength">Strength</span></b></label></div>
+                        <div class="sheet-item sheet-xhuge  sheet-attribute">
+                            <h3><label>
+                            <span data-i18n="strength">Strength</span>
+                        </label></h3>
+                        </div>
                         <div class="sheet-item sheet-large"><input type="number" name="attr_strlvl" value=""></div>
                         <div class="sheet-item sheet-tiny">d</div>
                         <div class="sheet-item sheet-large">
                             <select name="attr_strdtype" class="dtype" style="margin-bottom: 0px; width: 60px">
-                                <option select="selected" value="d4">4</option>
+                                <option selected="selected" value="d4">4</option>
                                 <option value="d6">6</option>
                                 <option value="d8">8</option>
                                 <option value="d10">10</option>
@@ -1167,12 +1222,14 @@
                 <div class="sheet-borderdiv">
                     <!-- Attribut -->
                     <div class="sheet-row">
-                        <div class="sheet-item sheet-xhuge sheet-h2 sheet-attribute"><label><b><span data-i18n="vigor">Vigor</span></b></label></div>
+                        <div class="sheet-item sheet-xhuge  sheet-attribute">
+                            <h3><label><span data-i18n="vigor">Vigor</span></label></h3>
+                        </div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_viglvl"></div>
                         <div class="sheet-item sheet-tiny">d</div>
                         <div class="sheet-item sheet-large">
                             <select name="attr_vigdtype" class="dtype" style="margin-bottom: 0px; width: 60px">
-                                <option select="selected" value="d4">4</option>
+                                <option selected="selected" value="d4">4</option>
                                 <option value="d6">6</option>
                                 <option value="d8">8</option>
                                 <option value="d10">10</option>
@@ -1202,12 +1259,14 @@
                 <!-- Rapidite -->
                 <div class="sheet-borderdiv">
                     <div class="sheet-row">
-                        <div class="sheet-item sheet-xhuge sheet-h2 sheet-attribute"><label><b><span data-i18n="quickness">Quickness</span></b></label></div>
+                        <div class="sheet-item sheet-xhuge  sheet-attribute">
+                            <h3><label><span data-i18n="quickness">Quickness</span></label></h3>
+                        </div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_quilvl"></div>
                         <div class="sheet-item sheet-tiny">d</div>
                         <div class="sheet-item sheet-large">
                             <select name="attr_quidtype" class="dtype" style="margin-bottom: 0px; width: 60px">
-                                <option select="selected" value="d4">4</option>
+                                <option selected="selected" value="d4">4</option>
                                 <option value="d6">6</option>
                                 <option value="d8">8</option>
                                 <option value="d10">10</option>
@@ -1256,8 +1315,9 @@
   <!-- Combat Stuff Tab -->
   <div class="sheet-section-combat">
     <div class="sheet-borderdiv">
-      <div class="sheet-row sheet-h1">
-        <div class="sheet-center"><span data-i18n="wounds">Wounds</span></div>
+      <div class="sheet-row">
+        <div class="sheet-center">
+            <h2><span data-i18n="wounds">Wounds</span></h2></div>
       </div>
       <div class="sheet-4colrow">
         <div class="sheet-col">
@@ -1266,7 +1326,7 @@
 			</div>
 			<div class="sheet-xxhuge">
 			  <select name="attr_larmwtype" class="sheet-wounds">
-				<option value="0" data-i18n="none"></option>
+			      <option value="0" data-i18n="none"></option>
 				<option value="1" data-i18n="light"></option>
 				<option value="2" data-i18n="heavy"></option>
 				<option value="3" data-i18n="serious"></option>
@@ -1354,51 +1414,53 @@
         </div>
       </div>
 
-      <div class="sheet-row sheet-h1">
-        <div class="sheet-center"><span data-i18n="wind">Wind</span></div>
+      <div class="sheet-row">
+        <div class="sheet-center">
+            <h2><span data-i18n="wind">Wind</span></h2></div>
       </div>
       <div class="sheet-row windrow">
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="0" checked="checked"><span>0</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="1"><span>1</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="2"><span>2</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="3"><span>3</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="4"><span>4</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="5"><span>5</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="6"><span>6</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="7"><span>7</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="8"><span>8</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="9"><span>9</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="10"><span>10</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="11"><span>11</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="12"><span>12</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="13"><span>13</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="14"><span>14</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="15"><span>15</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="16"><span>16</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="17"><span>17</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="18"><span>18</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="19"><span>19</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="20"><span>20</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="21"><span>21</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="22"><span>22</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="23"><span>23</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="24"><span>24</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="25"><span>25</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="26"><span>26</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="27"><span>27</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="28"><span>28</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="29"><span>29</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="30"><span>30</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="31"><span>31</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="32"><span>32</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="33"><span>33</span></div>
-          <div class="sheet-item sheet-wind buttons"><input type="radio" name="attr_wind" value="34"><span>34</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="0" checked="checked"><span>0</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="1"><span>1</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="2"><span>2</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="3"><span>3</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="4"><span>4</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="5"><span>5</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="6"><span>6</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="7"><span>7</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="8"><span>8</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="9"><span>9</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="10"><span>10</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="11"><span>11</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="12"><span>12</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="13"><span>13</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="14"><span>14</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="15"><span>15</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="16"><span>16</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="17"><span>17</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="18"><span>18</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="19"><span>19</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="20"><span>20</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="21"><span>21</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="22"><span>22</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="23"><span>23</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="24"><span>24</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="25"><span>25</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="26"><span>26</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="27"><span>27</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="28"><span>28</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="29"><span>29</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="30"><span>30</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="31"><span>31</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="32"><span>32</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="33"><span>33</span></div>
+          <div class="sheet-item sheet-wind sheet-buttons"><input type="radio" name="attr_wind" value="34"><span>34</span></div>
       </div>
     </div>
     <br>
     <div class="sheet-borderdiv">
-      <div class="sheet-row sheet-h1">
-        <div class="sheet-center"><span data-i18n="ammo">Ammo</span></div>
+      <div class="sheet-row">
+        <div class="sheet-center">
+            <h2><span data-i18n="ammo">Ammo</span></h2></div>
       </div>
       <div class="sheet-row">
         <div class="sheet-row">
@@ -1418,22 +1480,23 @@
     </div>
     <br>
     <div class="sheet-borderdiv">
-      <div class="sheet-row sheet-h1">
-        <div class="sheet-center"><span data-i18n="shootingIronsAndSuch">Shootin Irons &amp; Such</span></div>
+      <div class="sheet-row">
+        <div class="sheet-center">
+            <h2><span data-i18n="shootingIronsAndSuch">Shootin Irons &amp; Such</span></h2></div>
       </div>
       <div class="sheet-row weapon-headers">
         <div class="sheet-item sheet-xlarge"><label><b><span data-i18n="weapon">Weapon</span></b></label></div>
-        <div class="sheet-item sheet-large wea-label"><label><b><span data-i18n="shotsMax">Shots / Max</span></b></label></div>
-        <div class="sheet-item sheet-large wea-label"><label><b><span data-i18n="rof">RoF</span></b></label></div>
-        <div class="sheet-item sheet-large wea-label"><label><b><span data-i18n="range">Range</span></b></label></div>
-        <div class="sheet-item sheet-large wea-label"><label><b><span data-i18n="damage">Damage</span></b></label></div>
-        <div class="sheet-item sheet-xlarge location"><label><b><span data-i18n="locationToggle">Location Toggle</span></b></label>
+        <div class="sheet-item sheet-large sheet-wea-label"><label><b><span data-i18n="shotsMax">Shots / Max</span></b></label></div>
+          <div class="sheet-item sheet-large sheet-wea-label"><label><b><span data-i18n="rof">RoF</span></b></label></div>
+          <div class="sheet-item sheet-large sheet-wea-label"><label><b><span data-i18n="range">Range</span></b></label></div>
+          <div class="sheet-item sheet-large sheet-wea-label"><label><b><span data-i18n="damage">Damage</span></b></label></div>
+          <div class="sheet-item sheet-xlarge sheet-location"><label><b><span data-i18n="locationToggle">Location Toggle</span></b></label>
           <input type="radio" name="attr_locationtoggle" value="{{location=[[1d20]]}}" /><span data-i18n="on">On</span>
           <input type="radio" name="attr_locationtoggle" value="" checked="checked" /><span data-i18n="off">Off</span>
         </div>
       </div>
-      <div class="sheet-row weapon" style="vertical-align: top;">
-        <fieldset class="repeating_range">
+        <div class="sheet-row sheet-weapon" style="vertical-align: top;">
+            <fieldset class="sheet-repeating_range">
           <div class="sheet-item sheet-xlarge"><input type="text" name="attr_name" placeholder="Colt Army"></div>
           <div class="sheet-item sheet-large"><input type="text" name="attr_shots" placeholder="6"></div> /
           <div class="sheet-item sheet-large"><input type="text" name="attr_shots_max" placeholder="6"></div>
@@ -1451,8 +1514,9 @@
     </div>
     <br>
     <div class="sheet-borderdiv">
-      <div class="sheet-row sheet-h1">
-        <div class="sheet-center"><span data-i18n="hand2hand">Hand-To-Hand Weapons</span></div>
+      <div class="sheet-row">
+        <div class="sheet-center">
+            <h2><span data-i18n="hand2hand">Hand-To-Hand Weapons</span></h2></div>
       </div>
       <div class="sheet-row">
         <div class="sheet-item sheet-xlarge"><label><b><span data-i18n="weapon">Weapon</span></b></label></div>
@@ -1481,56 +1545,63 @@
 
   <!-- Arcane Ablities Tab -->
   <div class="sheet-section-arcane">
-    <div class="sheet-row sheet-h1">
-      <div class="sheet-center"><span data-i18n="arcaneAbilities">Arcane Abilities</span></div>
-    </div>
     <div class="sheet-row">
-      <div class="sheet-item sheet-large"><label><b><span data-i18n="skill">Skill</span></b></label></div>
-      <div class="sheet-item sheet-small"><input type="number" min="0" name="attr_hexslinginlvl"></div>
-      <div class="sheet-item sheet-large"><b><span data-i18n="ritual">Ritual</span></b></div>
-      <div class="sheet-item sheet-small">
-        <input type="number" name="attr_rituallvl">
-      </div>
-      <div class="sheet-item sheet-large"><b><span data-i18n="rituals">Rituals</span></b></div>
-      <div class="sheet-item sheet-huge">
-        <input type="text" name="attr_rituals">
-      </div>
-    </div>
-    <br>
-    <div class="sheet-row">
-      <div class="sheet-item sheet-large"><label><b><span data-i18n="name">Name</span></b></label></div>
-      <div class="sheet-item sheet-small"><label><b><span data-i18n="speed">Speed</span></b></label></div>
-      <div class="sheet-item sheet-large"><label><b><span data-i18n="duration">Duration</span></b></label></div>
-      <div class="sheet-item sheet-small"><label><b><span data-i18n="range">Range</span></b></label></div>
-      <div class="sheet-item sheet-small"><label><b><span data-i18n="dice">Dice</span></b></label></div>
-	  <div class="sheet-item sheet-small">&nbsp;</div>
-      <div class="sheet-item sheet-small"><label><b><span data-i18n="tn">TN</span></b></label></div>
-      <div class="sheet-item sheet-large"><label><b><span data-i18n="notes">Notes</span></b></label></div>
-      <fieldset class="repeating_spells" style="display: none;">
-      <div class="arcane-row">
-        <div class="sheet-item sheet-large"><input type="text" name="attr_spellname" placeholder="Shadow Man"></div>
-        <div class="sheet-item sheet-small"><input type="number" name="attr_spellspeed" placeholder="2"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_spelldur" placeholder="Concentration"></div>
-        <div class="sheet-item sheet-small"><input type="text" name="attr_spellran" placeholder="Self"></div>
-            <div class="sheet-item sheet-large">
-              <select name="attr_magtype" class="dtype" style="margin-bottom: 0px; width: 60px">
-                <option select="selected" value="d4">4</option>
-                <option value="d6">6</option>
-                <option value="d8">8</option>
-                <option value="d10">10</option>
-                <option value="d12">12</option>
-              </select>
+      <div class="sheet-center">
+          <h2><span data-i18n="arcaneAbilities">Arcane</span></h2></div>
+        <div class="sheet-row">
+            <div class="sheet-item sheet-large"><label><b><span data-i18n="skill">Skill</span></b></label></div>
+            <div class="sheet-item sheet-small"><input type="number" min="0" name="attr_hexslinginlvl"></div>
+            <div class="sheet-item sheet-large"><b><span data-i18n="ritual">Ritual</span></b></div>
+            <div class="sheet-item sheet-small">
+                <input type="number" name="attr_rituallvl">
             </div>
-        <div class="sheet-item sheet-small"><input type="text" name="attr_spelltn" placeholder="#"></div>
-        <div class="sheet-item sheet-huge" style="width: 30%;">
-          <textarea name="attr_spellnotes" class="sheet-shorttextarea" placeholder="Notes"></textarea>
+            <div class="sheet-item sheet-large"><b><span data-i18n="rituals">Rituals</span></b></div>
+            <div class="sheet-item sheet-huge">
+                <input type="text" name="attr_rituals">
+            </div>
         </div>
-		<button type="roll" name="Magie/Wunder" value="@{gmtoggle}&{template:simple}  {{rollname=Magie/Wunder}} {{dice=[[@{hexslinginlvl}@{magtype}!!k1]]}}"></button>
-      </div>
-      </fieldset>
-      <div class="repcontainer" data-groupname="repeating_spells"></div>
+        
+        <br/>
+        <div class="sheet-row">
+            <div class="sheet-item sheet-large"><label><b><span data-i18n="name">Name</span></b></label></div>
+            <div class="sheet-item sheet-small"><label><b><span data-i18n="speed">Speed</span></b></label></div>
+            <div class="sheet-item sheet-large"><label><b><span data-i18n="duration">Duration</span></b></label></div>
+            <div class="sheet-item sheet-small"><label><b><span data-i18n="range">Range</span></b></label></div>
+            <div class="sheet-item sheet-small"><label><b><span data-i18n="dice">Dice</span></b></label></div>
+            <div class="sheet-item sheet-small">&nbsp;</div>
+            <div class="sheet-item sheet-small"><label><b><span data-i18n="tn">TN</span></b></label></div>
+            <div class="sheet-item sheet-large"><label><b><span data-i18n="notes">Notes</span></b></label></div>
+            <fieldset class="repeating_spells" style="display: none;">
+                <div class="arcane-row">
+                    <div class="sheet-item sheet-large"><input type="text" name="attr_spellname" placeholder="Shadow Man"></div>
+                    <div class="sheet-item sheet-small"><input type="number" name="attr_spellspeed" placeholder="2"></div>
+                    <div class="sheet-item sheet-large"><input type="text" name="attr_spelldur" placeholder="Concentration"></div>
+                    <div class="sheet-item sheet-small"><input type="text" name="attr_spellran" placeholder="Self"></div>
+                    <div class="sheet-item sheet-large">
+                        <select name="attr_magtype" class="dtype" style="margin-bottom: 0px; width: 60px">
+                            <option select="selected" value="d4">4</option>
+                            <option value="d6">6</option>
+                            <option value="d8">8</option>
+                            <option value="d10">10</option>
+                            <option value="d12">12</option>
+                        </select>
+                    </div>
+                    <div class="sheet-item sheet-small"><input type="text" name="attr_spelltn" placeholder="#"></div>
+                    <div class="sheet-item sheet-huge" style="width: 30%;">
+                        <textarea name="attr_spellnotes" class="sheet-shorttextarea" placeholder="Notes"></textarea>
+                    </div>
+                    <button type="roll" name="Magie/Wunder" value="@{gmtoggle}&{template:simple}  {{rollname=Magie/Wunder}} {{dice=[[@{hexslinginlvl}@{magtype}!!k1]]}}"></button>
+                </div>
+            </fieldset>
+            <div class="repcontainer" data-groupname="repeating_spells"></div>
+        </div>
     </div>
-  </div> <!-- Arcane Ablities Tab -->
+     
+      
+  </div>
+   <!-- -->
+    <!---->
+   <!-- Arcane Ablities Tab -->
 
   <!-- Misc Tab -->
   <div class="sheet-section-misc">
@@ -1597,197 +1668,6 @@
       </div>
     </div>
   </div><!-- Misc Tab -->
-     <!-- Obsolete Data Tab -->
-  <div class="sheet-section-obsolete">
-    <div style="border: 1px solid black">
-        <div class="sheet-alert sheet-alert-warning">
-            <div class="sheet-row" style="margin-bottom: 15px;">
-            This sheet has been recently updated. This section was broke and has been made obsolete. Data on this tab will be removed over time.
-            </div>
-        </div>
-  <div class="sheet-borderdiv">
-      <div class="sheet-row sheet-h1">
-        <div class="sheet-center">Shootin Irons &amp; Such</div>
-      </div>
-      <div class="sheet-row">
-        <div class="sheet-item sheet-xlarge"><label><b>Weapon</b></label></div>
-        <div class="sheet-item sheet-large"><label><b>Shots</b></label></div>
-        <div class="sheet-item sheet-large"><label><b>RoF</b></label></div>
-        <div class="sheet-item sheet-large"><label><b>Range</b></label></div>
-        <div class="sheet-item sheet-large"><label><b>Damage</b></label></div>
-        <div class="sheet-item sheet-xlarge location"><label><b>Location Toggle</b></label>
-          <input type="radio" name="attr_locationtoggle" value="{{location=[[1d20]]}}" /><span>On</span>
-          <input type="radio" name="attr_locationtoggle" value="" checked="checked" /><span>Off</span>
-        </div>
-      </div>
-      <div class="sheet-row" style="vertical-align: top;">
-        <div class="sheet-item sheet-xlarge"><input type="text" name="attr_rngweaponname1" placeholder="Colt Army"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_rngweaponshots1" placeholder="6"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_rngweaponrof1" placeholder="1"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_rngweaponrange1" placeholder="10"></div>
-        <div class="sheet-item sheet-xxxlarge">
-          <fieldset class="repeating_rngweaponsdmg1">
-            <div class="sheet-item sheet-xxhuge"><input type="text" name="attr_rngweapondamage1" placeholder="3d6"></div>
-            <div class="sheet-item sheet-xlarge"><button type="roll" name="roll_rngweapondamage1" value="@{gmtoggle}&{template:simple} {{rollname=@{rngweaponname1}}} {{damage=[[@{rngweapondamage1}!!]]}} @{locationtoggle}"></button></div>
-          </fieldset>
-        </div><br>
-        <hr>
-      </div>
-      <div class="sheet-row" style="vertical-align: top;">
-        <div class="sheet-item sheet-xlarge"><input type="text" name="attr_rngweaponname2"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_rngweaponshots2"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_rngweaponrof2"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_rngweaponrange2"></div>
-        <div class="sheet-item sheet-xxxlarge">
-          <fieldset class="repeating_rngweaponsdmg2">
-            <div class="sheet-item sheet-xxhuge"><input type="text" name="attr_rngweapondamage2"></div>
-            <div class="sheet-item sheet-xlarge"><button type="roll" name="roll_rngweapondamage2" value="@{gmtoggle}&{template:simple} {{rollname=@{rngweaponname2}}} {{damage=[[@{rngweaponrange2}!!]]}} @{locationtoggle}"></button></div>
-          </fieldset>
-        </div><br>
-        <hr>
-      </div>
-      <div class="sheet-row" style="vertical-align: top;">
-        <div class="sheet-item sheet-xlarge"><input type="text" name="attr_rngweaponname3"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_rngweaponshots3"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_rngweaponrof3"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_rngweaponrange3"></div>
-        <div class="sheet-item sheet-xxxlarge">
-          <fieldset class="repeating_rngweaponsdmg3">
-            <div class="sheet-item sheet-xxhuge"><input type="text" name="attr_rngweapondamage3"></div>
-            <div class="sheet-item sheet-xlarge"><button type="roll" name="roll_rngweapondamage3" value="@{gmtoggle}&{template:simple} {{rollname=@{rngweaponname3}}} {{damage=[[@{rngweaponrange3}!!]]}} @{locationtoggle}"></button></div>
-          </fieldset>
-        </div><br>
-        <hr>
-      </div>
-      <div class="sheet-row" style="vertical-align: top;">
-        <div class="sheet-item sheet-xlarge"><input type="text" name="attr_rngweaponname4"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_rngweaponshots4"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_rngweaponrof4"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_rngweaponrange4"></div>
-        <div class="sheet-item sheet-xxxlarge">
-          <fieldset class="repeating_rngweaponsdmg4">
-            <div class="sheet-item sheet-xxhuge"><input type="text" name="attr_rngweapondamage4"></div>
-            <div class="sheet-item sheet-xlarge"><button type="roll" name="roll_rngweapondamage4" value="@{gmtoggle}&{template:simple} {{rollname=@{rngweaponname4}}} {{damage=[[@{rngweaponrange4}!!]]}} @{locationtoggle}"></button></div>
-          </fieldset>
-        </div><br>
-        <hr>
-      </div>
-      <div class="sheet-row" style="vertical-align: top;">
-        <div class="sheet-item sheet-xlarge"><input type="text" name="attr_rngweaponname5"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_rngweaponshots5"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_rngweaponrof5"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_rngweaponrange5"></div>
-        <div class="sheet-item sheet-xxxlarge">
-          <fieldset class="repeating_rngweaponsdmg5">
-            <div class="sheet-item sheet-xxhuge"><input type="text" name="attr_rngweapondamage5"></div>
-            <div class="sheet-item sheet-xlarge"><button type="roll" name="roll_rngweapondamage5" value="@{gmtoggle}&{template:simple} {{rollname=@{rngweaponname5}}} {{damage=[[@{rngweaponrange5}!!]]}} @{locationtoggle}"></button></div>
-          </fieldset>
-        </div><br>
-        <hr>
-      </div>
-      <div class="sheet-row" style="vertical-align: top;">
-        <div class="sheet-item sheet-xlarge"><input type="text" name="attr_rngweaponname6"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_rngweaponshots6"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_rngweaponrof6"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_rngweaponrange6"></div>
-        <div class="sheet-item sheet-xxxlarge">
-          <fieldset class="repeating_rngweaponsdmg6">
-            <div class="sheet-item sheet-xxhuge"><input type="text" name="attr_rngweapondamage6"></div>
-            <div class="sheet-item sheet-xlarge"><button type="roll" name="roll_rngweapondamage6" value="@{gmtoggle}&{template:simple} {{rollname=@{rngweaponname6}}} {{damage=[[@{rngweapondamage6}!!]]}} @{locationtoggle}"></button></div>
-          </fieldset>
-        </div><br>
-        <hr>
-      </div>
-    </div>
-    <br>
-    <div class="sheet-borderdiv">
-      <div class="sheet-row sheet-h1">
-        <div class="sheet-center">Hand-To-Hand Weapons</div>
-      </div>
-      <div class="sheet-row">
-        <div class="sheet-item sheet-xlarge"><label><b>Weapon</b></label></div>
-        <div class="sheet-item sheet-large"><label><b>Defense</b></label></div>
-        <div class="sheet-item sheet-large"><label><b>Speed</b></label></div>
-        <div class="sheet-item sheet-large"><label><b>Damage</b></label></div>
-        <div class="sheet-item sheet-xlarge location"><label><b>Location Toggle</b></label>
-          <input type="radio" name="attr_meleelocationtoggle" value="{{location=[[1d20]]}}" /><span>On</span>
-          <input type="radio" name="attr_meleelocationtoggle" value="" checked="checked" /><span>Off</span>
-        </div>
-      </div>
-      <div class="sheet-row" style="vertical-align: top;">
-        <div class="sheet-item sheet-xlarge"><input type="text" name="attr_meleeweaponname1" value="" placeholder="Fist"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_meleeweapondefense1" value="" placeholder="-"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_meleeweaponspeed1" value="" placeholder=""></div>
-        <div class="sheet-item sheet-xxxlarge">
-          <fieldset class="repeating_rngweapons_dmg1">
-            <div class="sheet-item sheet-xxhuge"><input type="text" name="attr_meleeweapondamage1" value="" placeholder="(Add 0 to roll only STR)"></div>
-            <div class="sheet-item sheet-xlarge"><button type="roll" name="roll_mien" value="@{gmtoggle}&{template:simple} {{rollname=@{meleeweaponname1}}} {{strength=[[@{strlvl}@{strdtype}!!k1]]}} {{meleedamage=[[@{meleeweapondamage1}!!]]}} @{meleelocationtoggle}"></button></div>
-          </fieldset>
-        </div><br>
-        <hr>
-      </div>
-      <div class="sheet-row" style="vertical-align: top;">
-        <div class="sheet-item sheet-xlarge"><input type="text" name="attr_meleeweaponname2" placeholder="Knife"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_meleeweapondefense2" placeholder="+1"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_meleeweaponspeed2"></div>
-        <div class="sheet-item sheet-xxxlarge">
-          <fieldset class="repeating_rngweapons_dmg2">
-            <div class="sheet-item sheet-xxhuge"><input type="text" name="attr_meleeweapondamage2" placeholder="1d4"></div>
-            <div class="sheet-item sheet-xlarge"><button type="roll" name="roll_mien" value="@{gmtoggle}&{template:simple} {{rollname=@{meleeweaponname2}}} {{strength=[[@{strlvl}@{strdtype}!!k1]]}} {{meleedamage=[[@{meleeweapondamage2}!!]]}} @{meleelocationtoggle}"></button></div>
-          </fieldset>
-        </div><br>
-        <hr>
-      </div>
-      <div class="sheet-row" style="vertical-align: top;">
-        <div class="sheet-item sheet-xlarge"><input type="text" name="attr_meleeweaponname3"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_meleeweapondefense3"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_meleeweaponspeed3"></div>
-        <div class="sheet-item sheet-xxxlarge">
-          <fieldset class="repeating_rngweapons_dmg3">
-            <div class="sheet-item sheet-xxhuge"><input type="text" name="attr_meleeweapondamage3"></div>
-            <div class="sheet-item sheet-xlarge"><button type="roll" name="roll_mien" value="@{gmtoggle}&{template:simple} {{rollname=@{meleeweaponname3}}} {{strength=[[@{strlvl}@{strdtype}!!k1]]}} {{meleedamage=[[@{meleeweapondamage3}!!]]}} @{meleelocationtoggle}"></button></div>
-          </fieldset>
-        </div><br>
-        <hr>
-      </div>
-      <div class="sheet-row" style="vertical-align: top;">
-        <div class="sheet-item sheet-xlarge"><input type="text" name="attr_meleeweaponname4"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_meleeweapondefense4"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_meleeweaponspeed4"></div>
-        <div class="sheet-item sheet-xxxlarge">
-          <fieldset class="repeating_rngweapons_dmg4">
-            <div class="sheet-item sheet-xxhuge"><input type="text" name="attr_meleeweapondamage4"></div>
-            <div class="sheet-item sheet-xlarge"><button type="roll" name="roll_mien" value="@{gmtoggle}&{template:simple} {{rollname=@{meleeweaponname4}}} {{strength=[[@{strlvl}@{strdtype}!!k1]]}} {{meleedamage=[[@{meleeweapondamage4}!!]]}} @{meleelocationtoggle}"></button></div>
-          </fieldset>
-        </div><br>
-        <hr>
-      </div>
-      <div class="sheet-row" style="vertical-align: top;">
-        <div class="sheet-item sheet-xlarge"><input type="text" name="attr_meleeweaponname5"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_meleeweapondefense5"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_meleeweaponspeed5"></div>
-        <div class="sheet-item sheet-xxxlarge">
-          <fieldset class="repeating_rngweapons_dmg5">
-            <div class="sheet-item sheet-xxhuge"><input type="text" name="attr_meleeweapondamage5"></div>
-            <div class="sheet-item sheet-xlarge"><button type="roll" name="roll_mien" value="@{gmtoggle}&{template:simple} {{rollname=@{meleeweaponname5}}} {{strength=[[@{strlvl}@{strdtype}!!k1]]}} {{meleedamage=[[@{meleeweapondamage5}!!]]}} @{meleelocationtoggle}"></button></div>
-          </fieldset>
-        </div><br>
-        <hr>
-      </div>
-      <div class="sheet-row" style="vertical-align: top;">
-        <div class="sheet-item sheet-xlarge"><input type="text" name="attr_meleeweaponname6"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_meleeweapondefense6"></div>
-        <div class="sheet-item sheet-large"><input type="text" name="attr_meleeweaponspeed6"></div>
-        <div class="sheet-item sheet-xxxlarge">
-          <fieldset class="repeating_rngweapons_dmg6">
-            <div class="sheet-item sheet-xxhuge"><input type="text" name="attr_meleeweapondamage6"></div>
-            <div class="sheet-item sheet-xlarge"><button type="roll" name="roll_mien" value="@{gmtoggle}&{template:simple} {{rollname=@{meleeweaponname6}}} {{strength=[[@{strlvl}@{strdtype}!!k1]]}} {{meleedamage=[[@{meleeweapondamage6}!!]]}} @{meleelocationtoggle}"></button></div>
-          </fieldset>
-        </div><br>
-        <hr>
-      </div>
-    </div>
-  </div>
-  <!-- Combat Stuff Tab -->
-  </div>
-</div><!-- Sheet wrapper-->
+
+  
+</div>
