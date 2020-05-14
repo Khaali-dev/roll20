@@ -168,12 +168,45 @@ class Rolls {
 	}
 
 	/**
+	 * @return the sum of the values.
+	 */
+	sum() {
+		var sum = 0;
+		this.rolls.forEach(r => sum = sum + r.value);
+		return sum;
+	}
+
+	/**
 	 * Indicates if the maximum result is greater or equal than the specified threshold.
 	 * @param threshold The threshold to reach.
 	 * @return true if the threshold has been reached.
 	 */
 	atLeast(threshold) {
 		return this.max() >= threshold;
+	}
+
+	/**
+	 * Gets the number of rolls for which the value is equal to the specified one.
+	 * @param value The value to search.
+	 * @return the number of matching roll.
+	 */
+	matches(value) {
+		return this.rolls.filter(r => r.value === value).length;
+	} 
+
+	/**
+	 * @return true if the rolls is a fumble.
+	 */
+	fumble() {
+		return this.matches(1) >= Math.floor(this.rolls.length/2);
+	}
+
+	success(tn,step) {
+		if (this.atLeast(tn)) {
+			return Math.floor((this.max()-tn)/step);
+		} else {
+			return 0;
+		}
 	}
 
 	/**
@@ -248,8 +281,24 @@ class Deadlands {
 		html += "<td>Max:</td>";
 		html += "<td>" + rolls.max() + "</td>";
 		html += "</tr>";
+		html += "<tr>";
+		html += "<td>Sum:</td>";
+		html += "<td>" + rolls.sum() + "</td>";
+		html += "</tr>";
 		html += "<td>Resultat:</td>";
-		html += "<td>" + rolls.atLeast(9) + "</td>";
+		html += "<td>" + rolls.atLeast(7) + "</td>";
+		html += "</tr>";
+		html += "<tr>";
+		html += "<td>Nb of 1:</td>";
+		html += "<td>" + rolls.matches(1) + "</td>";
+		html += "</tr>";
+		html += "<tr>";
+		html += "<td>Fumble:</td>";
+		html += "<td>" + rolls.fumble() + "</td>";
+		html += "</tr>";
+		html += "<tr>";
+		html += "<td>Success:</td>";
+		html += "<td>" + rolls.success(7,5) + "</td>";
 		html += "</tr>";
 		html += "</table>";
 		html += "</div>";
