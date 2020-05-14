@@ -13,7 +13,7 @@ class Tools {
 		var string = "";
 		if (items.length > 0) {
 			string += items[0];
-			for (var i=1; i<items.length; i++) {
+			for (let i=1; i<items.length; i++) {
 				string += separator;
 				string += items[i];
 			}
@@ -109,8 +109,8 @@ class Dices {
 	 */
 	roll() {
 		var rolls = new Rolls();
-		for (var [dice,size] of this.dices) {
-			for (var i=0; i<size; i++) {
+		for (let [dice,size] of this.dices) {
+			for (let i=0; i<size; i++) {
 				rolls.add(new Roll(dice, dice.roll()));
 			}
 		}
@@ -160,6 +160,30 @@ class Rolls {
 		return this;
 	}
 
+	/**
+	 * @return the maximum value of the rolls.
+	 */
+	max() {
+		return _.max(this.values());
+	}
+
+	/**
+	 * Indicates if the maximum result is greater or equal than the specified threshold.
+	 * @param threshold The threshold to reach.
+	 * @return true if the threshold has been reached.
+	 */
+	atLeast(threshold) {
+		return this.max() >= threshold;
+	}
+
+	/**
+	 * @return all values.
+	 */
+	values() {
+		var values = [];
+		this.rolls.forEach(r => values.push(r.value));
+		return values;
+	}
 
 	/**
 	 * @return the textual expression of the rolls.
@@ -219,6 +243,13 @@ class Deadlands {
 		html += "<tr>";
 		html += "<td>Dés:</td>";
 		html += "<td>" + rolls.toString() + "</td>";
+		html += "</tr>";
+		html += "<tr>";
+		html += "<td>Max:</td>";
+		html += "<td>" + rolls.max() + "</td>";
+		html += "</tr>";
+		html += "<td>Resultat:</td>";
+		html += "<td>" + rolls.atLeast(9) + "</td>";
 		html += "</tr>";
 		html += "</table>";
 		html += "</div>";
