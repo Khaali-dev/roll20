@@ -75,20 +75,6 @@ class Deadlands {
 	constructor() {}
 
 	/**
-	 * Loads the Deadlands API.
-	 */
-	load() {
-		log('Deadlands API loaded');
-	}
-
-	/**
-	 * Registers the Deadlands API.
-	 */
-	register() {
-		on('chat:message', this.handleMessage);
-	}
-
-	/**
 	 * Handles the Deadlands API command.
 	 * @param msg The message to handle.
 	 */
@@ -101,29 +87,42 @@ class Deadlands {
 		if (cmd != 'dl') return;
 		log("Handle Deadlands command");
 
-		log(Rolls.open(4, 6));
+		
+		this.openRoll(4, 6, 0, 5);
 
 	}
 
 	/**
 	 * Handles the specified roll.
-	 * @param size      The number of dices to roll.
+	 * @param size     The number of dices to roll.
 	 * @param dice     The type of dices to roll.
 	 * @param modifier The modifier to apply on the roll.
 	 * @param tn       The target number.
 	 */
 	openRoll(size, dice, modifier, tn) {
-		
+		log("openRoll");
+		var html = "";
+		html += "<div class='sheet-rolltemplate-default'>";
+		html += "<table>";
+		html += "<caption>Jet " + size + " d " + dice + " with TN " + tn + "</caption>";
+		html += "<tr>";
+		html += "<td>Resultat</td>";
+		html += "<td>" + Rolls.open(size, dice) + "</td>";
+		html += "</tr>";
+		html += "</table>";
+		html += "</div>";
+		sendChat("Summary", html);
 	}
 
 }
 
-// Create deadlands singleton
+// Create Deadlands singleton
 var deadlands = deadlands || new Deadlands();
 
-// Register the script
+// API message subscribtion.
 on('ready',function() {
 	'use strict';
-	deadlands.load();
-	deadlands.register();
+	on('chat:message', (msg) => {
+		deadlands.handleMessage(msg);
+	});
 });
