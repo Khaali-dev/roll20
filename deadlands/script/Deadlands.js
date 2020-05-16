@@ -1,28 +1,29 @@
 /**
  * The Deadlands class is the main class to process the commands.
  */
-class Deadlands {
+class Deadlands extends AbstractMessageHandler {
 
 	/**
-	 * Constructor.
+	 * @constructor
 	 */
-	constructor() {}
+	constructor() {
+		super();
+	}
 
 	/**
-	 * Handles the Deadlands API command.
-	 * @param msg The message to handle.
+	 * @Override.
 	 */
 	handleMessage(msg) {
+		this.handleCommand(msg);
+	}
 
-		// Check msg is a Deadlands command
-		if (msg.type != 'api') return;
-		var args = msg.content.split(/\s+/);
-		var cmd = args.shift().substring(1);
+	/**
+	 * @Override.
+	 */
+	processCommand(cmd, args) {
 		if (cmd != 'dl') return;
-		log("Handle Deadlands command");
 
 		this.openRoll(2, 0, 0, 0);
-
 	}
 
 	/**

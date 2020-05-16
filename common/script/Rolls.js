@@ -31,11 +31,18 @@ class Dice {
 	}
 
 	/**
-	 * @return the dice roll.
+	 * @return a dice roll value.
+	 */
+	value() {
+		var value = randomInteger(this.side);
+		return this.open === true && this.side === value ? value + this.value() : value;
+	}
+
+	/**
+	 * @return a dice roll.
 	 */
 	roll() {
-		var value = randomInteger(this.side);
-		return this.open === true && this.side === value ? value + this.roll() : value;
+		return new Roll(this, this.value());
 	}
 
 	/**
@@ -48,7 +55,7 @@ class Dice {
 }
 
 /**
- * The Dices class is the class to manage pool of dices. Dices can be rolled to get rolls.
+ * The Dices class defines a pool of dices which can be rolled.
  */
 class Dices {
 
@@ -80,20 +87,34 @@ class Dices {
 	}
 
 	/**
-	 * @return a dices rolls.
+	 * @return a new rolls.
 	 */
 	roll() {
 		var rolls = new Rolls();
 		for (let [dice,size] of this.dices) {
 			for (let i=0; i<size; i++) {
-				rolls.add(new Roll(dice, dice.roll()));
+				rolls.add(dice.roll());
 			}
 		}
 		return rolls;
 	}
 
+	/**
+	 * @return the textual expression of the dices.
+	 */
+	toString() {
+		var dices = [];
+		for (let [dice,size] of this.dices) {
+			dices.push(size + dice.toString());
+		}
+		return Strings.toString(dices, ", ");
+	}
+
 }
 
+/**
+ * The Roll class defines a dice roll.
+ */
 class Roll {
 
 	/**
@@ -115,6 +136,10 @@ class Roll {
 
 }
 
+/**
+ * The Roll class defines a pool of dices rolls. It provides some utilities to
+ * interpret the result according to the game system.
+ */
 class Rolls {
 
 	/**
@@ -122,7 +147,100 @@ class Rolls {
 	 */
 	constructor() {
 		this.rolls = [];
+	}
 
+	/**
+	 * @return the number of rolls.
+	 */
+	size() {
+		return this.rolls.length;
+	}
+
+	/**
+	 * @return all values.
+	 */
+	values() {
+		return _.map(this.rolls, function(r) { return r.value; });
+	}
+
+	/**
+	 * @return the minimum value of the rolls.
+	 */
+	min() {
+		return _.min(this.values());
+	}
+
+	/**
+	 * @return the maximum value of the rolls.
+	 */
+	max() {
+		return _.max(this.values());
+	}
+
+
+	/**
+	 * @return the sum of the values.
+	 */
+	sum() {
+		return _.reduce(this.rolls, function(sum, r) { return sum + r.value; }, 0);
+	}
+
+	/**
+	 * Filters the rolls which satisfies the specified predicate.
+	 * @param predicate The predicate to satisfy.
+	 * @return the filtered rolls.
+	 */
+	filter(predicate) {
+		var filter = new Rolls();
+		_.filter(this.rolls, predicate).forEach(r => filter.add(r));
+		return filter;
+	}
+
+	/**
+	 * Indicates if some roll satisfies the specified predicate.
+	 * @param predicate The predicate to satisfy.
+	 * @return true if some roll satisfies the predicate.
+	 */
+	some(predicate) {
+		return _.some(this.rolls, predicate);
+	}
+
+	/**
+	 * Counts the number of rolls which satisfy the specified predicate.
+	 * @param predicate The predicate to satisfy.
+	 * @return the number of satisfied rolls.
+	 */
+	count(predicate) {
+		return _.filter(this.rolls, predicate).length;
+	}
+
+	/**
+	 * Gets the number of rolls for which the value is equal to the specified one.
+	 * @param value The value to search.
+	 * @return the number of matching roll.
+	 */
+	numberOf(value) {
+		return this.count(r => r.value === value);
+	}
+
+	
+	
+	
+	
+	/**
+	 * Indicates if the maximum result is greater or equal than the specified threshold.
+	 * @param threshold The threshold to reach.
+	 * @return true if the threshold has been reached.
+	 */
+	atLeast(threshold) {
+		return this.some(function (r) { return r.value >= threshold; });
+	}
+
+	/**
+	 * @return the textual expression of the rolls.
+	 */
+	toString() {
+		return Strings.toString(this.rolls, ", ");
 	}
 
 	/**
@@ -135,39 +253,6 @@ class Rolls {
 		return this;
 	}
 
-	/**
-	 * @return the maximum value of the rolls.
-	 */
-	max() {
-		return _.max(this.values());
-	}
-
-	/**
-	 * @return the sum of the values.
-	 */
-	sum() {
-		var sum = 0;
-		this.rolls.forEach(r => sum = sum + r.value);
-		return sum;
-	}
-
-	/**
-	 * Indicates if the maximum result is greater or equal than the specified threshold.
-	 * @param threshold The threshold to reach.
-	 * @return true if the threshold has been reached.
-	 */
-	atLeast(threshold) {
-		return this.max() >= threshold;
-	}
-
-	/**
-	 * Gets the number of rolls for which the value is equal to the specified one.
-	 * @param value The value to search.
-	 * @return the number of matching roll.
-	 */
-	matches(value) {
-		return this.rolls.filter(r => r.value === value).length;
-	} 
 
 	/**
 	 * @return true if the rolls is a fumble.
@@ -183,21 +268,5 @@ class Rolls {
 			return 0;
 		}
 	}
-
-	/**
-	 * @return all values.
-	 */
-	values() {
-		var values = [];
-		this.rolls.forEach(r => values.push(r.value));
-		return values;
-	}
-
-	/**
-	 * @return the textual expression of the rolls.
-	 */
-	toString() {
-		return Strings.toString(this.rolls, ", ");
-	}
-
+	
 }
