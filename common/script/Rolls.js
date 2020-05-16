@@ -267,20 +267,4 @@ class Rolls {
 		return this;
 	}
 
-
-	/**
-	 * @return true if the rolls is a fumble.
-	 */
-	fumble() {
-		return this.matches(1) >= Math.floor(this.rolls.length/2);
-	}
-
-	success(tn,step) {
-		if (this.atLeast(tn)) {
-			return Math.floor((this.max()-tn)/step);
-		} else {
-			return 0;
-		}
-	}
-	
 }

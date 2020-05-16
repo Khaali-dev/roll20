@@ -1,4 +1,3 @@
-// Create the TestSuite singleton.
 var testsuite = testsuite || new TestSuite()
 	.add("Dice serialization", () => {
 		return new Dice(6).toString() === "d6";
