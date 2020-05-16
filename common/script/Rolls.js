@@ -177,7 +177,6 @@ class Rolls {
 		return _.max(this.values());
 	}
 
-
 	/**
 	 * @return the sum of the values.
 	 */
@@ -186,14 +185,33 @@ class Rolls {
 	}
 
 	/**
+	 * Produces a new rolls by mapping each roll through the specified transformation function.
+	 * @param to The transformation function.
+	 * @return the instance.
+	 */
+	transform(to) {
+		this.rolls = _.map(this.rolls, to);
+		return this;
+	}
+
+	/**
+	 * Rejects the rolls which satisfies the specified predicate.
+	 * @param predicate The predicate to satisfy.
+	 * @return the instance.
+	 */
+	reject(predicate) {
+		this.rolls = _.reject(this.rolls, predicate);
+		return this;
+	}
+
+	/**
 	 * Filters the rolls which satisfies the specified predicate.
 	 * @param predicate The predicate to satisfy.
 	 * @return the filtered rolls.
 	 */
 	filter(predicate) {
-		var filter = new Rolls();
-		_.filter(this.rolls, predicate).forEach(r => filter.add(r));
-		return filter;
+		this.rolls = _.filter(this.rolls, predicate);
+		return this;
 	}
 
 	/**
@@ -223,17 +241,13 @@ class Rolls {
 		return this.count(r => r.value === value);
 	}
 
-	
-	
-	
-	
 	/**
-	 * Indicates if the maximum result is greater or equal than the specified threshold.
-	 * @param threshold The threshold to reach.
+	 * Indicates if the greatest roll is greater or equal than the specified value.
+	 * @param value The threshold to reach.
 	 * @return true if the threshold has been reached.
 	 */
-	atLeast(threshold) {
-		return this.some(function (r) { return r.value >= threshold; });
+	atLeast(value) {
+		return this.some(function (r) { return r.value >= value; });
 	}
 
 	/**

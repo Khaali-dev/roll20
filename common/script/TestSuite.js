@@ -54,7 +54,7 @@ var testsuite = testsuite || new TestSuite()
 			.add(new Roll(new Dice(6), 2));
 		return rolls.toString() === "1(d4), 3(d4), 1(d6), 6(d6), 2(d6)";
 	})
-	.add("Min roll", () => {
+	.add("Number of rolls", () => {
 		const rolls = new Rolls()
 			.add(new Roll(new Dice(4), 1))
 			.add(new Roll(new Dice(4), 3))
@@ -78,7 +78,7 @@ var testsuite = testsuite || new TestSuite()
 		       values[3] === 6 &&
 		       values[4] === 2;
 	})
-	.add("Min roll", () => {
+	.add("Min of rolls", () => {
 		const rolls = new Rolls()
 			.add(new Roll(new Dice(4), 1))
 			.add(new Roll(new Dice(4), 3))
@@ -87,7 +87,7 @@ var testsuite = testsuite || new TestSuite()
 			.add(new Roll(new Dice(6), 2));
 		return rolls.min() === 1;
 	})
-	.add("Max roll", () => {
+	.add("Max of rolls", () => {
 		const rolls = new Rolls()
 			.add(new Roll(new Dice(4), 1))
 			.add(new Roll(new Dice(4), 3))
@@ -105,15 +105,45 @@ var testsuite = testsuite || new TestSuite()
 			.add(new Roll(new Dice(6), 2));
 		return rolls.sum() === 13;
 	})
+	.add("Transform rolls", () => {
+		const rolls = new Rolls()
+			.add(new Roll(new Dice(4), 1))
+			.add(new Roll(new Dice(4), 3))
+			.add(new Roll(new Dice(6), 1))
+			.add(new Roll(new Dice(6), 6))
+			.add(new Roll(new Dice(6), 2))
+			.transform(function (r) { return new Roll(r.dice, r.value + 1); });
+		const values = rolls.values();
+		return values.length === 5 &&
+		       values[0] === 2 &&
+		       values[1] === 4 &&
+		       values[2] === 2 &&
+		       values[3] === 7 &&
+		       values[4] === 3;
+	})
+	.add("Reject rolls", () => {
+		const rolls = new Rolls()
+			.add(new Roll(new Dice(4), 1))
+			.add(new Roll(new Dice(4), 3))
+			.add(new Roll(new Dice(6), 1))
+			.add(new Roll(new Dice(6), 6))
+			.add(new Roll(new Dice(6), 2))
+			.reject(function (r) { return r.value === 1; });
+		const values = rolls.values();
+		return values.length === 3 &&
+		       values[0] === 3 &&
+		       values[1] === 6 &&
+		       values[2] === 2;
+	})
 	.add("Filter rolls", () => {
 		const rolls = new Rolls()
 			.add(new Roll(new Dice(4), 1))
 			.add(new Roll(new Dice(4), 3))
 			.add(new Roll(new Dice(6), 1))
 			.add(new Roll(new Dice(6), 6))
-			.add(new Roll(new Dice(6), 2));
-		const filtered = rolls.filter(function (r) { return r.value > 1; });
-		const values = filtered.values();
+			.add(new Roll(new Dice(6), 2))
+			.filter(function (r) { return r.value > 1; });
+		const values = rolls.values();
 		return values.length === 3 &&
 		       values[0] === 3 &&
 		       values[1] === 6 &&
