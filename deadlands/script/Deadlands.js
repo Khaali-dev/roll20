@@ -14,17 +14,18 @@ class DeadlandsRolls extends Rolls {
 	 *  1 : Success
 	 *  2 : Success with one degree
 	 *  N : Success with N-1 degrees
-	 * @param tn The difficulty target number.
+	 * @param tn  The difficulty target number.
+	 * @param mod The roll modifier.
 	 * @return the number of success.
 	 */
-	result(tn) {
+	result(tn, mod) {
 		if (super.size() === 0 ? false : parseFloat(super.numberOf(1)) >= parseFloat(this.rolls.length/2)) {
 			return -1;
 		}
-		if (!super.atLeast(tn)) {
+		if (!super.atLeast(tn-mod)) {
 			return 0;
 		}
-		return Math.floor((this.max()-tn)/5) + 1;
+		return Math.floor((this.max()-tn+mod)/5) + 1;
 	}
 
 }
