@@ -1,4 +1,4 @@
-var testsuite = testsuite || new TestSuite()
+var _deadlands = _deadlands || new TestSuite("deadlands")
 	.add("Rolls as fumble", () => {
 		return new DeadlandsRolls()
 			.add(new Roll(new Dice(4), 1))
@@ -68,6 +68,6 @@ var testsuite = testsuite || new TestSuite()
 on('ready',function() {
 	'use strict';
 	on('chat:message', (msg) => {
-		testsuite.handleMessage(msg);
+		_deadlands.handleMessage(msg);
 	});
 });

@@ -1,4 +1,4 @@
-var testsuite = testsuite || new TestSuite()
+var _roll20 = _roll20 || new TestSuite("roll20")
 	.add("Dice serialization", () => {
 		return new Dice(6).toString() === "d6";
 	})
@@ -192,6 +192,6 @@ var testsuite = testsuite || new TestSuite()
 on('ready',function() {
 	'use strict';
 	on('chat:message', (msg) => {
-		testsuite.handleMessage(msg);
+		_roll20.handleMessage(msg);
 	});
 });

@@ -98,9 +98,11 @@ class TestSuite extends AbstractMessageHandler {
 
 	/**
 	 * @constructor
+	 * @param name The name of the testsuite.
 	 */
-	constructor() {
+	constructor(name) {
 		super();
+		this.name = name;
 		this.tests = [];
 	}
 
@@ -115,7 +117,7 @@ class TestSuite extends AbstractMessageHandler {
 	 * @Override.
 	 */
 	processCommand(cmd, args) {
-		if (cmd != 'tu') return;
+		if (cmd != 'test' || args[0] != this.name) return;
 		this.tests.forEach(t => t.evaluate());
 	}
 
