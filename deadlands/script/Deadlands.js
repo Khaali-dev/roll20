@@ -8,29 +8,23 @@ class DeadlandsRolls extends Rolls {
 	}
 
 	/**
-	 * @return true if the rolls is a fumble.
-	 */
-	isFumble() {
-		return super.size() === 0 ? false : parseFloat(super.numberOf(1)) >= parseFloat(this.rolls.length/2);
-	}
-
-	/**
 	 * Gets the number of success.
 	 * -1 : Fumble
 	 *  0 : Fail
 	 *  1 : Success
 	 *  2 : Success with one degree
 	 *  N : Success with N-1 degrees
+	 * @param tn The difficulty target number.
 	 * @return the number of success.
 	 */
-	result(tn, step) {
+	result(tn) {
 		if (super.size() === 0 ? false : parseFloat(super.numberOf(1)) >= parseFloat(this.rolls.length/2)) {
 			return -1;
 		}
 		if (!super.atLeast(tn)) {
 			return 0;
 		}
-		return Math.floor((this.max()-tn)/step) + 1;
+		return Math.floor((this.max()-tn)/5) + 1;
 	}
 
 }
