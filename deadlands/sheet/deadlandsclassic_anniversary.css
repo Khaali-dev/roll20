@@ -197,7 +197,7 @@
     margin:10px;
 }
 
-.charsheet .sheet-4colrow, .ui-dialog .charsheet .sheet-3colrow, .ui-dialog .charsheet .sheet-2colrow {
+.charsheet .sheet-4colrow, .charsheet .sheet-3colrow, .charsheet .sheet-2colrow {
   display:block;
   clear:both
 }
