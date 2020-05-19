@@ -37,7 +37,7 @@ var Deadlands = (function() {
 		 * @param rolls    The rolls to interpret.
 		 * @param tn       The difficulty target number.
 		 * @param modifier The modifier to apply to the roll.
-		 * @return the number rof success:
+		 * @return the number of success:
 		 *    -1 : Fumble
 		 *     0 : Fail
 		 *     1 : Success
@@ -53,7 +53,7 @@ var Deadlands = (function() {
 		 * @param rolls    The rolls to interpret.
 		 * @param tn       The difficulty target number.
 		 * @param modifier The modifier to apply to the roll.
-		 * @return the number rof success:
+		 * @return the number of success:
 		 *    -1 : Fumble
 		 *     0 : Fail
 		 *     1 : Success
@@ -161,12 +161,16 @@ var Deadlands = (function() {
 	 */
 	const _handler = new MessageHandler();
 
+	/**
+	 * Handles the specified message.
+	 * @param msg The message to handle.
+	 */
 	function handleMessage(msg) {
 		_handler.handleMessage(msg);
 	}
 
 	/**
-	 * Returns all classes.
+	 * @return the public elements.
 	 */
 	return  {
 		Rolls : Rolls,
@@ -175,7 +179,9 @@ var Deadlands = (function() {
 
 })();
 
-// API message subscribtion.
+/**
+ * Registers the Deadlands module.
+ */
 on('ready',function() {
 	'use strict';
 	on('chat:message', (msg) => {

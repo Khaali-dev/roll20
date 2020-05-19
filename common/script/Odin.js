@@ -413,7 +413,7 @@ var Odin = (function() {
 	}
 
 	/**
-	 * Returns all classes.
+	 * @return the public elements.
 	 */
 	return  {
 		Strings : Strings,
