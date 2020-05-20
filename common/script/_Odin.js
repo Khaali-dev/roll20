@@ -186,6 +186,17 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 			.add(new Odin.Roll(new Odin.Dice(6), 2));
 		return rolls.atLeast(3) === true && rolls.atLeast(5) === false;
 	})
+	.add("Replace some rolls", () => {
+		const rolls = new Odin.Rolls()
+			.add(new Odin.Roll(new Odin.Dice(4), 1))
+			.add(new Odin.Roll(new Odin.Dice(4), 3))
+			.add(new Odin.Roll(new Odin.Dice(6), 1))
+			.add(new Odin.Roll(new Odin.Dice(6), 6))
+			.add(new Odin.Roll(new Odin.Dice(6), 2));
+		const gets = rolls.get(function (r) { return r.value === 1; });
+		gets[0].value = 2;
+		return rolls.toString() === "2(d4), 3(d4), 1(d6), 6(d6), 2(d6)";
+	})
 	;
 
 // The API message subscribtion.

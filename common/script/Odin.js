@@ -471,7 +471,27 @@ var Odin = (function() {
 		/**
 		 * @return true if the turn order is displayed.
 		 */
-		
+		static isDisplayed() {
+			return Campaign().get(Odin.Properties.CAMPAIGN.INITIATIVE_PAGE);
+		}
+
+		/**
+		 * Shows the turn order.
+		 * @return the instance.
+		 */
+		static show() {
+			Campaign().set(Odin.Properties.CAMPAIGN.INITIATIVE_PAGE, true);
+			return this;
+		}
+
+		/**
+		 * Hides the turn order.
+		 * @return the instance.
+		 */
+		static hide() {
+			Campaign().set(Odin.Properties.CAMPAIGN.INITIATIVE_PAGE, false);
+			return this;
+		}
 
 	}
 
@@ -488,7 +508,8 @@ var Odin = (function() {
 		Dice: Dice,
 		Dices: Dices,
 		Roll: Roll,
-		Rolls: Rolls
+		Rolls: Rolls,
+		Initiative: Initiative
 	};
 
 })();
