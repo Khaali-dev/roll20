@@ -30,6 +30,42 @@ var Odin = (function() {
 	}
 
 	/**
+	 * The Type enumerate defines all roll20 objects types.
+	 */
+	const Type = {
+		PATH: 'path',
+		TEXT: 'text',
+		GRAPHIC: 'graphic',
+		PAGE: 'page',
+		CAMPAIGN: 'campaign',
+		PLAYER: 'player',
+		MACRO: 'macro',
+		ROLLABLE_TABLE: 'rollabletable',
+		TABLE_ITEM: 'tableitem',
+		CHARACTER: 'character',
+		ATTRIBUTE: 'attribute',
+		ABILITY: 'ability',
+		HANDOUT: 'handout',
+		DECK: 'deck',
+		CARD: 'card',
+		HAND: 'hand',
+		JUKEBOX_TRACK: 'jukeboxtrack',
+		CUSTOM_FC: 'custfx'
+	};
+
+	/**
+	 * The Properties enumerate defines all roll20 objects properties.
+	 */
+	const Properties = {
+		CAMPAIGN: {
+			INITIATIVE_PAGE: "initiativepage",
+			TURN_ORDER: "turnorder",
+			PLAYER_PAGE_ID: "playerpageid",
+			PLAYER_SPECIFIC_PAGES: "playerspecificpages"
+		}
+	};
+
+	/**
 	 * The AbstractMessageHandler class is the base class to define a message handler.
 	 */
 	class AbstractMessageHandler {
@@ -328,6 +364,15 @@ var Odin = (function() {
 		}
 
 		/**
+		 * Gets the rolls which satisfy the specified predicate.
+		 * @param predicate The predicate to satisfy.
+		 * @return the matching rolls.
+		 */
+		get(predicate) {
+			return _.filter(this.rolls, predicate);
+		}
+
+		/**
 		 * Produces a new rolls by mapping each roll through the specified transformation function.
 		 * @param to The transformation function.
 		 * @return the instance.
@@ -413,17 +458,37 @@ var Odin = (function() {
 	}
 
 	/**
+	 * The Initiative class provides functionnalities to 
+	 */
+	class Initiative {
+
+		/**
+		 * Constructor.
+		 */
+		constructor() {
+		}
+
+		/**
+		 * @return true if the turn order is displayed.
+		 */
+		
+
+	}
+
+	/**
 	 * @return the public elements.
 	 */
 	return  {
-		Strings : Strings,
-		Test : Test,
-		TestSuite : TestSuite,
-		AbstractMessageHandler : AbstractMessageHandler,
-		Dice : Dice,
-		Dices : Dices,
-		Roll : Roll,
-		Rolls : Rolls
+		Strings: Strings,
+		Type: Type,
+		Properties: Properties,
+		Test: Test,
+		TestSuite: TestSuite,
+		AbstractMessageHandler: AbstractMessageHandler,
+		Dice: Dice,
+		Dices: Dices,
+		Roll: Roll,
+		Rolls: Rolls
 	};
 
 })();
