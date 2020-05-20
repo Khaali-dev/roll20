@@ -197,6 +197,11 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		gets[0].value = 2;
 		return rolls.toString() === "2(d4), 3(d4), 1(d6), 6(d6), 2(d6)";
 	})
+	.add("Parse the current turn order", () => {
+		const turnOrder = Odin.Initiative.parse();
+		log(turnOrder);
+		return true;
+	})
 	;
 
 // The API message subscribtion.

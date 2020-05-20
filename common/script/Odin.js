@@ -54,9 +54,9 @@ var Odin = (function() {
 	};
 
 	/**
-	 * The Properties enumerate defines all roll20 objects properties.
+	 * The Property enumerate defines all roll20 objects properties.
 	 */
-	const Properties = {
+	const Property = {
 		CAMPAIGN: {
 			INITIATIVE_PAGE: "initiativepage",
 			TURN_ORDER: "turnorder",
@@ -64,6 +64,16 @@ var Odin = (function() {
 			PLAYER_SPECIFIC_PAGES: "playerspecificpages"
 		}
 	};
+
+	/**
+	 * The poker card colors.
+	 */
+	const PokerCardColor = {
+		SPADE: "♠",
+		CLUB: "♣",
+		DIAMOND: "♦",
+		HEART: "♥"
+	}
 
 	/**
 	 * The AbstractMessageHandler class is the base class to define a message handler.
@@ -458,7 +468,35 @@ var Odin = (function() {
 	}
 
 	/**
-	 * The Initiative class provides functionnalities to 
+	 * The Turn class defines the item to register in the turn order.
+	 */
+	class Turn {
+
+		/**
+		 * Constructor.
+		 * @param id The identifier of the token, -1 if none.
+		 * @param pr The value associated to the item.
+		 * @param custom The custom name if no image is defined (id -1).
+		 */
+		constructor(id, pr, custom) {
+			this.id = id;
+			this.pr = pr;
+			this.custom = custom;
+		}
+
+		/**
+		 * @return the converted turn.
+		 */
+		toItem() { return {
+			id: this.id,
+			pr: this.pr,
+			custom: this.custom };
+		}
+
+	}
+
+	/**
+	 * The Initiative class provides functionnalities to manage intiative, turns and rounds.
 	 */
 	class Initiative {
 
@@ -466,13 +504,14 @@ var Odin = (function() {
 		 * Constructor.
 		 */
 		constructor() {
+			this.turnOrder = [];
 		}
 
 		/**
 		 * @return true if the turn order is displayed.
 		 */
 		static isDisplayed() {
-			return Campaign().get(Odin.Properties.CAMPAIGN.INITIATIVE_PAGE);
+			return Campaign().get(Odin.Property.CAMPAIGN.INITIATIVE_PAGE);
 		}
 
 		/**
@@ -480,7 +519,7 @@ var Odin = (function() {
 		 * @return the instance.
 		 */
 		static show() {
-			Campaign().set(Odin.Properties.CAMPAIGN.INITIATIVE_PAGE, true);
+			Campaign().set(Odin.Property.CAMPAIGN.INITIATIVE_PAGE, true);
 			return this;
 		}
 
@@ -489,8 +528,65 @@ var Odin = (function() {
 		 * @return the instance.
 		 */
 		static hide() {
-			Campaign().set(Odin.Properties.CAMPAIGN.INITIATIVE_PAGE, false);
+			Campaign().set(Odin.Property.CAMPAIGN.INITIATIVE_PAGE, false);
 			return this;
+		}
+
+		/**
+		 * @return the turn order from parsing the campaign property.
+		 */
+		static parse() {
+			const to = Campaign().get(Odin.Property.CAMPAIGN.TURN_ORDER);
+			return to === "" ? [] : JSON.parse(to);
+		}
+
+		/**
+		 * Clears the current turn order.
+		 * @return the instance.
+		 */
+		static clear() {
+			this.turnOrder = [];
+			Campaign().set(Odin.Property.CAMPAIGN.TURN_ORDER, "");
+			return this;
+		}
+
+		/**
+		 * Sorts the registered turns.
+		 */
+		sort() {
+			
+		}
+
+		/**
+		 * Pushes a new turn in the turn order.
+		 * @param turn The turn to push.
+		 * @return the instance.
+		 */
+		push(turn) {
+			this.turnOrder.push(turn.toItem());
+		}
+
+		/**
+		 * Starts the initiative manager.
+		 */
+		start() {
+			this.clear();
+			this.show();
+		}
+	
+		/**
+		 * Stops the initiative manager.
+		 */
+		stop() {
+			this.clear();
+			this.hide();
+		}
+
+		/**
+		 * Processes a next round. The turn order page is cleaned.
+		 */
+		next() {
+			
 		}
 
 	}
@@ -501,7 +597,8 @@ var Odin = (function() {
 	return  {
 		Strings: Strings,
 		Type: Type,
-		Properties: Properties,
+		Property: Property,
+		PokerCardColor: PokerCardColor,
 		Test: Test,
 		TestSuite: TestSuite,
 		AbstractMessageHandler: AbstractMessageHandler,
