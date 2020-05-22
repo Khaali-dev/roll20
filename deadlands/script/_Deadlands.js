@@ -246,13 +246,12 @@ var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
 			{"id":"-M7lbGZnSu6SItqBzU4n","pr":"9♣","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
 			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"4♥","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
 			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"2♠","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"}];
-		const sorted = _.sortBy(turns, function(turn){ return Deadlands.PokerCardOrder[turn.pr]; });
-		log(sorted);
+		const sorted = _.sortBy(turns, function(turn){ return Deadlands.PokerCardOrder.get(turn.pr); });
 		return true;
 	})
 	.add("Sort turn order", () => {
-		const turnOrder = new Odin.TurnOrder(function(turn){ return Deadlands.PokerCardOrder[turn.pr]; });
-		sorted = turnOrder.set(turnOrder.parse()).parse();
+		const turnOrder = new Odin.TurnOrder(function(turn){ return Deadlands.PokerCardOrder.get(turn.pr); });
+		turnOrder.set(turnOrder.parse());
 		return true;
 	})
 	;

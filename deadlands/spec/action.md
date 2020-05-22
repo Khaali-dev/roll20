@@ -1,3 +1,16 @@
+# Système d'initiative
+
++ Declaration d'un nouveau round: Le turn order est vidé. Creation d'une macro MJ *New round*.
++ Chaque personnage lance son initiative avec possibilité de dépenser des pépites via une macro. Cette derniere ne doit etre active que pendant la resolution du nouveau round.. 
++ Chaque personnage recoit 0+ tours dans le turn order.
++ Chaque personnage pioche de son deck un nombre de carte égal au nombre de tours obtenu
++ Resolution du jocker noir: perte de la plus haute carte et remet le joker.
++ Resolution du jocker rouge qui est ecarté du turn order pour pouvoir en le jouant interrompre un tour
++ Resolution de l'aout Tete Froide pour changer de carte.
++ Resolution de triche pour gagner des cartes d'action supplementaires.
+
+La résolution de l'initiative dans 2 paquets differents n'est directement géré par roll20. Il faut implementer ces deux paquets (PJ & PNJ).
+
 # Liste des actions
 
 ## Mettre une carte dans sa manche
