@@ -62,6 +62,13 @@ var Odin = (function() {
 			TURN_ORDER: "turnorder",
 			PLAYER_PAGE_ID: "playerpageid",
 			PLAYER_SPECIFIC_PAGES: "playerspecificpages"
+		},
+		TURN_ORDER: {
+			ID: "id",
+			VALUE: "pr",
+			NAME: "custom",
+			PAGE_ID: "_pageid",
+			MODIFIER: "formula"
 		}
 	};
 
@@ -70,9 +77,9 @@ var Odin = (function() {
 	 */
 	const PokerCardColor = {
 		SPADE: "♠",
-		CLUB: "♣",
+		HEART: "♥",
 		DIAMOND: "♦",
-		HEART: "♥"
+		CLUB: "♣"
 	}
 
 	/**
@@ -81,7 +88,7 @@ var Odin = (function() {
 	class AbstractMessageHandler {
 
 		/**
-		 * Constructor.
+		 * @constructor.
 		 */
 		constructor() {
 			if (this.constructor === AbstractMessageHandler) {
@@ -193,7 +200,7 @@ var Odin = (function() {
 	class Dice {
 
 		/**
-		 * Constructor.
+		 * @constructor.
 		 * @param side The number of side.
 		 */
 		constructor(side) {
@@ -249,7 +256,7 @@ var Odin = (function() {
 	class Dices {
 
 		/**
-		 * Constructor.
+		 * @constructor.
 		 */
 		constructor() {
 			this.dices = new Map();
@@ -307,7 +314,7 @@ var Odin = (function() {
 	class Roll {
 
 		/**
-		 * Constructor.
+		 * @constructor.
 		 * @param dice  The rolled dice.
 		 * @param value The roll value.
 		 */
@@ -332,7 +339,7 @@ var Odin = (function() {
 	class Rolls {
 
 		/**
-		 * Constructor.
+		 * @constructor.
 		 */
 		constructor() {
 			this.rolls = [];
@@ -468,57 +475,78 @@ var Odin = (function() {
 	}
 
 	/**
-	 * The Turn class defines the item to register in the turn order.
+	 * The Character class provides functionnality to manage a character.
 	 */
-	class Turn {
+	class Character {
 
-		/**
-		 * Constructor.
-		 * @param id The identifier of the token, -1 if none.
-		 * @param pr The value associated to the item.
-		 * @param custom The custom name if no image is defined (id -1).
-		 */
-		constructor(id, pr, custom) {
+		constructor(id) {
 			this.id = id;
-			this.pr = pr;
-			this.custom = custom;
 		}
 
 		/**
-		 * @return the converted turn.
+		 * Gets the specified character.
+		 * @param name The name of the character to get.
+		 * @return the character.
 		 */
-		toItem() { return {
-			id: this.id,
-			pr: this.pr,
-			custom: this.custom };
+		byName(name) {
+			
 		}
 
 	}
 
 	/**
-	 * The Initiative class provides functionnalities to manage intiative, turns and rounds.
+	 * The TurnOrder class provides functionnalities to manage intiative, turns and rounds.
 	 */
-	class Initiative {
+	class TurnOrder {
 
 		/**
 		 * Constructor.
+		 * @param order The function which defines the order to set.
 		 */
-		constructor() {
-			this.turnOrder = [];
+		constructor(order) {
+			this.order = order;
 		}
-
+	
 		/**
 		 * @return true if the turn order is displayed.
 		 */
-		static isDisplayed() {
+		isDisplayed() {
 			return Campaign().get(Odin.Property.CAMPAIGN.INITIATIVE_PAGE);
+		}
+
+		/**
+		 * @return the turn order from parsing the campaign property.
+		 */
+		parse() {
+			const to = Campaign().get(Odin.Property.CAMPAIGN.TURN_ORDER);
+			return to === "" ? [] : JSON.parse(to);
+		}
+
+		/**
+		 * Sets the specified turn order to the campaign property according to the specified order if defined.
+		 * @param turnOrder The turn order to set.
+		 * @return the instance.
+		 */
+		set(turnOrder) {
+			const sorted = this.order != null ? _.sortBy(turnOrder, this.order) : turnOrder;
+			Campaign().set(Odin.Property.CAMPAIGN.TURN_ORDER, JSON.stringify(sorted));
+			return this;
+		}
+
+		/**
+		 * Clears the current turn order.
+		 * @return the instance.
+		 */
+		clear() {
+			Campaign().set(Odin.Property.CAMPAIGN.TURN_ORDER, JSON.stringify(""));
+			return this;
 		}
 
 		/**
 		 * Shows the turn order.
 		 * @return the instance.
 		 */
-		static show() {
+		show() {
 			Campaign().set(Odin.Property.CAMPAIGN.INITIATIVE_PAGE, true);
 			return this;
 		}
@@ -527,66 +555,9 @@ var Odin = (function() {
 		 * Hides the turn order.
 		 * @return the instance.
 		 */
-		static hide() {
+		hide() {
 			Campaign().set(Odin.Property.CAMPAIGN.INITIATIVE_PAGE, false);
 			return this;
-		}
-
-		/**
-		 * @return the turn order from parsing the campaign property.
-		 */
-		static parse() {
-			const to = Campaign().get(Odin.Property.CAMPAIGN.TURN_ORDER);
-			return to === "" ? [] : JSON.parse(to);
-		}
-
-		/**
-		 * Clears the current turn order.
-		 * @return the instance.
-		 */
-		static clear() {
-			this.turnOrder = [];
-			Campaign().set(Odin.Property.CAMPAIGN.TURN_ORDER, "");
-			return this;
-		}
-
-		/**
-		 * Sorts the registered turns.
-		 */
-		sort() {
-			
-		}
-
-		/**
-		 * Pushes a new turn in the turn order.
-		 * @param turn The turn to push.
-		 * @return the instance.
-		 */
-		push(turn) {
-			this.turnOrder.push(turn.toItem());
-		}
-
-		/**
-		 * Starts the initiative manager.
-		 */
-		start() {
-			this.clear();
-			this.show();
-		}
-	
-		/**
-		 * Stops the initiative manager.
-		 */
-		stop() {
-			this.clear();
-			this.hide();
-		}
-
-		/**
-		 * Processes a next round. The turn order page is cleaned.
-		 */
-		next() {
-			
 		}
 
 	}
@@ -606,7 +577,7 @@ var Odin = (function() {
 		Dices: Dices,
 		Roll: Roll,
 		Rolls: Rolls,
-		Initiative: Initiative
+		TurnOrder: TurnOrder
 	};
 
 })();

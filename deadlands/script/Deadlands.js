@@ -5,6 +5,76 @@ var Deadlands = (function() {
 	'use strict';
 
 	/**
+	 * The poker card order.
+	 */
+	const PokerColorCardOrder = {
+		"♠": 1,
+		"♥": 2,
+		"♦": 3,
+		"♣": 4
+	}
+
+	/**
+	 * The poker card order.
+	 */
+	const PokerCardOrder = {
+		"RJo": 1,
+		"A♠": 2,
+		"A♥": 3,
+		"A♦": 4,
+		"A♣": 5,
+		"K♠": 6,
+		"K♥": 7,
+		"K♦": 8,
+		"K♣": 9,
+		"Q♠": 10,
+		"Q♥": 11,
+		"Q♦": 12,
+		"Q♣": 13,
+		"Ja♠": 14,
+		"Ja♥": 15,
+		"Ja♦": 16,
+		"Ja♣": 17,
+		"10♠": 18,
+		"10♥": 19,
+		"10♦": 20,
+		"10♣": 21,
+		"9♠": 22,
+		"9♥": 23,
+		"9♦": 24,
+		"9♣": 25,
+		"8♠": 26,
+		"8♥": 27,
+		"8♦": 28,
+		"8♣": 29,
+		"7♠": 30,
+		"7♥": 31,
+		"7♦": 32,
+		"7♣": 33,
+		"6♠": 34,
+		"6♥": 35,
+		"6♦": 36,
+		"6♣": 37,
+		"5♠": 38,
+		"5♥": 39,
+		"5♦": 40,
+		"5♣": 41,
+		"4♠": 42,
+		"4♥": 43,
+		"4♦": 44,
+		"4♣": 45,
+		"3♠": 46,
+		"3♥": 47,
+		"3♦": 48,
+		"3♣": 49,
+		"2♠": 50,
+		"2♥": 51,
+		"2♦": 52,
+		"2♣": 53,
+		"BJo": 54
+	}
+
+	/**
 	 * The Rolls class provides functionnalities to manage Deadlands rolls.
 	 */
 	class Rolls {
@@ -173,6 +243,7 @@ var Deadlands = (function() {
 	 * @return the public elements.
 	 */
 	return  {
+		PokerCardOrder: PokerCardOrder,
 		Rolls : Rolls,
 		handleMessage : handleMessage
 	};

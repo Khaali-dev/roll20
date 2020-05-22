@@ -198,7 +198,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return rolls.toString() === "2(d4), 3(d4), 1(d6), 6(d6), 2(d6)";
 	})
 	.add("Parse the current turn order", () => {
-		const turnOrder = Odin.Initiative.parse();
+		const turnOrder = Odin.TurnOrder.parse();
 		log(turnOrder);
 		return true;
 	})
