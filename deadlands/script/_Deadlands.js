@@ -250,7 +250,7 @@ var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
 		return true;
 	})
 	.add("Sort turn order", () => {
-		const turnOrder = new Odin.TurnOrder(function(turn){ return Deadlands.PokerCardOrder.get(turn.pr); });
+		const turnOrder = new Deadlands.TurnOrder();
 		turnOrder.set(turnOrder.parse());
 		return true;
 	})

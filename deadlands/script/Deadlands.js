@@ -144,6 +144,22 @@ var Deadlands = (function() {
 	}
 
 	/**
+	 * The TurnOrder class provides functionnalities to manage intiative, turns and rounds.
+	 */
+	class TurnOrder extends Odin.TurnOrder {
+
+		/**
+		 * Constructor.
+		 */
+		constructor() {
+			super(function(turn) {
+				return Deadlands.PokerCardOrder.get(turn.pr);
+			});
+		}
+
+	}
+
+	/**
 	 * The MessageHandler class is the main class to handle commands.
 	 */
 	class MessageHandler extends Odin.AbstractMessageHandler {
@@ -244,6 +260,7 @@ var Deadlands = (function() {
 	return  {
 		PokerCardOrder: PokerCardOrder,
 		Rolls : Rolls,
+		TurnOrder: TurnOrder,
 		handleMessage : handleMessage
 	};
 
