@@ -565,8 +565,8 @@ var Odin = (function() {
 		 * @return the instance.
 		 */
 		set(turnOrder) {
-			const sorted = this.order != null ? _.sortBy(turnOrder, this.order) : turnOrder;
-			Campaign().set(Odin.Property.CAMPAIGN.TURN_ORDER, JSON.stringify(sorted));
+			const turns = this.order != null ? _.sortBy(turnOrder, this.order) : turnOrder;
+			Campaign().set(Odin.Property.CAMPAIGN.TURN_ORDER, JSON.stringify(turns));
 			return this;
 		}
 
@@ -577,6 +577,17 @@ var Odin = (function() {
 		 */
 		add(turns) {
 			return this.set(this.parse().concat(turns));
+		}
+
+		/**
+		 * Pops the first turn.
+		 * @return the identifier of the token.
+		 */
+		pop() {
+			const turns = this.parse();
+			const turn = turns.shift();
+			this.set(turns);
+			return turn == null ? null : turn.id;
 		}
 
 		/**

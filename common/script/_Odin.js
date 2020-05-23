@@ -204,15 +204,20 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	})
 	.add("Add some turns to the turn order", () => {
 		const turns = [
-			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 0),
-			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 0),
-			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 0),
-			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 0),
-			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 0),
+			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 1),
+			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 2),
+			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 3),
+			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 4),
+			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 5),
 		];
 		const turnOrder = new Odin.TurnOrder();
 		turnOrder.add(turns);
 		log(turnOrder.parse());
+		return true;
+	})
+	.add("Pop first turn from turn order", () => {
+		const turnOrder = new Odin.TurnOrder();
+		log(turnOrder.pop());
 		return true;
 	})
 	;
