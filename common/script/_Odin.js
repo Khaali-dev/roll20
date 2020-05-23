@@ -229,6 +229,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return true;
 	})
 	.add("Gets data", () => {
+		log(Odin.Data.getPlayers());
 		log(Odin.Data.getPlayer("-M5rtkkXsEkckPk1v0DL"));
 		log(Odin.Data.getPage("-M5xeoigOD2b0Vsz4stI"));
 		log(Odin.Data.getGraphic("-M7lbGZnSu6SItqBzU4n"));
