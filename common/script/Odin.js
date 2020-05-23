@@ -507,17 +507,7 @@ var Odin = (function() {
 		constructor(id, pr) {
 			this.id = id;
 			this.pr = pr;
-		}
-
-		/**
-		 * Converts the turn to object.
-		 */
-		toObject() {
-			return {
-				"id": this.id,
-				"pr": this.pr,
-				"custom": ""
-			}
+			this.cursom = "";
 		}
 
 	}
@@ -577,6 +567,20 @@ var Odin = (function() {
 		 */
 		add(turns) {
 			return this.set(this.parse().concat(turns));
+		}
+
+		/**
+		 * Inserts the specified turns at the top of the turn order, regardless of the order.
+		 * @param turns The turns sto insert.
+		 * @return the instance.
+		 */
+		insert(turns) {
+			const _turns = this.parse();
+			_.each(turns, function(t) {
+				_turns.unshift(t);
+			})
+			Campaign().set(Odin.Property.CAMPAIGN.TURN_ORDER, JSON.stringify(_turns));
+			return this;
 		}
 
 		/**

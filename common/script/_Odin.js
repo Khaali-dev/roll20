@@ -220,6 +220,14 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		log(turnOrder.pop());
 		return true;
 	})
+	.add("Insert turns to turn order", () => {
+		const turns = [
+			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 10),
+			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 20)
+		];
+		new Odin.TurnOrder().insert(turns);
+		return true;
+	})
 	;
 
 // The API message subscribtion.
