@@ -57,11 +57,17 @@ var Odin = (function() {
 	 * The Property enumerate defines all roll20 objects properties.
 	 */
 	const Property = {
+		TYPE: "_type",
 		CAMPAIGN: {
 			INITIATIVE_PAGE: "initiativepage",
 			TURN_ORDER: "turnorder",
 			PLAYER_PAGE_ID: "playerpageid",
 			PLAYER_SPECIFIC_PAGES: "playerspecificpages"
+		},
+		GRAPHIC: {
+			SUBTYPE: "_subtype",
+			TOKEN: "token",
+			CARD: "card"
 		},
 		TURN_ORDER: {
 			ID: "id",
@@ -88,7 +94,7 @@ var Odin = (function() {
 	class AbstractMessageHandler {
 
 		/**
-		 * @constructor.
+		 * @constructor
 		 */
 		constructor() {
 			if (this.constructor === AbstractMessageHandler) {
@@ -166,14 +172,14 @@ var Odin = (function() {
 		}
 
 		/**
-		 * @Override.
+		 * @Override
 		 */
 		handleMessage(msg) {
 			this.handleCommand(msg);
 		}
 
 		/**
-		 * @Override.
+		 * @Override
 		 */
 		processCommand(cmd, args) {
 			if (cmd != 'test' || args[0] != this.name) return;
@@ -195,12 +201,120 @@ var Odin = (function() {
 	}
 
 	/**
+	 * The Data class provides roll20 database accessors.
+	 */
+	class Data {
+
+		/**
+		 * @eturn all players.
+		 */
+		static getPlayers() {
+			return findObjs({
+				_type: Type.PLAYER
+			});
+		}
+
+		/**
+		 * Gets the specified player.
+		 * @param id The identifier of the player to get.
+		 * @return the player.
+		 */
+		static getPlayer(id) {
+			return getObj(Type.PLAYER, id);
+		}
+
+		/**
+		 * Gets the specified page.
+		 * @param id The identifier of the page to get.
+		 * @return the page.
+		 */
+		static getPage(id) {
+			return getObj(Type.PAGE, id);
+		}
+
+		/**
+		 * Gets the specified graphic.
+		 * @param id The identifier of the graphic to get.
+		 * @return the graphic.
+		 */
+		static getGraphic(id) {
+			return getObj(Type.GRAPHIC, id);
+		}
+
+		/**
+		 * Gets the specified token.
+		 * @param id The identifier of the token to get.
+		 * @return the token.
+		 */
+		static getToken(id) {
+			const obj = Data.getGraphic(id);
+			return obj != null && obj.get(Property.GRAPHIC.SUBTYPE) === Property.GRAPHIC.TOKEN ? obj : null;
+		}
+
+		/**
+		 * Gets the specified card.
+		 * @param id The identifier of the card to get.
+		 * @return the card.
+		 */
+		static getCard(id) {
+			const obj = Data.getGraphic(id);
+			return obj != null && obj.get(Property.GRAPHIC.SUBTYPE) === Property.GRAPHIC.CARD ? obj : null;
+		}
+
+		/**
+		 * Gets the specified character.
+		 * @param id The identifier of the character to get.
+		 * @return the character.
+		 */
+		static getCharacter(id) {
+			return getObj(Type.CHARACTER, id);
+		}
+
+		
+		
+		/**
+		 * Gets the specified characters.
+		 * @param name The name of the characters to get.
+		 */
+		static charactersByName(name) {
+			return findObjs({type:'character', name: name});
+		}
+
+		/**
+		 * Gets the specified non player characters.
+		 * @param name The name of the non player characters to get.
+		 * @return the non player characters.
+		 */
+		static npc(name) {
+			return findObjs({type:'character', name: name, controlledby: ""});
+		}
+
+		/**
+		 * Gets the specified character.
+		 * @param id The identifier of the character to get.
+		 */
+		static characterById(id) {
+			return getObj('character', id);
+		}
+
+		/**
+		 * Gets the identifier of the page which contains the specified player.
+		 * @param player The identifier of the player for which to get the page.
+		 * @return the page identifier.
+		 */
+		static getPageOfPlayer(player) {
+			
+		}
+
+	}
+
+	/**
 	 * The Dice class is the class used to manage dice roll.
 	 */
 	class Dice {
 
 		/**
-		 * @constructor.
+		 * @constructor
 		 * @param side The number of side.
 		 */
 		constructor(side) {
@@ -256,7 +370,7 @@ var Odin = (function() {
 	class Dices {
 
 		/**
-		 * @constructor.
+		 * @constructor
 		 */
 		constructor() {
 			this.dices = new Map();
@@ -314,7 +428,7 @@ var Odin = (function() {
 	class Roll {
 
 		/**
-		 * @constructor.
+		 * @constructor
 		 * @param dice  The rolled dice.
 		 * @param value The roll value.
 		 */
@@ -339,7 +453,7 @@ var Odin = (function() {
 	class Rolls {
 
 		/**
-		 * @constructor.
+		 * @constructor
 		 */
 		constructor() {
 			this.rolls = [];
@@ -479,16 +593,12 @@ var Odin = (function() {
 	 */
 	class Character {
 
-		constructor(id) {
-			this.id = id;
-		}
-
 		/**
-		 * Gets the specified character.
-		 * @param name The name of the character to get.
-		 * @return the character.
+		 * Gets the identifier of the specified character.
+		 * @param name The name of the character for which to get the identifier.
+		 * @return the character identifier.
 		 */
-		byName(name) {
+		static id(name) {
 			
 		}
 
@@ -500,14 +610,14 @@ var Odin = (function() {
 	class Turn {
 
 		/**
-		 * @constructor.
+		 * @constructor
 		 * @param id The identifier of the graphic object.
 		 * @param pr The value of the turn.
 		 */
 		constructor(id, pr) {
 			this.id = id;
 			this.pr = pr;
-			this.cursom = "";
+			this.custom = "";
 		}
 
 	}
@@ -518,7 +628,7 @@ var Odin = (function() {
 	class TurnOrder {
 
 		/**
-		 * @constructor.
+		 * @constructor
 		 * @param order The function which defines the order to set.
 		 */
 		constructor(order) {
@@ -625,6 +735,7 @@ var Odin = (function() {
 		Test: Test,
 		TestSuite: TestSuite,
 		AbstractMessageHandler: AbstractMessageHandler,
+		Data: Data,
 		Dice: Dice,
 		Dices: Dices,
 		Roll: Roll,

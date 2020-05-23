@@ -144,12 +144,42 @@ var Deadlands = (function() {
 	}
 
 	/**
+	 * The PokerDeck class provides functionnalities to manage poker deck. It's used for
+	 * the turn order, the huckster tricks.
+	 */
+	class PokerDeck {
+
+		/**
+		 * @constructor
+		 */
+		constructor() {
+			this.deck = Array.from(PokerCardOrder.keys());
+			this.given = new Map();
+			this.discard = [];
+		}
+
+		/**
+		 * Gives the specified number of cards to the specified character.
+		 * @param id     The identifier of the token.
+		 * @param number The number of cards to give.
+		 * @return the array of given cards.
+		 */
+		give(id, number) {
+			
+		}
+
+		/**
+		 * Discards the specified cards
+		 */
+	}
+
+	/**
 	 * The TurnOrder class provides functionnalities to manage intiative, turns and rounds.
 	 */
 	class TurnOrder extends Odin.TurnOrder {
 
 		/**
-		 * Constructor.
+		 * @constructor
 		 */
 		constructor() {
 			super(function(turn) {
@@ -212,14 +242,14 @@ var Deadlands = (function() {
 		}
 
 		/**
-		 * @Override.
+		 * @Override
 		 */
 		handleMessage(msg) {
 			this.handleCommand(msg);
 		}
 
 		/**
-		 * @Override.
+		 * @Override
 		 */
 		processCommand(cmd, args) {
 			if (cmd != 'dl') return;

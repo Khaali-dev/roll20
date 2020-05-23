@@ -228,6 +228,14 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		new Odin.TurnOrder().insert(turns);
 		return true;
 	})
+	.add("Gets data", () => {
+		log(Odin.Data.getPlayer("-M5xeoigOD2b0Vsz4stI"));
+		log(Odin.Data.getPage("-M5xeoigOD2b0Vsz4stI"));
+		log(Odin.Data.getGraphic("-M5xeoigOD2b0Vsz4stI"));
+		log(Odin.Data.getCard("-M5xeoigOD2b0Vsz4stI"));
+		log(Odin.Data.getToken("-M7lbGZnSu6SItqBzU4n"));
+		log(Odin.Data.getCharacter("-M7laLPHxEwBBvSma4gh"));
+	})
 	;
 
 // The API message subscribtion.
