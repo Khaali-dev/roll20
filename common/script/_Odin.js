@@ -202,6 +202,19 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		log(turnOrder);
 		return true;
 	})
+	.add("Add some turns to the turn order", () => {
+		const turns = [
+			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 0),
+			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 0),
+			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 0),
+			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 0),
+			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 0),
+		];
+		const turnOrder = new Odin.TurnOrder();
+		turnOrder.add(turns);
+		log(turnOrder.parse());
+		return true;
+	})
 	;
 
 // The API message subscribtion.

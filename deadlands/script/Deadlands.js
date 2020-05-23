@@ -157,6 +157,46 @@ var Deadlands = (function() {
 			});
 		}
 
+		/**
+		 * Starts the turn
+		 */
+		start() {
+			
+		}
+
+		/**
+		 * Starts a next round.
+		 */
+		newRound() {
+			
+		}
+
+		/**
+		 * Finishes
+		 */
+		finish() {
+			
+		}
+
+//		/**
+//		 * Gives the specified number of cards to the specified player.
+//		 * @param player The identifier of the player for which to give cards.
+//		 * @param size   The number of cards to give.
+//		 * @return the instance.
+//		 */
+//		give(player, size) {
+//			
+//		}
+//
+//		/**
+//		 * Discards the specified cards.
+//		 * @param cards The cards to discard.
+//		 * @return the instance.
+//		 */
+//		discard(cards) {
+//			
+//		}
+
 	}
 
 	/**

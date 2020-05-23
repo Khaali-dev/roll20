@@ -252,6 +252,7 @@ var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
 	.add("Sort turn order", () => {
 		const turnOrder = new Deadlands.TurnOrder();
 		turnOrder.set(turnOrder.parse());
+		log(turnOrder);
 		return true;
 	})
 	;

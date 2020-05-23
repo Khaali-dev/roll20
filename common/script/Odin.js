@@ -495,12 +495,40 @@ var Odin = (function() {
 	}
 
 	/**
+	 * The Turn class defines registrable item of the turn order.
+	 */
+	class Turn {
+
+		/**
+		 * @constructor.
+		 * @param id The identifier of the graphic object.
+		 * @param pr The value of the turn.
+		 */
+		constructor(id, pr) {
+			this.id = id;
+			this.pr = pr;
+		}
+
+		/**
+		 * Converts the turn to object.
+		 */
+		toObject() {
+			return {
+				"id": this.id,
+				"pr": this.pr,
+				"custom": ""
+			}
+		}
+
+	}
+
+	/**
 	 * The TurnOrder class provides functionnalities to manage intiative, turns and rounds.
 	 */
 	class TurnOrder {
 
 		/**
-		 * Constructor.
+		 * @constructor.
 		 * @param order The function which defines the order to set.
 		 */
 		constructor(order) {
@@ -523,6 +551,15 @@ var Odin = (function() {
 		}
 
 		/**
+		 * Clears the current turn order.
+		 * @return the instance.
+		 */
+		clear() {
+			Campaign().set(Odin.Property.CAMPAIGN.TURN_ORDER, JSON.stringify(""));
+			return this;
+		}
+
+		/**
 		 * Sets the specified turn order to the campaign property according to the specified order if defined.
 		 * @param turnOrder The turn order to set.
 		 * @return the instance.
@@ -534,12 +571,12 @@ var Odin = (function() {
 		}
 
 		/**
-		 * Clears the current turn order.
+		 * Adds the specified turns.
+		 * @param turns The turns to add.
 		 * @return the instance.
 		 */
-		clear() {
-			Campaign().set(Odin.Property.CAMPAIGN.TURN_ORDER, JSON.stringify(""));
-			return this;
+		add(turns) {
+			return this.set(this.parse().concat(turns));
 		}
 
 		/**
@@ -577,6 +614,7 @@ var Odin = (function() {
 		Dices: Dices,
 		Roll: Roll,
 		Rolls: Rolls,
+		Turn: Turn,
 		TurnOrder: TurnOrder
 	};
 
