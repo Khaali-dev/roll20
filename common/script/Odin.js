@@ -224,6 +224,15 @@ var Odin = (function() {
 		}
 
 		/**
+		 * @eturn all pages.
+		 */
+		static getPages() {
+			return findObjs({
+				_type: Type.PAGE
+			});
+		}
+
+		/**
 		 * Gets the specified page.
 		 * @param id The identifier of the page to get.
 		 * @return the page.
