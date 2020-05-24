@@ -15,9 +15,9 @@ var Deadlands = (function() {
 	}
 
 	/**
-	 * The poker card order.
+	 * The poker card rank.
 	 */
-	const PokerCardOrder = new Map()
+	const PokerCardRank = new Map()
 		.set("RJo", 1)
 		.set("A♠", 2)
 		.set("A♥", 3)
@@ -153,7 +153,7 @@ var Deadlands = (function() {
 		 * @constructor
 		 */
 		constructor() {
-			this.deck = Array.from(PokerCardOrder.keys());
+			this.deck = Array.from(PokerCardRank.keys());
 			this.given = new Map();
 			this.discard = [];
 		}
@@ -183,7 +183,7 @@ var Deadlands = (function() {
 		 */
 		constructor() {
 			super(function(turn) {
-				return Deadlands.PokerCardOrder.get(turn.pr);
+				return Deadlands.PokerCardRank.get(turn.pr);
 			});
 		}
 
@@ -230,9 +230,9 @@ var Deadlands = (function() {
 	}
 
 	/**
-	 * The MessageHandler class is the main class to handle commands.
+	 * The EventHandler class is the main class to handle commands.
 	 */
-	class MessageHandler extends Odin.AbstractMessageHandler {
+	class EventHandler extends Odin.AbstractEventHandler {
 
 		/**
 		 * @constructor
@@ -314,7 +314,7 @@ var Deadlands = (function() {
 	/**
 	 * The message handler.
 	 */
-	const _handler = new MessageHandler();
+	const _handler = new EventHandler();
 
 	/**
 	 * Handles the specified message.
@@ -328,7 +328,7 @@ var Deadlands = (function() {
 	 * @return the public elements.
 	 */
 	return  {
-		PokerCardOrder: PokerCardOrder,
+		PokerCardRank: PokerCardRank,
 		Rolls : Rolls,
 		TurnOrder: TurnOrder,
 		handleMessage : handleMessage

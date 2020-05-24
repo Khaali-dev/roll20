@@ -89,16 +89,16 @@ var Odin = (function() {
 	}
 
 	/**
-	 * The AbstractMessageHandler class is the base class to define a message handler.
+	 * The AbstractEventHandler class is the base class to define a message handler.
 	 */
-	class AbstractMessageHandler {
+	class AbstractEventHandler {
 
 		/**
 		 * @constructor
 		 */
 		constructor() {
-			if (this.constructor === AbstractMessageHandler) {
-				throw new TypeError("Abstract class AbstractMessageHandler cannot be instantiated directly");
+			if (this.constructor === AbstractEventHandler) {
+				throw new TypeError("Abstract class AbstractEventHandler cannot be instantiated directly");
 			}
 		}
 
@@ -159,7 +159,7 @@ var Odin = (function() {
 	/**
 	 * The AbstractTestSuite class is the base class to define a testsuite.
 	 */
-	class TestSuite extends AbstractMessageHandler {
+	class TestSuite extends AbstractEventHandler {
 
 		/**
 		 * @constructor
@@ -743,7 +743,7 @@ var Odin = (function() {
 		PokerCardColor: PokerCardColor,
 		Test: Test,
 		TestSuite: TestSuite,
-		AbstractMessageHandler: AbstractMessageHandler,
+		AbstractEventHandler: AbstractEventHandler,
 		Data: Data,
 		Dice: Dice,
 		Dices: Dices,

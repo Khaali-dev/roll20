@@ -97,7 +97,7 @@ Contre un groupe, le token choisi doit être celui du leader.
 
 ### Les manoeuvres de pistolets
 
-Pour une action donnée, on peut avoir des cartes de modificateurs:
+Pour une action donnée, on peut avoir des modificateurs:
 
 + Viser pour sélectionner une partie du corps.
 + Tirer par dessus la jambe pour augmenter la CDT.
@@ -105,6 +105,8 @@ Pour une action donnée, on peut avoir des cartes de modificateurs:
 + Main droite - Main gauche pour échanger ses pistolets de main.
 
 #### Tirer
++ Le personnage joue la carte d'action.
++ Le personnage sélectionne le token cible.
 
 #### Le retourné-tiré
 + Le personnage joue la carte d'action.
