@@ -30,12 +30,71 @@ var Odin = (function() {
 	}
 
 	/**
+	 * The Type enumerate defines all roll20 objects types.
+	 */
+	const Type = {
+		PATH: 'path',
+		TEXT: 'text',
+		GRAPHIC: 'graphic',
+		PAGE: 'page',
+		CAMPAIGN: 'campaign',
+		PLAYER: 'player',
+		MACRO: 'macro',
+		ROLLABLE_TABLE: 'rollabletable',
+		TABLE_ITEM: 'tableitem',
+		CHARACTER: 'character',
+		ATTRIBUTE: 'attribute',
+		ABILITY: 'ability',
+		HANDOUT: 'handout',
+		DECK: 'deck',
+		CARD: 'card',
+		HAND: 'hand',
+		JUKEBOX_TRACK: 'jukeboxtrack',
+		CUSTOM_FC: 'custfx'
+	};
+
+	/**
+	 * The Property enumerate defines all roll20 objects properties.
+	 */
+	const Property = {
+		TYPE: "_type",
+		CAMPAIGN: {
+			INITIATIVE_PAGE: "initiativepage",
+			TURN_ORDER: "turnorder",
+			PLAYER_PAGE_ID: "playerpageid",
+			PLAYER_SPECIFIC_PAGES: "playerspecificpages"
+		},
+		GRAPHIC: {
+			SUBTYPE: "_subtype",
+			TOKEN: "token",
+			CARD: "card"
+		},
+		TURN_ORDER: {
+			ID: "id",
+			VALUE: "pr",
+			NAME: "custom",
+			PAGE_ID: "_pageid",
+			MODIFIER: "formula"
+		}
+	};
+
+	/**
+	 * The poker card colors.
+	 */
+	const PokerCardColor = {
+		SPADE: "♠",
+		HEART: "♥",
+		DIAMOND: "♦",
+		CLUB: "♣"
+	}
+
+	/**
 	 * The AbstractMessageHandler class is the base class to define a message handler.
 	 */
 	class AbstractMessageHandler {
 
 		/**
-		 * Constructor.
+		 * @constructor
 		 */
 		constructor() {
 			if (this.constructor === AbstractMessageHandler) {
@@ -113,14 +172,14 @@ var Odin = (function() {
 		}
 
 		/**
-		 * @Override.
+		 * @Override
 		 */
 		handleMessage(msg) {
 			this.handleCommand(msg);
 		}
 
 		/**
-		 * @Override.
+		 * @Override
 		 */
 		processCommand(cmd, args) {
 			if (cmd != 'test' || args[0] != this.name) return;
@@ -142,12 +201,129 @@ var Odin = (function() {
 	}
 
 	/**
+	 * The Data class provides roll20 database accessors.
+	 */
+	class Data {
+
+		/**
+		 * @eturn all players.
+		 */
+		static getPlayers() {
+			return findObjs({
+				_type: Type.PLAYER
+			});
+		}
+
+		/**
+		 * Gets the specified player.
+		 * @param id The identifier of the player to get.
+		 * @return the player.
+		 */
+		static getPlayer(id) {
+			return getObj(Type.PLAYER, id);
+		}
+
+		/**
+		 * @eturn all pages.
+		 */
+		static getPages() {
+			return findObjs({
+				_type: Type.PAGE
+			});
+		}
+
+		/**
+		 * Gets the specified page.
+		 * @param id The identifier of the page to get.
+		 * @return the page.
+		 */
+		static getPage(id) {
+			return getObj(Type.PAGE, id);
+		}
+
+		/**
+		 * Gets the specified graphic.
+		 * @param id The identifier of the graphic to get.
+		 * @return the graphic.
+		 */
+		static getGraphic(id) {
+			return getObj(Type.GRAPHIC, id);
+		}
+
+		/**
+		 * Gets the specified token.
+		 * @param id The identifier of the token to get.
+		 * @return the token.
+		 */
+		static getToken(id) {
+			const obj = Data.getGraphic(id);
+			return obj != null && obj.get(Property.GRAPHIC.SUBTYPE) === Property.GRAPHIC.TOKEN ? obj : null;
+		}
+
+		/**
+		 * Gets the specified card.
+		 * @param id The identifier of the card to get.
+		 * @return the card.
+		 */
+		static getCard(id) {
+			const obj = Data.getGraphic(id);
+			return obj != null && obj.get(Property.GRAPHIC.SUBTYPE) === Property.GRAPHIC.CARD ? obj : null;
+		}
+
+		/**
+		 * Gets the specified character.
+		 * @param id The identifier of the character to get.
+		 * @return the character.
+		 */
+		static getCharacter(id) {
+			return getObj(Type.CHARACTER, id);
+		}
+
+		
+		
+		/**
+		 * Gets the specified characters.
+		 * @param name The name of the characters to get.
+		 */
+		static charactersByName(name) {
+			return findObjs({type:'character', name: name});
+		}
+
+		/**
+		 * Gets the specified non player characters.
+		 * @param name The name of the non player characters to get.
+		 * @return the non player characters.
+		 */
+		static npc(name) {
+			return findObjs({type:'character', name: name, controlledby: ""});
+		}
+
+		/**
+		 * Gets the specified character.
+		 * @param id The identifier of the character to get.
+		 */
+		static characterById(id) {
+			return getObj('character', id);
+		}
+
+		/**
+		 * Gets the identifier of the page which contains the specified player.
+		 * @param player The identifier of the player for which to get the page.
+		 * @return the page identifier.
+		 */
+		static getPageOfPlayer(player) {
+			
+		}
+
+	}
+
+	/**
 	 * The Dice class is the class used to manage dice roll.
 	 */
 	class Dice {
 
 		/**
-		 * Constructor.
+		 * @constructor
 		 * @param side The number of side.
 		 */
 		constructor(side) {
@@ -203,7 +379,7 @@ var Odin = (function() {
 	class Dices {
 
 		/**
-		 * Constructor.
+		 * @constructor
 		 */
 		constructor() {
 			this.dices = new Map();
@@ -261,7 +437,7 @@ var Odin = (function() {
 	class Roll {
 
 		/**
-		 * Constructor.
+		 * @constructor
 		 * @param dice  The rolled dice.
 		 * @param value The roll value.
 		 */
@@ -286,7 +462,7 @@ var Odin = (function() {
 	class Rolls {
 
 		/**
-		 * Constructor.
+		 * @constructor
 		 */
 		constructor() {
 			this.rolls = [];
@@ -325,6 +501,15 @@ var Odin = (function() {
 		 */
 		sum() {
 			return _.reduce(this.rolls, function(sum, r) { return sum + r.value; }, 0);
+		}
+
+		/**
+		 * Gets the rolls which satisfy the specified predicate.
+		 * @param predicate The predicate to satisfy.
+		 * @return the matching rolls.
+		 */
+		get(predicate) {
+			return _.filter(this.rolls, predicate);
 		}
 
 		/**
@@ -413,17 +598,159 @@ var Odin = (function() {
 	}
 
 	/**
+	 * The Character class provides functionnality to manage a character.
+	 */
+	class Character {
+
+		/**
+		 * Gets the identifier of the specified character.
+		 * @param name The name of the character for which to get the identifier.
+		 * @return the character identifier.
+		 */
+		static id(name) {
+			
+		}
+
+	}
+
+	/**
+	 * The Turn class defines registrable item of the turn order.
+	 */
+	class Turn {
+
+		/**
+		 * @constructor
+		 * @param id The identifier of the graphic object.
+		 * @param pr The value of the turn.
+		 */
+		constructor(id, pr) {
+			this.id = id;
+			this.pr = pr;
+			this.custom = "";
+		}
+
+	}
+
+	/**
+	 * The TurnOrder class provides functionnalities to manage intiative, turns and rounds.
+	 */
+	class TurnOrder {
+
+		/**
+		 * @constructor
+		 * @param order The function which defines the order to set.
+		 */
+		constructor(order) {
+			this.order = order;
+		}
+	
+		/**
+		 * @return true if the turn order is displayed.
+		 */
+		isDisplayed() {
+			return Campaign().get(Odin.Property.CAMPAIGN.INITIATIVE_PAGE);
+		}
+
+		/**
+		 * @return the turn order from parsing the campaign property.
+		 */
+		parse() {
+			const to = Campaign().get(Odin.Property.CAMPAIGN.TURN_ORDER);
+			return to === "" ? [] : JSON.parse(to);
+		}
+
+		/**
+		 * Clears the current turn order.
+		 * @return the instance.
+		 */
+		clear() {
+			Campaign().set(Odin.Property.CAMPAIGN.TURN_ORDER, JSON.stringify(""));
+			return this;
+		}
+
+		/**
+		 * Sets the specified turn order to the campaign property according to the specified order if defined.
+		 * @param turnOrder The turn order to set.
+		 * @return the instance.
+		 */
+		set(turnOrder) {
+			const turns = this.order != null ? _.sortBy(turnOrder, this.order) : turnOrder;
+			Campaign().set(Odin.Property.CAMPAIGN.TURN_ORDER, JSON.stringify(turns));
+			return this;
+		}
+
+		/**
+		 * Adds the specified turns.
+		 * @param turns The turns to add.
+		 * @return the instance.
+		 */
+		add(turns) {
+			return this.set(this.parse().concat(turns));
+		}
+
+		/**
+		 * Inserts the specified turns at the top of the turn order, regardless of the order.
+		 * @param turns The turns sto insert.
+		 * @return the instance.
+		 */
+		insert(turns) {
+			const _turns = this.parse();
+			_.each(turns, function(t) {
+				_turns.unshift(t);
+			})
+			Campaign().set(Odin.Property.CAMPAIGN.TURN_ORDER, JSON.stringify(_turns));
+			return this;
+		}
+
+		/**
+		 * Pops the first turn.
+		 * @return the identifier of the token.
+		 */
+		pop() {
+			const turns = this.parse();
+			const turn = turns.shift();
+			this.set(turns);
+			return turn == null ? null : turn.id;
+		}
+
+		/**
+		 * Shows the turn order.
+		 * @return the instance.
+		 */
+		show() {
+			Campaign().set(Odin.Property.CAMPAIGN.INITIATIVE_PAGE, true);
+			return this;
+		}
+
+		/**
+		 * Hides the turn order.
+		 * @return the instance.
+		 */
+		hide() {
+			Campaign().set(Odin.Property.CAMPAIGN.INITIATIVE_PAGE, false);
+			return this;
+		}
+
+	}
+
+	/**
 	 * @return the public elements.
 	 */
 	return  {
-		Strings : Strings,
-		Test : Test,
-		TestSuite : TestSuite,
-		AbstractMessageHandler : AbstractMessageHandler,
-		Dice : Dice,
-		Dices : Dices,
-		Roll : Roll,
-		Rolls : Rolls
+		Strings: Strings,
+		Type: Type,
+		Property: Property,
+		PokerCardColor: PokerCardColor,
+		Test: Test,
+		TestSuite: TestSuite,
+		AbstractMessageHandler: AbstractMessageHandler,
+		Data: Data,
+		Dice: Dice,
+		Dices: Dices,
+		Roll: Roll,
+		Rolls: Rolls,
+		Turn: Turn,
+		TurnOrder: TurnOrder
 	};
 
 })();

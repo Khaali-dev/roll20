@@ -186,6 +186,57 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 			.add(new Odin.Roll(new Odin.Dice(6), 2));
 		return rolls.atLeast(3) === true && rolls.atLeast(5) === false;
 	})
+	.add("Replace some rolls", () => {
+		const rolls = new Odin.Rolls()
+			.add(new Odin.Roll(new Odin.Dice(4), 1))
+			.add(new Odin.Roll(new Odin.Dice(4), 3))
+			.add(new Odin.Roll(new Odin.Dice(6), 1))
+			.add(new Odin.Roll(new Odin.Dice(6), 6))
+			.add(new Odin.Roll(new Odin.Dice(6), 2));
+		const gets = rolls.get(function (r) { return r.value === 1; });
+		gets[0].value = 2;
+		return rolls.toString() === "2(d4), 3(d4), 1(d6), 6(d6), 2(d6)";
+	})
+	.add("Parse the current turn order", () => {
+		const turnOrder = Odin.TurnOrder.parse();
+		log(turnOrder);
+		return true;
+	})
+	.add("Add some turns to the turn order", () => {
+		const turns = [
+			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 1),
+			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 2),
+			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 3),
+			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 4),
+			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 5),
+		];
+		const turnOrder = new Odin.TurnOrder();
+		turnOrder.add(turns);
+		log(turnOrder.parse());
+		return true;
+	})
+	.add("Pop first turn from turn order", () => {
+		const turnOrder = new Odin.TurnOrder();
+		log(turnOrder.pop());
+		return true;
+	})
+	.add("Insert turns to turn order", () => {
+		const turns = [
+			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 10),
+			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 20)
+		];
+		new Odin.TurnOrder().insert(turns);
+		return true;
+	})
+	.add("Gets data", () => {
+		log(Odin.Data.getPlayers());
+		log(Odin.Data.getPlayer("-M5rtkkXsEkckPk1v0DL"));
+		log(Odin.Data.getPage("-M5xeoigOD2b0Vsz4stI"));
+		log(Odin.Data.getGraphic("-M7lbGZnSu6SItqBzU4n"));
+		log(Odin.Data.getCard("-M7lbGZnSu6SItqBzU4n"));
+		log(Odin.Data.getToken("-M7lbGZnSu6SItqBzU4n"));
+		log(Odin.Data.getCharacter("-M7laLPHxEwBBvSma4gh"));
+	})
 	;
 
 // The API message subscribtion.

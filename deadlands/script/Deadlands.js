@@ -5,6 +5,75 @@ var Deadlands = (function() {
 	'use strict';
 
 	/**
+	 * The poker card order.
+	 */
+	const PokerColorCardOrder = {
+		"♠": 1,
+		"♥": 2,
+		"♦": 3,
+		"♣": 4
+	}
+
+	/**
+	 * The poker card order.
+	 */
+	const PokerCardOrder = new Map()
+		.set("RJo", 1)
+		.set("A♠", 2)
+		.set("A♥", 3)
+		.set("A♦", 4)
+		.set("A♣", 5)
+		.set("K♠", 6)
+		.set("K♥", 7)
+		.set("K♦", 8)
+		.set("K♣", 9)
+		.set("Q♠", 10)
+		.set("Q♥", 11)
+		.set("Q♦", 12)
+		.set("Q♣", 13)
+		.set("Ja♠", 14)
+		.set("Ja♥", 15)
+		.set("Ja♦", 16)
+		.set("Ja♣", 17)
+		.set("10♠", 18)
+		.set("10♥", 19)
+		.set("10♦", 20)
+		.set("10♣", 21)
+		.set("9♠", 22)
+		.set("9♥", 23)
+		.set("9♦", 24)
+		.set("9♣", 25)
+		.set("8♠", 26)
+		.set("8♥", 27)
+		.set("8♦", 28)
+		.set("8♣", 29)
+		.set("7♠", 30)
+		.set("7♥", 31)
+		.set("7♦", 32)
+		.set("7♣", 33)
+		.set("6♠", 34)
+		.set("6♥", 35)
+		.set("6♦", 36)
+		.set("6♣", 37)
+		.set("5♠", 38)
+		.set("5♥", 39)
+		.set("5♦", 40)
+		.set("5♣", 41)
+		.set("4♠", 42)
+		.set("4♥", 43)
+		.set("4♦", 44)
+		.set("4♣", 45)
+		.set("3♠", 46)
+		.set("3♥", 47)
+		.set("3♦", 48)
+		.set("3♣", 49)
+		.set("2♠", 50)
+		.set("2♥", 51)
+		.set("2♦", 52)
+		.set("2♣", 53)
+		.set("BJo", 54);
+
+	/**
 	 * The Rolls class provides functionnalities to manage Deadlands rolls.
 	 */
 	class Rolls {
@@ -75,6 +144,92 @@ var Deadlands = (function() {
 	}
 
 	/**
+	 * The PokerDeck class provides functionnalities to manage poker deck. It's used for
+	 * the turn order, the huckster tricks.
+	 */
+	class PokerDeck {
+
+		/**
+		 * @constructor
+		 */
+		constructor() {
+			this.deck = Array.from(PokerCardOrder.keys());
+			this.given = new Map();
+			this.discard = [];
+		}
+
+		/**
+		 * Gives the specified number of cards to the specified character.
+		 * @param id     The identifier of the token.
+		 * @param number The number of cards to give.
+		 * @return the array of given cards.
+		 */
+		give(id, number) {
+			
+		}
+
+		/**
+		 * Discards the specified cards
+		 */
+	}
+
+	/**
+	 * The TurnOrder class provides functionnalities to manage intiative, turns and rounds.
+	 */
+	class TurnOrder extends Odin.TurnOrder {
+
+		/**
+		 * @constructor
+		 */
+		constructor() {
+			super(function(turn) {
+				return Deadlands.PokerCardOrder.get(turn.pr);
+			});
+		}
+
+		/**
+		 * Starts the turn
+		 */
+		start() {
+			
+		}
+
+		/**
+		 * Starts a next round.
+		 */
+		newRound() {
+			
+		}
+
+		/**
+		 * Finishes
+		 */
+		finish() {
+			
+		}
+
+//		/**
+//		 * Gives the specified number of cards to the specified player.
+//		 * @param player The identifier of the player for which to give cards.
+//		 * @param size   The number of cards to give.
+//		 * @return the instance.
+//		 */
+//		give(player, size) {
+//			
+//		}
+//
+//		/**
+//		 * Discards the specified cards.
+//		 * @param cards The cards to discard.
+//		 * @return the instance.
+//		 */
+//		discard(cards) {
+//			
+//		}
+
+	}
+
+	/**
 	 * The MessageHandler class is the main class to handle commands.
 	 */
 	class MessageHandler extends Odin.AbstractMessageHandler {
@@ -87,14 +242,14 @@ var Deadlands = (function() {
 		}
 
 		/**
-		 * @Override.
+		 * @Override
 		 */
 		handleMessage(msg) {
 			this.handleCommand(msg);
 		}
 
 		/**
-		 * @Override.
+		 * @Override
 		 */
 		processCommand(cmd, args) {
 			if (cmd != 'dl') return;
@@ -173,7 +328,9 @@ var Deadlands = (function() {
 	 * @return the public elements.
 	 */
 	return  {
+		PokerCardOrder: PokerCardOrder,
 		Rolls : Rolls,
+		TurnOrder: TurnOrder,
 		handleMessage : handleMessage
 	};
 
