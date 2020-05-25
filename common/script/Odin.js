@@ -133,16 +133,6 @@ var Odin = (function() {
 	};
 
 	/**
-	 * The poker card colors.
-	 */
-	const PokerCardColor = {
-		SPADE: "♠",
-		HEART: "♥",
-		DIAMOND: "♦",
-		CLUB: "♣"
-	}
-
-	/**
 	 * The AbstractEventHandler class is the base class to define a message handler.
 	 */
 	class AbstractEventHandler {
@@ -921,7 +911,6 @@ var Odin = (function() {
 		Rankables: Rankables,
 		Type: Type,
 		Property: Property,
-		PokerCardColor: PokerCardColor,
 		Test: Test,
 		TestSuite: TestSuite,
 		AbstractEventHandler: AbstractEventHandler,

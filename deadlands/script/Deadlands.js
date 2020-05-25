@@ -89,7 +89,7 @@ var Deadlands = (function() {
 			this.deck = deck;
 			this.token = token;
 		}
-	
+
 	}
 
 	/**
@@ -110,7 +110,7 @@ var Deadlands = (function() {
 		/**
 		 * Defines a new poker card.
 		 */
-		
+
 
 		/**
 		 * Gives the specified number of cards to the specified character.
