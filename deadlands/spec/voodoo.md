@@ -60,15 +60,21 @@ exemples :
 
 ## Sorts
 
-case à cocher autel/humfor pour bonus +4
+prévoir une case à cocher autel/humfor pour bonus +4
 
-caractéristiques d'un sort:
-- Trait (à associer à Conjuration)
+**caractéristiques d'un sort**:
+- Trait  (la quantité de dés correspond au niveau en Conjurin' et le type de dé au trait associé)
 - TN
 - Vitesse
 - Durée
 - Portée
 - (Ingrédients)
+
+**effets possibles d'un sort**:
+
+- crée un sachet
+- enchante un objet
+- effet instantané sur la cible
 
 
 
