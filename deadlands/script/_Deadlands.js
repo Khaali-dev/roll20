@@ -246,13 +246,19 @@ var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
 			{"id":"-M7lbGZnSu6SItqBzU4n","pr":"9♣","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
 			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"4♥","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
 			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"2♠","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"}];
-		const sorted = _.sortBy(turns, function(turn){ return Deadlands.PokerCardRank.get(turn.pr); });
-		return true;
+		const expected = [
+			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"RJo","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
+			{"id":"-M7lbGZnSu6SItqBzU4n","pr":"9♣","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
+			{"id":"-M7lbGZnSu6SItqBzU4n", "pr":"6♣", "custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
+			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"4♥","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
+			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"2♠","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"}];
+		return Odin.Test.assertArrayEqual(
+				expected,
+				_.sortBy(turns, function(turn){ return Deadlands.PokerCardRank.get(turn.pr); }));
 	})
 	.add("Sort turn order", () => {
 		const turnOrder = new Deadlands.TurnOrder();
-		turnOrder.set(turnOrder.parse());
-		log(turnOrder);
+		return Odin.Test.assertNotEmpty(new Deadlands.TurnOrder().parse());
 		return true;
 	})
 	;

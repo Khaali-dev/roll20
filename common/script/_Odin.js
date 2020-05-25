@@ -69,13 +69,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 			.add(new Odin.Roll(new Odin.Dice(6), 1))
 			.add(new Odin.Roll(new Odin.Dice(6), 6))
 			.add(new Odin.Roll(new Odin.Dice(6), 2));
-		const values = rolls.values();
-		return values.length === 5 &&
-		       values[0] === 1 &&
-		       values[1] === 3 &&
-		       values[2] === 1 &&
-		       values[3] === 6 &&
-		       values[4] === 2;
+		return Odin.Test.assertArrayEqual([1, 3, 1, 6, 2], rolls.values());
 	})
 	.add("Min of rolls", () => {
 		const rolls = new Odin.Rolls()
@@ -112,13 +106,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 			.add(new Odin.Roll(new Odin.Dice(6), 6))
 			.add(new Odin.Roll(new Odin.Dice(6), 2))
 			.transform(function (r) { return new Odin.Roll(r.dice, r.value + 1); });
-		const values = rolls.values();
-		return values.length === 5 &&
-		       values[0] === 2 &&
-		       values[1] === 4 &&
-		       values[2] === 2 &&
-		       values[3] === 7 &&
-		       values[4] === 3;
+		return Odin.Test.assertArrayEqual([2, 4, 2, 7, 3], rolls.values());
 	})
 	.add("Reject rolls", () => {
 		const rolls = new Odin.Rolls()
@@ -128,11 +116,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 			.add(new Odin.Roll(new Odin.Dice(6), 6))
 			.add(new Odin.Roll(new Odin.Dice(6), 2))
 			.reject(function (r) { return r.value === 1; });
-		const values = rolls.values();
-		return values.length === 3 &&
-		       values[0] === 3 &&
-		       values[1] === 6 &&
-		       values[2] === 2;
+		return Odin.Test.assertArrayEqual([3, 6, 2], rolls.values());
 	})
 	.add("Filter rolls", () => {
 		const rolls = new Odin.Rolls()
@@ -142,11 +126,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 			.add(new Odin.Roll(new Odin.Dice(6), 6))
 			.add(new Odin.Roll(new Odin.Dice(6), 2))
 			.filter(function (r) { return r.value > 1; });
-		const values = rolls.values();
-		return values.length === 3 &&
-		       values[0] === 3 &&
-		       values[1] === 6 &&
-		       values[2] === 2;
+		return Odin.Test.assertArrayEqual([3, 6, 2], rolls.values());
 	})
 	.add("Some rolls", () => {
 		const rolls = new Odin.Rolls()
@@ -198,9 +178,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return rolls.toString() === "2(d4), 3(d4), 1(d6), 6(d6), 2(d6)";
 	})
 	.add("Parse the current turn order", () => {
-		const turnOrder = new Odin.TurnOrder(null).parse();
-		log(turnOrder);
-		return true;
+		return Odin.Test.assertNotEmpty(new Odin.TurnOrder(null).parse());
 	})
 	.add("Add some turns to the turn order", () => {
 		const turns = [
@@ -210,32 +188,27 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 4),
 			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 5),
 		];
-		const turnOrder = new Odin.TurnOrder();
-		turnOrder.add(turns);
-		log(turnOrder.parse());
-		return true;
+		return Odin.Test.assertNotEmpty(new Odin.TurnOrder().add(turns).parse());
 	})
 	.add("Pop first turn from turn order", () => {
-		const turnOrder = new Odin.TurnOrder();
-		log(turnOrder.pop());
-		return true;
+		return Odin.Test.assertNotEmpty(new Odin.TurnOrder().pop());
 	})
 	.add("Insert turns to turn order", () => {
 		const turns = [
 			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 10),
 			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 20)
 		];
-		new Odin.TurnOrder().insert(turns);
-		return true;
+		return Odin.Test.assertNotEmpty(new Odin.TurnOrder().insert(turns));
 	})
 	.add("Gets data", () => {
-		log(Odin.Data.getPlayers());
-		log(Odin.Data.getPlayer("-M5rtkkXsEkckPk1v0DL"));
-		log(Odin.Data.getPage("-M5xeoigOD2b0Vsz4stI"));
-		log(Odin.Data.getGraphic("-M7lbGZnSu6SItqBzU4n"));
-		log(Odin.Data.getCard("-M7lbGZnSu6SItqBzU4n"));
-		log(Odin.Data.getToken("-M7lbGZnSu6SItqBzU4n"));
-		log(Odin.Data.getCharacter("-M7laLPHxEwBBvSma4gh"));
+		return
+			Odin.Test.assertNotEmpty(Odin.Data.getPlayers()) &&
+			Odin.Test.assertNotEmpty(Odin.Data.getPlayer("-M5rtkkXsEkckPk1v0DL")) &&
+			Odin.Test.assertNotEmpty(Odin.Data.getPage("-M5xeoigOD2b0Vsz4stI")) &&
+			Odin.Test.assertNotEmpty(Odin.Data.getGraphic("-M7lbGZnSu6SItqBzU4n")) &&
+			Odin.Test.assertNotEmpty(Odin.Data.getCard("-M7lbGZnSu6SItqBzU4n")) &&
+			Odin.Test.assertNotEmpty(Odin.Data.getToken("-M7lbGZnSu6SItqBzU4n")) &&
+			Odin.Test.assertNotEmpty(Odin.Data.getCharacter("-M7laLPHxEwBBvSma4gh"));
 	})
 	;
 

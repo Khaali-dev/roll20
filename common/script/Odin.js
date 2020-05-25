@@ -154,6 +154,29 @@ var Odin = (function() {
 			log((this.assert() === true ? "[OK    ]" : "[   NOK]") + ": " + this.name);
 		}
 
+		/**
+		 * Checks the value is not null or empty.
+		 * @param value The value to check.
+		 * @return true oif value is not empty or null;
+		 */
+		static assertNotEmpty(value) {
+			const assert = value != null && value != [];
+			if (!assert) {
+				log(assert);
+			}
+			return assert;
+		}
+
+		/**
+		 * Checks both arrays are equals.
+		 * @param array1 The first array to check.
+		 * @param array2 The second array to check.
+		 * @return true if both arrays are equals.
+		 */
+		static assertArrayEqual(array1, array2) {
+			return JSON.stringify(array1)==JSON.stringify(array2)
+		}
+
 	}
 
 	/**
