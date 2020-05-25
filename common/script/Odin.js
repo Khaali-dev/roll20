@@ -30,6 +30,60 @@ var Odin = (function() {
 	}
 
 	/**
+	 * The Rankable class defines rankable object.
+	 */
+	class Rankable {
+
+		/**
+		 * @constructor
+		 * @param name The name of the rankable object.
+		 * @param rank The rank of the rankable object, from 1 to the lower priority.
+		 */
+		constructor(name, rank) {
+			this.name = name;
+			this.rank = rank;
+		}
+
+	}
+
+	/**
+	 * The Rankables class defines rankable objects. Name of the rankable objects are
+	 * used for registration.
+	 */
+	class Rankables {
+
+		/**
+		 * @constructor
+		 * @param name The name of the rankable object.
+		 * @param rank The rank of the rankable object, from 1 to the lower priority.
+		 */
+		constructor(name, rank) {
+			this.rankables = new Map();
+		}
+
+		/**
+		 * Registers the specified rankable object.
+		 * @param rankable The rankable object to register.
+		 * @return the instance.
+		 */
+		withRankable(rankable) {
+			this.rankables.set(rankable.name, rankable);
+			return this;
+		}
+
+		/**
+		 * Returns the rank of the specified object.
+		 * @param name The name of the object for which to get the rank.
+		 * @return the rank.
+		 */
+		rank(name) {
+			const r = this.rankables.get(name);
+			return r == null ? null : r.rank;
+		}
+
+	}
+
+	/**
 	 * The Type enumerate defines all roll20 objects types.
 	 */
 	const Type = {
@@ -222,6 +276,108 @@ var Odin = (function() {
 		}
 
 	}
+
+	/**
+	 * The PokerColor class defines poker color.
+	 */
+	class PokerColor extends Rankable {
+
+		/**
+		 * @constructor
+		 * @param name The name of the poker color.
+		 * @param rank The rank of the color, from 1 to the lower priority.
+		 * 
+		 */
+		constructor(name, rank) {
+			super(name, rank);
+		}
+
+	}
+
+	/**
+	 * The PokerCard class defines poker card.
+	 */
+	class PokerCard extends Rankable {
+
+		/**
+		 * @constructor
+		 * @param name The name of the poker card.
+		 * @param rank The rank of the card, from 1 to the lower priority.
+		 * 
+		 */
+		constructor(name, rank) {
+			super(name, rank);
+		}
+
+	}
+
+	/**
+	 * The poker card order.
+	 */
+	const PokerColors = new Rankables()
+		.withRankable(new PokerColor("♠", 1))
+		.withRankable(new PokerColor("♥", 2))
+		.withRankable(new PokerColor("♦", 3))
+		.withRankable(new PokerColor("♣", 4));
+
+	/**
+	 * The poker cards.
+	 */
+	const PokerCards = new Rankables()
+		.withRankable(new PokerCard("RJo", 1))
+		.withRankable(new PokerCard("A♠", 2))
+		.withRankable(new PokerCard("A♥", 3))
+		.withRankable(new PokerCard("A♦", 4))
+		.withRankable(new PokerCard("A♣", 5))
+		.withRankable(new PokerCard("K♠", 6))
+		.withRankable(new PokerCard("K♥", 7))
+		.withRankable(new PokerCard("K♦", 8))
+		.withRankable(new PokerCard("K♣", 9))
+		.withRankable(new PokerCard("Q♠", 10))
+		.withRankable(new PokerCard("Q♥", 11))
+		.withRankable(new PokerCard("Q♦", 12))
+		.withRankable(new PokerCard("Q♣", 13))
+		.withRankable(new PokerCard("Ja♠", 14))
+		.withRankable(new PokerCard("Ja♥", 15))
+		.withRankable(new PokerCard("Ja♦", 16))
+		.withRankable(new PokerCard("Ja♣", 17))
+		.withRankable(new PokerCard("10♠", 18))
+		.withRankable(new PokerCard("10♥", 19))
+		.withRankable(new PokerCard("10♦", 20))
+		.withRankable(new PokerCard("10♣", 21))
+		.withRankable(new PokerCard("9♠", 22))
+		.withRankable(new PokerCard("9♥", 23))
+		.withRankable(new PokerCard("9♦", 24))
+		.withRankable(new PokerCard("9♣", 25))
+		.withRankable(new PokerCard("8♠", 26))
+		.withRankable(new PokerCard("8♥", 27))
+		.withRankable(new PokerCard("8♦", 28))
+		.withRankable(new PokerCard("8♣", 29))
+		.withRankable(new PokerCard("7♠", 30))
+		.withRankable(new PokerCard("7♥", 31))
+		.withRankable(new PokerCard("7♦", 32))
+		.withRankable(new PokerCard("7♣", 33))
+		.withRankable(new PokerCard("6♠", 34))
+		.withRankable(new PokerCard("6♥", 35))
+		.withRankable(new PokerCard("6♦", 36))
+		.withRankable(new PokerCard("6♣", 37))
+		.withRankable(new PokerCard("5♠", 38))
+		.withRankable(new PokerCard("5♥", 39))
+		.withRankable(new PokerCard("5♦", 40))
+		.withRankable(new PokerCard("5♣", 41))
+		.withRankable(new PokerCard("4♠", 42))
+		.withRankable(new PokerCard("4♥", 43))
+		.withRankable(new PokerCard("4♦", 44))
+		.withRankable(new PokerCard("4♣", 45))
+		.withRankable(new PokerCard("3♠", 46))
+		.withRankable(new PokerCard("3♥", 47))
+		.withRankable(new PokerCard("3♦", 48))
+		.withRankable(new PokerCard("3♣", 49))
+		.withRankable(new PokerCard("2♠", 50))
+		.withRankable(new PokerCard("2♥", 51))
+		.withRankable(new PokerCard("2♦", 52))
+		.withRankable(new PokerCard("2♣", 53))
+		.withRankable(new PokerCard("BJo", 54));
 
 	/**
 	 * The Data class provides roll20 database accessors.
@@ -761,6 +917,8 @@ var Odin = (function() {
 	 */
 	return  {
 		Strings: Strings,
+		Rankable: Rankable,
+		Rankables: Rankables,
 		Type: Type,
 		Property: Property,
 		PokerCardColor: PokerCardColor,
@@ -768,6 +926,10 @@ var Odin = (function() {
 		TestSuite: TestSuite,
 		AbstractEventHandler: AbstractEventHandler,
 		Data: Data,
+		PokerColor: PokerColor,
+		PokerCard: PokerCard,
+		PokerColors: PokerColors,
+		PokerCards: PokerCards,
 		Dice: Dice,
 		Dices: Dices,
 		Roll: Roll,

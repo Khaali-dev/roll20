@@ -177,6 +177,25 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		gets[0].value = 2;
 		return rolls.toString() === "2(d4), 3(d4), 1(d6), 6(d6), 2(d6)";
 	})
+	.add("Sort poker cards", () => {
+		const turns = [
+			{"id":"-M7lbGZnSu6SItqBzU4n", "pr":"6♣", "custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
+			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"RJo","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
+			{"id":"-M7lbGZnSu6SItqBzU4n","pr":"9♣","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
+			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"4♥","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
+			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"2♠","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"}];
+		const expected = [
+			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"RJo","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
+			{"id":"-M7lbGZnSu6SItqBzU4n","pr":"9♣","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
+			{"id":"-M7lbGZnSu6SItqBzU4n", "pr":"6♣", "custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
+			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"4♥","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
+			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"2♠","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"}];
+		return Odin.Test.assertArrayEqual(
+				expected,
+				_.sortBy(turns, function(turn)
+						{ return Odin.PokerCards.rank(turn.pr); 
+				}));
+	})
 	.add("Parse the current turn order", () => {
 		return Odin.Test.assertNotEmpty(new Odin.TurnOrder(null).parse());
 	})

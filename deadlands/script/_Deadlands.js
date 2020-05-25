@@ -239,26 +239,14 @@ var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
 		const unskill = Deadlands.Rolls.unskill(rolls, 5, -1) === 1;
 		return !fumble && skill && unskill;
 	})
-	.add("Sort poker cards", () => {
-		const turns = [
-			{"id":"-M7lbGZnSu6SItqBzU4n", "pr":"6♣", "custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
-			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"RJo","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
-			{"id":"-M7lbGZnSu6SItqBzU4n","pr":"9♣","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
-			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"4♥","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
-			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"2♠","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"}];
-		const expected = [
-			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"RJo","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
-			{"id":"-M7lbGZnSu6SItqBzU4n","pr":"9♣","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
-			{"id":"-M7lbGZnSu6SItqBzU4n", "pr":"6♣", "custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
-			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"4♥","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
-			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"2♠","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"}];
-		return Odin.Test.assertArrayEqual(
-				expected,
-				_.sortBy(turns, function(turn){ return Deadlands.PokerCardRank.get(turn.pr); }));
-	})
-	.add("Sort turn order", () => {
+	.add("Gets turn order", () => {
 		const turnOrder = new Deadlands.TurnOrder();
 		return Odin.Test.assertNotEmpty(new Deadlands.TurnOrder().parse());
+		return true;
+	})
+	.add("Sorts turn order", () => {
+		const turnOrder = new Deadlands.TurnOrder();
+		return Odin.Test.assertNotEmpty(turnOrder.set(turnOrder.parse()));
 		return true;
 	})
 	;
