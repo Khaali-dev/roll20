@@ -80,6 +80,8 @@ prévoir une case à cocher autel/humfor pour bonus +4
 
 ## Sachets
 
+à gérer par le voodooiste ou à déporter dans l'inventaire de la personne qui les porte
+
 **caractéristiques d'un sachet**:
 
 - nom
