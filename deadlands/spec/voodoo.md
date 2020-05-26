@@ -12,7 +12,7 @@ Pour avoir accès à Arcane/Voodoo, il faut au minimum:
 
 - Loas
 - Sorts
-- Sachets "en activité"
+- Sachets 
 
 ## Loas
 
@@ -63,12 +63,14 @@ exemples :
 prévoir une case à cocher autel/humfor pour bonus +4
 
 **caractéristiques d'un sort**:
-- Trait  (la quantité de dés correspond au niveau en Conjurin' et le type de dé au trait associé)
+- Nom
+- Trait (associé à Conjurin' pour le jet)
 - TN
 - Vitesse
 - Durée
 - Portée
 - (Ingrédients)
+- Effet
 
 **effets possibles d'un sort**:
 
@@ -76,6 +78,14 @@ prévoir une case à cocher autel/humfor pour bonus +4
 - enchante un objet
 - effet instantané sur la cible
 
+## Sachets
+
+**caractéristiques d'un sachet**:
+
+- nom
+- effet
+- emplacement
+- durée restante
 
 
 
