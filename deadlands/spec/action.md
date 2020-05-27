@@ -18,7 +18,13 @@
     + Le MJ sélectionne un token
     + Le MJ reçoit un moyen d'activer l'nitiative du personnage selectionné
 
+! Un seul item à la fois dans le turn order pour cacher l'ordre général
+
 # Système de carte
+
+#### Après la réunion
++ Utilisation d'un menu (avec les cartes ?)
++ Bouton de selection/deselection
 
 #### Les fonctions à utiliser
 + giveCardToPlayer(cardid, playerid)
