@@ -44,9 +44,7 @@
 .charsheet input.sheet-tab1:checked ~ div.sheet-section-traits,
 .charsheet input.sheet-tab2:checked ~ div.sheet-section-combat,
 .charsheet input.sheet-tab3:checked ~ div.sheet-section-arcane,
-.charsheet input.sheet-tab4:checked ~ div.sheet-section-misc,
-.charsheet input.sheet-tab5:checked ~ div.sheet-section-core,
-.charsheet input.sheet-tab6:checked ~ div.sheet-section-obsolete {
+.charsheet input.sheet-tab5:checked ~ div.sheet-section-core {
   display: block;
   border-radius: 4px;
   padding: 5px;
@@ -54,36 +52,44 @@
 
 /*this hides the radio button for each tab, makes it 130px wide and 40px tall and makes sure it's above everything else*/
 .charsheet input.sheet-tab {
-  width: 130px;
+  width: 160px;
   height: 40px;
   cursor: pointer;
-  position: relative;
   opacity: 0;
   z-index: 9999;
+  position:relative;
 }
 
 /*this styles the span with the tab information and slides to the left, so it appears underneath the radio button*/
 .charsheet span.sheet-tab {
+
     text-align: center;
-    display: inline-block;
     font-size: 14pt;
     color: black;
     font-weight: bold;
-    border-radius: 4px;
-    min-width: 130px;
-    height: 40px;
     cursor: pointer;
-    position: relative;
-    vertical-align: middle;
-    margin-left: -130px;/*originally 91px*/
-    padding-left:10px;
-    padding-right:10px;
     font-family:'Shadows into Light',cursive;
     text-transform:uppercase;
+    position:relative;
+    width:140px;
+   height:40px;
     
   background:url("img/sign.png") center no-repeat;
   background-size:cover;
+  
+    padding-left:10px;
+    padding-right:10px;  
+    vertical-align:baseline;
+        display: inline-block;
+        margin-left:-162px;
+        top:-13px;
+        
+    
+    display: inline-block;
+    cursor: pointer;
+    
 }
+
 
 /*this modifies the span color once the radio button is selected so you know which tab is selected*/
 .charsheet input.sheet-tab1:checked + span.sheet-tab1,
@@ -93,7 +99,6 @@
 .charsheet input.sheet-tab5:checked + span.sheet-tab5,
 .charsheet input.sheet-tab6:checked + span.sheet-tab6 {
     color: #ffffff;
-    border-radius: 4px;
     background-image:url("img/sign2.png");
 }
 
@@ -314,6 +319,7 @@ input[type=text], input[type=number], .sheet-textarea{
 .sheet-shorttextarea{
     height: 40px;
     resize: vertical; /* user can resize vertically, but width is fixed */
+    width: 100%;
 }
 
 .sheet-wounds {
