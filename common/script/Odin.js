@@ -302,7 +302,7 @@ var Odin = (function() {
 	}
 
 	/**
-	 * The poker card order.
+	 * The poker card colors.
 	 */
 	const PokerColors = new Rankables()
 		.withRankable(new PokerColor("♠", 1))
