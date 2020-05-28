@@ -192,59 +192,67 @@ var Deadlands = (function() {
 		 */
 		processCommand(cmd, args) {
 			if (cmd != 'dl') return;
+			if (args.length > 0) {
 
-			this.openRoll(2, 0, 0, 0);
+				
+				
+				if (args[0] === 'skill') {
+					const size = parseInt(args[1], 10);
+					const dice = parseInt(args[2], 10);
+					const tn = parseInt(args[3], 10);
+					log(size + "d" + dice + " SD:" + tn);
+					this.openRoll(size, dice, 0, tn);
+
+				} else if (args[0] === 'attribute') {
+					const size = parseInt(args[1], 10);
+					const dice = parseInt(args[2], 10);
+					const tn = parseInt(args[3], 10);
+					log(size + "d" + dice + " SD:" + tn);
+					this.openRoll(size, dice, 0, tn);
+
+				}
+
+			}
+
 		}
 
 		/**
 		 * Handles the specified roll.
-		 * @param attribute    The attribute defines the number of dices to roll.
-		 * @param coordination The skill or the coordination defines the type of dices to roll.
-		 * @param modifier     The modifier to apply to the roll.
-		 * @param tn           The difficulty target number.
+		 * @param size     The number of dices to roll.
+		 * @param dice     The type of dices to roll.
+		 * @param tn       The difficulty target number.
 		 */
 		openRoll(size, dice, modifier, tn) {
 			log("openRoll");
 
-			var rolls = new Odin.Dices()
-				.add(new Odin.Dice(8), 2)
-				.add(new Odin.Dice(6), 4)
+			const rolls = new Odin.Dices()
+				.add(new Odin.Dice(dice), size)
 				.roll();
+
+			var result = null;
+			if (Rolls.isFumble(rolls) === true) {
+				result = "Tu t'es planté !";
+			} else if (rolls.atLeast(tn) === false) {
+				result = "Tu as échoué";
+			} else {
+				result = "Tu réussis avec " + Rolls.getSuccess(rolls.max(), tn) + " degré(s)"
+			}
 
 			var html = "";
 			html += "<div class='sheet-rolltemplate-default'>";
 			html += "<table>";
-			html += "<caption>Jet " + size + "d" + dice + " avec SD " + tn + "</caption>";
+			html += "<caption>Jet " + size + "d" + dice + " SD:" + tn + "</caption>";
 			html += "<tr>";
 			html += "<td>Dés:</td>";
 			html += "<td>" + rolls.toString() + "</td>";
 			html += "</tr>";
-			html += "<tr>";
-			html += "<td>Max:</td>";
-			html += "<td>" + rolls.max() + "</td>";
-			html += "</tr>";
-			html += "<tr>";
-			html += "<td>Sum:</td>";
-			html += "<td>" + rolls.sum() + "</td>";
-			html += "</tr>";
 			html += "<td>Resultat:</td>";
-			html += "<td>" + rolls.atLeast(7) + "</td>";
-			html += "</tr>";
-			html += "<tr>";
-			html += "<td>Nb of 1:</td>";
-			html += "<td>" + rolls.numberOf(1) + "</td>";
-			html += "</tr>";
-			html += "<tr>";
-			html += "<td>Fumble:</td>";
-			html += "<td>" + Rolls.isFumble(rolls) + "</td>";
-			html += "</tr>";
-			html += "<tr>";
-			html += "<td>Success:</td>";
-			html += "<td>" + Rolls.getSuccess(7,5) + "</td>";
+			html += "<td>" + rolls.max() + " :" + result + "</td>";
 			html += "</tr>";
 			html += "</table>";
 			html += "</div>";
 			sendChat("Summary", html);
+
 		}
 
 	}
