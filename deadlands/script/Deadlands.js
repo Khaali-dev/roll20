@@ -5,9 +5,9 @@ var Deadlands = (function() {
 	'use strict';
 
 	/**
-	 * The Rolls class provides functionnalities to manage Deadlands rolls.
+	 * The RollInterpreter class provides functionnalities to manage Deadlands rolls.
 	 */
-	class Rolls {
+	class RollInterpreter {
 
 		/**
 		 * Indicates if the specified rolls is a fumble.
@@ -45,7 +45,7 @@ var Deadlands = (function() {
 		 *     N : Success with N-1 degrees
 		 */
 		static skill(rolls, tn, modifier) {
-			return Rolls.isFumble(rolls) ? -1 : Rolls.getSuccess(rolls.max() + modifier, tn);
+			return RollInterpreter.isFumble(rolls) ? -1 : RollInterpreter.getSuccess(rolls.max() + modifier, tn);
 		}
 
 		/**
@@ -61,7 +61,7 @@ var Deadlands = (function() {
 		 *     N : Success with N-1 degrees
 		 */
 		static unskill(rolls, tn, modifier) {
-			return Rolls.isFumble(rolls) ? -1 : Rolls.getSuccess(Math.floor(rolls.max()/2) + modifier, tn);
+			return RollInterpreter.isFumble(rolls) ? -1 : RollInterpreter.getSuccess(Math.floor(rolls.max()/2) + modifier, tn);
 		}
 	
 		static rollSkill(attribute, coordination, skill, tn, modifier) {
@@ -230,12 +230,12 @@ var Deadlands = (function() {
 				.roll();
 
 			var result = null;
-			if (Rolls.isFumble(rolls) === true) {
+			if (RollInterpreter.isFumble(rolls) === true) {
 				result = "Tu t'es planté !";
 			} else if (rolls.atLeast(tn) === false) {
 				result = "Tu as échoué";
 			} else {
-				result = "Tu réussis avec " + Rolls.getSuccess(rolls.max(), tn) + " degré(s)"
+				result = "Tu réussis avec " + RollInterpreter.getSuccess(rolls.max(), tn) + " degré(s)"
 			}
 
 			var html = "";
@@ -275,7 +275,7 @@ var Deadlands = (function() {
 	 * @return the public elements.
 	 */
 	return  {
-		Rolls : Rolls,
+		RollInterpreter : RollInterpreter,
 		TurnOrder: TurnOrder,
 		handleMessage : handleMessage
 	};

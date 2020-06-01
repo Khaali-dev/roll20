@@ -1,3 +1,27 @@
+# Système de jet de compétence
++ Le MJ initialise le jet en fournissant les données suivantes:
+    + initialisation
+    + nom de l'attribut
+    + nom de la compétence (optionnel)
+    + seuil de difficulté
+    + indique si le resultat doit apparaitre:
+        + pour le GM
+        + pour le GM et le(s) joueur(s)
+        + pour le GM et tous les joueurs
+    + la liste des ids concernés (token, personnage, joueur ?)
++ Sur la réception de cette commande, chaque joueur voit apparaitre les macros suivantes:
+    + jet
+    + pépite blanche
+    + pépite rouge
+    + pépite bleue
++ Le joueur clique sur jet pour lancer ses dés qui apparaissent uniquement dans son channel
++ La macro 'jet' est renommé appliqué
++ Le joueur peut dépenser des pépites si il en a. Le nouveau lancé de dés apparait
++ Le joueur applique le jet. Ce dernier apparait chez le GM et dans d'autres channels si besoin.
++ Les macros disparaissent
++ Lorsque tous les personnages ont agit, le MJ recoit un message listant les résultats généraux.  
+    
+
 # Système d'initiative
 
 + Déclaration de passage en mode round. Le système d'initiative est activé.
