@@ -5,10 +5,11 @@
 <!-- Shooting & Perfomin-->
         <link href="assets/base.css" rel="stylesheet" type="text/css"/>
         <link href="assets/app.css" rel="stylesheet" type="text/css"/>
-        <link href="deadlandsclassic_anniversary.css" rel="stylesheet" type="text/css"/>
-        <script src="assets/app.js"></script>        
-        <script src="assets/base.js"></script>      
-        <script src="assets/firebase.2.4.0.js"></script>
+        <link href="deadlandsclassic_anniversary.css" rel="stylesheet" type="text/css"/>        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!--<script src="assets/app.js"></script>        
+         <script src="assets/base.js"></script>      
+        <script src="assets/firebase.2.4.0.js"></script>-->
 <script type="text/worker">
 
 on("sheet:opened", function(eventInfo){
@@ -75,6 +76,15 @@ on("sheet:opened", function(eventInfo){
     });     
     
 });
+
+ const levelRadioValues = ["1","2","3","4","5"];
+  levelRadioValues.forEach(function(value) {
+    on(`clicked:level_${value}`, function() {
+      setAttrs({
+        ["level"]: value
+      });
+    });
+  });
 </script>
     </head>
     <body class="ui-dialog">
@@ -1697,7 +1707,26 @@ on("sheet:opened", function(eventInfo){
   <!-- Arcane Ablities Tab -->
   <div class="sheet-section-arcane">
     <div class="sheet-row">
-      <div class="sheet-center">
+          
+              <div class="sheet-radios">
+                  <input type="hidden" class="sheet-radio" name="attr_level" value="1" />
+                  <button type="action" name="act_level_1" class="sheet-radio sheet-radio-1">
+                      <span class="checked"></span>
+                  </button>
+                  <button type="action" name="act_level_2" class="sheet-radio sheet-radio-2">
+                      <span class="sheet-checked"></span>
+                  </button>
+                  <button type="action" name="act_level_3" class="sheet-radio sheet-radio-3">
+                      <span class="sheet-checked"></span>
+                  </button>
+                  <button type="action" name="act_level_4" class="sheet-radio sheet-radio-4">
+                      <span class="checked"></span>
+                  </button>
+                  <button type="action" name="act_level_5" class="sheet-radio sheet-radio-5">
+                      <span class="sheet-checked"></span>
+                  </button>
+              </div>
+              <div class="sheet-center">
           <h2><span data-i18n="arcaneAbilities">Arcane</span></h2></div>
         <div class="sheet-row">
             <div class="sheet-item sheet-large"><label><b><span data-i18n="skill">Skill</span></b></label></div>
@@ -1745,13 +1774,11 @@ on("sheet:opened", function(eventInfo){
                 </div>
             </fieldset>
             <div class="repcontainer" data-groupname="repeating_spells"></div>
-        </div>
+        </div></div>
     </div>
      
       
   </div>
-   <!-- -->
-    <!---->
    <!-- Arcane Ablities Tab -->
 
   <!-- Misc Tab -->

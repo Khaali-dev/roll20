@@ -622,3 +622,40 @@ textarea {
 .sheet-arcane-row .sheet-item {
   vertical-align: top;
 }
+
+/* test javascript */
+
+/* Configure a container for the radio buttons. */
+.sheet-radios {
+  display: flex;
+  align-items: center;
+}
+
+/* Configure the button styling. This example makes it look like a radio. */
+button.sheet-radio {
+  padding: 0;
+  border: solid 1px #a8a8a8;
+  cursor: pointer;
+
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+button.sheet-radio > span.sheet-checked {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: buttontext;
+}
+
+/* Hide the "checked" section of the radio if the attribute value does not match the radio */
+input.sheet-radio:not([value="1"]) ~ button.sheet-radio-1 > span.sheet-checked,
+input.sheet-radio:not([value="2"]) ~ button.sheet-radio-2 > span.sheet-checked,
+input.sheet-radio:not([value="3"]) ~ button.sheet-radio-3 > span.sheet-checked,
+input.sheet-radio:not([value="4"]) ~ button.sheet-radio-4 > span.sheet-checked,
+input.sheet-radio:not([value="5"]) ~ button.sheet-radio-5 > span.sheet-checked {
+  display: none;
+}
