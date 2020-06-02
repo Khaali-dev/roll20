@@ -456,109 +456,217 @@ var Odin = (function() {
 	}
 
 	/**
-	 * The Data class provides roll20 database accessors.
+	 * The Page class provides features to get and manipulate a page.
 	 */
-	class Data {
+	class Page {
 
 		/**
-		 * Gets the specified player.
-		 * @param id The identifier of the player to get.
-		 * @return the player.
+		 * @constructor.
 		 */
-		static getPlayer(id) {
-			return getObj(Type.PLAYER, id);
+		constructor() {
+			this.data = null;
 		}
 
 		/**
-		 * @eturn all pages.
+		 * Finds the page with the specified identifier.
+		 * @param id The identifier of the page to set.
+		 * @return the instance.
 		 */
-		static getPages() {
-			return findObjs({
+		findId(id) {
+			this.data = getObj(Type.PAGE, id);
+			return this;
+		}
+
+	}
+
+	/**
+	 * The Pages class provides functionnalities to get and filter pages.
+	 */
+	class Pages {
+
+		/**
+		 * @constructor.
+		 */
+		constructor() {
+			this.data = null;
+		}
+
+		/**
+		 * @return all pages.
+		 */
+		findAll() {
+			this.data = findObjs({
 				_type: Type.PAGE
 			});
+			return this;
+		}
+
+	}
+
+	/**
+	 * The Character class provides features to get and manipulate a character.
+	 */
+	class Character {
+
+		/**
+		 * @constructor.
+		 */
+		constructor() {
+			this.data = null;
 		}
 
 		/**
-		 * Gets the specified page.
-		 * @param id The identifier of the page to get.
-		 * @return the page.
+		 * Finds the character with the specified identifier.
+		 * @param id The identifier of the character to set.
+		 * @return the instance.
 		 */
-		static getPage(id) {
-			return getObj(Type.PAGE, id);
+		findId(id) {
+			this.data = getObj(Type.CHARACTER, id);
+			return this;
+		}
+
+	}
+
+	/**
+	 * The Characters class provides functionnalities to get and filter characters.
+	 */
+	class Characters {
+
+		/**
+		 * @constructor.
+		 */
+		constructor() {
+			this.data = null;
 		}
 
 		/**
-		 * Gets the specified graphic.
-		 * @param id The identifier of the graphic to get.
-		 * @return the graphic.
+		 * @return all characters.
 		 */
-		static getGraphic(id) {
-			return getObj(Type.GRAPHIC, id);
+		findAll() {
+			this.data = findObjs({
+				_type: Type.CHARACTER
+			});
+			return this;
 		}
 
 		/**
-		 * Gets the specified token.
-		 * @param id The identifier of the token to get.
-		 * @return the token.
+		 * Filters the characters by name.
+		 * @param name The name of the characters.
+		 * @return the filtered characters.
 		 */
-		static getToken(id) {
-			const obj = Data.getGraphic(id);
-			return obj != null && obj.get(Property.GRAPHIC.SUBTYPE) === Property.GRAPHIC.TOKEN ? obj : null;
+		findName(name) {
+			this.data = findObjs({type:'character', name: name});
+			return this;
 		}
 
-		/**
-		 * Gets the specified card.
-		 * @param id The identifier of the card to get.
-		 * @return the card.
-		 */
-		static getCard(id) {
-			const obj = Data.getGraphic(id);
-			return obj != null && obj.get(Property.GRAPHIC.SUBTYPE) === Property.GRAPHIC.CARD ? obj : null;
-		}
-
-		/**
-		 * Gets the specified character.
-		 * @param id The identifier of the character to get.
-		 * @return the character.
-		 */
-		static getCharacter(id) {
-			return getObj(Type.CHARACTER, id);
-		}
-
-		
-		
-		/**
-		 * Gets the specified characters.
-		 * @param name The name of the characters to get.
-		 */
+		/*
 		static charactersByName(name) {
 			return findObjs({type:'character', name: name});
 		}
 
-		/**
-		 * Gets the specified non player characters.
-		 * @param name The name of the non player characters to get.
-		 * @return the non player characters.
-		 */
 		static npc(name) {
 			return findObjs({type:'character', name: name, controlledby: ""});
 		}
+		*/
+
+	}
+
+	/**
+	 * The Token class provides features to get and manipulate a token.
+	 */
+	class Token {
 
 		/**
-		 * Gets the specified character.
-		 * @param id The identifier of the character to get.
+		 * @constructor.
 		 */
-		static characterById(id) {
-			return getObj('character', id);
+		constructor() {
+			this.data = null;
 		}
 
 		/**
-		 * Gets the identifier of the page which contains the specified player.
-		 * @param player The identifier of the player for which to get the page.
-		 * @return the page identifier.
+		 * Finds the token with the specified identifier.
+		 * @param id The identifier of the token to set.
+		 * @return the instance.
 		 */
-		static getPageOfPlayer(player) {
-			
+		findId(id) {
+			const obj = getObj(Type.GRAPHIC, id);
+			this.data = obj != null && obj.get(Property.GRAPHIC.SUBTYPE) === Property.GRAPHIC.TOKEN ? obj : null;
+			return this;
+		}
+
+	}
+
+	/**
+	 * The Tokens class provides functionnalities to get and filter tokens.
+	 */
+	class Tokens {
+
+		/**
+		 * @constructor.
+		 */
+		constructor() {
+			this.data = null;
+		}
+
+		/**
+		 * @return all tokens.
+		 */
+		findAll() {
+			this.data = findObjs({
+				_type: Type.GRAPHIC,
+				_subtype: Property.GRAPHIC.TOKEN
+			});
+			return this;
+		}
+
+	}
+
+	/**
+	 * The Card class provides features to get and manipulate a token.
+	 */
+	class Card {
+
+		/**
+		 * @constructor.
+		 */
+		constructor() {
+			this.data = null;
+		}
+
+		/**
+		 * Finds the card with the specified identifier.
+		 * @param id The identifier of the card to set.
+		 * @return the instance.
+		 */
+		findId(id) {
+			const obj = getObj(Type.GRAPHIC, id);
+			this.data = obj != null && obj.get(Property.GRAPHIC.SUBTYPE) === Property.GRAPHIC.CARD ? obj : null;
+			return this;
+		}
+
+	}
+
+	/**
+	 * The Cards class provides functionnalities to get and filter cards.
+	 */
+	class Cards {
+
+		/**
+		 * @constructor.
+		 */
+		constructor() {
+			this.data = null;
+		}
+
+		/**
+		 * @return all cards.
+		 */
+		findAll() {
+			this.data = findObjs({
+				_type: Type.GRAPHIC,
+				_subtype: Property.GRAPHIC.CARD
+			});
+			return this;
 		}
 
 	}
@@ -844,22 +952,6 @@ var Odin = (function() {
 	}
 
 	/**
-	 * The Character class provides functionnality to manage a character.
-	 */
-	class Character {
-
-		/**
-		 * Gets the identifier of the specified character.
-		 * @param name The name of the character for which to get the identifier.
-		 * @return the character identifier.
-		 */
-		static id(name) {
-			
-		}
-
-	}
-
-	/**
 	 * The Turn class defines registrable item of the turn order.
 	 */
 	class Turn {
@@ -991,9 +1083,16 @@ var Odin = (function() {
 		Test: Test,
 		TestSuite: TestSuite,
 		AbstractEventHandler: AbstractEventHandler,
-		Players: Players,
 		Player: Player,
-		Data: Data,
+		Players: Players,
+		Page: Page,
+		Pages: Pages,
+		Character: Character,
+		Characters: Characters,
+		Token: Token,
+		Tokens: Tokens,
+		Card: Card,
+		Cards: Cards,
 		PokerColor: PokerColor,
 		PokerCard: PokerCard,
 		PokerColors: PokerColors,

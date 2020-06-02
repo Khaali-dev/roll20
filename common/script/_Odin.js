@@ -231,17 +231,30 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	.add("Gets a player by id", () => {
 		return Odin.Test.assertNotEmptyObject(new Odin.Player().findId("-M5rtkkXsEkckPk1v0DL").data);
 	})
-	/*
-	.add("Gets data", () => {
-		return
-			Odin.Test.assertNotEmptyArray(Odin.Data.getPlayer("-M5rtkkXsEkckPk1v0DL")) &&
-			Odin.Test.assertNotEmptyArray(Odin.Data.getPage("-M5xeoigOD2b0Vsz4stI")) &&
-			Odin.Test.assertNotEmptyArray(Odin.Data.getGraphic("-M7lbGZnSu6SItqBzU4n")) &&
-			Odin.Test.assertNotEmptyArray(Odin.Data.getCard("-M7lbGZnSu6SItqBzU4n")) &&
-			Odin.Test.assertNotEmptyArray(Odin.Data.getToken("-M7lbGZnSu6SItqBzU4n")) &&
-			Odin.Test.assertNotEmptyArray(Odin.Data.getCharacter("-M7laLPHxEwBBvSma4gh"));
+	.add("Gets all pages", () => {
+		return Odin.Test.assertNotEmptyArray(new Odin.Pages().findAll().data);
 	})
-	*/
+	.add("Gets a page by id", () => {
+		return Odin.Test.assertNotEmptyObject(new Odin.Page().findId("-M5xeoigOD2b0Vsz4stI").data);
+	})
+	.add("Gets all cards", () => {
+		return Odin.Test.assertNotEmptyArray(new Odin.Cards().findAll().data);
+	})
+	.add("Gets a card by id", () => {
+		return Odin.Test.assertNotEmptyObject(new Odin.Card().findId("-M8lV6csv-qWWy0A1_zo").data);
+	})
+	.add("Gets all tokens", () => {
+		return Odin.Test.assertNotEmptyArray(new Odin.Tokens().findAll().data);
+	})
+	.add("Gets a token by id", () => {
+		return Odin.Test.assertNotEmptyObject(new Odin.Token().findId("-M7lbGZnSu6SItqBzU4n").data);
+	})
+	.add("Gets all characters", () => {
+		return Odin.Test.assertNotEmptyArray(new Odin.Characters().findAll().data);
+	})
+	.add("Gets a character by id", () => {
+		return Odin.Test.assertNotEmptyObject(new Odin.Character().findId("-M7laLPHxEwBBvSma4gh").data);
+	})
 	;
 
 // The API message subscribtion.
