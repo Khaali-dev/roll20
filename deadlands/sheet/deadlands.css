@@ -92,7 +92,6 @@
 .charsheet input.sheet-tab5:checked + span.sheet-tab5,
 .charsheet input.sheet-tab6:checked + span.sheet-tab6 {
     color: #ffffff;
-    border-radius: 4px;
     background-image:url('https://raw.githubusercontent.com/rlepennec/roll20/ND-charsheet/deadlands/sheet/img/sign2.png');
 }
 
@@ -311,6 +310,7 @@ input[type=text], input[type=number], .sheet-textarea{
 .sheet-shorttextarea{
     height: 40px;
     resize: vertical; /* user can resize vertically, but width is fixed */
+    width: 100%;
 }
 
 .sheet-wounds {
