@@ -53,35 +53,35 @@
 
 /*this hides the radio button for each tab, makes it 130px wide and 40px tall and makes sure it's above everything else*/
 .charsheet input.sheet-tab {
-  width: 130px;
+  width: 160px;
   height: 40px;
   cursor: pointer;
-  position: relative;
   opacity: 0;
   z-index: 9999;
+  position: relative;
 }
 
 /*this styles the span with the tab information and slides to the left, so it appears underneath the radio button*/
 .charsheet span.sheet-tab {
     text-align: center;
-    display: inline-block;
     font-size: 14pt;
     color: black;
     font-weight: bold;
-    border-radius: 4px;
-    min-width: 130px;
-    height: 40px;
     cursor: pointer;
-    position: relative;
-    vertical-align: middle;
-    margin-left: -130px;/*originally 91px*/
-    padding-left:10px;
-    padding-right:10px;
     font-family:'Shadows into Light',cursive;
     text-transform:uppercase;
-    
-  background:url('https://raw.githubusercontent.com/rlepennec/roll20/ND-charsheet/deadlands/sheet/img/sign.png') center no-repeat;
-  background-size:cover;
+    position: relative;
+    width:140px;
+    height: 40px;
+    background:url('https://raw.githubusercontent.com/rlepennec/roll20/ND-charsheet/deadlands/sheet/img/sign.png') center no-repeat;
+    background-image:url("https://raw.githubusercontent.com/rlepennec/roll20/ND-charsheet/deadlands/sheet/img/sign2.png");
+    background-size:cover;
+    padding-left:10px;
+    padding-right:10px;
+    vertical-align:baseline;
+    display: inline-block;
+    margin-left:-162px;
+    top:-13px;
 }
 
 /*this modifies the span color once the radio button is selected so you know which tab is selected*/
@@ -612,4 +612,42 @@ textarea {
 
 .sheet-arcane-row .sheet-item {
   vertical-align: top;
+}
+
+
+/* test javascript */
+
+/* Configure a container for the radio buttons. */
+.sheet-radios {
+  display: flex;
+  align-items: center;
+}
+
+/* Configure the button styling. This example makes it look like a radio. */
+button.sheet-radio {
+  padding: 0;
+  border: solid 1px #a8a8a8;
+  cursor: pointer;
+
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+button.sheet-radio > span.sheet-checked {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: buttontext;
+}
+
+/* Hide the "checked" section of the radio if the attribute value does not match the radio */
+input.sheet-radio:not([value="1"]) ~ button.sheet-radio-1 > span.sheet-checked,
+input.sheet-radio:not([value="2"]) ~ button.sheet-radio-2 > span.sheet-checked,
+input.sheet-radio:not([value="3"]) ~ button.sheet-radio-3 > span.sheet-checked,
+input.sheet-radio:not([value="4"]) ~ button.sheet-radio-4 > span.sheet-checked,
+input.sheet-radio:not([value="5"]) ~ button.sheet-radio-5 > span.sheet-checked {
+  display: none;
 }

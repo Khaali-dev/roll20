@@ -63,6 +63,14 @@ on("sheet:opened", function(eventInfo){
 		quickDrawMacro: getTranslationByKey("quickDraw")
     });     
     
+    on("clicked:level_1", function() {
+        console.log("Activate level 1");
+        setAttrs({ level: 1 });
+    });
+    on("clicked:level_2", function() {
+        console.log("Activate level 2");
+        setAttrs({ level: 2 });
+    });
 });
 </script>
 
@@ -1812,6 +1820,26 @@ on("sheet:opened", function(eventInfo){
   <!-- Arcane Ablities Tab -->
   <div class="sheet-section-arcane">
     <div class="sheet-row">
+        
+        <div class="sheet-radios">
+            <input type="hidden" class="sheet-radio" name="attr_level" value="1" />
+            <button type="action" name="act_level_1" class="sheet-radio sheet-radio-1">
+                <span class="checked"></span>
+            </button>
+            <button type="action" name="act_level_2" class="sheet-radio sheet-radio-2">
+                <span class="sheet-checked"></span>
+            </button>
+            <button type="action" name="act_level_3" class="sheet-radio sheet-radio-3">
+                <span class="sheet-checked"></span>
+            </button>
+            <button type="action" name="act_level_4" class="sheet-radio sheet-radio-4">
+                <span class="checked"></span>
+            </button>
+            <button type="action" name="act_level_5" class="sheet-radio sheet-radio-5">
+                <span class="sheet-checked"></span>
+            </button>
+        </div> 
+        
       <div class="sheet-center">
           <h2><span data-i18n="arcaneAbilities">Arcane</span></h2></div>
         <div class="sheet-row">
