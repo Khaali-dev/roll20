@@ -241,12 +241,12 @@ var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
 	})
 	.add("Gets turn order", () => {
 		const turnOrder = new Deadlands.TurnOrder();
-		return Odin.Test.assertNotEmpty(new Deadlands.TurnOrder().parse());
+		return Odin.Test.assertNotEmptyArray(new Deadlands.TurnOrder().parse());
 		return true;
 	})
 	.add("Sorts turn order", () => {
 		const turnOrder = new Deadlands.TurnOrder();
-		return Odin.Test.assertNotEmpty(turnOrder.set(turnOrder.parse()));
+		return Odin.Test.assertNotEmptyArray(turnOrder.set(turnOrder.parse()));
 		return true;
 	})
 	;

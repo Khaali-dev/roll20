@@ -118,6 +118,15 @@ var Odin = (function() {
 			PLAYER_PAGE_ID: "playerpageid",
 			PLAYER_SPECIFIC_PAGES: "playerspecificpages"
 		},
+		PLAYER: {
+			NAME: "_displayname",
+			ONLINE: "_online",
+			PAGE: "_lastpage",
+			AS: "speakingas",
+			COLOR: "color",
+			MACRO: "_macrobar",
+			SHOW_MACRO: "showmacrobar"
+		},
 		GRAPHIC: {
 			SUBTYPE: "_subtype",
 			TOKEN: "token",
@@ -199,18 +208,31 @@ var Odin = (function() {
 		}
 
 		/**
-		 * Checks the value is not null or empty.
-		 * @param value The value to check.
-		 * @return true oif value is not empty or null;
+		 * Checks the array is not null or empty.
+		 * @param array The array to check.
+		 * @return true if array is not empty or null;
 		 */
-		static assertNotEmpty(value) {
-			const assert = value != null && value != [];
+		static assertNotEmptyArray(array) {
+			const assert = Array.isArray(array) && array.length > 0;
 			if (!assert) {
 				log(assert);
 			}
 			return assert;
 		}
 
+		/**
+		 * Checks the object is not null or empty.
+		 * @param object The object to check.
+		 * @return true if object is not empty or null;
+		 */
+		static assertNotEmptyObject(object) {
+			const assert = _.isObject(object) && !_.isEmpty(object);
+			if (!assert) {
+				log(assert);
+			}
+			return assert;
+		}
+	
 		/**
 		 * Checks both arrays are equals.
 		 * @param array1 The first array to check.
@@ -370,18 +392,73 @@ var Odin = (function() {
 		.withRankable(new PokerCard("BJo", 54));
 
 	/**
+	 * The Player class provides features to get and manipulate a player.
+	 */
+	class Player {
+
+		/**
+		 * @constructor.
+		 */
+		constructor() {
+			this.data = null;
+		}
+
+		/**
+		 * Finds the player with the specified identifier.
+		 * @param id The identifier of the player to set.
+		 * @return the instance.
+		 */
+		findId(id) {
+			this.data = getObj(Type.PLAYER, id);
+			return this;
+		}
+
+	}
+
+	/**
+	 * The Players class provides functionnalities to get and filter players.
+	 */
+	class Players {
+
+		/**
+		 * @constructor.
+		 */
+		constructor() {
+			this.data = null;
+		}
+
+		/**
+		 * @return all players.
+		 */
+		findAll() {
+			this.data = findObjs({
+				_type: Type.PLAYER
+			});
+			return this;
+		}
+
+		/**
+		 * @return filtered online players.
+		 */
+		filterOnline() {
+			this.data = _.filter(this.data, function(obj) { return (obj.get(Property.PLAYER.ONLINE) === true); });
+			return this;
+		}
+
+		/**
+		 * @return filtered offline players.
+		 */
+		filterOffline() {
+			this.data = _.filter(this.data, function(obj) { return (obj.get(Property.PLAYER.ONLINE) === false); });
+			return this;
+		}
+
+	}
+
+	/**
 	 * The Data class provides roll20 database accessors.
 	 */
 	class Data {
-
-		/**
-		 * @eturn all players.
-		 */
-		static getPlayers() {
-			return findObjs({
-				_type: Type.PLAYER
-			});
-		}
 
 		/**
 		 * Gets the specified player.
@@ -914,6 +991,8 @@ var Odin = (function() {
 		Test: Test,
 		TestSuite: TestSuite,
 		AbstractEventHandler: AbstractEventHandler,
+		Players: Players,
+		Player: Player,
 		Data: Data,
 		PokerColor: PokerColor,
 		PokerCard: PokerCard,

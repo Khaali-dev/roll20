@@ -132,6 +132,89 @@ var Deadlands = (function() {
 	}
 
 	/**
+	 * The Rolls class provides functionnalities to manages characters rolls. The GM specifies the roll to process, using the
+	 * methods start. Each character can then rolls and improves the result using macros.
+	 */
+	class Rolls {
+
+		/**
+		 * @constructor
+		 */
+		constructor() {
+			this.rolls = new Map();
+			this.attribute = null;
+			this.skill = null;
+			this.tn = null;
+		}
+
+		/**
+		 * Starts the specified attribute roll.
+		 * @param attribute The name of the attribute to roll.
+		 * @param tn        The difficulty.
+		 */
+		attribute(attribute, tn) {
+			this.rolls = new Map();
+			this.attribute = attribute;
+			this.skill = null;
+			this.tn = null;
+
+		}
+
+		/**
+		 * Starts the specified skill roll.
+		 * @param attribute The name of the attribute to roll.
+		 * @param skill     The name of the skill to roll.
+		 * @param tn        The difficulty.
+		 */
+		skill(attribute, skill, tn) {
+			this.rolls = new Map();
+			this.attribute = attribute;
+			this.skill = skill;
+			this.tn = tn;
+		}
+
+		/**
+		 * Adds the specified character roll. Retrieves the number and the type of dices to roll,
+		 * rolls the dices and registers the result for the specified character.
+		 * @param id The identifier of the character.
+		 */
+		character(id) {
+			const size = 2;
+			const dice = 6;
+			this.rolls.set(id, new Odin.Rolls()
+				.add(new Odin.Roll(new Odin.Dice(this.dice(id)), this.size(id))));
+		}
+
+		/**
+		 * Stops the roll.
+		 */
+		stop() {
+			this.rolls = new Map();
+			this.attribute = null;
+			this.skill = null;
+		}
+
+		/**
+		 * Gets the number of dice to roll for the specified character and the current roll.
+		 * @param id The identifier of the character.
+		 * @return the number of dice to roll.
+		 */
+		size(id) {
+			return 2;
+		}
+
+		/**
+		 * Gets the type of dice to roll for the specified character and the current roll.
+		 * @param id The identifier of the character.
+		 * @return the type of dice to roll.
+		 */
+		dice(id) {
+			return 6;
+		}
+
+	}
+
+	/**
 	 * The TurnOrder class provides functionnalities to manage intiative, turns and rounds.
 	 */
 	class TurnOrder extends Odin.TurnOrder {
@@ -178,6 +261,7 @@ var Deadlands = (function() {
 		 */
 		constructor() {
 			super();
+			this.rolls = new Rolls();
 		}
 
 		/**
@@ -194,8 +278,7 @@ var Deadlands = (function() {
 			if (cmd != 'dl') return;
 			if (args.length > 0) {
 
-				
-				
+
 				if (args[0] === 'skill') {
 					const size = parseInt(args[1], 10);
 					const dice = parseInt(args[2], 10);
@@ -210,6 +293,11 @@ var Deadlands = (function() {
 					log(size + "d" + dice + " SD:" + tn);
 					this.openRoll(size, dice, 0, tn);
 
+				} else if (args[0] === 'rolls') {
+					const attribute = args[1];
+					const skill = null;
+					const tn = parseInt(args[2], 5);
+					this.rolls.attribute(attribute, tn);
 				}
 
 			}
@@ -276,6 +364,7 @@ var Deadlands = (function() {
 	 */
 	return  {
 		RollInterpreter : RollInterpreter,
+		Rolls: Rolls,
 		TurnOrder: TurnOrder,
 		handleMessage : handleMessage
 	};

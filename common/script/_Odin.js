@@ -197,7 +197,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 				}));
 	})
 	.add("Parse the current turn order", () => {
-		return Odin.Test.assertNotEmpty(new Odin.TurnOrder(null).parse());
+		return Odin.Test.assertNotEmptyArray(new Odin.TurnOrder(null).parse());
 	})
 	.add("Add some turns to the turn order", () => {
 		const turns = [
@@ -207,28 +207,41 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 4),
 			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 5),
 		];
-		return Odin.Test.assertNotEmpty(new Odin.TurnOrder().add(turns).parse());
+		return Odin.Test.assertNotEmptyArray(new Odin.TurnOrder().add(turns).parse());
 	})
-	.add("Pop first turn from turn order", () => {
-		return Odin.Test.assertNotEmpty(new Odin.TurnOrder().pop());
+	.add("Pop first turn from turn order (Expected failed)", () => {
+		return Odin.Test.assertNotEmptyArray(new Odin.TurnOrder().pop());
 	})
-	.add("Insert turns to turn order", () => {
+	.add("Insert turns to turn order (Expected failed)", () => {
 		const turns = [
 			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 10),
 			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 20)
 		];
-		return Odin.Test.assertNotEmpty(new Odin.TurnOrder().insert(turns));
+		return Odin.Test.assertNotEmptyArray(new Odin.TurnOrder().insert(turns));
 	})
+	.add("Gets all players", () => {
+		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().data);
+	})
+	.add("Gets online players", () => {
+		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().filterOnline().data);
+	})
+	.add("Gets offline players", () => {
+		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().filterOffline().data);
+	})
+	.add("Gets a player by id", () => {
+		return Odin.Test.assertNotEmptyObject(new Odin.Player().findId("-M5rtkkXsEkckPk1v0DL").data);
+	})
+	/*
 	.add("Gets data", () => {
 		return
-			Odin.Test.assertNotEmpty(Odin.Data.getPlayers()) &&
-			Odin.Test.assertNotEmpty(Odin.Data.getPlayer("-M5rtkkXsEkckPk1v0DL")) &&
-			Odin.Test.assertNotEmpty(Odin.Data.getPage("-M5xeoigOD2b0Vsz4stI")) &&
-			Odin.Test.assertNotEmpty(Odin.Data.getGraphic("-M7lbGZnSu6SItqBzU4n")) &&
-			Odin.Test.assertNotEmpty(Odin.Data.getCard("-M7lbGZnSu6SItqBzU4n")) &&
-			Odin.Test.assertNotEmpty(Odin.Data.getToken("-M7lbGZnSu6SItqBzU4n")) &&
-			Odin.Test.assertNotEmpty(Odin.Data.getCharacter("-M7laLPHxEwBBvSma4gh"));
+			Odin.Test.assertNotEmptyArray(Odin.Data.getPlayer("-M5rtkkXsEkckPk1v0DL")) &&
+			Odin.Test.assertNotEmptyArray(Odin.Data.getPage("-M5xeoigOD2b0Vsz4stI")) &&
+			Odin.Test.assertNotEmptyArray(Odin.Data.getGraphic("-M7lbGZnSu6SItqBzU4n")) &&
+			Odin.Test.assertNotEmptyArray(Odin.Data.getCard("-M7lbGZnSu6SItqBzU4n")) &&
+			Odin.Test.assertNotEmptyArray(Odin.Data.getToken("-M7lbGZnSu6SItqBzU4n")) &&
+			Odin.Test.assertNotEmptyArray(Odin.Data.getCharacter("-M7laLPHxEwBBvSma4gh"));
 	})
+	*/
 	;
 
 // The API message subscribtion.

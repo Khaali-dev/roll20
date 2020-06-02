@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<traits>
+    <trait id="perception">
+        <compétences>
+            <compétence id="artillerie"/>
+            <compétence id="arts"/>
+            <compétence id="détecter"/>
+            <compétence id="pister"/>
+            <compétence id="scruter"/>
+        </compétences>
+    </trait>
+    
+    
+    
+</traits>
