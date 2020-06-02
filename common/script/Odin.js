@@ -208,12 +208,38 @@ var Odin = (function() {
 		}
 
 		/**
+		 * Checks the value is not null.
+		 * @param value The value to check.
+		 * @return true if value is not null;
+		 */
+		static assertNotNull(value) {
+			const assert = value != null;
+			if (!assert) {
+				log(assert);
+			}
+			return assert;
+		}
+
+		/**
 		 * Checks the array is not null or empty.
 		 * @param array The array to check.
 		 * @return true if array is not empty or null;
 		 */
 		static assertNotEmptyArray(array) {
 			const assert = Array.isArray(array) && array.length > 0;
+			if (!assert) {
+				log(assert);
+			}
+			return assert;
+		}
+
+		/**
+		 * Checks the array is empty.
+		 * @param array The array to check.
+		 * @return true if array is empty;
+		 */
+		static assertEmptyArray(array) {
+			const assert = Array.isArray(array) && _.size(array) === 0;
 			if (!assert) {
 				log(assert);
 			}
@@ -1002,7 +1028,7 @@ var Odin = (function() {
 		 * @return the instance.
 		 */
 		clear() {
-			Campaign().set(Odin.Property.CAMPAIGN.TURN_ORDER, JSON.stringify(""));
+			Campaign().set(Odin.Property.CAMPAIGN.TURN_ORDER, '[]');
 			return this;
 		}
 

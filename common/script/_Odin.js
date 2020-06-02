@@ -199,6 +199,9 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	.add("Parse the current turn order", () => {
 		return Odin.Test.assertNotEmptyArray(new Odin.TurnOrder(null).parse());
 	})
+	.add("Clears the turn order", () => {
+		return Odin.Test.assertEmptyArray(new Odin.TurnOrder().clear().parse());
+	})
 	.add("Add some turns to the turn order", () => {
 		const turns = [
 			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 1),
@@ -207,17 +210,22 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 4),
 			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 5),
 		];
-		return Odin.Test.assertNotEmptyArray(new Odin.TurnOrder().add(turns).parse());
+		return _.size(new Odin.TurnOrder().clear().add(turns).parse()) === 5
 	})
 	.add("Pop first turn from turn order (Expected failed)", () => {
-		return Odin.Test.assertNotEmptyArray(new Odin.TurnOrder().pop());
+		return Odin.Test.assertNotNull(new Odin.TurnOrder()
+			.clear()
+			.add([new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 10)])
+			.pop());
 	})
-	.add("Insert turns to turn order (Expected failed)", () => {
-		const turns = [
-			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 10),
-			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 20)
-		];
-		return Odin.Test.assertNotEmptyArray(new Odin.TurnOrder().insert(turns));
+	.add("Insert turns to turn order", () => {
+		return Odin.Test.assertArrayEqual(
+			new Odin.TurnOrder()
+				.clear()
+				.add([new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 20)])
+				.insert([new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 10)])
+				.parse(),
+			[{"id":"-M7lbGZnSu6SItqBzU4n","pr":10,"custom":""},{"id":"-M7lbGZnSu6SItqBzU4n","pr":20,"custom":""}]);
 	})
 	.add("Gets all players", () => {
 		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().data);
