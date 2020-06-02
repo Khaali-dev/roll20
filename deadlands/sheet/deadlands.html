@@ -71,6 +71,18 @@ on("sheet:opened", function(eventInfo){
         console.log("Activate level 2");
         setAttrs({ level: 2 });
     });
+    on("clicked:level_3", function() {
+    console.log("Activate level 3");
+    setAttrs({ level: 3 });
+    });
+    on("clicked:level_4", function() {
+    console.log("Activate level 4");
+    setAttrs({ level: 4 });
+    });
+    on("clicked:level_5", function() {
+    console.log("Activate level 5");
+    setAttrs({ level: 5 });
+    });
 });
 </script>
 
