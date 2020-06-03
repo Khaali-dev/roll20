@@ -418,25 +418,61 @@ var Odin = (function() {
 		.withRankable(new PokerCard("BJo", 54));
 
 	/**
+	 * The base class for all roll20 wrapped object.
+	 */
+	class Object {
+
+		/**
+		 * @constructor.
+		 * @param type    The type of the object.
+		 * @param subtype The optional subtype of the object.
+		 */
+		constructor(type, subtype) {
+			this.type = type;
+			this.subtype = subtype;
+			this.data = null;
+		}
+
+		/**
+		 * Finds the object with the specified identifier.
+		 * @param id The identifier of the object to find.
+		 * @return the instance.
+		 */
+		findId(id) {
+			if (this.subtype != null) {
+				const obj = getObj(this.type, id);
+				this.data = obj != null && obj.get(Property.GRAPHIC.SUBTYPE) === this.subtype ? obj : null;
+			} else {
+				this.data = getObj(this.type, id);
+			}
+			return this;
+		}
+
+		/**
+		 * Sets the specified object property.
+		 * @param name The name of the property to set.
+		 * @param value The value of the property to set.
+		 * @return the instance.
+		 */
+		set(name, value) {
+			if (this.data != null) {
+				this.data.set(name, false);
+			}
+			return this;
+		}
+
+	}
+
+	/**
 	 * The Player class provides features to get and manipulate a player.
 	 */
-	class Player {
+	class Player extends Object {
 
 		/**
 		 * @constructor.
 		 */
 		constructor() {
-			this.data = null;
-		}
-
-		/**
-		 * Finds the player with the specified identifier.
-		 * @param id The identifier of the player to set.
-		 * @return the instance.
-		 */
-		findId(id) {
-			this.data = getObj(Type.PLAYER, id);
-			return this;
+			super(Type.PLAYER, null);
 		}
 
 	}
@@ -484,23 +520,13 @@ var Odin = (function() {
 	/**
 	 * The Page class provides features to get and manipulate a page.
 	 */
-	class Page {
+	class Page extends Object {
 
 		/**
 		 * @constructor.
 		 */
 		constructor() {
-			this.data = null;
-		}
-
-		/**
-		 * Finds the page with the specified identifier.
-		 * @param id The identifier of the page to set.
-		 * @return the instance.
-		 */
-		findId(id) {
-			this.data = getObj(Type.PAGE, id);
-			return this;
+			super(Type.PAGE, null);
 		}
 
 	}
@@ -532,23 +558,13 @@ var Odin = (function() {
 	/**
 	 * The Character class provides features to get and manipulate a character.
 	 */
-	class Character {
+	class Character extends Object {
 
 		/**
 		 * @constructor.
 		 */
 		constructor() {
-			this.data = null;
-		}
-
-		/**
-		 * Finds the character with the specified identifier.
-		 * @param id The identifier of the character to set.
-		 * @return the instance.
-		 */
-		findId(id) {
-			this.data = getObj(Type.CHARACTER, id);
-			return this;
+			super(Type.CHARACTER, null);
 		}
 
 	}
@@ -600,24 +616,13 @@ var Odin = (function() {
 	/**
 	 * The Token class provides features to get and manipulate a token.
 	 */
-	class Token {
+	class Token extends Object {
 
 		/**
 		 * @constructor.
 		 */
 		constructor() {
-			this.data = null;
-		}
-
-		/**
-		 * Finds the token with the specified identifier.
-		 * @param id The identifier of the token to set.
-		 * @return the instance.
-		 */
-		findId(id) {
-			const obj = getObj(Type.GRAPHIC, id);
-			this.data = obj != null && obj.get(Property.GRAPHIC.SUBTYPE) === Property.GRAPHIC.TOKEN ? obj : null;
-			return this;
+			super(Type.GRAPHIC, Property.GRAPHIC.TOKEN);
 		}
 
 	}
@@ -650,23 +655,14 @@ var Odin = (function() {
 	/**
 	 * The Deck class provides features to get and manipulate a deck.
 	 */
-	class Deck {
+	class Deck extends Object {
 
 		/**
 		 * @constructor.
 		 */
 		constructor() {
+			super(Type.DECK, null);
 			this.data = null;
-		}
-
-		/**
-		 * Finds the deck with the specified identifier.
-		 * @param id The identifier of the deck to set.
-		 * @return the instance.
-		 */
-		findId(id) {
-			this.data = getObj(Type.DECK, id);
-			return this;
 		}
 
 	}
@@ -698,24 +694,13 @@ var Odin = (function() {
 	/**
 	 * The Card class provides features to get and manipulate a token.
 	 */
-	class Card {
+	class Card extends Object {
 
 		/**
 		 * @constructor.
 		 */
 		constructor() {
-			this.data = null;
-		}
-
-		/**
-		 * Finds the card with the specified identifier.
-		 * @param id The identifier of the card to set.
-		 * @return the instance.
-		 */
-		findId(id) {
-			const obj = getObj(Type.GRAPHIC, id);
-			this.data = obj != null && obj.get(Property.GRAPHIC.SUBTYPE) === Property.GRAPHIC.CARD ? obj : null;
-			return this;
+			super(Type.GRAPHIC, Property.GRAPHIC.CARD);
 		}
 
 	}
@@ -748,23 +733,13 @@ var Odin = (function() {
 	/**
 	 * The Hand class provides features to get and manipulate a hand.
 	 */
-	class Hand {
+	class Hand extends Object {
 
 		/**
 		 * @constructor.
 		 */
 		constructor() {
-			this.data = null;
-		}
-
-		/**
-		 * Finds the hand with the specified identifier.
-		 * @param id The identifier of the hand to set.
-		 * @return the instance.
-		 */
-		findId(id) {
-			this.data = getObj(Type.HAND, id);
-			return this;
+			super(Type.HAND, null);
 		}
 
 	}
