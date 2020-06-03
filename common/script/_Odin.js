@@ -69,13 +69,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 			.add(new Odin.Roll(new Odin.Dice(6), 1))
 			.add(new Odin.Roll(new Odin.Dice(6), 6))
 			.add(new Odin.Roll(new Odin.Dice(6), 2));
-		const values = rolls.values();
-		return values.length === 5 &&
-		       values[0] === 1 &&
-		       values[1] === 3 &&
-		       values[2] === 1 &&
-		       values[3] === 6 &&
-		       values[4] === 2;
+		return Odin.Test.assertArrayEqual([1, 3, 1, 6, 2], rolls.values());
 	})
 	.add("Min of rolls", () => {
 		const rolls = new Odin.Rolls()
@@ -112,13 +106,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 			.add(new Odin.Roll(new Odin.Dice(6), 6))
 			.add(new Odin.Roll(new Odin.Dice(6), 2))
 			.transform(function (r) { return new Odin.Roll(r.dice, r.value + 1); });
-		const values = rolls.values();
-		return values.length === 5 &&
-		       values[0] === 2 &&
-		       values[1] === 4 &&
-		       values[2] === 2 &&
-		       values[3] === 7 &&
-		       values[4] === 3;
+		return Odin.Test.assertArrayEqual([2, 4, 2, 7, 3], rolls.values());
 	})
 	.add("Reject rolls", () => {
 		const rolls = new Odin.Rolls()
@@ -128,11 +116,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 			.add(new Odin.Roll(new Odin.Dice(6), 6))
 			.add(new Odin.Roll(new Odin.Dice(6), 2))
 			.reject(function (r) { return r.value === 1; });
-		const values = rolls.values();
-		return values.length === 3 &&
-		       values[0] === 3 &&
-		       values[1] === 6 &&
-		       values[2] === 2;
+		return Odin.Test.assertArrayEqual([3, 6, 2], rolls.values());
 	})
 	.add("Filter rolls", () => {
 		const rolls = new Odin.Rolls()
@@ -142,11 +126,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 			.add(new Odin.Roll(new Odin.Dice(6), 6))
 			.add(new Odin.Roll(new Odin.Dice(6), 2))
 			.filter(function (r) { return r.value > 1; });
-		const values = rolls.values();
-		return values.length === 3 &&
-		       values[0] === 3 &&
-		       values[1] === 6 &&
-		       values[2] === 2;
+		return Odin.Test.assertArrayEqual([3, 6, 2], rolls.values());
 	})
 	.add("Some rolls", () => {
 		const rolls = new Odin.Rolls()
@@ -197,10 +177,30 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		gets[0].value = 2;
 		return rolls.toString() === "2(d4), 3(d4), 1(d6), 6(d6), 2(d6)";
 	})
+	.add("Sort poker cards", () => {
+		const turns = [
+			{"id":"-M7lbGZnSu6SItqBzU4n", "pr":"6♣", "custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
+			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"RJo","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
+			{"id":"-M7lbGZnSu6SItqBzU4n","pr":"9♣","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
+			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"4♥","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
+			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"2♠","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"}];
+		const expected = [
+			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"RJo","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
+			{"id":"-M7lbGZnSu6SItqBzU4n","pr":"9♣","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
+			{"id":"-M7lbGZnSu6SItqBzU4n", "pr":"6♣", "custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
+			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"4♥","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"},
+			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"2♠","custom":"","_pageid":"-M5xeoigOD2b0Vsz4stI"}];
+		return Odin.Test.assertArrayEqual(
+				expected,
+				_.sortBy(turns, function(turn)
+						{ return Odin.PokerCards.rank(turn.pr); 
+				}));
+	})
 	.add("Parse the current turn order", () => {
-		const turnOrder = Odin.TurnOrder.parse();
-		log(turnOrder);
-		return true;
+		return Odin.Test.assertNotEmptyArray(new Odin.TurnOrder(null).parse());
+	})
+	.add("Clears the turn order", () => {
+		return Odin.Test.assertEmptyArray(new Odin.TurnOrder().clear().parse());
 	})
 	.add("Add some turns to the turn order", () => {
 		const turns = [
@@ -210,32 +210,80 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 4),
 			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 5),
 		];
-		const turnOrder = new Odin.TurnOrder();
-		turnOrder.add(turns);
-		log(turnOrder.parse());
-		return true;
+		return _.size(new Odin.TurnOrder().clear().add(turns).parse()) === 5
 	})
-	.add("Pop first turn from turn order", () => {
-		const turnOrder = new Odin.TurnOrder();
-		log(turnOrder.pop());
-		return true;
+	.add("Pop first turn from turn order (Expected failed)", () => {
+		return Odin.Test.assertNotNull(new Odin.TurnOrder()
+			.clear()
+			.add([new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 10)])
+			.pop());
 	})
 	.add("Insert turns to turn order", () => {
-		const turns = [
-			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 10),
-			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 20)
-		];
-		new Odin.TurnOrder().insert(turns);
-		return true;
+		return Odin.Test.assertArrayEqual(
+			new Odin.TurnOrder()
+				.clear()
+				.add([new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 20)])
+				.insert([new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 10)])
+				.parse(),
+			[{"id":"-M7lbGZnSu6SItqBzU4n","pr":10,"custom":""},{"id":"-M7lbGZnSu6SItqBzU4n","pr":20,"custom":""}]);
 	})
-	.add("Gets data", () => {
-		log(Odin.Data.getPlayers());
-		log(Odin.Data.getPlayer("-M5rtkkXsEkckPk1v0DL"));
-		log(Odin.Data.getPage("-M5xeoigOD2b0Vsz4stI"));
-		log(Odin.Data.getGraphic("-M7lbGZnSu6SItqBzU4n"));
-		log(Odin.Data.getCard("-M7lbGZnSu6SItqBzU4n"));
-		log(Odin.Data.getToken("-M7lbGZnSu6SItqBzU4n"));
-		log(Odin.Data.getCharacter("-M7laLPHxEwBBvSma4gh"));
+	.add("Finds all players", () => {
+		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().objs);
+	})
+	.add("Filters online players", () => {
+		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().filterOnline().objs);
+	})
+	.add("filters offline players", () => {
+		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().filterOffline().objs);
+	})
+	.add("filters game masters", () => {
+		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().filterMasters().objs);
+	})
+	.add("filters players", () => {
+		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().filterPlayers().objs);
+	})
+	.add("Finds a player by id", () => {
+		return Odin.Test.assertNotEmptyObject(new Odin.Player().findId("-M5rtkkXsEkckPk1v0DL").obj);
+	})
+	.add("Player is game master", () => {
+		return new Odin.Player().findId("-M5rtkkXsEkckPk1v0DL").isMaster() === true &&
+		       new Odin.Player().findId("-M5rtkkXsEkckPk1v0DL").isPlayer() === false;
+	})
+	.add("Finds all pages", () => {
+		return Odin.Test.assertNotEmptyArray(new Odin.Pages().findAll().objs);
+	})
+	.add("Finds a page by id", () => {
+		return Odin.Test.assertNotEmptyObject(new Odin.Page().findId("-M5xeoigOD2b0Vsz4stI").obj);
+	})
+	.add("Finds all decks", () => {
+		return Odin.Test.assertNotEmptyArray(new Odin.Decks().findAll().objs);
+	})
+	.add("Finds a deck by id", () => {
+		return Odin.Test.assertNotEmptyObject(new Odin.Deck().findId("-M8pqKN-SnT3CwJJqRcz").obj);
+	})
+	.add("Finds all cards", () => {
+		return Odin.Test.assertNotEmptyArray(new Odin.Cards().findAll().objs);
+	})
+	.add("Finds a card by id", () => {
+		return Odin.Test.assertNotEmptyObject(new Odin.Card().findId("-M8swNpKKC6Ujo0SvBel").obj);
+	})
+	.add("Finds all hands", () => {
+		return Odin.Test.assertNotEmptyArray(new Odin.Hands().findAll().objs);
+	})
+	.add("Finds a hand by id", () => {
+		return Odin.Test.assertNotEmptyObject(new Odin.Hand().findId("-M8r15WD7wDam7lAX_bW").obj);
+	})
+	.add("Finds all tokens", () => {
+		return Odin.Test.assertNotEmptyArray(new Odin.Tokens().findAll().objs);
+	})
+	.add("Finds a token by id", () => {
+		return Odin.Test.assertNotEmptyObject(new Odin.Token().findId("-M7lbGZnSu6SItqBzU4n").obj);
+	})
+	.add("Finds all characters", () => {
+		return Odin.Test.assertNotEmptyArray(new Odin.Characters().findAll().objs);
+	})
+	.add("Finds a character by id", () => {
+		return Odin.Test.assertNotEmptyObject(new Odin.Character().findId("-M7laLPHxEwBBvSma4gh").obj);
 	})
 	;
 
@@ -244,5 +292,8 @@ on('ready',function() {
 	'use strict';
 	on('chat:message', (msg) => {
 		_odin.handleMessage(msg);
+	});
+	on("add:graphic", function(obj) {
+		log(obj);
 	});
 });

@@ -30,6 +30,60 @@ var Odin = (function() {
 	}
 
 	/**
+	 * The Rankable class defines rankable object.
+	 */
+	class Rankable {
+
+		/**
+		 * @constructor
+		 * @param name The name of the rankable object.
+		 * @param rank The rank of the rankable object, from 1 to the lower priority.
+		 */
+		constructor(name, rank) {
+			this.name = name;
+			this.rank = rank;
+		}
+
+	}
+
+	/**
+	 * The Rankables class defines rankable objects. Name of the rankable objects are
+	 * used for registration.
+	 */
+	class Rankables {
+
+		/**
+		 * @constructor
+		 * @param name The name of the rankable object.
+		 * @param rank The rank of the rankable object, from 1 to the lower priority.
+		 */
+		constructor(name, rank) {
+			this.rankables = new Map();
+		}
+
+		/**
+		 * Registers the specified rankable object.
+		 * @param rankable The rankable object to register.
+		 * @return the instance.
+		 */
+		withRankable(rankable) {
+			this.rankables.set(rankable.name, rankable);
+			return this;
+		}
+
+		/**
+		 * Returns the rank of the specified object.
+		 * @param name The name of the object for which to get the rank.
+		 * @return the rank.
+		 */
+		rank(name) {
+			const r = this.rankables.get(name);
+			return r == null ? null : r.rank;
+		}
+
+	}
+
+	/**
 	 * The Type enumerate defines all roll20 objects types.
 	 */
 	const Type = {
@@ -64,6 +118,15 @@ var Odin = (function() {
 			PLAYER_PAGE_ID: "playerpageid",
 			PLAYER_SPECIFIC_PAGES: "playerspecificpages"
 		},
+		PLAYER: {
+			NAME: "_displayname",
+			ONLINE: "_online",
+			PAGE: "_lastpage",
+			AS: "speakingas",
+			COLOR: "color",
+			MACRO: "_macrobar",
+			SHOW_MACRO: "showmacrobar"
+		},
 		GRAPHIC: {
 			SUBTYPE: "_subtype",
 			TOKEN: "token",
@@ -79,26 +142,16 @@ var Odin = (function() {
 	};
 
 	/**
-	 * The poker card colors.
+	 * The AbstractEventHandler class is the base class to define a message handler.
 	 */
-	const PokerCardColor = {
-		SPADE: "♠",
-		HEART: "♥",
-		DIAMOND: "♦",
-		CLUB: "♣"
-	}
-
-	/**
-	 * The AbstractMessageHandler class is the base class to define a message handler.
-	 */
-	class AbstractMessageHandler {
+	class AbstractEventHandler {
 
 		/**
 		 * @constructor
 		 */
 		constructor() {
-			if (this.constructor === AbstractMessageHandler) {
-				throw new TypeError("Abstract class AbstractMessageHandler cannot be instantiated directly");
+			if (this.constructor === AbstractEventHandler) {
+				throw new TypeError("Abstract class AbstractEventHandler cannot be instantiated directly");
 			}
 		}
 
@@ -154,12 +207,74 @@ var Odin = (function() {
 			log((this.assert() === true ? "[OK    ]" : "[   NOK]") + ": " + this.name);
 		}
 
+		/**
+		 * Checks the value is not null.
+		 * @param value The value to check.
+		 * @return true if value is not null;
+		 */
+		static assertNotNull(value) {
+			const assert = value != null;
+			if (!assert) {
+				log(assert);
+			}
+			return assert;
+		}
+
+		/**
+		 * Checks the array is not null or empty.
+		 * @param array The array to check.
+		 * @return true if array is not empty or null;
+		 */
+		static assertNotEmptyArray(array) {
+			const assert = Array.isArray(array) && array.length > 0;
+			if (!assert) {
+				log(assert);
+			}
+			return assert;
+		}
+
+		/**
+		 * Checks the array is empty.
+		 * @param array The array to check.
+		 * @return true if array is empty;
+		 */
+		static assertEmptyArray(array) {
+			const assert = Array.isArray(array) && _.size(array) === 0;
+			if (!assert) {
+				log(assert);
+			}
+			return assert;
+		}
+
+		/**
+		 * Checks the object is not null or empty.
+		 * @param object The object to check.
+		 * @return true if object is not empty or null;
+		 */
+		static assertNotEmptyObject(object) {
+			const assert = _.isObject(object) && !_.isEmpty(object);
+			if (!assert) {
+				log(assert);
+			}
+			return assert;
+		}
+	
+		/**
+		 * Checks both arrays are equals.
+		 * @param array1 The first array to check.
+		 * @param array2 The second array to check.
+		 * @return true if both arrays are equals.
+		 */
+		static assertArrayEqual(array1, array2) {
+			return JSON.stringify(array1)==JSON.stringify(array2)
+		}
+
 	}
 
 	/**
 	 * The AbstractTestSuite class is the base class to define a testsuite.
 	 */
-	class TestSuite extends AbstractMessageHandler {
+	class TestSuite extends AbstractEventHandler {
 
 		/**
 		 * @constructor
@@ -201,118 +316,487 @@ var Odin = (function() {
 	}
 
 	/**
-	 * The Data class provides roll20 database accessors.
+	 * The PokerColor class defines poker color.
 	 */
-	class Data {
+	class PokerColor extends Rankable {
 
 		/**
-		 * @eturn all players.
+		 * @constructor
+		 * @param name The name of the poker color.
+		 * @param rank The rank of the color, from 1 to the lower priority.
+		 * 
 		 */
-		static getPlayers() {
-			return findObjs({
-				_type: Type.PLAYER
-			});
+		constructor(name, rank) {
+			super(name, rank);
+		}
+
+	}
+
+	/**
+	 * The PokerCard class defines poker card.
+	 */
+	class PokerCard extends Rankable {
+
+		/**
+		 * @constructor
+		 * @param name The name of the poker card.
+		 * @param rank The rank of the card, from 1 to the lower priority.
+		 * 
+		 */
+		constructor(name, rank) {
+			super(name, rank);
+		}
+
+	}
+
+	/**
+	 * The poker card colors.
+	 */
+	const PokerColors = new Rankables()
+		.withRankable(new PokerColor("♠", 1))
+		.withRankable(new PokerColor("♥", 2))
+		.withRankable(new PokerColor("♦", 3))
+		.withRankable(new PokerColor("♣", 4));
+
+	/**
+	 * The poker cards.
+	 */
+	const PokerCards = new Rankables()
+		.withRankable(new PokerCard("RJo", 1))
+		.withRankable(new PokerCard("A♠", 2))
+		.withRankable(new PokerCard("A♥", 3))
+		.withRankable(new PokerCard("A♦", 4))
+		.withRankable(new PokerCard("A♣", 5))
+		.withRankable(new PokerCard("K♠", 6))
+		.withRankable(new PokerCard("K♥", 7))
+		.withRankable(new PokerCard("K♦", 8))
+		.withRankable(new PokerCard("K♣", 9))
+		.withRankable(new PokerCard("Q♠", 10))
+		.withRankable(new PokerCard("Q♥", 11))
+		.withRankable(new PokerCard("Q♦", 12))
+		.withRankable(new PokerCard("Q♣", 13))
+		.withRankable(new PokerCard("Ja♠", 14))
+		.withRankable(new PokerCard("Ja♥", 15))
+		.withRankable(new PokerCard("Ja♦", 16))
+		.withRankable(new PokerCard("Ja♣", 17))
+		.withRankable(new PokerCard("10♠", 18))
+		.withRankable(new PokerCard("10♥", 19))
+		.withRankable(new PokerCard("10♦", 20))
+		.withRankable(new PokerCard("10♣", 21))
+		.withRankable(new PokerCard("9♠", 22))
+		.withRankable(new PokerCard("9♥", 23))
+		.withRankable(new PokerCard("9♦", 24))
+		.withRankable(new PokerCard("9♣", 25))
+		.withRankable(new PokerCard("8♠", 26))
+		.withRankable(new PokerCard("8♥", 27))
+		.withRankable(new PokerCard("8♦", 28))
+		.withRankable(new PokerCard("8♣", 29))
+		.withRankable(new PokerCard("7♠", 30))
+		.withRankable(new PokerCard("7♥", 31))
+		.withRankable(new PokerCard("7♦", 32))
+		.withRankable(new PokerCard("7♣", 33))
+		.withRankable(new PokerCard("6♠", 34))
+		.withRankable(new PokerCard("6♥", 35))
+		.withRankable(new PokerCard("6♦", 36))
+		.withRankable(new PokerCard("6♣", 37))
+		.withRankable(new PokerCard("5♠", 38))
+		.withRankable(new PokerCard("5♥", 39))
+		.withRankable(new PokerCard("5♦", 40))
+		.withRankable(new PokerCard("5♣", 41))
+		.withRankable(new PokerCard("4♠", 42))
+		.withRankable(new PokerCard("4♥", 43))
+		.withRankable(new PokerCard("4♦", 44))
+		.withRankable(new PokerCard("4♣", 45))
+		.withRankable(new PokerCard("3♠", 46))
+		.withRankable(new PokerCard("3♥", 47))
+		.withRankable(new PokerCard("3♦", 48))
+		.withRankable(new PokerCard("3♣", 49))
+		.withRankable(new PokerCard("2♠", 50))
+		.withRankable(new PokerCard("2♥", 51))
+		.withRankable(new PokerCard("2♦", 52))
+		.withRankable(new PokerCard("2♣", 53))
+		.withRankable(new PokerCard("BJo", 54));
+
+	/**
+	 * The base class for all roll20 wrapped object.
+	 */
+	class Object {
+
+		/**
+		 * @constructor.
+		 * @param type    The type of the object.
+		 * @param subtype The optional subtype of the object.
+		 */
+		constructor(type, subtype) {
+			this.type = type;
+			this.subtype = subtype;
+			this.obj = null;
 		}
 
 		/**
-		 * Gets the specified player.
-		 * @param id The identifier of the player to get.
-		 * @return the player.
+		 * Finds the object with the specified identifier.
+		 * @param id The identifier of the object to find.
+		 * @return the instance.
 		 */
-		static getPlayer(id) {
-			return getObj(Type.PLAYER, id);
+		findId(id) {
+			if (this.subtype != null) {
+				const o = getObj(this.type, id);
+				this.obj = o != null && o.get(Property.GRAPHIC.SUBTYPE) === this.subtype ? o : null;
+			} else {
+				this.obj = getObj(this.type, id);
+			}
+			return this;
 		}
 
 		/**
-		 * @eturn all pages.
+		 * Sets the specified object property.
+		 * @param name The name of the property to set.
+		 * @param value The value of the property to set.
+		 * @return the instance.
 		 */
-		static getPages() {
-			return findObjs({
-				_type: Type.PAGE
-			});
+		set(name, value) {
+			if (this.obj != null) {
+				this.obj.set(name, false);
+			}
+			return this;
+		}
+
+	}
+
+	/**
+	 * The base class for roll20 object collections.
+	 */
+	class Objects {
+
+		/**
+		 * @constructor.
+		 * @param type    The type of the object.
+		 * @param subtype The optional subtype of the object.
+		 */
+		constructor(type, subtype) {
+			this.type = type;
+			this.subtype = subtype;
+			this.objs = null;
 		}
 
 		/**
-		 * Gets the specified page.
-		 * @param id The identifier of the page to get.
-		 * @return the page.
+		 * @return all objects.
 		 */
-		static getPage(id) {
-			return getObj(Type.PAGE, id);
+		findAll() {
+			if (this.subtype != null) {
+				this.objs = findObjs({
+					_type: this.type,
+					_subtype: this.subtype
+				});
+			} else {
+				this.objs = findObjs({
+					_type: this.type
+				});
+			}
+			return this;
 		}
 
 		/**
-		 * Gets the specified graphic.
-		 * @param id The identifier of the graphic to get.
-		 * @return the graphic.
+		 * Filters the objects
+		 * @param predicate The predicate to realize.
+		 * @return filtered objects.
 		 */
-		static getGraphic(id) {
-			return getObj(Type.GRAPHIC, id);
+		filter(predicate) {
+			this.objs = _.filter(this.objs, predicate);
+			return this;
+		}
+
+	}
+
+	/**
+	 * The Player class provides features to get and manipulate a player.
+	 */
+	class Player extends Object {
+
+		/**
+		 * @constructor.
+		 */
+		constructor() {
+			super(Type.PLAYER, null);
 		}
 
 		/**
-		 * Gets the specified token.
-		 * @param id The identifier of the token to get.
-		 * @return the token.
+		 * @eturn true if the player is online.
 		 */
-		static getToken(id) {
-			const obj = Data.getGraphic(id);
-			return obj != null && obj.get(Property.GRAPHIC.SUBTYPE) === Property.GRAPHIC.TOKEN ? obj : null;
+		isOnline() {
+			return this.obj != null && this.obj.get(Property.PLAYER.ONLINE) === true;
 		}
 
 		/**
-		 * Gets the specified card.
-		 * @param id The identifier of the card to get.
-		 * @return the card.
+		 * @return true if the player is online and a game master. 
 		 */
-		static getCard(id) {
-			const obj = Data.getGraphic(id);
-			return obj != null && obj.get(Property.GRAPHIC.SUBTYPE) === Property.GRAPHIC.CARD ? obj : null;
+		isMaster() {
+			return this.obj != null && playerIsGM(this.obj.get("id")) === true;
 		}
 
 		/**
-		 * Gets the specified character.
-		 * @param id The identifier of the character to get.
-		 * @return the character.
+		 * @return true if the player is online and not a game master. 
 		 */
-		static getCharacter(id) {
-			return getObj(Type.CHARACTER, id);
+		isPlayer() {
+			return this.obj != null && playerIsGM(this.obj.get("id")) === false;
 		}
 
-		
-		
+	}
+
+	/**
+	 * The Players class provides functionnalities to get and filter players.
+	 */
+	class Players extends Objects {
+
 		/**
-		 * Gets the specified characters.
-		 * @param name The name of the characters to get.
+		 * @constructor.
 		 */
+		constructor() {
+			super(Type.PLAYER, null);
+		}
+
+		/**
+		 * @return filtered online players.
+		 */
+		filterOnline() {
+			return this.filter(function(obj) { return (obj.get(Property.PLAYER.ONLINE) === true); });
+		}
+
+		/**
+		 * @return filtered offline players.
+		 */
+		filterOffline() {
+			return this.filter(function(obj) { return (obj.get(Property.PLAYER.ONLINE) === false); });
+		}
+
+		/**
+		 * @return filtered game masters.
+		 */
+		filterMasters() {
+			return this.filter(function(obj) { return (playerIsGM(obj.get("id")) === true); });
+		}
+
+		/**
+		 * @return filtered players.
+		 */
+		filterPlayers() {
+			return this.filter(function(obj) { return (playerIsGM(obj.get("id")) === false); });
+		}
+
+	}
+
+	/**
+	 * The Page class provides features to get and manipulate a page.
+	 */
+	class Page extends Object {
+
+		/**
+		 * @constructor.
+		 */
+		constructor() {
+			super(Type.PAGE, null);
+		}
+
+	}
+
+	/**
+	 * The Pages class provides functionnalities to get and filter pages.
+	 */
+	class Pages extends Objects {
+
+		/**
+		 * @constructor.
+		 */
+		constructor() {
+			super(Type.PAGE, null);
+		}
+
+	}
+
+	/**
+	 * The Character class provides features to get and manipulate a character.
+	 */
+	class Character extends Object {
+
+		/**
+		 * @constructor.
+		 */
+		constructor() {
+			super(Type.CHARACTER, null);
+		}
+
+	}
+
+	/**
+	 * The Characters class provides functionnalities to get and filter characters.
+	 */
+	class Characters extends Objects {
+
+		/**
+		 * @constructor.
+		 */
+		constructor() {
+			super(Type.CHARACTER, null);
+		}
+
+		/**
+		 * Filters the characters by name.
+		 * @param name The name of the characters.
+		 * @return the filtered characters.
+		 */
+		findName(name) {
+			this.data = findObjs({type:'character', name: name});
+			return this;
+		}
+
+		/*
 		static charactersByName(name) {
 			return findObjs({type:'character', name: name});
 		}
 
-		/**
-		 * Gets the specified non player characters.
-		 * @param name The name of the non player characters to get.
-		 * @return the non player characters.
-		 */
 		static npc(name) {
 			return findObjs({type:'character', name: name, controlledby: ""});
 		}
+		*/
+
+	}
+
+	/**
+	 * The Token class provides features to get and manipulate a token.
+	 */
+	class Token extends Object {
 
 		/**
-		 * Gets the specified character.
-		 * @param id The identifier of the character to get.
+		 * @constructor.
 		 */
-		static characterById(id) {
-			return getObj('character', id);
+		constructor() {
+			super(Type.GRAPHIC, Property.GRAPHIC.TOKEN);
+		}
+
+	}
+
+	/**
+	 * The Tokens class provides functionnalities to get and filter tokens.
+	 */
+	class Tokens extends Objects {
+
+		/**
+		 * @constructor.
+		 */
+		constructor() {
+			super(Type.GRAPHIC, Property.GRAPHIC.TOKEN);
+		}
+
+	}
+
+	/**
+	 * The Deck class provides features to get and manipulate a deck.
+	 */
+	class Deck extends Object {
+
+		/**
+		 * @constructor.
+		 */
+		constructor() {
+			super(Type.DECK, null);
+		}
+
+	}
+
+	/**
+	 * The Decks class provides functionnalities to get and filter decks.
+	 */
+	class Decks extends Objects {
+
+		/**
+		 * @constructor.
+		 */
+		constructor() {
+			super(Type.DECK, null);
+		}
+
+	}
+
+	/**
+	 * The Card class provides features to get and manipulate a token.
+	 */
+	class Card extends Object {
+
+		/**
+		 * @constructor.
+		 */
+		constructor() {
+			super(Type.GRAPHIC, Property.GRAPHIC.CARD);
 		}
 
 		/**
-		 * Gets the identifier of the page which contains the specified player.
-		 * @param player The identifier of the player for which to get the page.
-		 * @return the page identifier.
+		 * Finds the card with the specified id.
+		 * @param id The identifier of the card to find, that is not the graphic id.
+		 * @return the instance.
 		 */
-		static getPageOfPlayer(player) {
-			
+		findId(id) {
+			this.obj = getObj(this.subtype, id);
+			return this;
+		}
+
+	}
+
+	/**
+	 * The Cards class provides functionnalities to get and filter cards.
+	 */
+	class Cards extends Objects {
+
+		/**
+		 * @constructor.
+		 */
+		constructor() {
+			super(Type.GRAPHIC, Property.GRAPHIC.CARD);
+		}
+
+		/**
+		 * @override.
+		 */
+		findAll() {
+			const decks = new Odin.Decks().findAll();
+			if (this.subtype != null) {
+				this.objs = findObjs({
+					_type: this.type,
+					_subtype: this.subtype
+				});
+			} else {
+				this.objs = findObjs({
+					_type: this.type
+				});
+			}
+			return this;
+		}
+
+	}
+
+	/**
+	 * The Hand class provides features to get and manipulate a hand.
+	 */
+	class Hand extends Object {
+
+		/**
+		 * @constructor.
+		 */
+		constructor() {
+			super(Type.HAND, null);
+		}
+
+	}
+
+	/**
+	 * The Hands class provides functionnalities to get and filter hands.
+	 */
+	class Hands extends Objects {
+
+		/**
+		 * @constructor.
+		 */
+		constructor() {
+			super(Type.HAND, null);
 		}
 
 	}
@@ -598,22 +1082,6 @@ var Odin = (function() {
 	}
 
 	/**
-	 * The Character class provides functionnality to manage a character.
-	 */
-	class Character {
-
-		/**
-		 * Gets the identifier of the specified character.
-		 * @param name The name of the character for which to get the identifier.
-		 * @return the character identifier.
-		 */
-		static id(name) {
-			
-		}
-
-	}
-
-	/**
 	 * The Turn class defines registrable item of the turn order.
 	 */
 	class Turn {
@@ -664,7 +1132,7 @@ var Odin = (function() {
 		 * @return the instance.
 		 */
 		clear() {
-			Campaign().set(Odin.Property.CAMPAIGN.TURN_ORDER, JSON.stringify(""));
+			Campaign().set(Odin.Property.CAMPAIGN.TURN_ORDER, '[]');
 			return this;
 		}
 
@@ -738,13 +1206,31 @@ var Odin = (function() {
 	 */
 	return  {
 		Strings: Strings,
+		Rankable: Rankable,
+		Rankables: Rankables,
 		Type: Type,
 		Property: Property,
-		PokerCardColor: PokerCardColor,
 		Test: Test,
 		TestSuite: TestSuite,
-		AbstractMessageHandler: AbstractMessageHandler,
-		Data: Data,
+		AbstractEventHandler: AbstractEventHandler,
+		Player: Player,
+		Players: Players,
+		Page: Page,
+		Pages: Pages,
+		Character: Character,
+		Characters: Characters,
+		Token: Token,
+		Tokens: Tokens,
+		Deck: Deck,
+		Decks: Decks,
+		Card: Card,
+		Cards: Cards,
+		Hand: Hand,
+		Hands: Hands,
+		PokerColor: PokerColor,
+		PokerCard: PokerCard,
+		PokerColors: PokerColors,
+		PokerCards: PokerCards,
 		Dice: Dice,
 		Dices: Dices,
 		Roll: Roll,

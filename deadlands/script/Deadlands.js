@@ -5,78 +5,9 @@ var Deadlands = (function() {
 	'use strict';
 
 	/**
-	 * The poker card order.
+	 * The RollInterpreter class provides functionnalities to manage Deadlands rolls.
 	 */
-	const PokerColorCardOrder = {
-		"♠": 1,
-		"♥": 2,
-		"♦": 3,
-		"♣": 4
-	}
-
-	/**
-	 * The poker card order.
-	 */
-	const PokerCardOrder = new Map()
-		.set("RJo", 1)
-		.set("A♠", 2)
-		.set("A♥", 3)
-		.set("A♦", 4)
-		.set("A♣", 5)
-		.set("K♠", 6)
-		.set("K♥", 7)
-		.set("K♦", 8)
-		.set("K♣", 9)
-		.set("Q♠", 10)
-		.set("Q♥", 11)
-		.set("Q♦", 12)
-		.set("Q♣", 13)
-		.set("Ja♠", 14)
-		.set("Ja♥", 15)
-		.set("Ja♦", 16)
-		.set("Ja♣", 17)
-		.set("10♠", 18)
-		.set("10♥", 19)
-		.set("10♦", 20)
-		.set("10♣", 21)
-		.set("9♠", 22)
-		.set("9♥", 23)
-		.set("9♦", 24)
-		.set("9♣", 25)
-		.set("8♠", 26)
-		.set("8♥", 27)
-		.set("8♦", 28)
-		.set("8♣", 29)
-		.set("7♠", 30)
-		.set("7♥", 31)
-		.set("7♦", 32)
-		.set("7♣", 33)
-		.set("6♠", 34)
-		.set("6♥", 35)
-		.set("6♦", 36)
-		.set("6♣", 37)
-		.set("5♠", 38)
-		.set("5♥", 39)
-		.set("5♦", 40)
-		.set("5♣", 41)
-		.set("4♠", 42)
-		.set("4♥", 43)
-		.set("4♦", 44)
-		.set("4♣", 45)
-		.set("3♠", 46)
-		.set("3♥", 47)
-		.set("3♦", 48)
-		.set("3♣", 49)
-		.set("2♠", 50)
-		.set("2♥", 51)
-		.set("2♦", 52)
-		.set("2♣", 53)
-		.set("BJo", 54);
-
-	/**
-	 * The Rolls class provides functionnalities to manage Deadlands rolls.
-	 */
-	class Rolls {
+	class RollInterpreter {
 
 		/**
 		 * Indicates if the specified rolls is a fumble.
@@ -114,7 +45,7 @@ var Deadlands = (function() {
 		 *     N : Success with N-1 degrees
 		 */
 		static skill(rolls, tn, modifier) {
-			return Rolls.isFumble(rolls) ? -1 : Rolls.getSuccess(rolls.max() + modifier, tn);
+			return RollInterpreter.isFumble(rolls) ? -1 : RollInterpreter.getSuccess(rolls.max() + modifier, tn);
 		}
 
 		/**
@@ -130,7 +61,7 @@ var Deadlands = (function() {
 		 *     N : Success with N-1 degrees
 		 */
 		static unskill(rolls, tn, modifier) {
-			return Rolls.isFumble(rolls) ? -1 : Rolls.getSuccess(Math.floor(rolls.max()/2) + modifier, tn);
+			return RollInterpreter.isFumble(rolls) ? -1 : RollInterpreter.getSuccess(Math.floor(rolls.max()/2) + modifier, tn);
 		}
 	
 		static rollSkill(attribute, coordination, skill, tn, modifier) {
@@ -139,6 +70,24 @@ var Deadlands = (function() {
 			} else {
 				return unskill(new Odin.Dices(attribute, coordination).rolls(), tn, modifier);
 			}
+		}
+
+	}
+
+	/**
+	 * The PokerHand class provides functionnalities to manage the pocker hand of a character.
+	 * It's used to define the turn order.
+	 */
+	class PokerHand {
+
+		/**
+		 * @constructor
+		 * @param deck  The associated poker deck.
+		 * @param token The identifier of the token which represents the character.
+		 */
+		constructor(deck, token) {
+			this.deck = deck;
+			this.token = token;
 		}
 
 	}
@@ -153,10 +102,15 @@ var Deadlands = (function() {
 		 * @constructor
 		 */
 		constructor() {
-			this.deck = Array.from(PokerCardOrder.keys());
+			this.deck = Array.from(PokerCardRank.keys());
 			this.given = new Map();
 			this.discard = [];
 		}
+
+		/**
+		 * Defines a new poker card.
+		 */
+
 
 		/**
 		 * Gives the specified number of cards to the specified character.
@@ -169,8 +123,93 @@ var Deadlands = (function() {
 		}
 
 		/**
-		 * Discards the specified cards
+		 * @return new poker deck.
 		 */
+		static cards() {
+			
+		}
+
+	}
+
+	/**
+	 * The Rolls class provides functionnalities to manages characters rolls. The GM specifies the roll to process, using the
+	 * methods start. Each character can then rolls and improves the result using macros.
+	 */
+	class Rolls {
+
+		/**
+		 * @constructor
+		 */
+		constructor() {
+			this.rolls = new Map();
+			this.attribute = null;
+			this.skill = null;
+			this.tn = null;
+		}
+
+		/**
+		 * Starts the specified attribute roll.
+		 * @param attribute The name of the attribute to roll.
+		 * @param tn        The difficulty.
+		 */
+		attribute(attribute, tn) {
+			this.rolls = new Map();
+			this.attribute = attribute;
+			this.skill = null;
+			this.tn = null;
+		}
+
+		/**
+		 * Starts the specified skill roll.
+		 * @param attribute The name of the attribute to roll.
+		 * @param skill     The name of the skill to roll.
+		 * @param tn        The difficulty.
+		 */
+		skill(attribute, skill, tn) {
+			this.rolls = new Map();
+			this.attribute = attribute;
+			this.skill = skill;
+			this.tn = tn;
+		}
+
+		/**
+		 * Adds the specified character roll. Retrieves the number and the type of dices to roll,
+		 * rolls the dices and registers the result for the specified character.
+		 * @param id The identifier of the character.
+		 */
+		character(id) {
+			const size = 2;
+			const dice = 6;
+			this.rolls.set(id, new Odin.Rolls().add(new Odin.Roll(new Odin.Dice(this.dice(id)), this.size(id))));
+		}
+
+		/**
+		 * Stops the roll.
+		 */
+		stop() {
+			this.rolls = new Map();
+			this.attribute = null;
+			this.skill = null;
+		}
+
+		/**
+		 * Gets the number of dice to roll for the specified character and the current roll.
+		 * @param id The identifier of the character.
+		 * @return the number of dice to roll.
+		 */
+		size(id) {
+			return 2;
+		}
+
+		/**
+		 * Gets the type of dice to roll for the specified character and the current roll.
+		 * @param id The identifier of the character.
+		 * @return the type of dice to roll.
+		 */
+		dice(id) {
+			return 6;
+		}
+
 	}
 
 	/**
@@ -183,7 +222,7 @@ var Deadlands = (function() {
 		 */
 		constructor() {
 			super(function(turn) {
-				return Deadlands.PokerCardOrder.get(turn.pr);
+				return Odin.PokerCards.rank(turn.pr);
 			});
 		}
 
@@ -208,37 +247,19 @@ var Deadlands = (function() {
 			
 		}
 
-//		/**
-//		 * Gives the specified number of cards to the specified player.
-//		 * @param player The identifier of the player for which to give cards.
-//		 * @param size   The number of cards to give.
-//		 * @return the instance.
-//		 */
-//		give(player, size) {
-//			
-//		}
-//
-//		/**
-//		 * Discards the specified cards.
-//		 * @param cards The cards to discard.
-//		 * @return the instance.
-//		 */
-//		discard(cards) {
-//			
-//		}
-
 	}
 
 	/**
-	 * The MessageHandler class is the main class to handle commands.
+	 * The EventHandler class is the main class to handle commands.
 	 */
-	class MessageHandler extends Odin.AbstractMessageHandler {
+	class EventHandler extends Odin.AbstractEventHandler {
 
 		/**
 		 * @constructor
 		 */
 		constructor() {
 			super();
+			this.rolls = new Rolls();
 		}
 
 		/**
@@ -253,59 +274,71 @@ var Deadlands = (function() {
 		 */
 		processCommand(cmd, args) {
 			if (cmd != 'dl') return;
+			if (args.length > 0) {
 
-			this.openRoll(2, 0, 0, 0);
+
+				if (args[0] === 'skill') {
+					const size = parseInt(args[1], 10);
+					const dice = parseInt(args[2], 10);
+					const tn = parseInt(args[3], 10);
+					log(size + "d" + dice + " SD:" + tn);
+					this.openRoll(size, dice, 0, tn);
+
+				} else if (args[0] === 'attribute') {
+					const size = parseInt(args[1], 10);
+					const dice = parseInt(args[2], 10);
+					const tn = parseInt(args[3], 10);
+					log(size + "d" + dice + " SD:" + tn);
+					this.openRoll(size, dice, 0, tn);
+
+				} else if (args[0] === 'rolls') {
+					const attribute = args[1];
+					const skill = null;
+					const tn = parseInt(args[2], 5);
+					this.rolls.attribute(attribute, tn);
+				}
+
+			}
+
 		}
 
 		/**
 		 * Handles the specified roll.
-		 * @param attribute    The attribute defines the number of dices to roll.
-		 * @param coordination The skill or the coordination defines the type of dices to roll.
-		 * @param modifier     The modifier to apply to the roll.
-		 * @param tn           The difficulty target number.
+		 * @param size     The number of dices to roll.
+		 * @param dice     The type of dices to roll.
+		 * @param tn       The difficulty target number.
 		 */
 		openRoll(size, dice, modifier, tn) {
 			log("openRoll");
 
-			var rolls = new Odin.Dices()
-				.add(new Odin.Dice(8), 2)
-				.add(new Odin.Dice(6), 4)
+			const rolls = new Odin.Dices()
+				.add(new Odin.Dice(dice), size)
 				.roll();
+
+			var result = null;
+			if (RollInterpreter.isFumble(rolls) === true) {
+				result = "Tu t'es planté !";
+			} else if (rolls.atLeast(tn) === false) {
+				result = "Tu as échoué";
+			} else {
+				result = "Tu réussis avec " + RollInterpreter.getSuccess(rolls.max(), tn) + " degré(s)"
+			}
 
 			var html = "";
 			html += "<div class='sheet-rolltemplate-default'>";
 			html += "<table>";
-			html += "<caption>Jet " + size + "d" + dice + " avec SD " + tn + "</caption>";
+			html += "<caption>Jet " + size + "d" + dice + " SD:" + tn + "</caption>";
 			html += "<tr>";
 			html += "<td>Dés:</td>";
 			html += "<td>" + rolls.toString() + "</td>";
 			html += "</tr>";
-			html += "<tr>";
-			html += "<td>Max:</td>";
-			html += "<td>" + rolls.max() + "</td>";
-			html += "</tr>";
-			html += "<tr>";
-			html += "<td>Sum:</td>";
-			html += "<td>" + rolls.sum() + "</td>";
-			html += "</tr>";
 			html += "<td>Resultat:</td>";
-			html += "<td>" + rolls.atLeast(7) + "</td>";
-			html += "</tr>";
-			html += "<tr>";
-			html += "<td>Nb of 1:</td>";
-			html += "<td>" + rolls.numberOf(1) + "</td>";
-			html += "</tr>";
-			html += "<tr>";
-			html += "<td>Fumble:</td>";
-			html += "<td>" + Rolls.isFumble(rolls) + "</td>";
-			html += "</tr>";
-			html += "<tr>";
-			html += "<td>Success:</td>";
-			html += "<td>" + Rolls.getSuccess(7,5) + "</td>";
+			html += "<td>" + rolls.max() + " :" + result + "</td>";
 			html += "</tr>";
 			html += "</table>";
 			html += "</div>";
 			sendChat("Summary", html);
+
 		}
 
 	}
@@ -314,7 +347,7 @@ var Deadlands = (function() {
 	/**
 	 * The message handler.
 	 */
-	const _handler = new MessageHandler();
+	const _handler = new EventHandler();
 
 	/**
 	 * Handles the specified message.
@@ -328,8 +361,8 @@ var Deadlands = (function() {
 	 * @return the public elements.
 	 */
 	return  {
-		PokerCardOrder: PokerCardOrder,
-		Rolls : Rolls,
+		RollInterpreter : RollInterpreter,
+		Rolls: Rolls,
 		TurnOrder: TurnOrder,
 		handleMessage : handleMessage
 	};

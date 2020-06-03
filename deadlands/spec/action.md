@@ -1,19 +1,89 @@
+# Système de jet de compétence
++ Le MJ initialise le jet en fournissant les données suivantes:
+    + initialisation
+    + nom de l'attribut
+    + nom de la compétence (optionnel)
+    + seuil de difficulté
+    + indique si le resultat doit apparaitre:
+        + pour le GM
+        + pour le GM et le(s) joueur(s)
+        + pour le GM et tous les joueurs
+    + la liste des ids concernés (token, personnage, joueur ?)
++ Sur la réception de cette commande, chaque joueur voit apparaitre les macros suivantes:
+    + jet
+    + pépite blanche
+    + pépite rouge
+    + pépite bleue
++ Le joueur clique sur jet pour lancer ses dés qui apparaissent uniquement dans son channel
++ La macro 'jet' est renommé appliqué
++ Le joueur peut dépenser des pépites si il en a. Le nouveau lancé de dés apparait
++ Le joueur applique le jet. Ce dernier apparait chez le GM et dans d'autres channels si besoin.
++ Les macros disparaissent
++ Lorsque tous les personnages ont agit, le MJ recoit un message listant les résultats généraux.  
+    
+
 # Système d'initiative
 
-+ Déclaration de passage en mode round.
-+ + Le turn order est affiché, initialement vide.
-+ Déclaration d'un nouvau round.
-+ + Chaque joueur peut lancer son initiative.
-+ + Chaque joueur peut dépenser des pépites pour améiorer son initiative.
-+ + Chaque personnage se voit attribuer un nombre de tours dépendant du jet d'initiative.
-+ + Le système attribut a chaque tour une carte
-+ + + Une carte du deck PNJ pour les PNJs
-+ + + Une carte du deck PJ pour les PJs
-+ + Si une des carte du personnage est un Jocker Noir, il perds sa plus haute carte d'initiative qui peut etre la carte dans la manche..
-+ + Si une des carte du personnage est un Jocker Rouge, il met de coté la carte dans son deck comme pour la carte dans la manche.
-+ Usage de triche
-+ + Si le personnage possède l'atout Tête Froide, il peut remplacer une des cartes.
-+ + Résolution de triche pour rajouter des cartes comme la Rage.
++ Déclaration de passage en mode round. Le système d'initiative est activé.
+    + Le turn order est affiché, initialement vide.
+    + Le numéro du round est 0.
+ + Déclaration d'un nouveau round
+    + Le système d'initiative doit être vide.
+    + Le numéro du round est incrémenté de 1.
+    + Chaque joueur reçoit un moyen d'activer son initiative (bouton, carte ?)
++ Un joueur active son initiative.
+    + On tire un jet d'initiative.
+    + Le joueur peut dépenser des pépites
+    + Le joueur valide le jet. Le nombre de cartes d'initiative est inséré dans le turn order.
+    + Le moyen d'activation d'initiative disparait.
+    + Si le joueur possède l'atout *Tête froide*, le moyen de l'activer apparait. Si le joueur l'utilise, sa carte la plus basse est remplacé par la nouvelle.
+    + Si le joueur possède des points de rage, il peut en dépenser pour obtenir de nouvelles cartes.
++ Le MJ active l'initiative des PNJs.
+    + Le MJ sélectionne un token
+    + Le MJ reçoit un moyen d'activer l'nitiative du personnage selectionné
+
+! Un seul item à la fois dans le turn order pour cacher l'ordre général
+
+# Système de carte
+
+#### Après la réunion
++ Utilisation d'un menu (avec les cartes ?)
++ Bouton de selection/deselection
+
+#### Les fonctions à utiliser
++ giveCardToPlayer(cardid, playerid)
++ takeCardFromPlayer(playerid, cardid)
++ recallCards(deckid, type(optional))
+
+#### Les évènements
++ on("ready", function() {
++ on("add:graphic", function(obj) {} Si mis sur la table
++ on("destroy:graphic", function(obj) {} Si enlevé de la table
++ on("change:graphic", function(obj) {} ???
++ on("change:player:_online", function(obj){} 
+
+#### Les decks
++ Créer un deck complet pour le GM avec toutes les actions. Possibilité de l'étendre.
++ Une carte peut être joué pendant une phase du round
+    + La détermination de l'initiative
+    + Après un jet de dés: les pépites, ...
+    + Après la résolution de l'intiative (les cartes sont affichées dans le turn order)
+    + Au début du tour d'un personnage: c'est la liste des actions possibles. Gestion possible d'un historique comme pour 'Prendre son temps'..
+    + Après une action d'un personnage: c'est un modificateur, comme viser une partie spécifique, etc...
+
+#### Utilisation PC:
++ On est à une phase du cycle d'action ou d'initiative.
++ On est sur un playerId, tokenId, characterId
++ On supprime toutes les cartes de la main du joueur.
++ On clone du deck complet les cartes du GM pour constituer le deck du joueur pour cette action.
++ PB: Quand on joue une carte, on ne connait pas quel personnage le joue, on a seulement la cardId
++ --> Ajouter dans la carte les informations:
+    + au moment ou elle est joué sur la table (pour un NPC en fonction de la selection).
+
+####Utilisation NPC:
+- Quand on selectionne un token en tant que MJ, il faut rafraichir les cartes pour le token.
+- PB: Pas d'event remontant la selection.
+ --> Passer par une macro de selection qui doit mettre une aura pour afficher le token controlé.
 
 # Les actions
 
@@ -25,6 +95,7 @@
 #### Jouer une carte de sa manche.
 + Le joueur joue la carte *Jouer une carte de sa manche*.
 + Le tour du joueur suivant est interrompu (et de rapidité opposé si attente de qqchose)
++ Le joueur interrompu voit sa phase d'action annulé. Son deck est supprimé.
 
 #### Passer
 + Le joueur joue la carte *Passer son tour*.
@@ -97,7 +168,7 @@ Contre un groupe, le token choisi doit être celui du leader.
 
 ### Les manoeuvres de pistolets
 
-Pour une action donnée, on peut avoir des cartes de modificateurs:
+Pour une action donnée, on peut avoir des modificateurs:
 
 + Viser pour sélectionner une partie du corps.
 + Tirer par dessus la jambe pour augmenter la CDT.
@@ -105,6 +176,8 @@ Pour une action donnée, on peut avoir des cartes de modificateurs:
 + Main droite - Main gauche pour échanger ses pistolets de main.
 
 #### Tirer
++ Le personnage joue la carte d'action.
++ Le personnage sélectionne le token cible.
 
 #### Le retourné-tiré
 + Le personnage joue la carte d'action.

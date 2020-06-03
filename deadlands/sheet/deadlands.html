@@ -1,3 +1,91 @@
+<script type="text/worker">
+
+on("sheet:opened", function(eventInfo){
+    
+    setAttrs({
+        gutsAndGritMacro: getTranslationByKey("gutsAndGrit"),
+		cognitionMacro: getTranslationByKey("cognition"),
+		artilleryMacro: getTranslationByKey("artillery"),
+		scrutinizeMacro: getTranslationByKey("scrutinize"),
+		artMacro: getTranslationByKey("art"),
+		trackingMacro: getTranslationByKey("tracking"),
+		searchMacro: getTranslationByKey("search"),
+		deftnessMacro: getTranslationByKey("deftness"),
+		bowMacro: getTranslationByKey("bow"),
+		sleightofhandMacro: getTranslationByKey("sleightofhand"),
+		shootingMacro: getTranslationByKey("shooting"),
+		lockpickingMacro: getTranslationByKey("lockpicking"),
+		filchingMacro: getTranslationByKey("filching"),
+		speedloadMacro: getTranslationByKey("speedload"),
+		throwingMacro: getTranslationByKey("throwing"),
+		mineMacro: getTranslationByKey("mine"),
+		performingMacro: getTranslationByKey("performing"),
+		overaweMacro: getTranslationByKey("overawe"),
+		leadershipMacro: getTranslationByKey("leadership"),
+		taleTellMacro: getTranslationByKey("taleTell"),
+		animalWranglingMacro: getTranslationByKey("animalWrangling"),
+		persuasionMacro: getTranslationByKey("persuasion"),
+		spiritMacro: getTranslationByKey("spirit"),
+		faithMacro: getTranslationByKey("faith"),
+		gutsMacro: getTranslationByKey("guts"),
+		strengthMacro: getTranslationByKey("strength"),
+		vigorMacro: getTranslationByKey("vigor"),
+		knowledgeMacro: getTranslationByKey("knowledge"),
+		professionalMacro: getTranslationByKey("professional"),
+		academiaMacro: getTranslationByKey("academia"),
+		tradeMacro: getTranslationByKey("trade"),
+		medicineMacro: getTranslationByKey("medicine"),
+		areaKnowledgeMacro: getTranslationByKey("areaKnowledge"),
+		homeCountryMacro: getTranslationByKey("homeCountry"),
+		demolitionMacro: getTranslationByKey("demolition"),
+		disguiseMacro: getTranslationByKey("disguise"),
+		languageMacro: getTranslationByKey("language"),
+		madScienceMacro: getTranslationByKey("madScience"),
+		scienceMacro: getTranslationByKey("science"),
+		smartsMacro: getTranslationByKey("smarts"),
+		tinkeringMacro: getTranslationByKey("tinkering"),
+		bluffMacro: getTranslationByKey("bluff"),
+		gamblingMacro: getTranslationByKey("gambling"),
+		ridiculeMacro: getTranslationByKey("ridicule"),
+		scroungingMacro: getTranslationByKey("scrounging"),
+		streetwiseMacro: getTranslationByKey("streetwise"),
+		survivalMacro: getTranslationByKey("survival"),
+		nimblenessMacro: getTranslationByKey("nimbleness"),
+		dodgeMacro: getTranslationByKey("dodge"),
+		drivingMacro: getTranslationByKey("driving"),
+		fightingMacro: getTranslationByKey("fighting"),
+		climbingMacro: getTranslationByKey("climbing"),
+		teamsterMacro: getTranslationByKey("teamster"),
+		horseRidingMacro: getTranslationByKey("horseRiding"),
+		sneakMacro: getTranslationByKey("sneak"),
+		swimmingMacro: getTranslationByKey("swimming"),
+		quicknessMacro: getTranslationByKey("quickness"),
+		quickDrawMacro: getTranslationByKey("quickDraw")
+    });     
+    
+    on("clicked:level_1", function() {
+        console.log("Activate level 1");
+        setAttrs({ level: 1 });
+    });
+    on("clicked:level_2", function() {
+        console.log("Activate level 2");
+        setAttrs({ level: 2 });
+    });
+    on("clicked:level_3", function() {
+    console.log("Activate level 3");
+    setAttrs({ level: 3 });
+    });
+    on("clicked:level_4", function() {
+    console.log("Activate level 4");
+    setAttrs({ level: 4 });
+    });
+    on("clicked:level_5", function() {
+    console.log("Activate level 5");
+    setAttrs({ level: 5 });
+    });
+});
+</script>
+
 <div class="sheet-wrapper">
   <!-- Sheet Header -->
   <div class="sheet-3colrow">
@@ -303,15 +391,15 @@
                         <div class="sheet-item sheet-tiny">d</div>
                         <div class="sheet-item sheet-large">
                             <select name="attr_cogdtype" class="dtype" style="margin-bottom: 0px; width: 60px">
-                                <option selected="selected" value="d4">4</option>
-                                <option value="d6">6</option>
-                                <option value="d8">8</option>
-                                <option value="d10">10</option>
-                                <option value="d12">12</option>
+                                <option selected="selected" value="4">4</option>
+                                <option value="6">6</option>
+                                <option value="8">8</option>
+                                <option value="10">10</option>
+                                <option value="12">12</option>
                             </select>
                         </div>
                         <div class="sheet-itemright sheet-small">
-                            <button type="roll" name="roll_cognition" value="@{gmtoggle}&{template:simple}  {{rollname=@{cognitionMacro}}} {{dice=[[@{coglvl}@{cogdtype}!!k1]]}}"></button>
+                        	<button type="roll" name="roll_cognition" value="!dl skill @{coglvl} @{cogdtype} ?{Modifier|5}"></button>
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -322,7 +410,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_artillerymod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                       	    <button type="roll" name="roll_cognition" value="!dl skill @{artillerylvl} @{cogdtype} ?{Modifier|5}"></button>
+                       	    <!-- 
                             <button type="roll" name="roll_cognition" value="@{gmtoggle}&{template:simple}  {{rollname=@{artilleryMacro}}} {{dice=[[@{artillerylvl}@{cogdtype}!!k1+@{artillerymod}]]}}"></button>
+                        -->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -339,7 +430,10 @@
                             <div class="sheet-item sheet-tiny">+</div>
                             <div class="sheet-item sheet-large"><input type="number" name="attr_artconcmod" placeholder="Mod"></div>
                             <div class="sheet-itemright sheet-small">
+                            	<button type="roll" name="roll_cognition" value="!dl skill @{artlvl} @{cogdtype} ?{Modifier|5}"></button>
+                                <!--  
                                 <button type="roll" name="roll_cognition" value="@{gmtoggle}&{template:simple}  {{rollname=@{artMacro} - @{artconc}}} {{dice=[[@{artlvl}@{cogdtype}!!k1+@{artconcmod}]]}}"></button>
+                            	-->
                             </div>
                         </fieldset>
                     </div>
@@ -351,7 +445,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_searchmod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_cognition" value="!dl skill @{searchlvl} @{cogdtype} ?{Modifier|5}"></button>
+                            <!--  
                             <button type="roll" name="roll_cognition" value="@{gmtoggle}&{template:simple}  {{rollname=@{searchMacro}}} {{dice=[[@{searchlvl}@{cogdtype}!!k1+@{searchmod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -362,7 +459,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_trackinmod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_cognition" value="!dl skill @{trackinlvl} @{cogdtype} ?{Modifier|5}"></button>
+                            <!--  
                             <button type="roll" name="roll_cognition" value="@{gmtoggle}&{template:simple}  {{rollname=@{trackingMacro}}} {{dice=[[@{trackinlvl}@{cogdtype}!!k1+@{trackinmod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/> 
@@ -373,7 +473,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_scrutinizemod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_cognition" value="!dl skill @{scrutinizelvl} @{cogdtype} ?{Modifier|5}"></button>
+                            <!--  
                             <button type="roll" name="roll_cognition" value="@{gmtoggle}&{template:simple}  {{rollname=@{scrutinizeMacro}}} {{dice=[[@{scrutinizelvl}@{cogdtype}!!k1+@{scrutinizemod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -385,7 +488,10 @@
                             <div class="sheet-item sheet-tiny">+</div>
                             <div class="sheet-item sheet-large"><input type="text" name="attr_extracogaptmod" placeholder="Mod"></div>
                             <div class="sheet-itemright sheet-small">
+                            	<button type="roll" name="roll_cognition" value="!dl skill @{extracogaptlvl} @{cogdtype} ?{Modifier|5}"></button>
+                                <!-- 
                                 <button type="roll" name="roll_cognition" value="@{gmtoggle}&{template:simple}  {{rollname=^@{extracogapt}}} {{dice=[[@{extracogaptlvl}@{cogdtype}!!k1+@{extracogaptmod}]]}}"></button>
+                            	 -->
                             </div>
                         </div>
                     </fieldset>
@@ -403,15 +509,18 @@
                         <div class="sheet-item sheet-tiny">d</div>
                         <div class="sheet-item sheet-large">
                             <select name="attr_knodtype" class="dtype" style="margin-bottom: 0px; width: 60px">
-                                <option selected="selected" value="d4">4</option>
-                                <option value="d6">6</option>
-                                <option value="d8">8</option>
-                                <option value="d10">10</option>
-                                <option value="d12">12</option>
+                                <option selected="selected" value="4">4</option>
+                                <option value="6">6</option>
+                                <option value="8">8</option>
+                                <option value="10">10</option>
+                                <option value="12">12</option>
                             </select>
                         </div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Knowledge" value="!dl skill @{knolvl} @{knodtype} ?{Modifier|5}"></button>
+                            <!--  
                             <button type="roll" name="roll_Knowledge" value="@{gmtoggle}&{template:simple}  {{rollname=@{knowledgeMacro}}} {{dice=[[@{knolvl}@{knodtype}!!k1]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -428,7 +537,10 @@
                                 <div class="sheet-item sheet-tiny">+</div>
                                 <div class="sheet-item sheet-large"><input type="text" name="attr_professionalmod" placeholder="Mod"></div>
                                 <div class="sheet-itemright sheet-small">
+                                	<button type="roll" name="roll_Professional" value="!dl skill @{professionallvl} @{knodtype} ?{Modifier|5}"></button>
+                                    <!-- 
                                     <button type="roll" name="roll_Professional" value="@{gmtoggle}&{template:simple}  {{rollname=@{professionalMacro} - @{professionalname}}} {{dice=[[@{professionallvl}@{knodtype}!!k1+@{professionalmod}]]}}"></button>
+                                 	-->
                                 </div>
                             </div>
                         </fieldset>
@@ -446,7 +558,10 @@
                             <div class="sheet-item sheet-tiny">+</div>
                             <div class="sheet-item sheet-large"><input type="text" name="attr_akhomecountymod" placeholder="Mod"></div>
                             <div class="sheet-itemright sheet-small">
+                            	<button type="roll" name="roll_akhomecounty" value="!dl skill @{akhomecountylvl} @{knodtype} ?{Modifier|5}"></button>
+                            	<!--  
                                 <button type="roll" name="roll_akhomecounty" value="@{gmtoggle}&{template:simple}  {{rollname=@{areaKnowledgeMacro} - @{homeCountryMacro}}} {{dice=[[@{akhomecountylvl}@{knodtype}!!k1+@{akhomecountymod}]]}}"></button>
+                            	-->
                             </div>
                         </div>
                         <fieldset class="repeating_areakno">
@@ -457,7 +572,10 @@
                                 <div class="sheet-item sheet-tiny">+</div>
                                 <div class="sheet-item sheet-large"><input type="text" name="attr_areaknomod" placeholder="Mod"></div>
                                 <div class="sheet-itemright sheet-small">
+                                	<button type="roll" name="roll_areakno" value="!dl skill @{areaknolvl} @{knodtype} ?{Modifier|5}"></button>
+                                	<!--  
                                     <button type="roll" name="roll_areakno" value="@{gmtoggle}&{template:simple}  {{rollname=@{areaKnowledgeMacro} - @{areaknoname}}} {{dice=[[@{areaknolvl}@{knodtype}!!k1+@{areaknomod}]]}}"></button>
+                                	-->
                                 </div>
                             </div>
                         </fieldset>
@@ -470,7 +588,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_disguisemod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Disguise" value="!dl skill @{disguiselvl} @{knodtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Disguise" value="@{gmtoggle}&{template:simple}  {{rollname=@{disguiseMacro}}} {{dice=[[@{disguiselvl}@{knodtype}!!k1+@{disguisemod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -481,7 +602,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_demolitionmod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Demolition" value="!dl skill @{demolitionlvl} @{knodtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Demolition" value="@{gmtoggle}&{template:simple}  {{rollname=@{demolitionMacro}}} {{dice=[[@{demolitionlvl}@{knodtype}!!k1+@{demolitionmod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -498,7 +622,10 @@
                                 <div class="sheet-item sheet-tiny">+</div>
                                 <div class="sheet-item sheet-large"><input type="text" name="attr_languagemod" placeholder="Mod"></div>
                                 <div class="sheet-itemright sheet-small">
+                                	<button type="roll" name="roll_Language" value="!dl skill @{languagelvl} @{knodtype} ?{Modifier|5}"></button>
+                                	<!--
                                     <button type="roll" name="roll_Language" value="@{gmtoggle}&{template:simple}  {{rollname=@{languageMacro} @{languagename}}} {{dice=[[@{languagelvl}@{knodtype}!!k1+@{languagemod}]]}}"></button>
+                                	-->
                                 </div>
                             </div>
                         </fieldset>
@@ -517,7 +644,10 @@
                             <div class="sheet-item sheet-tiny">+</div>
                             <div class="sheet-item sheet-large"><input type="text" name="attr_medicineconcmod" placeholder="Mod"></div>
                             <div class="sheet-itemright sheet-small">
+                            	<button type="roll" name="roll_Medicine" value="!dl skill @{medicinelvl} @{knodtype} ?{Modifier|5}"></button>
+                            	<!--
                                 <button type="roll" name="roll_Medicine" value="@{gmtoggle}&{template:simple}  {{rollname=@{medicineMacro} @{medicineconc}}} {{dice=[[@{medicinelvl}@{knodtype}!!k1+@{medicineconcmod}]]}}"></button>
+                            	-->
                             </div>
                         </fieldset>
                     </div>
@@ -535,7 +665,10 @@
                                 <div class="sheet-item sheet-tiny">+</div>
                                 <div class="sheet-item sheet-large"><input type="text" name="attr_trademod" placeholder="Mod"></div>
                                 <div class="sheet-itemright sheet-small">
+                                	<button type="roll" name="roll_Trade" value="!dl skill @{tradelvl} @{knodtype} ?{Modifier|5}"></button>
+                                	<!-- 
                                     <button type="roll" name="roll_Trade" value="@{gmtoggle}&{template:simple}  {{rollname=@{tradeMacro} - @{tradename}}} {{dice=[[@{tradelvl}@{knodtype}!!k1+@{trademod}]]}}"></button>
+                                	-->
                                 </div>
                             </div>
                         </fieldset>
@@ -554,7 +687,10 @@
                                 <div class="sheet-item sheet-tiny">+</div>
                                 <div class="sheet-item sheet-large"><input type="text" name="attr_sciencemod" placeholder="Mod"></div>
                                 <div class="sheet-itemright sheet-small">
+                                	<button type="roll" name="roll_Science" value="!dl skill @{sciencelvl} @{knodtype} ?{Modifier|5}"></button>
+                                	<!-- 
                                     <button type="roll" name="roll_Science" value="@{gmtoggle}&{template:simple}  {{rollname=@{scienceMacro} - @{sciencename}}} {{dice=[[@{sciencelvl}@{knodtype}!!k1+@{sciencemod}]]}}"></button>
+                                	 -->
                                 </div>
                             </div>
                         </fieldset>			
@@ -567,7 +703,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_madScienceMod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
-                            <button type="roll" name="roll_Disguise" value="@{gmtoggle}&{template:simple}  {{rollname=@{madScienceMacro}}} {{dice=[[@{madSciencelvl}@{knodtype}!!k1+@{madScienceMod}]]}}"></button>
+                        	<button type="roll" name="roll_Disguise" value="!dl skill @{madSciencelvl} @{knodtype} ?{Modifier|5}"></button>
+                        	<!-- 
+                        	<button type="roll" name="roll_Disguise" value="@{gmtoggle}&{template:simple}  {{rollname=@{madScienceMacro}}} {{dice=[[@{madSciencelvl}@{knodtype}!!k1+@{madScienceMod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -584,7 +723,10 @@
                                 <div class="sheet-item sheet-tiny">+</div>
                                 <div class="sheet-item sheet-large"><input type="text" name="attr_academiamod" placeholder="Mod"></div>
                                 <div class="sheet-itemright sheet-small">
+                                	<button type="roll" name="roll_Academia" value="!dl skill @{academialvl} @{knodtype} ?{Modifier|5}"></button>
+                                	<!--
                                     <button type="roll" name="roll_Academia" value="@{gmtoggle}&{template:simple}  {{rollname=@{academiaMacro} - @{academianame}}} {{dice=[[@{academialvl}@{knodtype}!!k1+@{academiamod}]]}}"></button>
+                                	-->
                                 </div>
                             </div>
                         </fieldset>
@@ -598,7 +740,10 @@
                             <div class="sheet-item sheet-tiny">+</div>
                             <div class="sheet-item sheet-large"><input type="text" name="attr_extraknoaptmod" placeholder="Mod"></div>
                             <div class="sheet-itemright sheet-small">
+                            	<button type="roll" name="roll_extraknoapt" value="!dl skill @{extraknoaptlvl} @{knodtype} ?{Modifier|5}"></button>
+                            	<!--
                                 <button type="roll" name="roll_extraknoapt" value="@{gmtoggle}&{template:simple}  {{rollname=^@{extraknoapt}}} {{dice=[[@{extraknoaptlvl}@{knodtype}!!k1+@{extraknoaptmod}]]}}"></button>
+                            	-->
                             </div>
                         </div>
                     </fieldset>
@@ -616,15 +761,18 @@
                         <div class="sheet-item sheet-tiny">d</div>
                         <div class="sheet-item sheet-large">
                             <select name="attr_miendtype" class="dtype" style="margin-bottom: 0px; width: 60px">
-                                <option selected="selected" value="d4">4</option>
-                                <option value="d6">6</option>
-                                <option value="d8">8</option>
-                                <option value="d10">10</option>
-                                <option value="d12">12</option>
+                                <option selected="selected" value="4">4</option>
+                                <option value="6">6</option>
+                                <option value="8">8</option>
+                                <option value="10">10</option>
+                                <option value="12">12</option>
                             </select>
                         </div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Mien" value="!dl skill @{mienlvl} @{miendtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Mien" value="@{gmtoggle}&{template:simple}  {{rollname=@{mineMacro}}} {{dice=[[@{mienlvl}@{miendtype}!!k1]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -635,7 +783,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_leadershipmod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Leadership" value="!dl skill @{leadershiplvl} @{miendtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Leadership" value="@{gmtoggle}&{template:simple}  {{rollname=@{leadershipMacro}}} {{dice=[[@{leadershiplvl}@{miendtype}!!k1+@{leadershipmod}]]}}"></button>
+                       	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -651,7 +802,10 @@
                             <div class="sheet-item sheet-tiny">+</div>
                             <div class="sheet-item sheet-large"><input type="text" name="attr_aniwraconcmod" placeholder="Mod"></div>
                             <div class="sheet-itemright sheet-small">
+                            	<button type="roll" name="roll_aniwra" value="!dl skill @{aniwralvl} @{miendtype} ?{Modifier|5}"></button>
+                            	<!--
                                 <button type="roll" name="roll_aniwra" value="@{gmtoggle}&{template:simple}  {{rollname=@{animalWranglingMacro} - @{aniwraconc}}} {{dice=[[@{aniwralvl}@{miendtype}!!k1+@{aniwraconcmod}]]}}"></button>
+                            	-->
                             </div>
                         </fieldset>
                     </div>
@@ -663,7 +817,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_taletellmod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_TaleTellin" value="!dl skill @{taletelllvl} @{miendtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_TaleTellin" value="@{gmtoggle}&{template:simple}  {{rollname=@{taleTellMacro}}} {{dice=[[@{taletelllvl}@{miendtype}!!k1+@{taletellmod}]]}}"></button>
+                       		-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -674,7 +831,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_overawemod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Leadership" value="!dl skill @{overawelvl} @{miendtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Leadership" value="@{gmtoggle}&{template:simple}  {{rollname=@{overaweMacro}}} {{dice=[[@{overawelvl}@{miendtype}!!k1+@{overawemod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -685,7 +845,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_persuasionmod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Persuasion" value="!dl skill @{persuasionlvl} @{miendtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Persuasion" value="@{gmtoggle}&{template:simple}  {{rollname=@{persuasionMacro}}} {{dice=[[@{persuasionlvl}@{miendtype}!!k1+@{persuasionmod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -702,7 +865,10 @@
                             <div class="sheet-item sheet-tiny">+</div>
                             <div class="sheet-item sheet-large"><input type="number" name="attr_performinconcmod" placeholder="Mod"></div>
                             <div class="sheet-itemright sheet-small">
+                            	<button type="roll" name="roll_cognition" value="!dl skill @{performinlvl} @{miendtype} ?{Modifier|5}"></button>
+                            	<!--
                                 <button type="roll" name="roll_cognition" value="@{gmtoggle}&{template:simple}  {{rollname=@{performingMacro} - @{performinconc}}} {{dice=[[@{performinlvl}@{miendtype}!!k1+@{performinconcmod}]]}}"></button>
+                            	-->
                             </div>
                         </fieldset>
                     </div>
@@ -715,7 +881,10 @@
                             <div class="sheet-item sheet-tiny">+</div>
                             <div class="sheet-item sheet-large"><input type="text" name="attr_extramienaptmod" placeholder="Mod"></div>
                             <div class="sheet-itemright sheet-small">
+                            	<button type="roll" name="roll_extradefapt" value="!dl skill @{extramienapt} @{miendtype} ?{Modifier|5}"></button>
+                            	<!--
                                 <button type="roll" name="roll_extradefapt" value="@{gmtoggle}&{template:simple}  {{rollname=^@{extramienapt}}} {{dice=[[@{extramienapt}@{miendtype}!!k1+@{extramienaptmod}]]}}"></button>
+                            	-->
                             </div>
                         </div>
                     </fieldset>
@@ -733,15 +902,18 @@
                         <div class="sheet-item sheet-tiny">d</div>
                         <div class="sheet-item sheet-large">
                             <select name="attr_spidtype" class="dtype" style="margin-bottom: 0px; width: 60px">
-                                <option selected="selected" value="d4">4</option>
-                                <option value="d6">6</option>
-                                <option value="d8">8</option>
-                                <option value="d10">10</option>
-                                <option value="d12">12</option>
+                                <option selected="selected" value="4">4</option>
+                                <option value="6">6</option>
+                                <option value="8">8</option>
+                                <option value="10">10</option>
+                                <option value="12">12</option>
                             </select>
                         </div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Mien" value="!dl skill @{spilvl} @{spidtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Mien" value="@{gmtoggle}&{template:simple}  {{rollname=@{spiritMacro}}} {{dice=[[@{spilvl}@{spidtype}!!k1]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -752,7 +924,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_faithmod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Faith" value="!dl skill @{faithlvl} @{spidtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Faith" value="@{gmtoggle}&{template:simple}  {{rollname=@{faithMacro}}} {{dice=[[@{faithlvl}@{spidtype}!!k1+@{faithmod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -763,7 +938,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_gutsmod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Guts" value="!dl skill @{gutslvl} @{spidtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Guts" value="@{gmtoggle}&{template:simple}  {{rollname=@{gutsMacro}}} {{dice=[[@{gutslvl}@{spidtype}!!k1+@{gutsmod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -775,7 +953,10 @@
                             <div class="sheet-item sheet-tiny">+</div>
                             <div class="sheet-item sheet-large"><input type="text" name="attr_extraspiaptmod" placeholder="Mod"></div>
                             <div class="sheet-itemright sheet-small">
+                            	<button type="roll" name="roll_extraspiapt" value="!dl skill @{extraspiaptlvl} @{spidtype} ?{Modifier|5}"></button>
+                            	<!--
                                 <button type="roll" name="roll_extraspiapt" value="@{gmtoggle}&{template:simple}  {{rollname=^@{extraspiapt}}} {{dice=[[@{extraspiaptlvl}@{spidtype}!!k1+@{extraspiaptmod}]]}}"></button>
+                            	-->
                             </div>
                         </div>
                     </fieldset>
@@ -805,15 +986,18 @@
                         <div class="sheet-item sheet-tiny">d</div>
                         <div class="sheet-item sheet-large">
                             <select name="attr_defdtype" class="dtype" style="margin-bottom: 0px; width: 60px">
-                                <option selected="selected" value="d4">4</option>
-                                <option value="d6">6</option>
-                                <option value="d8">8</option>
-                                <option value="d10">10</option>
-                                <option value="d12">12</option>
+                                <option selected="selected" value="4">4</option>
+                                <option value="6">6</option>
+                                <option value="8">8</option>
+                                <option value="10">10</option>
+                                <option value="12">12</option>
                             </select>
                         </div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Deftness" value="!dl skill @{deflvl} @{defdtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Deftness" value="@{gmtoggle}&{template:simple}  {{rollname=@{deftnessMacro}}} {{dice=[[@{deflvl}@{defdtype}!!k1]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -824,7 +1008,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_bowmod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Bow" value="!dl skill @{bowlvl} @{defdtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Bow" value="@{gmtoggle}&{template:simple}  {{rollname=@{bowMacro}}} {{dice=[[@{bowlvl}@{defdtype}!!k1+@{bowmod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -835,7 +1022,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_lockpickinmod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Lockpickin" value="!dl skill @{lockpickinlvl} @{defdtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Lockpickin" value="@{gmtoggle}&{template:simple}  {{rollname=@{lockpickingMacro}}} {{dice=[[@{lockpickinlvl}@{defdtype}!!k1+@{lockpickinmod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -846,7 +1036,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_filchinmod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Filchin" value="!dl skill @{filchinlvl} @{defdtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Filchin" value="@{gmtoggle}&{template:simple}  {{rollname=@{filchingMacro}}} {{dice=[[@{filchinlvl}@{defdtype}!!k1+@{filchinmod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -862,7 +1055,10 @@
                             <div class="sheet-item sheet-tiny">+</div>
                             <div class="sheet-item sheet-large"><input type="text" name="attr_throwincmod" placeholder="Mod"></div>
                             <div class="sheet-itemright sheet-small">
+                            	<button type="roll" name="roll_Throwin" value="!dl skill @{throwinlvl} @{defdtype} ?{Modifier|5}"></button>
+                            	<!--
                                 <button type="roll" name="roll_Throwin" value="@{gmtoggle}&{template:simple}  {{rollname=@{throwingMacro} - @{throwinconc}}} {{dice=[[@{throwinlvl}@{defdtype}!!k1+@{throwincmod}]]}}"></button>
+                            	-->
                             </div>
                         </fieldset>
                     </div>
@@ -874,7 +1070,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_sleightohandmod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_sleightohand" value="!dl skill @{sleightohandlvl} @{defdtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_sleightohand" value="@{gmtoggle}&{template:simple}  {{rollname=@{sleightofhandMacro}}} {{dice=[[@{sleightohandlvl}@{defdtype}!!k1+@{sleightohandmod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -885,7 +1084,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_speedloadmod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_cognition" value="!dl skill @{speedloadlvl} @{defdtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_cognition" value="@{gmtoggle}&{template:simple}  {{rollname=@{speedloadMacro}}} {{dice=[[@{speedloadlvl}@{defdtype}!!k1+@{speedloadmod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -902,7 +1104,10 @@
                             <div class="sheet-item sheet-tiny">+</div>
                             <div class="sheet-item sheet-large"><input type="text" name="attr_shootinconcmod" placeholder="Mod"></div>
                             <div class="sheet-itemright sheet-small">
+                            	<button type="roll" name="roll_shootin" value="!dl skill @{shootinlvl} @{defdtype} ?{Modifier|5}"></button>
+                            	<!--
                                 <button type="roll" name="roll_shootin" value="@{gmtoggle}&{template:simple}  {{rollname=@{shootingMacro} - @{shootinconc}}} {{dice=[[@{shootinlvl}@{defdtype}!!k1+@{shootinconcmod}]]}}"></button>
+                            	-->
                             </div>
                         </fieldset>
                     </div>
@@ -915,7 +1120,10 @@
                             <div class="sheet-item sheet-tiny">+</div>
                             <div class="sheet-item sheet-large"><input type="text" name="attr_extradefaptmod" placeholder="Mod"></div>
                             <div class="sheet-itemright sheet-small">
+                            	<button type="roll" name="roll_extradefapt" value="!dl skill @{extradefaptlvl} @{defdtype} ?{Modifier|5}"></button>
+                            	<!--
                                 <button type="roll" name="roll_extradefapt" value="@{gmtoggle}&{template:simple}  {{rollname=^@{extradefapt}}} {{dice=[[@{extradefaptlvl}@{defdtype}!!k1+@{extradefaptmod}]]}}"></button>
+                            	-->
                             </div>
                         </div>
                     </fieldset>
@@ -933,15 +1141,18 @@
                         <div class="sheet-item sheet-tiny">d</div>
                         <div class="sheet-item sheet-large">
                             <select name="attr_nimdtype" class="dtype" style="margin-bottom: 0px; width: 60px">
-                                <option selected="selected" value="d4">4</option>
-                                <option value="d6">6</option>
-                                <option value="d8">8</option>
-                                <option value="d10">10</option>
-                                <option value="d12">12</option>
+                                <option selected="selected" value="4">4</option>
+                                <option value="6">6</option>
+                                <option value="8">8</option>
+                                <option value="10">10</option>
+                                <option value="12">12</option>
                             </select>
                         </div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Nimbleness" value="!dl skill @{nimlvl} @{nimdtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Nimbleness" value="@{gmtoggle}&{template:simple}  {{rollname=@{nimblenessMacro}}} {{dice=[[@{nimlvl}@{nimdtype}!!k1]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -952,7 +1163,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_teamstermod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_teamster" value="!dl skill @{teamsterlvl} @{nimdtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_teamster" value="@{gmtoggle}&{template:simple}  {{rollname=@{teamsterMacro}}} {{dice=[[@{teamsterlvl}@{nimdtype}!!k1+@{teamstermod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -969,7 +1183,10 @@
                                 <div class="sheet-item sheet-tiny">+</div>
                                 <div class="sheet-item sheet-large"><input type="text" name="attr_fightinmod" placeholder="Mod"></div>
                                 <div class="sheet-itemright sheet-small">
+                                	<button type="roll" name="roll_fightin" value="!dl skill @{fightinlvl} @{nimdtype} ?{Modifier|5}"></button>
+                                	<!--
                                     <button type="roll" name="roll_fightin" value="@{gmtoggle}&{template:simple}  {{rollname=@{fightingMacro} - @{fightinname}}} {{dice=[[@{fightinlvl}@{nimdtype}!!k1+@{fightinmod}]]}}"></button>
+                                	-->
                                 </div>
                             </div>
                         </fieldset>
@@ -982,7 +1199,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_drivinmod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Drivin" value="!dl skill @{drivinlvl} @{nimdtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Drivin" value="@{gmtoggle}&{template:simple}  {{rollname=@{drivingMacro}}} {{dice=[[@{drivinlvl}@{nimdtype}!!k1+@{drivinmod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -993,7 +1213,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_horsemod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_HorseRide" value="!dl skill @{horselvl} @{nimdtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_HorseRide" value="@{gmtoggle}&{template:simple}  {{rollname=@{horseRidingMacro}}} {{dice=[[@{horselvl}@{nimdtype}!!k1+@{horsemod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -1004,7 +1227,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_dodgemod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Dodge" value="!dl skill @{dodgelvl} @{nimdtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Dodge" value="@{gmtoggle}&{template:simple}  {{rollname=@{dodgeMacro}}} {{dice=[[@{dodgelvl}@{nimdtype}!!k1+@{dodgemod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -1015,7 +1241,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_sneakmod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Sneak" value="!dl skill @{sneaklvl} @{nimdtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Sneak" value="@{gmtoggle}&{template:simple}  {{rollname=@{sneakMacro}}} {{dice=[[@{sneaklvl}@{nimdtype}!!k1+@{sneakmod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -1026,7 +1255,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_climbinmod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Climbin" value="!dl skill @{climbinlvl} @{nimdtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Climbin" value="@{gmtoggle}&{template:simple}  {{rollname=@{climbingMacro}}} {{dice=[[@{climbinlvl}@{nimdtype}!!k1+@{climbinmod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -1037,7 +1269,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_swimminmod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Swimmin" value="!dl skill @{swimminlvl} @{nimdtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Swimmin" value="@{gmtoggle}&{template:simple}  {{rollname=@{swimmingMacro}}} {{dice=[[@{swimminlvl}@{nimdtype}!!k1+@{swimminmod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -1049,7 +1284,10 @@
                             <div class="sheet-item sheet-tiny">+</div>
                             <div class="sheet-item sheet-large"><input type="text" name="attr_extranimaptmod" placeholder="Mod"></div>
                             <div class="sheet-itemright sheet-small">
+                            	<button type="roll" name="roll_extranimapt" value="!dl skill @{extranimaptlvl} @{nimdtype} ?{Modifier|5}"></button>
+                            	<!--
                                 <button type="roll" name="roll_extranimapt" value="@{gmtoggle}&{template:simple}  {{rollname=^@{extranimapt}}} {{dice=[[@{extranimaptlvl}@{nimdtype}!!k1+@{extranimaptmod}]]}}"></button>
+                            	-->
                             </div>
                         </div>
                     </fieldset>
@@ -1067,15 +1305,18 @@
                         <div class="sheet-item sheet-tiny">d</div>
                         <div class="sheet-item sheet-large">
                             <select name="attr_smadtype" class="dtype" style="margin-bottom: 0px; width: 60px">
-                                <option selected="selected" value="d4">4</option>
-                                <option value="d6">6</option>
-                                <option value="d8">8</option>
-                                <option value="d10">10</option>
-                                <option value="d12">12</option>
+                                <option selected="selected" value="4">4</option>
+                                <option value="6">6</option>
+                                <option value="8">8</option>
+                                <option value="10">10</option>
+                                <option value="12">12</option>
                             </select>
                         </div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Smarts" value="!dl skill @{smalvl} @{smadtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Smarts" value="@{gmtoggle}&{template:simple}  {{rollname=@{smartsMacro}}} {{dice=[[@{smalvl}@{smadtype}!!k1]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -1086,7 +1327,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_tinkerinmod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Tinkerin" value="!dl skill @{tinkerinlvl} @{smadtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Tinkerin" value="@{gmtoggle}&{template:simple}  {{rollname=@{tinkeringMacro}}} {{dice=[[@{tinkerinlvl}@{smadtype}!!k1+@{tinkerinmod}]]}}"></button>
+                        	-->
                         </div>
                     </div>		
                     <hr class="sheet-apthr"/>
@@ -1097,7 +1341,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_bluffmod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Bluff" value="!dl skill @{blufflvl} @{smadtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Bluff" value="@{gmtoggle}&{template:simple}  {{rollname=@{bluffMacro}}} {{dice=[[@{blufflvl}@{smadtype}!!k1+@{bluffmod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -1108,7 +1355,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_streetwisemod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Streetwise" value="!dl skill @{streetwiselvl} @{smadtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Streetwise" value="@{gmtoggle}&{template:simple}  {{rollname=@{streetwiseMacro}}} {{dice=[[@{streetwiselvl}@{smadtype}!!k1+@{streetwisemod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -1119,7 +1369,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_scrounginmod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Scroungin" value="!dl skill @{scrounginlvl} @{smadtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Scroungin" value="@{gmtoggle}&{template:simple}  {{rollname=@{scroungingMacro}}} {{dice=[[@{scrounginlvl}@{smadtype}!!k1+@{scrounginmod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -1130,7 +1383,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_gamblinmod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Gamblin" value="!dl skill @{gamblinlvl} @{smadtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Gamblin" value="@{gmtoggle}&{template:simple}  {{rollname=@{gamblingMacro}}} {{dice=[[@{gamblinlvl}@{smadtype}!!k1+@{gamblinmod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -1141,7 +1397,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_ridiculemod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Ridicule" value="!dl skill @{ridiculelvl} @{smadtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Ridicule" value="@{gmtoggle}&{template:simple}  {{rollname=@{ridiculeMacro}}} {{dice=[[@{ridiculelvl}@{smadtype}!!k1+@{ridiculemod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -1158,7 +1417,10 @@
                             <div class="sheet-item sheet-tiny">+</div>
                             <div class="sheet-item sheet-large"><input type="text" name="attr_survivalconcmod" placeholder="Mod"></div>
                             <div class="sheet-itemright sheet-small">
+                            	<button type="roll" name="roll_Performin" value="!dl skill @{survivallvl} @{smadtype} ?{Modifier|5}"></button>
+                           		<!--
                                 <button type="roll" name="roll_Performin" value="@{gmtoggle}&{template:simple}  {{rollname=@{survivalMacro} - @{survivalconname}}} {{dice=[[@{survivallvl}@{spidtype}!!k1+@{survivalconcmod}]]}}"></button>
+                            	-->
                             </div>
                         </fieldset>
                     </div>
@@ -1171,7 +1433,10 @@
                             <div class="sheet-item sheet-tiny">+</div>
                             <div class="sheet-item sheet-large"><input type="text" name="attr_extrasmaaptmod" placeholder="Mod"></div>
                             <div class="sheet-itemright sheet-small">
+                            	<button type="roll" name="roll_extrasmaapt" value="!dl skill @{extrasmaaptlvl} @{smadtype} ?{Modifier|5}"></button>
+                            	<!--
                                 <button type="roll" name="roll_extrasmaapt" value="@{gmtoggle}&{template:simple}  {{rollname=^@{extrasmaapt}}} {{dice=[[@{extrasmaaptlvl}@{smadtype}!!k1+@{extrasmaaptmod}]]}}"></button>
+                            	-->
                             </div>
                         </div>
                     </fieldset>
@@ -1191,15 +1456,18 @@
                         <div class="sheet-item sheet-tiny">d</div>
                         <div class="sheet-item sheet-large">
                             <select name="attr_strdtype" class="dtype" style="margin-bottom: 0px; width: 60px">
-                                <option selected="selected" value="d4">4</option>
-                                <option value="d6">6</option>
-                                <option value="d8">8</option>
-                                <option value="d10">10</option>
-                                <option value="d12">12</option>
+                                <option selected="selected" value="4">4</option>
+                                <option value="6">6</option>
+                                <option value="8">8</option>
+                                <option value="10">10</option>
+                                <option value="12">12</option>
                             </select>
                         </div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Strength" value="!dl skill @{strlvl} @{strdtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Strength" value="@{gmtoggle}&{template:simple}  {{rollname=@{strengthMacro}}} {{dice=[[@{strlvl}@{strdtype}!!k1]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -1211,7 +1479,10 @@
                             <div class="sheet-item sheet-tiny">+</div>
                             <div class="sheet-item sheet-large"><input type="text" name="attr_extrastraptmod" placeholder="Mod"></div>
                             <div class="sheet-itemright sheet-small">
+                            	<button type="roll" name="roll_extrastrapt" value="!dl skill @{extrastraptlvl} @{strdtype} ?{Modifier|5}"></button>
+                            	<!--
                                 <button type="roll" name="roll_extrastrapt" value="@{gmtoggle}&{template:simple}  {{rollname=^@{extrastrapt}}} {{dice=[[@{extrastraptlvl}@{strdtype}!!k1+@{extrastraptmod}]]}}"></button>
+                            	-->
                             </div>
                         </div>
                     </fieldset>
@@ -1229,15 +1500,18 @@
                         <div class="sheet-item sheet-tiny">d</div>
                         <div class="sheet-item sheet-large">
                             <select name="attr_vigdtype" class="dtype" style="margin-bottom: 0px; width: 60px">
-                                <option selected="selected" value="d4">4</option>
-                                <option value="d6">6</option>
-                                <option value="d8">8</option>
-                                <option value="d10">10</option>
-                                <option value="d12">12</option>
+                                <option selected="selected" value="4">4</option>
+                                <option value="6">6</option>
+                                <option value="8">8</option>
+                                <option value="10">10</option>
+                                <option value="12">12</option>
                             </select>
                         </div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Vigor" value="!dl skill @{viglvl} @{vigdtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Vigor" value="@{gmtoggle}&{template:simple}  {{rollname=@{vigorMacro}}} {{dice=[[@{viglvl}@{vigdtype}!!k1]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -1249,7 +1523,10 @@
                             <div class="sheet-item sheet-tiny">+</div>
                             <div class="sheet-item sheet-large"><input type="text" name="attr_extravigaptmod" placeholder="Mod"></div>
                             <div class="sheet-itemright sheet-small">
+                            	<button type="roll" name="roll_extravigapt" value="!dl skill @{extravigaptlvl} @{vigdtype} ?{Modifier|5}"></button>
+                            	<!--
                                 <button type="roll" name="roll_extravigapt" value="@{gmtoggle}&{template:simple}  {{rollname=^@{extravigapt}}} {{dice=[[@{extravigaptlvl}@{vigdtype}!!k1+@{extravigaptmod}]]}}"></button>
+                            	-->
                             </div>
                         </div>
                     </fieldset>
@@ -1266,15 +1543,18 @@
                         <div class="sheet-item sheet-tiny">d</div>
                         <div class="sheet-item sheet-large">
                             <select name="attr_quidtype" class="dtype" style="margin-bottom: 0px; width: 60px">
-                                <option selected="selected" value="d4">4</option>
-                                <option value="d6">6</option>
-                                <option value="d8">8</option>
-                                <option value="d10">10</option>
-                                <option value="d12">12</option>
+                                <option selected="selected" value="4">4</option>
+                                <option value="6">6</option>
+                                <option value="8">8</option>
+                                <option value="10">10</option>
+                                <option value="12">12</option>
                             </select>
                         </div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_Quickness" value="!dl skill @{quilvl} @{quidtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_Quickness" value="@{gmtoggle}&{template:simple}  {{rollname=@{quicknessMacro}}} {{dice=[[@{quilvl}@{quidtype}!!k1]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -1285,7 +1565,10 @@
                         <div class="sheet-item sheet-tiny">+</div>
                         <div class="sheet-item sheet-large"><input type="text" name="attr_quidramod" placeholder="Mod"></div>
                         <div class="sheet-itemright sheet-small">
+                        	<button type="roll" name="roll_QuickDraw" value="!dl skill @{quidralvl} @{quidtype} ?{Modifier|5}"></button>
+                        	<!--
                             <button type="roll" name="roll_QuickDraw" value="@{gmtoggle}&{template:simple}  {{rollname=@{quickDrawMacro}}} {{dice=[[@{quidralvl}@{quidtype}!!k1+@{quidramod}]]}}"></button>
+                        	-->
                         </div>
                     </div>
                     <hr class="sheet-apthr"/>
@@ -1297,7 +1580,10 @@
                             <div class="sheet-item sheet-tiny">+</div>
                             <div class="sheet-item sheet-large"><input type="text" name="attr_extraquidaptmod" placeholder="Mod"></div>
                             <div class="sheet-itemright sheet-small">
+                            	<button type="roll" name="roll_extraquidapt" value="!dl skill @{extraquidaptlvl} @{quidtype} ?{Modifier|5}"></button>
+                            	<!--
                                 <button type="roll" name="roll_extraquidapt" value="@{gmtoggle}&{template:simple}  {{rollname=^@{extraquidapt}}} {{dice=[[@{extraquidaptlvl}@{quidtype}!!k1+@{extraquidaptmod}]]}}"></button>
+                            	-->
                             </div>
                         </div>
                     </fieldset>
@@ -1546,6 +1832,26 @@
   <!-- Arcane Ablities Tab -->
   <div class="sheet-section-arcane">
     <div class="sheet-row">
+        
+        <div class="sheet-radios">
+            <input type="hidden" class="sheet-radio" name="attr_level" value="1" />
+            <button type="action" name="act_level_1" class="sheet-radio sheet-radio-1">
+                <span class="checked"></span>
+            </button>
+            <button type="action" name="act_level_2" class="sheet-radio sheet-radio-2">
+                <span class="sheet-checked"></span>
+            </button>
+            <button type="action" name="act_level_3" class="sheet-radio sheet-radio-3">
+                <span class="sheet-checked"></span>
+            </button>
+            <button type="action" name="act_level_4" class="sheet-radio sheet-radio-4">
+                <span class="checked"></span>
+            </button>
+            <button type="action" name="act_level_5" class="sheet-radio sheet-radio-5">
+                <span class="sheet-checked"></span>
+            </button>
+        </div> 
+        
       <div class="sheet-center">
           <h2><span data-i18n="arcaneAbilities">Arcane</span></h2></div>
         <div class="sheet-row">

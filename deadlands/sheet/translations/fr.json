@@ -126,5 +126,8 @@
 	"hindrances": "Handicaps",
 	"equipment": "Équipement",
 	"money": "Argent",
-	"worstNightmare": "Pire Cauchemars"
+	"worstNightmare": "Pire Cauchemars",
+	"mental": "Mental",
+	"physique": "Physique"
+	
 }
