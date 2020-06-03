@@ -249,7 +249,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return Odin.Test.assertNotEmptyArray(new Odin.Cards().findAll().data);
 	})
 	.add("Gets a card by id", () => {
-		return Odin.Test.assertNotEmptyObject(new Odin.Card().findId("-M8lV6csv-qWWy0A1_zo").data);
+		return Odin.Test.assertNotEmptyObject(new Odin.Card().findId("-M8r15WD7wDam7lAX_bW").data);
 	})
 	.add("Gets all tokens", () => {
 		return Odin.Test.assertNotEmptyArray(new Odin.Tokens().findAll().data);
