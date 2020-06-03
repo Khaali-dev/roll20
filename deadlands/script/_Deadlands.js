@@ -239,16 +239,6 @@ var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
 		const unskill = Deadlands.RollInterpreter.unskill(rolls, 5, -1) === 1;
 		return !fumble && skill && unskill;
 	})
-	.add("Gets turn order", () => {
-		const turnOrder = new Deadlands.TurnOrder();
-		return Odin.Test.assertNotEmptyArray(new Deadlands.TurnOrder().parse());
-		return true;
-	})
-	.add("Sorts turn order", () => {
-		const turnOrder = new Deadlands.TurnOrder();
-		return Odin.Test.assertNotEmptyArray(turnOrder.set(turnOrder.parse()));
-		return true;
-	})
 	;
 
 // The API message subscribtion.
