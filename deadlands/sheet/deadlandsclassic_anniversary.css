@@ -44,14 +44,18 @@
 .charsheet input.sheet-tab1:checked ~ div.sheet-section-traits,
 .charsheet input.sheet-tab2:checked ~ div.sheet-section-combat,
 .charsheet input.sheet-tab3:checked ~ div.sheet-section-arcane,
-.charsheet input.sheet-tab5:checked ~ div.sheet-section-core {
+.charsheet input.sheet-tab5:checked ~ div.sheet-section-core,
+.charsheet div.sheet-section-huckster,
+.charseet input.sheet-subtab2:checked ~ .charsheet div.sheet-section-werewolf,
+.charseet input.sheet-subtab3:checked ~ .charsheet div.sheet-section-voodoo,
+.charseet input.sheet-subtab4:checked ~ .charsheet div.sheet-section-martial_arts{
   display: block;
   border-radius: 4px;
   padding: 5px;
 }
 
 /*this hides the radio button for each tab, makes it 130px wide and 40px tall and makes sure it's above everything else*/
-.charsheet input.sheet-tab {
+.charsheet input.sheet-tab{
   width: 160px;
   height: 40px;
   cursor: pointer;
@@ -61,7 +65,7 @@
 }
 
 /*this styles the span with the tab information and slides to the left, so it appears underneath the radio button*/
-.charsheet span.sheet-tab {
+.charsheet span.sheet-tab{
 
     text-align: center;
     font-size: 14pt;
@@ -624,38 +628,3 @@ textarea {
 }
 
 /* test javascript */
-
-/* Configure a container for the radio buttons. */
-.sheet-radios {
-  display: flex;
-  align-items: center;
-}
-
-/* Configure the button styling. This example makes it look like a radio. */
-button.sheet-radio {
-  padding: 0;
-  border: solid 1px #a8a8a8;
-  cursor: pointer;
-
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-button.sheet-radio > span.sheet-checked {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: buttontext;
-}
-
-/* Hide the "checked" section of the radio if the attribute value does not match the radio */
-input.sheet-radio:not([value="1"]) ~ button.sheet-radio-1 > span.sheet-checked,
-input.sheet-radio:not([value="2"]) ~ button.sheet-radio-2 > span.sheet-checked,
-input.sheet-radio:not([value="3"]) ~ button.sheet-radio-3 > span.sheet-checked,
-input.sheet-radio:not([value="4"]) ~ button.sheet-radio-4 > span.sheet-checked,
-input.sheet-radio:not([value="5"]) ~ button.sheet-radio-5 > span.sheet-checked {
-  display: none;
-}
