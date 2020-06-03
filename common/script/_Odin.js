@@ -245,11 +245,23 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	.add("Gets a page by id", () => {
 		return Odin.Test.assertNotEmptyObject(new Odin.Page().findId("-M5xeoigOD2b0Vsz4stI").data);
 	})
+	.add("Gets all decks", () => {
+		return Odin.Test.assertNotEmptyArray(new Odin.Decks().findAll().data);
+	})
+	.add("Gets a deck by id", () => {
+		return Odin.Test.assertNotEmptyObject(new Odin.Deck().findId("-M8pqKN-SnT3CwJJqRcz").data);
+	})
 	.add("Gets all cards", () => {
 		return Odin.Test.assertNotEmptyArray(new Odin.Cards().findAll().data);
 	})
 	.add("Gets a card by id", () => {
 		return Odin.Test.assertNotEmptyObject(new Odin.Card().findId("-M8r15WD7wDam7lAX_bW").data);
+	})
+	.add("Gets all hands", () => {
+		return Odin.Test.assertNotEmptyArray(new Odin.Hands().findAll().data);
+	})
+	.add("Gets a hand by id", () => {
+		return Odin.Test.assertNotEmptyObject(new Odin.Hand().findId("-M8r15WD7wDam7lAX_bW").data);
 	})
 	.add("Gets all tokens", () => {
 		return Odin.Test.assertNotEmptyArray(new Odin.Tokens().findAll().data);

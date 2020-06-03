@@ -648,6 +648,54 @@ var Odin = (function() {
 	}
 
 	/**
+	 * The Deck class provides features to get and manipulate a deck.
+	 */
+	class Deck {
+
+		/**
+		 * @constructor.
+		 */
+		constructor() {
+			this.data = null;
+		}
+
+		/**
+		 * Finds the deck with the specified identifier.
+		 * @param id The identifier of the deck to set.
+		 * @return the instance.
+		 */
+		findId(id) {
+			this.data = getObj(Type.DECK, id);
+			return this;
+		}
+
+	}
+
+	/**
+	 * The Decks class provides functionnalities to get and filter decks.
+	 */
+	class Decks {
+
+		/**
+		 * @constructor.
+		 */
+		constructor() {
+			this.data = null;
+		}
+
+		/**
+		 * @return all decks.
+		 */
+		findAll() {
+			this.data = findObjs({
+				_type: Type.DECK
+			});
+			return this;
+		}
+
+	}
+
+	/**
 	 * The Card class provides features to get and manipulate a token.
 	 */
 	class Card {
@@ -691,6 +739,54 @@ var Odin = (function() {
 			this.data = findObjs({
 				_type: Type.GRAPHIC,
 				_subtype: Property.GRAPHIC.CARD
+			});
+			return this;
+		}
+
+	}
+
+	/**
+	 * The Hand class provides features to get and manipulate a hand.
+	 */
+	class Hand {
+
+		/**
+		 * @constructor.
+		 */
+		constructor() {
+			this.data = null;
+		}
+
+		/**
+		 * Finds the hand with the specified identifier.
+		 * @param id The identifier of the hand to set.
+		 * @return the instance.
+		 */
+		findId(id) {
+			this.data = getObj(Type.HAND, id);
+			return this;
+		}
+
+	}
+
+	/**
+	 * The Hands class provides functionnalities to get and filter hands.
+	 */
+	class Hands {
+
+		/**
+		 * @constructor.
+		 */
+		constructor() {
+			this.data = null;
+		}
+
+		/**
+		 * @return all hands.
+		 */
+		findAll() {
+			this.data = findObjs({
+				_type: Type.HAND
 			});
 			return this;
 		}
@@ -1117,8 +1213,12 @@ var Odin = (function() {
 		Characters: Characters,
 		Token: Token,
 		Tokens: Tokens,
+		Deck: Deck,
+		Decks: Decks,
 		Card: Card,
 		Cards: Cards,
+		Hand: Hand,
+		Hands: Hands,
 		PokerColor: PokerColor,
 		PokerCard: PokerCard,
 		PokerColors: PokerColors,
