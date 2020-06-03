@@ -464,6 +464,51 @@ var Odin = (function() {
 	}
 
 	/**
+	 * The base class for roll20 object collections.
+	 */
+	class Objects {
+
+		/**
+		 * @constructor.
+		 * @param type    The type of the object.
+		 * @param subtype The optional subtype of the object.
+		 */
+		constructor(type, subtype) {
+			this.type = type;
+			this.subtype = subtype;
+			this.data = null;
+		}
+
+		/**
+		 * @return all objects.
+		 */
+		findAll() {
+			if (this.subtype != null) {
+				this.data = findObjs({
+					_type: this.type,
+					_subtype: this.subtype
+				});
+			} else {
+				this.data = findObjs({
+					_type: this.type
+				});
+			}
+			return this;
+		}
+
+		/**
+		 * Filters the objects
+		 * @param predicate The predicate to realize.
+		 * @return filtered objects.
+		 */
+		filter(predicate) {
+			this.data = _.filter(this.data, predicate);
+			return this;
+		}
+
+	}
+
+	/**
 	 * The Player class provides features to get and manipulate a player.
 	 */
 	class Player extends Object {
@@ -480,39 +525,27 @@ var Odin = (function() {
 	/**
 	 * The Players class provides functionnalities to get and filter players.
 	 */
-	class Players {
+	class Players extends Objects {
 
 		/**
 		 * @constructor.
 		 */
 		constructor() {
-			this.data = null;
-		}
-
-		/**
-		 * @return all players.
-		 */
-		findAll() {
-			this.data = findObjs({
-				_type: Type.PLAYER
-			});
-			return this;
+			super(Type.PLAYER, null);
 		}
 
 		/**
 		 * @return filtered online players.
 		 */
 		filterOnline() {
-			this.data = _.filter(this.data, function(obj) { return (obj.get(Property.PLAYER.ONLINE) === true); });
-			return this;
+			return this.filter(function(obj) { return (obj.get(Property.PLAYER.ONLINE) === true); });
 		}
 
 		/**
 		 * @return filtered offline players.
 		 */
 		filterOffline() {
-			this.data = _.filter(this.data, function(obj) { return (obj.get(Property.PLAYER.ONLINE) === false); });
-			return this;
+			return this.filter(function(obj) { return (obj.get(Property.PLAYER.ONLINE) === false); });
 		}
 
 	}
@@ -534,23 +567,13 @@ var Odin = (function() {
 	/**
 	 * The Pages class provides functionnalities to get and filter pages.
 	 */
-	class Pages {
+	class Pages extends Objects {
 
 		/**
 		 * @constructor.
 		 */
 		constructor() {
-			this.data = null;
-		}
-
-		/**
-		 * @return all pages.
-		 */
-		findAll() {
-			this.data = findObjs({
-				_type: Type.PAGE
-			});
-			return this;
+			super(Type.PAGE, null);
 		}
 
 	}
@@ -572,23 +595,13 @@ var Odin = (function() {
 	/**
 	 * The Characters class provides functionnalities to get and filter characters.
 	 */
-	class Characters {
+	class Characters extends Objects {
 
 		/**
 		 * @constructor.
 		 */
 		constructor() {
-			this.data = null;
-		}
-
-		/**
-		 * @return all characters.
-		 */
-		findAll() {
-			this.data = findObjs({
-				_type: Type.CHARACTER
-			});
-			return this;
+			super(Type.CHARACTER, null);
 		}
 
 		/**
@@ -630,24 +643,13 @@ var Odin = (function() {
 	/**
 	 * The Tokens class provides functionnalities to get and filter tokens.
 	 */
-	class Tokens {
+	class Tokens extends Objects {
 
 		/**
 		 * @constructor.
 		 */
 		constructor() {
-			this.data = null;
-		}
-
-		/**
-		 * @return all tokens.
-		 */
-		findAll() {
-			this.data = findObjs({
-				_type: Type.GRAPHIC,
-				_subtype: Property.GRAPHIC.TOKEN
-			});
-			return this;
+			super(Type.GRAPHIC, Property.GRAPHIC.TOKEN);
 		}
 
 	}
@@ -662,7 +664,6 @@ var Odin = (function() {
 		 */
 		constructor() {
 			super(Type.DECK, null);
-			this.data = null;
 		}
 
 	}
@@ -670,23 +671,13 @@ var Odin = (function() {
 	/**
 	 * The Decks class provides functionnalities to get and filter decks.
 	 */
-	class Decks {
+	class Decks extends Objects {
 
 		/**
 		 * @constructor.
 		 */
 		constructor() {
-			this.data = null;
-		}
-
-		/**
-		 * @return all decks.
-		 */
-		findAll() {
-			this.data = findObjs({
-				_type: Type.DECK
-			});
-			return this;
+			super(Type.DECK, null);
 		}
 
 	}
@@ -708,24 +699,13 @@ var Odin = (function() {
 	/**
 	 * The Cards class provides functionnalities to get and filter cards.
 	 */
-	class Cards {
+	class Cards extends Objects {
 
 		/**
 		 * @constructor.
 		 */
 		constructor() {
-			this.data = null;
-		}
-
-		/**
-		 * @return all cards.
-		 */
-		findAll() {
-			this.data = findObjs({
-				_type: Type.GRAPHIC,
-				_subtype: Property.GRAPHIC.CARD
-			});
-			return this;
+			super(Type.GRAPHIC, Property.GRAPHIC.CARD);
 		}
 
 	}
@@ -747,23 +727,13 @@ var Odin = (function() {
 	/**
 	 * The Hands class provides functionnalities to get and filter hands.
 	 */
-	class Hands {
+	class Hands extends Objects {
 
 		/**
 		 * @constructor.
 		 */
 		constructor() {
-			this.data = null;
-		}
-
-		/**
-		 * @return all hands.
-		 */
-		findAll() {
-			this.data = findObjs({
-				_type: Type.HAND
-			});
-			return this;
+			super(Type.HAND, null);
 		}
 
 	}
