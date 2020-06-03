@@ -1,9 +1,13 @@
-@import "https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap";@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');@import url('https://fonts.googleapis.com/css2?family=Sancreek&display=swap');@import url('https://fonts.googleapis.com/css2?family=Arbutus&display=swap');@import url('https://fonts.googleapis.com/css2?family=Goudy+Bookletter+1911&display=swap');@import url('https://fonts.googleapis.com/css2?family=Kotta+One&display=swap');@import url('https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap');
-/* little hack to override base.css and app.css for testing, comment out when integrating*/
+@import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap');@import url('https://fonts.googleapis.com/css?family=Alfa+Slab+One&display=swap');@import url('https://fonts.googleapis.com/css?family=Sancreek&display=swap');@import url('https://fonts.googleapis.com/css?family=Arbutus&display=swap');@import url('https://fonts.googleapis.com/css?family=Goudy+Bookletter+1911&display=swap');@import url('https://fonts.googleapis.com/css?family=Kotta+One&display=swap');@import url('https://fonts.googleapis.com/css?family=Reenie+Beanie&display=swap');
+
 .ui-dialog {
     overflow:auto!important;
 }
 
+
+.sheet-wrapper {
+  width: 950px;
+}
 
 /*  === GENERAL === */
 
@@ -44,29 +48,26 @@
 .charsheet input.sheet-tab1:checked ~ div.sheet-section-traits,
 .charsheet input.sheet-tab2:checked ~ div.sheet-section-combat,
 .charsheet input.sheet-tab3:checked ~ div.sheet-section-arcane,
+.charsheet input.sheet-tab4:checked ~ div.sheet-section-misc,
 .charsheet input.sheet-tab5:checked ~ div.sheet-section-core,
-.charsheet div.sheet-section-huckster,
-.charseet input.sheet-subtab2:checked ~ .charsheet div.sheet-section-werewolf,
-.charseet input.sheet-subtab3:checked ~ .charsheet div.sheet-section-voodoo,
-.charseet input.sheet-subtab4:checked ~ .charsheet div.sheet-section-martial_arts{
+.charsheet input.sheet-tab6:checked ~ div.sheet-section-obsolete {
   display: block;
   border-radius: 4px;
   padding: 5px;
 }
 
 /*this hides the radio button for each tab, makes it 130px wide and 40px tall and makes sure it's above everything else*/
-.charsheet input.sheet-tab{
+.charsheet input.sheet-tab {
   width: 160px;
   height: 40px;
   cursor: pointer;
   opacity: 0;
   z-index: 9999;
-  position:relative;
+  position: relative;
 }
 
 /*this styles the span with the tab information and slides to the left, so it appears underneath the radio button*/
-.charsheet span.sheet-tab{
-
+.charsheet span.sheet-tab {
     text-align: center;
     font-size: 14pt;
     color: black;
@@ -74,26 +75,18 @@
     cursor: pointer;
     font-family:'Shadows into Light',cursive;
     text-transform:uppercase;
-    position:relative;
+    position: relative;
     width:140px;
-   height:40px;
-    
-  background:url("img/sign.png") center no-repeat;
-  background-size:cover;
-  
+    height: 40px;
+    background:url('https://raw.githubusercontent.com/rlepennec/roll20/ND-charsheet/deadlands/sheet/img/sign.png') center no-repeat;
+    background-size:cover;
     padding-left:10px;
-    padding-right:10px;  
+    padding-right:10px;
     vertical-align:baseline;
-        display: inline-block;
-        margin-left:-162px;
-        top:-13px;
-        
-    
     display: inline-block;
-    cursor: pointer;
-    
+    margin-left:-162px;
+    top:-13px;
 }
-
 
 /*this modifies the span color once the radio button is selected so you know which tab is selected*/
 .charsheet input.sheet-tab1:checked + span.sheet-tab1,
@@ -103,7 +96,7 @@
 .charsheet input.sheet-tab5:checked + span.sheet-tab5,
 .charsheet input.sheet-tab6:checked + span.sheet-tab6 {
     color: #ffffff;
-    background-image:url("img/sign2.png");
+    background-image:url('https://raw.githubusercontent.com/rlepennec/roll20/ND-charsheet/deadlands/sheet/img/sign2.png');
 }
 
 /* ===== TABS ===== */
@@ -193,11 +186,11 @@
 /* ===== Layout Controls ===== */
 
 .charsheet [class^="sheet-section"] {
-   background-image:url("img/parchment3.jpg");
+   background-image:url('https://raw.githubusercontent.com/rlepennec/roll20/ND-charsheet/deadlands/sheet/img/parchment3.jpg');
 }
 
 .charsheet [class^="sheet-section"]>div>.sheet-col {
-    border-image-source:url("img/border.png");
+    border-image-source:url('https://raw.githubusercontent.com/rlepennec/roll20/ND-charsheet/deadlands/sheet/img/border.png');
     border-image-width:50px;
     border-image-slice:250;
     border-image-repeat:stretch;
@@ -215,7 +208,6 @@
     vertical-align:baseline!important;
 }
 
-
 .charsheet .sheet-4colrow .sheet-col {
   width:calc(25% - 21px);
   margin-right:15px
@@ -230,7 +222,6 @@
   width:calc(50% - 80px)!important;
   margin-right:15px
 }
-
 
 .sheet-item {
     margin: auto;
@@ -627,4 +618,40 @@ textarea {
   vertical-align: top;
 }
 
+
 /* test javascript */
+
+/* Configure a container for the radio buttons. */
+.sheet-radios {
+  display: flex;
+  align-items: center;
+}
+
+/* Configure the button styling. This example makes it look like a radio. */
+button.sheet-radio {
+  padding: 0;
+  border: solid 1px #a8a8a8;
+  cursor: pointer;
+
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+button.sheet-radio > span.sheet-checked {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: buttontext;
+}
+
+/* Hide the "checked" section of the radio if the attribute value does not match the radio */
+input.sheet-radio:not([value="1"]) ~ button.sheet-radio-1 > span.sheet-checked,
+input.sheet-radio:not([value="2"]) ~ button.sheet-radio-2 > span.sheet-checked,
+input.sheet-radio:not([value="3"]) ~ button.sheet-radio-3 > span.sheet-checked,
+input.sheet-radio:not([value="4"]) ~ button.sheet-radio-4 > span.sheet-checked,
+input.sheet-radio:not([value="5"]) ~ button.sheet-radio-5 > span.sheet-checked {
+  display: none;
+}
