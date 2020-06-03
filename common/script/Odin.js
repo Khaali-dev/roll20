@@ -430,7 +430,7 @@ var Odin = (function() {
 		constructor(type, subtype) {
 			this.type = type;
 			this.subtype = subtype;
-			this.data = null;
+			this.obj = null;
 		}
 
 		/**
@@ -440,10 +440,10 @@ var Odin = (function() {
 		 */
 		findId(id) {
 			if (this.subtype != null) {
-				const obj = getObj(this.type, id);
-				this.data = obj != null && obj.get(Property.GRAPHIC.SUBTYPE) === this.subtype ? obj : null;
+				const o = getObj(this.type, id);
+				this.obj = o != null && o.get(Property.GRAPHIC.SUBTYPE) === this.subtype ? o : null;
 			} else {
-				this.data = getObj(this.type, id);
+				this.obj = getObj(this.type, id);
 			}
 			return this;
 		}
@@ -455,8 +455,8 @@ var Odin = (function() {
 		 * @return the instance.
 		 */
 		set(name, value) {
-			if (this.data != null) {
-				this.data.set(name, false);
+			if (this.obj != null) {
+				this.obj.set(name, false);
 			}
 			return this;
 		}
@@ -476,7 +476,7 @@ var Odin = (function() {
 		constructor(type, subtype) {
 			this.type = type;
 			this.subtype = subtype;
-			this.data = null;
+			this.objs = null;
 		}
 
 		/**
@@ -484,12 +484,12 @@ var Odin = (function() {
 		 */
 		findAll() {
 			if (this.subtype != null) {
-				this.data = findObjs({
+				this.objs = findObjs({
 					_type: this.type,
 					_subtype: this.subtype
 				});
 			} else {
-				this.data = findObjs({
+				this.objs = findObjs({
 					_type: this.type
 				});
 			}
@@ -502,7 +502,7 @@ var Odin = (function() {
 		 * @return filtered objects.
 		 */
 		filter(predicate) {
-			this.data = _.filter(this.data, predicate);
+			this.objs = _.filter(this.objs, predicate);
 			return this;
 		}
 

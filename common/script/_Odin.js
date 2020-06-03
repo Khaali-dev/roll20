@@ -228,52 +228,52 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 			[{"id":"-M7lbGZnSu6SItqBzU4n","pr":10,"custom":""},{"id":"-M7lbGZnSu6SItqBzU4n","pr":20,"custom":""}]);
 	})
 	.add("Gets all players", () => {
-		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().data);
+		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().objs);
 	})
 	.add("Gets online players", () => {
-		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().filterOnline().data);
+		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().filterOnline().objs);
 	})
 	.add("Gets offline players", () => {
-		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().filterOffline().data);
+		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().filterOffline().objs);
 	})
 	.add("Gets a player by id", () => {
-		return Odin.Test.assertNotEmptyObject(new Odin.Player().findId("-M5rtkkXsEkckPk1v0DL").data);
+		return Odin.Test.assertNotEmptyObject(new Odin.Player().findId("-M5rtkkXsEkckPk1v0DL").obj);
 	})
 	.add("Gets all pages", () => {
-		return Odin.Test.assertNotEmptyArray(new Odin.Pages().findAll().data);
+		return Odin.Test.assertNotEmptyArray(new Odin.Pages().findAll().objs);
 	})
 	.add("Gets a page by id", () => {
-		return Odin.Test.assertNotEmptyObject(new Odin.Page().findId("-M5xeoigOD2b0Vsz4stI").data);
+		return Odin.Test.assertNotEmptyObject(new Odin.Page().findId("-M5xeoigOD2b0Vsz4stI").obj);
 	})
 	.add("Gets all decks", () => {
-		return Odin.Test.assertNotEmptyArray(new Odin.Decks().findAll().data);
+		return Odin.Test.assertNotEmptyArray(new Odin.Decks().findAll().objs);
 	})
 	.add("Gets a deck by id", () => {
-		return Odin.Test.assertNotEmptyObject(new Odin.Deck().findId("-M8pqKN-SnT3CwJJqRcz").data);
+		return Odin.Test.assertNotEmptyObject(new Odin.Deck().findId("-M8pqKN-SnT3CwJJqRcz").obj);
 	})
 	.add("Gets all cards", () => {
-		return Odin.Test.assertNotEmptyArray(new Odin.Cards().findAll().data);
+		return Odin.Test.assertNotEmptyArray(new Odin.Cards().findAll().objs);
 	})
 	.add("Gets a card by id", () => {
-		return Odin.Test.assertNotEmptyObject(new Odin.Card().findId("-M8r15WD7wDam7lAX_bW").data);
+		return Odin.Test.assertNotEmptyObject(new Odin.Card().findId("-M8r15WD7wDam7lAX_bW").obj);
 	})
 	.add("Gets all hands", () => {
-		return Odin.Test.assertNotEmptyArray(new Odin.Hands().findAll().data);
+		return Odin.Test.assertNotEmptyArray(new Odin.Hands().findAll().objs);
 	})
 	.add("Gets a hand by id", () => {
-		return Odin.Test.assertNotEmptyObject(new Odin.Hand().findId("-M8r15WD7wDam7lAX_bW").data);
+		return Odin.Test.assertNotEmptyObject(new Odin.Hand().findId("-M8r15WD7wDam7lAX_bW").obj);
 	})
 	.add("Gets all tokens", () => {
-		return Odin.Test.assertNotEmptyArray(new Odin.Tokens().findAll().data);
+		return Odin.Test.assertNotEmptyArray(new Odin.Tokens().findAll().objs);
 	})
 	.add("Gets a token by id", () => {
-		return Odin.Test.assertNotEmptyObject(new Odin.Token().findId("-M7lbGZnSu6SItqBzU4n").data);
+		return Odin.Test.assertNotEmptyObject(new Odin.Token().findId("-M7lbGZnSu6SItqBzU4n").obj);
 	})
 	.add("Gets all characters", () => {
-		return Odin.Test.assertNotEmptyArray(new Odin.Characters().findAll().data);
+		return Odin.Test.assertNotEmptyArray(new Odin.Characters().findAll().objs);
 	})
 	.add("Gets a character by id", () => {
-		return Odin.Test.assertNotEmptyObject(new Odin.Character().findId("-M7laLPHxEwBBvSma4gh").data);
+		return Odin.Test.assertNotEmptyObject(new Odin.Character().findId("-M7laLPHxEwBBvSma4gh").obj);
 	})
 	;
 
