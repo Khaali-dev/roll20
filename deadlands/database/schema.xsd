@@ -5,8 +5,12 @@
     <xs:complexType name="group">
         <xs:choice>
             <xs:element type="group" name="group" maxOccurs="unbounded"/>
-            <xs:element type="action" name="action" maxOccurs="unbounded"/>
-            <xs:element name="imageURL"/>
+            <xs:element name="availableActions" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:attribute name="id" type="xs:IDREF"/>                    
+                </xs:complexType>
+            </xs:element>
+            <xs:element ref="imageURL"/>
         </xs:choice>
     </xs:complexType>
 
@@ -14,9 +18,9 @@
         <xs:sequence>
             <xs:element name="name" type="xs:string"/>
             <xs:element name="description" type="xs:string"/>
+            <xs:element ref="imageURL"/>
             <xs:element type="result" name="result" maxOccurs="unbounded"/>
-            <xs:element name="imageURL"/>
-            <xs:element name="aptitude"/>
+            <xs:element name="aptitude" type="actionIDs"/>
             <xs:element name="competence"/>
             <xs:element name="modifier"/>
             <xs:element name="vitesse"/>
@@ -34,6 +38,32 @@
         </xs:choice>
     </xs:complexType>
 
+    <xs:complexType name="aptitude">
+        <xs:choice>
+            <xs:sequence>
+                <xs:element name="id">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="perception"/>
+                            <xs:enumeration value="connaissances"/>
+                            <xs:enumeration value="charisme"/>
+                            <xs:enumeration value="ame"/>
+                            <xs:enumeration value="dexterite"/>
+                            <xs:enumeration value="agilite"/>
+                            <xs:enumeration value="astuce"/>
+                            <xs:enumeration value="force"/>
+                            <xs:enumeration value="vigueur"/>
+                            <xs:enumeration value="rapidité"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+        </xs:choice>
+        <xs:attribute name="type" fixed="trait"/>
+    </xs:complexType>
+
+    <xs:element name="action" type="action"/>
+
     <!--
     plantage
     échec
@@ -41,4 +71,5 @@
     customisé par palier
     -->
 
+    <xs:element name="imageURL" type="xs:anyURI"/>
 </xs:schema>
