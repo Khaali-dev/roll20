@@ -729,6 +729,16 @@ var Odin = (function() {
 			super(Type.GRAPHIC, Property.GRAPHIC.CARD);
 		}
 
+		/**
+		 * Finds the card with the specified id.
+		 * @param id The identifier of the card to find, that is not the graphic id.
+		 * @return the instance.
+		 */
+		findId(id) {
+			this.obj = getObj(this.subtype, id);
+			return this;
+		}
+
 	}
 
 	/**
@@ -741,6 +751,24 @@ var Odin = (function() {
 		 */
 		constructor() {
 			super(Type.GRAPHIC, Property.GRAPHIC.CARD);
+		}
+
+		/**
+		 * @override.
+		 */
+		findAll() {
+			const decks = new Odin.Decks().findAll();
+			if (this.subtype != null) {
+				this.objs = findObjs({
+					_type: this.type,
+					_subtype: this.subtype
+				});
+			} else {
+				this.objs = findObjs({
+					_type: this.type
+				});
+			}
+			return this;
 		}
 
 	}

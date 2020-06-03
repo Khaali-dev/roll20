@@ -265,7 +265,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return Odin.Test.assertNotEmptyArray(new Odin.Cards().findAll().objs);
 	})
 	.add("Finds a card by id", () => {
-		return Odin.Test.assertNotEmptyObject(new Odin.Card().findId("-M8r15WD7wDam7lAX_bW").obj);
+		return Odin.Test.assertNotEmptyObject(new Odin.Card().findId("-M8swNpKKC6Ujo0SvBel").obj);
 	})
 	.add("Finds all hands", () => {
 		return Odin.Test.assertNotEmptyArray(new Odin.Hands().findAll().objs);
