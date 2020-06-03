@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="1.1"
+    xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" vc:minVersion="1.1">
+
+    <xs:complexType name="group">
+        <xs:choice>
+            <xs:element type="group" name="group" maxOccurs="unbounded"/>
+            <xs:element type="action" name="action" maxOccurs="unbounded"/>
+            <xs:element name="imageURL"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:complexType name="action">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="description" type="xs:string"/>
+            <xs:element type="result" name="result" maxOccurs="unbounded"/>
+            <xs:element name="imageURL"/>
+            <xs:element name="aptitude"/>
+            <xs:element name="competence"/>
+            <xs:element name="modifier"/>
+            <xs:element name="vitesse"/>
+        </xs:sequence>
+        <xs:attribute type="xs:ID" name="id"/>
+    </xs:complexType>
+
+
+    <xs:complexType name="result">
+        <xs:choice>
+            <xs:element name="plantage"/>
+            <xs:element name="echec"/>
+            <xs:element name="success"/>
+            <xs:element name="epic_success"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <!--
+    plantage
+    échec
+    réussite n degré
+    customisé par palier
+    -->
+
+</xs:schema>
