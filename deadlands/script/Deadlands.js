@@ -157,7 +157,6 @@ var Deadlands = (function() {
 			this.attribute = attribute;
 			this.skill = null;
 			this.tn = null;
-
 		}
 
 		/**
@@ -181,8 +180,7 @@ var Deadlands = (function() {
 		character(id) {
 			const size = 2;
 			const dice = 6;
-			this.rolls.set(id, new Odin.Rolls()
-				.add(new Odin.Roll(new Odin.Dice(this.dice(id)), this.size(id))));
+			this.rolls.set(id, new Odin.Rolls().add(new Odin.Roll(new Odin.Dice(this.dice(id)), this.size(id))));
 		}
 
 		/**
