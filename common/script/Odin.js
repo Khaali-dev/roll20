@@ -520,6 +520,27 @@ var Odin = (function() {
 			super(Type.PLAYER, null);
 		}
 
+		/**
+		 * @eturn true if the player is online.
+		 */
+		isOnline() {
+			return this.obj != null && this.obj.get(Property.PLAYER.ONLINE) === true;
+		}
+
+		/**
+		 * @return true if the player is online and a game master. 
+		 */
+		isMaster() {
+			return this.obj != null && playerIsGM(this.obj.get("id")) === true;
+		}
+
+		/**
+		 * @return true if the player is online and not a game master. 
+		 */
+		isPlayer() {
+			return this.obj != null && playerIsGM(this.obj.get("id")) === false;
+		}
+
 	}
 
 	/**
@@ -546,6 +567,20 @@ var Odin = (function() {
 		 */
 		filterOffline() {
 			return this.filter(function(obj) { return (obj.get(Property.PLAYER.ONLINE) === false); });
+		}
+
+		/**
+		 * @return filtered game masters.
+		 */
+		filterMasters() {
+			return this.filter(function(obj) { return (playerIsGM(obj.get("id")) === true); });
+		}
+
+		/**
+		 * @return filtered players.
+		 */
+		filterPlayers() {
+			return this.filter(function(obj) { return (playerIsGM(obj.get("id")) === false); });
 		}
 
 	}

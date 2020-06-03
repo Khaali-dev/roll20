@@ -236,8 +236,18 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	.add("filters offline players", () => {
 		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().filterOffline().objs);
 	})
+	.add("filters game masters", () => {
+		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().filterMasters().objs);
+	})
+	.add("filters players", () => {
+		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().filterPlayers().objs);
+	})
 	.add("Finds a player by id", () => {
 		return Odin.Test.assertNotEmptyObject(new Odin.Player().findId("-M5rtkkXsEkckPk1v0DL").obj);
+	})
+	.add("Player is game master", () => {
+		return new Odin.Player().findId("-M5rtkkXsEkckPk1v0DL").isMaster() === true &&
+		       new Odin.Player().findId("-M5rtkkXsEkckPk1v0DL").isPlayer() === false;
 	})
 	.add("Finds all pages", () => {
 		return Odin.Test.assertNotEmptyArray(new Odin.Pages().findAll().objs);
