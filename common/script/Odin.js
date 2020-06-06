@@ -132,6 +132,12 @@ var Odin = (function() {
 			TOKEN: "token",
 			CARD: "card"
 		},
+		DECK: {
+			CURRENT: "currentDeck"
+		},
+		CARD: {
+			CARDID: "cardid"
+		},
 		TURN_ORDER: {
 			ID: "id",
 			VALUE: "pr",
@@ -193,10 +199,12 @@ var Odin = (function() {
 		/**
 		 * @constructor
 		 * @param name   The name of the test.
+		 * @param wip    True if work in progress.
 		 * @param assert The function which defines the assertion to satisfy.
 		 */
-		constructor(name, assert) {
+		constructor(name, wip, assert) {
 			this.name = name;
+			this.wip = wip;
 			this.assert = assert;
 		}
 
@@ -204,7 +212,12 @@ var Odin = (function() {
 		 * @returns the specified test evaluation.
 		 */
 		evaluate() {
-			log((this.assert() === true ? "[OK    ]" : "[   NOK]") + ": " + this.name);
+			const inProgress = this.wip === true ? "[WIP] " : "[   ] ";
+			try {
+				log(inProgress + (this.assert() === true ? "[OK    ]" : "[   NOK]") + ": " + this.name);
+			} catch (exception) {
+				log(inProgress + "[   NOK]: " + this.name + " because exception has been raised");
+			}
 		}
 
 		/**
@@ -305,11 +318,12 @@ var Odin = (function() {
 		/**
 		 * Add the specified test.
 		 * @param name   The name of the test.
+		 * @param wip    True if work in progress.
 		 * @param assert The assertion to satisfy.
 		 * @return the instance.
 		 */
-		add(name, assert) {
-			this.tests.push(new Test(name, assert));
+		add(name, wip, assert) {
+			this.tests.push(new Test(name, wip, assert));
 			return this;
 		}
 
@@ -663,6 +677,7 @@ var Odin = (function() {
 
 	/**
 	 * The Token class provides features to get and manipulate a token.
+	 * Token must be on the table since getters only returns visible tokens.
 	 */
 	class Token extends Object {
 
@@ -677,6 +692,7 @@ var Odin = (function() {
 
 	/**
 	 * The Tokens class provides functionnalities to get and filter tokens.
+	 * Tokens must be on the table since getters only returns visible tokens.
 	 */
 	class Tokens extends Objects {
 
@@ -713,6 +729,24 @@ var Odin = (function() {
 		 */
 		constructor() {
 			super(Type.DECK, null);
+		}
+
+		/**
+		 * Recall all cards of the current decks.
+		 * @return the instance.
+		 */
+		recall() {
+			_.each(this.objs, obj => recallCards(obj.get('id')));
+			return this;
+		}
+
+		/**
+		 * Shuffle current decks.
+		 * @return the instance. 
+		 */
+		shuffle() {
+			_.each(this.objs, obj => shuffleDeck(obj.get('id')));
+			return this;
 		}
 
 	}
@@ -754,19 +788,31 @@ var Odin = (function() {
 		}
 
 		/**
-		 * @override.
+		 * Finds all cards on the table regardless of the decks.
+		 * @return the instance.
 		 */
-		findAll() {
-			const decks = new Odin.Decks().findAll();
-			if (this.subtype != null) {
-				this.objs = findObjs({
-					_type: this.type,
-					_subtype: this.subtype
-				});
+		findTable() {
+			this.objs = _.chain(this.findAll().objs)
+			             .map(obj => getObj(Property.GRAPHIC.CARD, obj.get(Property.CARD.CARDID)))
+			             .reject(_.isUndefined)
+			             .value();
+			return this;
+		}
+
+		/**
+		 * Finds all cards from the specified deck since the last shuffle.
+		 * @param id The identifier of the deck where to find cards.
+		 * @return the instance.
+		 */
+		findDeck(id) {
+			const deck = new Odin.Deck().findId(id);
+			if (deck != null && deck.obj != null) {
+				this.objs = _.chain(deck.obj.get(Property.DECK.CURRENT).split(/\s*,\s*/))
+				             .map(cardid => getObj(Property.GRAPHIC.CARD, cardid))
+				             .reject(_.isUndefined)
+				             .value();
 			} else {
-				this.objs = findObjs({
-					_type: this.type
-				});
+				this.objs = null;
 			}
 			return this;
 		}

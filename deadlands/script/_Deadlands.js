@@ -1,5 +1,5 @@
 var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
-	.add("Rolls as fumble without modifier", () => {
+	.add("Rolls as fumble without modifier", false, () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
@@ -11,7 +11,7 @@ var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
 		const unskill = Deadlands.RollInterpreter.unskill(rolls, 5, 0) === -1;
 		return fumble && skill && unskill;
 	})
-	.add("Rolls as fumble with modifier", () => {
+	.add("Rolls as fumble with modifier", false, () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
@@ -23,7 +23,7 @@ var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
 		const unskill = Deadlands.RollInterpreter.unskill(rolls, 5, 10) === -1;
 		return fumble && skill && unskill;
 	})
-	.add("Rolls as fail without modifier", () => {
+	.add("Rolls as fail without modifier", false, () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -35,7 +35,7 @@ var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
 		const unskill = Deadlands.RollInterpreter.unskill(rolls, 5, 0) === 0;
 		return !fumble && skill && unskill;
 	})
-	.add("Rolls as fail with bonus", () => {
+	.add("Rolls as fail with bonus", false, () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -47,7 +47,7 @@ var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
 		const unskill = Deadlands.RollInterpreter.unskill(rolls, 5, 1) === 0;
 		return !fumble && skill && unskill;
 	})
-	.add("Rolls as fail with malus", () => {
+	.add("Rolls as fail with malus", false, () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -59,7 +59,7 @@ var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
 		const unskill = Deadlands.RollInterpreter.unskill(rolls, 5, -1) === 0;
 		return !fumble && skill && unskill;
 	})
-	.add("Rolls as success without modifier where max equal to target", () => {
+	.add("Rolls as success without modifier where max equal to target", false, () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -71,7 +71,7 @@ var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
 		const unskill = Deadlands.RollInterpreter.unskill(rolls, 5, 0) === 0;
 		return !fumble && skill && unskill;
 	})
-	.add("Rolls as success with bonus where max equal to target", () => {
+	.add("Rolls as success with bonus where max equal to target", false, () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -83,7 +83,7 @@ var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
 		const unskill = Deadlands.RollInterpreter.unskill(rolls, 5, 1) === 0;
 		return !fumble && skill && unskill;
 	})
-	.add("Rolls as success with malus where max equal to target", () => {
+	.add("Rolls as success with malus where max equal to target", false, () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -95,7 +95,7 @@ var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
 		const unskill = Deadlands.RollInterpreter.unskill(rolls, 5, -1) === 0;
 		return !fumble && skill && unskill;
 	})
-	.add("Rolls as success without modifier where max equal to one degree minus 1", () => {
+	.add("Rolls as success without modifier where max equal to one degree minus 1", false, () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -107,7 +107,7 @@ var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
 		const unskill = Deadlands.RollInterpreter.unskill(rolls, 5, 0) === 0;
 		return !fumble && skill && unskill;
 	})
-	.add("Rolls as success with bonus where max equal to one degree minus 1", () => {
+	.add("Rolls as success with bonus where max equal to one degree minus 1", false, () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -119,7 +119,7 @@ var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
 		const unskill = Deadlands.RollInterpreter.unskill(rolls, 5, 1) === 1;
 		return !fumble && skill && unskill;
 	})
-	.add("Rolls as success with malus where max equal to one degree minus 1", () => {
+	.add("Rolls as success with malus where max equal to one degree minus 1", false, () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -131,7 +131,7 @@ var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
 		const unskill = Deadlands.RollInterpreter.unskill(rolls, 5, -1) === 0;
 		return !fumble && skill && unskill;
 	})
-	.add("Rolls as success without modifier where max equal to one degree", () => {
+	.add("Rolls as success without modifier where max equal to one degree", false, () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -143,7 +143,7 @@ var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
 		const unskill = Deadlands.RollInterpreter.unskill(rolls, 5, 0) === 1;
 		return !fumble && skill && unskill;
 	})
-	.add("Rolls as success with bonus where max equal to one degree", () => {
+	.add("Rolls as success with bonus where max equal to one degree", false, () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -155,7 +155,7 @@ var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
 		const unskill = Deadlands.RollInterpreter.unskill(rolls, 5, 1) === 1;
 		return !fumble && skill && unskill;
 	})
-	.add("Rolls as success with malus where max equal to one degree", () => {
+	.add("Rolls as success with malus where max equal to one degree", false, () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -167,7 +167,7 @@ var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
 		const unskill = Deadlands.RollInterpreter.unskill(rolls, 5, -1) === 0;
 		return !fumble && skill && unskill;
 	})
-	.add("Rolls as success without modifier where max equal to two degrees minus 1", () => {
+	.add("Rolls as success without modifier where max equal to two degrees minus 1", false, () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -179,7 +179,7 @@ var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
 		const unskill = Deadlands.RollInterpreter.unskill(rolls, 5, 0) === 1;
 		return !fumble && skill && unskill;
 	})
-	.add("Rolls as success with bonus where max equal to two degrees minus 1", () => {
+	.add("Rolls as success with bonus where max equal to two degrees minus 1", false, () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -191,7 +191,7 @@ var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
 		const unskill = Deadlands.RollInterpreter.unskill(rolls, 5, 1) === 1;
 		return !fumble && skill && unskill;
 	})
-	.add("Rolls as success with malus where max equal to two degrees minus 1", () => {
+	.add("Rolls as success with malus where max equal to two degrees minus 1", false, () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -203,7 +203,7 @@ var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
 		const unskill = Deadlands.RollInterpreter.unskill(rolls, 5, -1) === 1;
 		return !fumble && skill && unskill;
 	})
-	.add("Rolls as success without modifier where max equal to two degrees", () => {
+	.add("Rolls as success without modifier where max equal to two degrees", false, () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -215,7 +215,7 @@ var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
 		const unskill = Deadlands.RollInterpreter.unskill(rolls, 5, 0) === 1;
 		return !fumble && skill && unskill;
 	})
-	.add("Rolls as success with bonus where max equal to two degrees", () => {
+	.add("Rolls as success with bonus where max equal to two degrees", false, () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -227,7 +227,7 @@ var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
 		const unskill = Deadlands.RollInterpreter.unskill(rolls, 5, 1) === 1;
 		return !fumble && skill && unskill;
 	})
-	.add("Rolls as success with malus where max equal to two degrees", () => {
+	.add("Rolls as success with malus where max equal to two degrees", false, () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
