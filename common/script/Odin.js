@@ -520,6 +520,13 @@ var Odin = (function() {
 			return this;
 		}
 
+		/**
+		 * @return the only object of the collection, or null if no or more than one object. 
+		 */
+		only() {
+			return _.isUndefined(this.objs) || _.size(this.objs) === 0 || _.size(this.objs) > 1 ? null : _.first(this.objs);
+		}
+
 	}
 
 	/**
@@ -567,6 +574,19 @@ var Odin = (function() {
 		 */
 		constructor() {
 			super(Type.PLAYER, null);
+		}
+
+		/**
+		 * Finds the players with the specified name.
+		 * @param name The name to match.
+		 * @return the instance.
+		 */
+		findName(name) {
+			this.objs = findObjs({
+				_type: this.type,
+				_displayname: name
+			});
+			return this;
 		}
 
 		/**
