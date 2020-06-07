@@ -221,6 +221,24 @@ var Odin = (function() {
 		}
 
 		/**
+		 * Asserts the specified assertion is true.
+		 * @param assertion The assertion to evaluate.
+		 * @return true if the specified assertion is true.
+		 */
+		static assertTrue(assertion) {
+			return assertion === true;
+		}
+
+		/**
+		 * Asserts the specified assertion is false.
+		 * @param assertion The assertion to evaluate.
+		 * @return true if the specified assertion is false.
+		 */
+		static assertFalse(assertion) {
+			return assertion === false;
+		}
+
+		/**
 		 * Checks the value is not null.
 		 * @param value The value to check.
 		 * @return true if value is not null;
