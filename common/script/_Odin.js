@@ -166,8 +166,8 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 			.add(new Odin.Roll(new Odin.Dice(6), 1))
 			.add(new Odin.Roll(new Odin.Dice(6), 6))
 			.add(new Odin.Roll(new Odin.Dice(6), 2));
-		return rolls.some(function (r) { return r.value === 1; }) === true &&
-		       rolls.some(function (r) { return r.value === 5; }) === false;
+		return Odin.Test.assertTrue(rolls.some(function (r) { return r.value === 1; })) &&
+		       Odin.Test.assertFalse(rolls.some(function (r) { return r.value === 5; }));
 	})
 
 	.add("Count rolls", false, () => {
@@ -198,7 +198,8 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 			.add(new Odin.Roll(new Odin.Dice(6), 1))
 			.add(new Odin.Roll(new Odin.Dice(6), 4))
 			.add(new Odin.Roll(new Odin.Dice(6), 2));
-		return rolls.atLeast(3) === true && rolls.atLeast(5) === false;
+		return Odin.Test.assertTrue(rolls.atLeast(3)) &&
+		       Odin.Test.assertFalse(rolls.atLeast(5));
 	})
 
 	.add("Replace some rolls", false, () => {
@@ -230,10 +231,10 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"4♥","custom":"","_pageid":_pageId_1},
 			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"2♠","custom":"","_pageid":_pageId_1}];
 		return Odin.Test.assertArrayEqual(
-				expected,
-				_.sortBy(turns, function(turn)
-						{ return Odin.PokerCards.rank(turn.pr); 
-				}));
+			expected,
+			_.sortBy(turns, function(turn)
+					{ return Odin.PokerCards.rank(turn.pr); 
+			}));
 	})
 
 	// Turn order
