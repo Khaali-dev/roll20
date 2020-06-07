@@ -30,6 +30,158 @@ var Odin = (function() {
 	}
 
 	/**
+	 * The Test class defines a test to register in a testsuite.
+	 */
+	class Test {
+
+		/**
+		 * @constructor
+		 * @param name   The name of the test.
+		 * @param wip    True if work in progress.
+		 * @param assert The function which defines the assertion to satisfy.
+		 */
+		constructor(name, wip, assert) {
+			this.name = name;
+			this.wip = wip;
+			this.assert = assert;
+		}
+
+		/**
+		 * @returns the specified test evaluation.
+		 */
+		evaluate() {
+			const inProgress = this.wip === true ? "[WIP] " : "[   ] ";
+			try {
+				log(inProgress + (this.assert() === true ? "[OK    ]" : "[   NOK]") + ": " + this.name);
+			} catch (exception) {
+				log(inProgress + "[   NOK]: " + this.name + " because exception has been raised");
+			}
+		}
+
+		/**
+		 * @return true if the assertion is true.
+		 */
+		static assertTrue(assertion) {
+			return assertion === true;
+		}
+
+		/**
+		 * @return true if the assertion is false.
+		 */
+		static assertFalse(assertion) {
+			return assertion === false;
+		}
+
+		/**
+		 * Checks the value is not null.
+		 * @param value The value to check.
+		 * @return true if value is not null;
+		 */
+		static assertNotNull(value) {
+			const assert = value != null;
+			if (!assert) {
+				log(assert);
+			}
+			return assert;
+		}
+
+		/**
+		 * Checks the array is not null or empty.
+		 * @param array The array to check.
+		 * @return true if array is not empty or null;
+		 */
+		static assertNotEmptyArray(array) {
+			const assert = Array.isArray(array) && array.length > 0;
+			if (!assert) {
+				log(assert);
+			}
+			return assert;
+		}
+
+		/**
+		 * Checks the array is empty.
+		 * @param array The array to check.
+		 * @return true if array is empty;
+		 */
+		static assertEmptyArray(array) {
+			const assert = Array.isArray(array) && _.size(array) === 0;
+			if (!assert) {
+				log(assert);
+			}
+			return assert;
+		}
+
+		/**
+		 * Checks the object is not null or empty.
+		 * @param object The object to check.
+		 * @return true if object is not empty or null;
+		 */
+		static assertNotEmptyObject(object) {
+			const assert = _.isObject(object) && !_.isEmpty(object);
+			if (!assert) {
+				log(assert);
+			}
+			return assert;
+		}
+	
+		/**
+		 * Checks both arrays are equals.
+		 * @param array1 The first array to check.
+		 * @param array2 The second array to check.
+		 * @return true if both arrays are equals.
+		 */
+		static assertArrayEqual(array1, array2) {
+			return JSON.stringify(array1)==JSON.stringify(array2)
+		}
+
+	}
+
+	/**
+	 * The AbstractTestSuite class is the base class to define a testsuite.
+	 */
+	class TestSuite extends AbstractEventHandler {
+
+		/**
+		 * @constructor
+		 * @param name The name of the testsuite.
+		 */
+		constructor(name) {
+			super();
+			this.name = name;
+			this.tests = [];
+		}
+
+		/**
+		 * @Override
+		 */
+		handleMessage(msg) {
+			this.handleCommand(msg);
+		}
+
+		/**
+		 * @Override
+		 */
+		processCommand(cmd, args) {
+			if (cmd != 'test' || args[0] != this.name) return;
+			log("--------> Launch all tests for module " + this.name);
+			this.tests.forEach(t => t.evaluate());
+		}
+
+		/**
+		 * Add the specified test.
+		 * @param name   The name of the test.
+		 * @param wip    True if work in progress.
+		 * @param assert The assertion to satisfy.
+		 * @return the instance.
+		 */
+		add(name, wip, assert) {
+			this.tests.push(new Test(name, wip, assert));
+			return this;
+		}
+
+	}
+
+	/**
 	 * The Rankable class defines rankable object.
 	 */
 	class Rankable {
@@ -187,144 +339,6 @@ var Odin = (function() {
 		 */
 		processCommand(msg) {
 			throw new Error("Method 'handleMessage' must be implemented");
-		}
-
-	}
-
-	/**
-	 * The Test class defines a test to register in a testsuite.
-	 */
-	class Test {
-
-		/**
-		 * @constructor
-		 * @param name   The name of the test.
-		 * @param wip    True if work in progress.
-		 * @param assert The function which defines the assertion to satisfy.
-		 */
-		constructor(name, wip, assert) {
-			this.name = name;
-			this.wip = wip;
-			this.assert = assert;
-		}
-
-		/**
-		 * @returns the specified test evaluation.
-		 */
-		evaluate() {
-			const inProgress = this.wip === true ? "[WIP] " : "[   ] ";
-			try {
-				log(inProgress + (this.assert() === true ? "[OK    ]" : "[   NOK]") + ": " + this.name);
-			} catch (exception) {
-				log(inProgress + "[   NOK]: " + this.name + " because exception has been raised");
-			}
-		}
-
-		/**
-		 * Checks the value is not null.
-		 * @param value The value to check.
-		 * @return true if value is not null;
-		 */
-		static assertNotNull(value) {
-			const assert = value != null;
-			if (!assert) {
-				log(assert);
-			}
-			return assert;
-		}
-
-		/**
-		 * Checks the array is not null or empty.
-		 * @param array The array to check.
-		 * @return true if array is not empty or null;
-		 */
-		static assertNotEmptyArray(array) {
-			const assert = Array.isArray(array) && array.length > 0;
-			if (!assert) {
-				log(assert);
-			}
-			return assert;
-		}
-
-		/**
-		 * Checks the array is empty.
-		 * @param array The array to check.
-		 * @return true if array is empty;
-		 */
-		static assertEmptyArray(array) {
-			const assert = Array.isArray(array) && _.size(array) === 0;
-			if (!assert) {
-				log(assert);
-			}
-			return assert;
-		}
-
-		/**
-		 * Checks the object is not null or empty.
-		 * @param object The object to check.
-		 * @return true if object is not empty or null;
-		 */
-		static assertNotEmptyObject(object) {
-			const assert = _.isObject(object) && !_.isEmpty(object);
-			if (!assert) {
-				log(assert);
-			}
-			return assert;
-		}
-	
-		/**
-		 * Checks both arrays are equals.
-		 * @param array1 The first array to check.
-		 * @param array2 The second array to check.
-		 * @return true if both arrays are equals.
-		 */
-		static assertArrayEqual(array1, array2) {
-			return JSON.stringify(array1)==JSON.stringify(array2)
-		}
-
-	}
-
-	/**
-	 * The AbstractTestSuite class is the base class to define a testsuite.
-	 */
-	class TestSuite extends AbstractEventHandler {
-
-		/**
-		 * @constructor
-		 * @param name The name of the testsuite.
-		 */
-		constructor(name) {
-			super();
-			this.name = name;
-			this.tests = [];
-		}
-
-		/**
-		 * @Override
-		 */
-		handleMessage(msg) {
-			this.handleCommand(msg);
-		}
-
-		/**
-		 * @Override
-		 */
-		processCommand(cmd, args) {
-			if (cmd != 'test' || args[0] != this.name) return;
-			log("--------> Launch all tests for module " + this.name);
-			this.tests.forEach(t => t.evaluate());
-		}
-
-		/**
-		 * Add the specified test.
-		 * @param name   The name of the test.
-		 * @param wip    True if work in progress.
-		 * @param assert The assertion to satisfy.
-		 * @return the instance.
-		 */
-		add(name, wip, assert) {
-			this.tests.push(new Test(name, wip, assert));
-			return this;
 		}
 
 	}
@@ -491,6 +505,16 @@ var Odin = (function() {
 			this.type = type;
 			this.subtype = subtype;
 			this.objs = null;
+		}
+
+		/**
+		 * Sets the specified objects.
+		 * @param objs The objects to set.
+		 * @return the instance.
+		 */
+		set(objs) {
+			this.objs = objs;
+			return this;
 		}
 
 		/**
@@ -726,7 +750,8 @@ var Odin = (function() {
 	}
 
 	/**
-	 * The Deck class provides features to get and manipulate a deck.
+	 * The Deck class provides features to get and manipulate a deck. The cards can be
+	 * 
 	 */
 	class Deck extends Object {
 
@@ -735,6 +760,59 @@ var Odin = (function() {
 		 */
 		constructor() {
 			super(Type.DECK, null);
+			this.cards = new Map();
+		}
+
+		/**
+		 * Referencess all cards.
+		 * @return the instance.
+		 */
+		inventory() {
+			if (this.obj != null) {
+				const deckId = this.obj.get('id');
+				recallCards(deckId);
+				shuffleDeck(deckId);
+				_.each(this.lastShuffle(), card => {
+					
+				})
+				const cards = this.lastShuffle();
+				
+				
+			}
+			return this;
+		}
+	
+		/**
+		 * Recalls all cards.
+		 * @return the instance.
+		 */
+		recall() {
+			if (this.obj != null) {
+				recallCards(this.obj.get('id'));
+			}
+			return this;
+		}
+
+		/**
+		 * Shuffles the deck.
+		 * @return the instance.
+		 */
+		shuffle() {
+			if (this.obj != null) {
+				shuffleDeck(this.obj.get('id'));
+			}
+			return this;
+		}
+
+		/**
+		 * @return the cards in the deck just after the last shuffle.
+		 */
+		lastShuffle() {
+			return this.obj != null ? new Cards().set(
+				_.chain(this.obj.get(Property.DECK.CURRENT).split(/\s*,\s*/))
+				 .map(cardid => getObj(Property.GRAPHIC.CARD, cardid))
+				 .reject(_.isUndefined)
+				 .value()) else null;
 		}
 
 	}
@@ -749,24 +827,6 @@ var Odin = (function() {
 		 */
 		constructor() {
 			super(Type.DECK, null);
-		}
-
-		/**
-		 * Recall all cards of the current decks.
-		 * @return the instance.
-		 */
-		recall() {
-			_.each(this.objs, obj => recallCards(obj.get('id')));
-			return this;
-		}
-
-		/**
-		 * Shuffle current decks.
-		 * @return the instance. 
-		 */
-		shuffle() {
-			_.each(this.objs, obj => shuffleDeck(obj.get('id')));
-			return this;
 		}
 
 	}
@@ -816,24 +876,6 @@ var Odin = (function() {
 			             .map(obj => getObj(Property.GRAPHIC.CARD, obj.get(Property.CARD.CARDID)))
 			             .reject(_.isUndefined)
 			             .value();
-			return this;
-		}
-
-		/**
-		 * Finds all cards from the specified deck since the last shuffle.
-		 * @param id The identifier of the deck where to find cards.
-		 * @return the instance.
-		 */
-		findDeck(id) {
-			const deck = new Odin.Deck().findId(id);
-			if (deck != null && deck.obj != null) {
-				this.objs = _.chain(deck.obj.get(Property.DECK.CURRENT).split(/\s*,\s*/))
-				             .map(cardid => getObj(Property.GRAPHIC.CARD, cardid))
-				             .reject(_.isUndefined)
-				             .value();
-			} else {
-				this.objs = null;
-			}
 			return this;
 		}
 
