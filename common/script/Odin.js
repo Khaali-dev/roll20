@@ -84,70 +84,6 @@ var Odin = (function() {
 	}
 
 	/**
-	 * The Type enumerate defines all roll20 objects types.
-	 */
-	const Type = {
-		PATH: 'path',
-		TEXT: 'text',
-		GRAPHIC: 'graphic',
-		PAGE: 'page',
-		CAMPAIGN: 'campaign',
-		PLAYER: 'player',
-		MACRO: 'macro',
-		ROLLABLE_TABLE: 'rollabletable',
-		TABLE_ITEM: 'tableitem',
-		CHARACTER: 'character',
-		ATTRIBUTE: 'attribute',
-		ABILITY: 'ability',
-		HANDOUT: 'handout',
-		DECK: 'deck',
-		CARD: 'card',
-		HAND: 'hand',
-		JUKEBOX_TRACK: 'jukeboxtrack',
-		CUSTOM_FC: 'custfx'
-	};
-
-	/**
-	 * The Property enumerate defines all roll20 objects properties.
-	 */
-	const Property = {
-		TYPE: "_type",
-		CAMPAIGN: {
-			INITIATIVE_PAGE: "initiativepage",
-			TURN_ORDER: "turnorder",
-			PLAYER_PAGE_ID: "playerpageid",
-			PLAYER_SPECIFIC_PAGES: "playerspecificpages"
-		},
-		PLAYER: {
-			NAME: "_displayname",
-			ONLINE: "_online",
-			PAGE: "_lastpage",
-			AS: "speakingas",
-			COLOR: "color",
-			MACRO: "_macrobar",
-			SHOW_MACRO: "showmacrobar"
-		},
-		GRAPHIC: {
-			SUBTYPE: "_subtype",
-			TOKEN: "token",
-			CARD: "card"
-		},
-		DECK: {
-			CURRENT: "currentDeck"
-		},
-		CARD: {
-			CARDID: "cardid"
-		},
-		TURN_ORDER: {
-			ID: "id",
-			VALUE: "pr",
-			NAME: "custom",
-			PAGE_ID: "_pageid",
-			MODIFIER: "formula"
-		}
-	};
-
-	/**
 	 * The AbstractEventHandler class is the base class to define a message handler.
 	 */
 	class AbstractEventHandler {
@@ -1292,8 +1228,6 @@ var Odin = (function() {
 		Strings: Strings,
 		Rankable: Rankable,
 		Rankables: Rankables,
-		Type: Type,
-		Property: Property,
 		Test: Test,
 		TestSuite: TestSuite,
 		AbstractEventHandler: AbstractEventHandler,
