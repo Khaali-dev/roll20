@@ -287,18 +287,16 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().objs);
 	})
 
-	.add("Finds all players by name", false, () => {
+	.add("Finds players by name", false, () => {
 		return Odin.Test.assertNotEmptyArray(new Odin.Players().findName("Marshall").objs) &&
 		       Odin.Test.assertEmptyArray(new Odin.Players().findName("Unknown").objs);
 	})
 
-	.add("Filters online players", false, () => {
-		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().filterOnline().objs);
+	.add("Finds online players", false, () => {
+		return Odin.Test.assertNotEmptyArray(new Odin.Players().findOnline(true).objs) &&
+		       Odin.Test.assertNotEmptyArray(new Odin.Players().findOnline(false).objs);
 	})
 
-	.add("filters offline players", false, () => {
-		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().filterOffline().objs);
-	})
 	.add("filters game masters", false, () => {
 		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().filterMasters().objs);
 	})
@@ -306,7 +304,6 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	.add("filters players", false, () => {
 		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().filterPlayers().objs);
 	})
-
 
 	// Player
 	// ------------------------------------------------------------------------

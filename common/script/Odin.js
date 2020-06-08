@@ -602,17 +602,13 @@ var Odin = (function() {
 		}
 
 		/**
-		 * @return filtered online players.
+		 * Finds the online or offline players.
+		 * @param online True if players must be online.
+		 * @return the instance.
 		 */
-		filterOnline() {
-			return this.filter(function(obj) { return (obj.get('_online') === true); });
-		}
-
-		/**
-		 * @return filtered offline players.
-		 */
-		filterOffline() {
-			return this.filter(function(obj) { return (obj.get('_online') === false); });
+		findOnline(online) {
+			this.objs = Objects._findProperty(this.type, this.subtype, '_online', online);
+			return this;
 		}
 
 		/**
