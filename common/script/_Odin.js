@@ -343,6 +343,11 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return Odin.Test.assertNotEmptyObject(new Odin.Deck().findId("-M8pqKN-SnT3CwJJqRcz").obj);
 	})
 
+	.add("Finds a deck by name", false, () => {
+		return Odin.Test.assertNotEmptyObject(new Odin.Deck().findName('Actions').obj) &&
+		       Odin.Test.assertEmptyObject(new Odin.Deck().findName('Unknown').obj);
+	})
+
 	// Cards
 	// ------------------------------------------------------------------------
 

@@ -682,14 +682,6 @@ var Odin = (function() {
 			this.objs = Objects._findProperty(this.type, this.subtype, 'name', name);
 			return this;
 		}
-	
-
-
-		/*
-		static npc(name) {
-			return findObjs({type:'character', name: name, controlledby: ""});
-		}
-		*/
 
 	}
 
@@ -733,6 +725,16 @@ var Odin = (function() {
 		 */
 		constructor() {
 			super('deck', null);
+		}
+
+		/**
+		 * Finds the specified deck.
+		 * @param name The name of the deck to find.
+		 * @return the instance.
+		 */
+		findName(name) {
+			this.obj = Object._findProperty(this.type, this.subtype, 'name', name);
+			return this;
 		}
 
 	}
