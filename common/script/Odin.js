@@ -737,6 +737,24 @@ var Odin = (function() {
 			return this;
 		}
 
+		/**
+		 * Recalls cards.
+		 * @return the instance.
+		 */
+		recall() {
+			recallCards(this.obj.get('id'));
+			return this;
+		}
+
+		/**
+		 * Shuffles cards.
+		 * @return the instance.
+		 */
+		shuffle() {
+			shuffleDeck(this.obj.get('id'));
+			return this;
+		}
+
 	}
 
 	/**
@@ -749,24 +767,6 @@ var Odin = (function() {
 		 */
 		constructor() {
 			super('deck', null);
-		}
-
-		/**
-		 * Recall all cards of the current decks.
-		 * @return the instance.
-		 */
-		recall() {
-			_.each(this.objs, obj => recallCards(obj.get('id')));
-			return this;
-		}
-
-		/**
-		 * Shuffle current decks.
-		 * @return the instance. 
-		 */
-		shuffle() {
-			_.each(this.objs, obj => shuffleDeck(obj.get('id')));
-			return this;
 		}
 
 	}

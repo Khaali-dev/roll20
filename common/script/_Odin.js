@@ -4,7 +4,9 @@ const _tokenId_1 = "-M7lbGZnSu6SItqBzU4n";
 const _tokenId_2 = "-M7lbEbIk_ER_Mt51qZF";
 const _characterId_1 = "-M7laLPHxEwBBvSma4gh"; // Lincoln
 const _characterId_2 = "-M63mpWsG_c3BwN1b3DU"; // Sadie
+const _deckId_1 = "-M8pqKN-SnT3CwJJqRcz"; // Actions
 const _cardId_1 = "-M8swNpKKC6Ujo0SvBel";
+const _cardId_2 = "-M8r0TYwIpBy2pqUmWDT";
 
 var _odin = _odin || new Odin.TestSuite("Odin")
 
@@ -340,12 +342,24 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// ------------------------------------------------------------------------
 
 	.add("Finds a deck by id", false, () => {
-		return Odin.Test.assertNotEmptyObject(new Odin.Deck().findId("-M8pqKN-SnT3CwJJqRcz").obj);
+		return Odin.Test.assertNotEmptyObject(new Odin.Deck().findId(_deckId_1).obj);
 	})
 
 	.add("Finds a deck by name", false, () => {
 		return Odin.Test.assertNotEmptyObject(new Odin.Deck().findName('Actions').obj) &&
 		       Odin.Test.assertEmptyObject(new Odin.Deck().findName('Unknown').obj);
+	})
+
+	.add("Recall cards", false, () => {
+		const deck = new Odin.Deck().findName('Actions');
+		deck.recall();
+		shuffleDeck(deck.obj.get('id'));
+		const maxSize = _.size(deck.obj.get('currentDeck').split(/\s*,\s*/));
+		giveCardToPlayer(_cardId_1, _playerId_1);
+		giveCardToPlayer(_cardId_2, _playerId_1);
+		shuffleDeck(deck.obj.get('id'));
+		const size = _.size(deck.obj.get('currentDeck').split(/\s*,\s*/));
+		return maxSize === size + 2;
 	})
 
 	// Cards
