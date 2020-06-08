@@ -385,69 +385,69 @@ var Odin = (function() {
 	 * The poker card colors.
 	 */
 	const PokerColors = new Rankables()
-		.withRankable(new PokerColor("♠", 1))
-		.withRankable(new PokerColor("♥", 2))
-		.withRankable(new PokerColor("♦", 3))
-		.withRankable(new PokerColor("♣", 4));
+		.withRankable(new PokerColor('♠', 1))
+		.withRankable(new PokerColor('♥', 2))
+		.withRankable(new PokerColor('♦', 3))
+		.withRankable(new PokerColor('♣', 4));
 
 	/**
 	 * The poker cards.
 	 */
 	const PokerCards = new Rankables()
-		.withRankable(new PokerCard("RJo", 1))
-		.withRankable(new PokerCard("A♠", 2))
-		.withRankable(new PokerCard("A♥", 3))
-		.withRankable(new PokerCard("A♦", 4))
-		.withRankable(new PokerCard("A♣", 5))
-		.withRankable(new PokerCard("K♠", 6))
-		.withRankable(new PokerCard("K♥", 7))
-		.withRankable(new PokerCard("K♦", 8))
-		.withRankable(new PokerCard("K♣", 9))
-		.withRankable(new PokerCard("Q♠", 10))
-		.withRankable(new PokerCard("Q♥", 11))
-		.withRankable(new PokerCard("Q♦", 12))
-		.withRankable(new PokerCard("Q♣", 13))
-		.withRankable(new PokerCard("Ja♠", 14))
-		.withRankable(new PokerCard("Ja♥", 15))
-		.withRankable(new PokerCard("Ja♦", 16))
-		.withRankable(new PokerCard("Ja♣", 17))
-		.withRankable(new PokerCard("10♠", 18))
-		.withRankable(new PokerCard("10♥", 19))
-		.withRankable(new PokerCard("10♦", 20))
-		.withRankable(new PokerCard("10♣", 21))
-		.withRankable(new PokerCard("9♠", 22))
-		.withRankable(new PokerCard("9♥", 23))
-		.withRankable(new PokerCard("9♦", 24))
-		.withRankable(new PokerCard("9♣", 25))
-		.withRankable(new PokerCard("8♠", 26))
-		.withRankable(new PokerCard("8♥", 27))
-		.withRankable(new PokerCard("8♦", 28))
-		.withRankable(new PokerCard("8♣", 29))
-		.withRankable(new PokerCard("7♠", 30))
-		.withRankable(new PokerCard("7♥", 31))
-		.withRankable(new PokerCard("7♦", 32))
-		.withRankable(new PokerCard("7♣", 33))
-		.withRankable(new PokerCard("6♠", 34))
-		.withRankable(new PokerCard("6♥", 35))
-		.withRankable(new PokerCard("6♦", 36))
-		.withRankable(new PokerCard("6♣", 37))
-		.withRankable(new PokerCard("5♠", 38))
-		.withRankable(new PokerCard("5♥", 39))
-		.withRankable(new PokerCard("5♦", 40))
-		.withRankable(new PokerCard("5♣", 41))
-		.withRankable(new PokerCard("4♠", 42))
-		.withRankable(new PokerCard("4♥", 43))
-		.withRankable(new PokerCard("4♦", 44))
-		.withRankable(new PokerCard("4♣", 45))
-		.withRankable(new PokerCard("3♠", 46))
-		.withRankable(new PokerCard("3♥", 47))
-		.withRankable(new PokerCard("3♦", 48))
-		.withRankable(new PokerCard("3♣", 49))
-		.withRankable(new PokerCard("2♠", 50))
-		.withRankable(new PokerCard("2♥", 51))
-		.withRankable(new PokerCard("2♦", 52))
-		.withRankable(new PokerCard("2♣", 53))
-		.withRankable(new PokerCard("BJo", 54));
+		.withRankable(new PokerCard('RJo', 1))
+		.withRankable(new PokerCard('A♠', 2))
+		.withRankable(new PokerCard('A♥', 3))
+		.withRankable(new PokerCard('A♦', 4))
+		.withRankable(new PokerCard('A♣', 5))
+		.withRankable(new PokerCard('K♠', 6))
+		.withRankable(new PokerCard('K♥', 7))
+		.withRankable(new PokerCard('K♦', 8))
+		.withRankable(new PokerCard('K♣', 9))
+		.withRankable(new PokerCard('Q♠', 10))
+		.withRankable(new PokerCard('Q♥', 11))
+		.withRankable(new PokerCard('Q♦', 12))
+		.withRankable(new PokerCard('Q♣', 13))
+		.withRankable(new PokerCard('Ja♠', 14))
+		.withRankable(new PokerCard('Ja♥', 15))
+		.withRankable(new PokerCard('Ja♦', 16))
+		.withRankable(new PokerCard('Ja♣', 17))
+		.withRankable(new PokerCard('10♠', 18))
+		.withRankable(new PokerCard('10♥', 19))
+		.withRankable(new PokerCard('10♦', 20))
+		.withRankable(new PokerCard('10♣', 21))
+		.withRankable(new PokerCard('9♠', 22))
+		.withRankable(new PokerCard('9♥', 23))
+		.withRankable(new PokerCard('9♦', 24))
+		.withRankable(new PokerCard('9♣', 25))
+		.withRankable(new PokerCard('8♠', 26))
+		.withRankable(new PokerCard('8♥', 27))
+		.withRankable(new PokerCard('8♦', 28))
+		.withRankable(new PokerCard('8♣', 29))
+		.withRankable(new PokerCard('7♠', 30))
+		.withRankable(new PokerCard('7♥', 31))
+		.withRankable(new PokerCard('7♦', 32))
+		.withRankable(new PokerCard('7♣', 33))
+		.withRankable(new PokerCard('6♠', 34))
+		.withRankable(new PokerCard('6♥', 35))
+		.withRankable(new PokerCard('6♦', 36))
+		.withRankable(new PokerCard('6♣', 37))
+		.withRankable(new PokerCard('5♠', 38))
+		.withRankable(new PokerCard('5♥', 39))
+		.withRankable(new PokerCard('5♦', 40))
+		.withRankable(new PokerCard('5♣', 41))
+		.withRankable(new PokerCard('4♠', 42))
+		.withRankable(new PokerCard('4♥', 43))
+		.withRankable(new PokerCard('4♦', 44))
+		.withRankable(new PokerCard('4♣', 45))
+		.withRankable(new PokerCard('3♠', 46))
+		.withRankable(new PokerCard('3♥', 47))
+		.withRankable(new PokerCard('3♦', 48))
+		.withRankable(new PokerCard('3♣', 49))
+		.withRankable(new PokerCard('2♠', 50))
+		.withRankable(new PokerCard('2♥', 51))
+		.withRankable(new PokerCard('2♦', 52))
+		.withRankable(new PokerCard('2♣', 53))
+		.withRankable(new PokerCard('BJo', 54));
 
 	/**
 	 * The base class for all roll20 wrapped object.
@@ -473,7 +473,7 @@ var Odin = (function() {
 		findId(id) {
 			if (this.subtype != null) {
 				const o = getObj(this.type, id);
-				this.obj = o != null && o.get(Property.GRAPHIC.SUBTYPE) === this.subtype ? o : null;
+				this.obj = o != null && o.get('_subtype') === this.subtype ? o : null;
 			} else {
 				this.obj = getObj(this.type, id);
 			}
@@ -556,28 +556,28 @@ var Odin = (function() {
 		 * @constructor.
 		 */
 		constructor() {
-			super(Type.PLAYER, null);
+			super('player', null);
 		}
 
 		/**
 		 * @eturn true if the player is online.
 		 */
 		isOnline() {
-			return this.obj != null && this.obj.get(Property.PLAYER.ONLINE) === true;
+			return this.obj != null && this.obj.get('_online') === true;
 		}
 
 		/**
 		 * @return true if the player is online and a game master. 
 		 */
 		isMaster() {
-			return this.obj != null && playerIsGM(this.obj.get("id")) === true;
+			return this.obj != null && playerIsGM(this.obj.get('id')) === true;
 		}
 
 		/**
 		 * @return true if the player is online and not a game master. 
 		 */
 		isPlayer() {
-			return this.obj != null && playerIsGM(this.obj.get("id")) === false;
+			return this.obj != null && playerIsGM(this.obj.get('id')) === false;
 		}
 
 	}
@@ -591,7 +591,7 @@ var Odin = (function() {
 		 * @constructor.
 		 */
 		constructor() {
-			super(Type.PLAYER, null);
+			super('player', null);
 		}
 
 		/**
@@ -611,28 +611,28 @@ var Odin = (function() {
 		 * @return filtered online players.
 		 */
 		filterOnline() {
-			return this.filter(function(obj) { return (obj.get(Property.PLAYER.ONLINE) === true); });
+			return this.filter(function(obj) { return (obj.get('_online') === true); });
 		}
 
 		/**
 		 * @return filtered offline players.
 		 */
 		filterOffline() {
-			return this.filter(function(obj) { return (obj.get(Property.PLAYER.ONLINE) === false); });
+			return this.filter(function(obj) { return (obj.get('_online') === false); });
 		}
 
 		/**
 		 * @return filtered game masters.
 		 */
 		filterMasters() {
-			return this.filter(function(obj) { return (playerIsGM(obj.get("id")) === true); });
+			return this.filter(function(obj) { return (playerIsGM(obj.get('id')) === true); });
 		}
 
 		/**
 		 * @return filtered players.
 		 */
 		filterPlayers() {
-			return this.filter(function(obj) { return (playerIsGM(obj.get("id")) === false); });
+			return this.filter(function(obj) { return (playerIsGM(obj.get('id')) === false); });
 		}
 
 	}
@@ -646,7 +646,7 @@ var Odin = (function() {
 		 * @constructor.
 		 */
 		constructor() {
-			super(Type.PAGE, null);
+			super('page', null);
 		}
 
 	}
@@ -660,7 +660,7 @@ var Odin = (function() {
 		 * @constructor.
 		 */
 		constructor() {
-			super(Type.PAGE, null);
+			super('page', null);
 		}
 
 	}
@@ -674,7 +674,7 @@ var Odin = (function() {
 		 * @constructor.
 		 */
 		constructor() {
-			super(Type.CHARACTER, null);
+			super('character', null);
 		}
 
 	}
@@ -688,7 +688,7 @@ var Odin = (function() {
 		 * @constructor.
 		 */
 		constructor() {
-			super(Type.CHARACTER, null);
+			super('character', null);
 		}
 
 		/**
@@ -723,7 +723,7 @@ var Odin = (function() {
 		 * @constructor.
 		 */
 		constructor() {
-			super(Type.GRAPHIC, Property.GRAPHIC.TOKEN);
+			super('graphic', 'token');
 		}
 
 	}
@@ -738,7 +738,7 @@ var Odin = (function() {
 		 * @constructor.
 		 */
 		constructor() {
-			super(Type.GRAPHIC, Property.GRAPHIC.TOKEN);
+			super('graphic', 'token');
 		}
 
 	}
@@ -752,7 +752,7 @@ var Odin = (function() {
 		 * @constructor.
 		 */
 		constructor() {
-			super(Type.DECK, null);
+			super('deck', null);
 		}
 
 	}
@@ -766,7 +766,7 @@ var Odin = (function() {
 		 * @constructor.
 		 */
 		constructor() {
-			super(Type.DECK, null);
+			super('deck', null);
 		}
 
 		/**
@@ -798,7 +798,7 @@ var Odin = (function() {
 		 * @constructor.
 		 */
 		constructor() {
-			super(Type.GRAPHIC, Property.GRAPHIC.CARD);
+			super('graphic', 'card');
 		}
 
 		/**
@@ -822,7 +822,7 @@ var Odin = (function() {
 		 * @constructor.
 		 */
 		constructor() {
-			super(Type.GRAPHIC, Property.GRAPHIC.CARD);
+			super('graphic', 'card');
 		}
 
 		/**
@@ -831,7 +831,7 @@ var Odin = (function() {
 		 */
 		findTable() {
 			this.objs = _.chain(this.findAll().objs)
-			             .map(obj => getObj(Property.GRAPHIC.CARD, obj.get(Property.CARD.CARDID)))
+			             .map(obj => getObj(Property.GRAPHIC.CARD, obj.get('cardid')))
 			             .reject(_.isUndefined)
 			             .value();
 			return this;
@@ -845,8 +845,8 @@ var Odin = (function() {
 		findDeck(id) {
 			const deck = new Odin.Deck().findId(id);
 			if (deck != null && deck.obj != null) {
-				this.objs = _.chain(deck.obj.get(Property.DECK.CURRENT).split(/\s*,\s*/))
-				             .map(cardid => getObj(Property.GRAPHIC.CARD, cardid))
+				this.objs = _.chain(deck.obj.get('currentDeck').split(/\s*,\s*/))
+				             .map(cardid => getObj('card', cardid))
 				             .reject(_.isUndefined)
 				             .value();
 			} else {
@@ -866,7 +866,7 @@ var Odin = (function() {
 		 * @constructor.
 		 */
 		constructor() {
-			super(Type.HAND, null);
+			super('hand', null);
 		}
 
 	}
@@ -880,7 +880,7 @@ var Odin = (function() {
 		 * @constructor.
 		 */
 		constructor() {
-			super(Type.HAND, null);
+			super('hand', null);
 		}
 
 	}
@@ -1200,14 +1200,14 @@ var Odin = (function() {
 		 * @return true if the turn order is displayed.
 		 */
 		isDisplayed() {
-			return Campaign().get(Odin.Property.CAMPAIGN.INITIATIVE_PAGE);
+			return Campaign().get('initiativepage');
 		}
 
 		/**
 		 * @return the turn order from parsing the campaign property.
 		 */
 		parse() {
-			const to = Campaign().get(Odin.Property.CAMPAIGN.TURN_ORDER);
+			const to = Campaign().get('turnorder');
 			return to === "" ? [] : JSON.parse(to);
 		}
 
@@ -1216,7 +1216,7 @@ var Odin = (function() {
 		 * @return the instance.
 		 */
 		clear() {
-			Campaign().set(Odin.Property.CAMPAIGN.TURN_ORDER, '[]');
+			Campaign().set('turnorder', '[]');
 			return this;
 		}
 
@@ -1227,7 +1227,7 @@ var Odin = (function() {
 		 */
 		set(turnOrder) {
 			const turns = this.order != null ? _.sortBy(turnOrder, this.order) : turnOrder;
-			Campaign().set(Odin.Property.CAMPAIGN.TURN_ORDER, JSON.stringify(turns));
+			Campaign().set('turnorder', JSON.stringify(turns));
 			return this;
 		}
 
@@ -1250,7 +1250,7 @@ var Odin = (function() {
 			_.each(turns, function(t) {
 				_turns.unshift(t);
 			})
-			Campaign().set(Odin.Property.CAMPAIGN.TURN_ORDER, JSON.stringify(_turns));
+			Campaign().set('turnorder', JSON.stringify(_turns));
 			return this;
 		}
 
@@ -1270,7 +1270,7 @@ var Odin = (function() {
 		 * @return the instance.
 		 */
 		show() {
-			Campaign().set(Odin.Property.CAMPAIGN.INITIATIVE_PAGE, true);
+			Campaign().set('initiativepage', true);
 			return this;
 		}
 
@@ -1279,7 +1279,7 @@ var Odin = (function() {
 		 * @return the instance.
 		 */
 		hide() {
-			Campaign().set(Odin.Property.CAMPAIGN.INITIATIVE_PAGE, false);
+			Campaign().set('initiativepage', false);
 			return this;
 		}
 

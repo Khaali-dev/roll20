@@ -1,5 +1,9 @@
 const _playerId_1 = "-M5rtkkXsEkckPk1v0DL";
 const _pageId_1 = "-M5xeoigOD2b0Vsz4stI";
+const _tokenId_1 = "-M7lbGZnSu6SItqBzU4n";
+const _tokenId_2 = "-M7lbEbIk_ER_Mt51qZF";
+const _characterId_1 = "-M7laLPHxEwBBvSma4gh";
+const _cardId_1 = "-M8swNpKKC6Ujo0SvBel";
 
 var _odin = _odin || new Odin.TestSuite("Odin")
 
@@ -219,17 +223,17 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 
 	.add("Sort poker cards", false, () => {
 		const turns = [
-			{"id":"-M7lbGZnSu6SItqBzU4n", "pr":"6♣", "custom":"","_pageid":_pageId_1},
-			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"RJo","custom":"","_pageid":_pageId_1},
-			{"id":"-M7lbGZnSu6SItqBzU4n","pr":"9♣","custom":"","_pageid":_pageId_1},
-			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"4♥","custom":"","_pageid":_pageId_1},
-			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"2♠","custom":"","_pageid":_pageId_1}];
+			{"id":_tokenId_1, "pr":"6♣", "custom":"","_pageid":_pageId_1},
+			{"id":_tokenId_2,"pr":"RJo","custom":"","_pageid":_pageId_1},
+			{"id":_tokenId_1,"pr":"9♣","custom":"","_pageid":_pageId_1},
+			{"id":_tokenId_2,"pr":"4♥","custom":"","_pageid":_pageId_1},
+			{"id":_tokenId_2,"pr":"2♠","custom":"","_pageid":_pageId_1}];
 		const expected = [
-			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"RJo","custom":"","_pageid":_pageId_1},
-			{"id":"-M7lbGZnSu6SItqBzU4n","pr":"9♣","custom":"","_pageid":_pageId_1},
-			{"id":"-M7lbGZnSu6SItqBzU4n", "pr":"6♣", "custom":"","_pageid":_pageId_1},
-			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"4♥","custom":"","_pageid":_pageId_1},
-			{"id":"-M7lbEbIk_ER_Mt51qZF","pr":"2♠","custom":"","_pageid":_pageId_1}];
+			{"id":_tokenId_2,"pr":"RJo","custom":"","_pageid":_pageId_1},
+			{"id":_tokenId_1,"pr":"9♣","custom":"","_pageid":_pageId_1},
+			{"id":_tokenId_1, "pr":"6♣", "custom":"","_pageid":_pageId_1},
+			{"id":_tokenId_2,"pr":"4♥","custom":"","_pageid":_pageId_1},
+			{"id":_tokenId_2,"pr":"2♠","custom":"","_pageid":_pageId_1}];
 		return Odin.Test.assertArrayEqual(
 			expected,
 			_.sortBy(turns, function(turn)
@@ -250,11 +254,11 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 
 	.add("Add some turns to the turn order", false, () => {
 		const turns = [
-			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 1),
-			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 2),
-			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 3),
-			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 4),
-			new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 5),
+			new Odin.Turn(_tokenId_1, 1),
+			new Odin.Turn(_tokenId_1, 2),
+			new Odin.Turn(_tokenId_1, 3),
+			new Odin.Turn(_tokenId_1, 4),
+			new Odin.Turn(_tokenId_1, 5),
 		];
 		return _.size(new Odin.TurnOrder().clear().add(turns).parse()) === 5
 	})
@@ -262,7 +266,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	.add("Pop first turn from turn order", false, () => {
 		return Odin.Test.assertNotNull(new Odin.TurnOrder()
 			.clear()
-			.add([new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 10)])
+			.add([new Odin.Turn(_tokenId_1, 10)])
 			.pop());
 	})
 
@@ -270,10 +274,10 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return Odin.Test.assertArrayEqual(
 			new Odin.TurnOrder()
 				.clear()
-				.add([new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 20)])
-				.insert([new Odin.Turn("-M7lbGZnSu6SItqBzU4n", 10)])
+				.add([new Odin.Turn(_tokenId_1, 20)])
+				.insert([new Odin.Turn(_tokenId_1, 10)])
 				.parse(),
-			[{"id":"-M7lbGZnSu6SItqBzU4n","pr":10,"custom":""},{"id":"-M7lbGZnSu6SItqBzU4n","pr":20,"custom":""}]);
+			[{"id":_tokenId_1,"pr":10,"custom":""},{"id":_tokenId_1,"pr":20,"custom":""}]);
 	})
 
 	// Players
@@ -371,7 +375,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// ------------------------------------------------------------------------
 
 	.add("Finds a card by id", false, () => {
-		return Odin.Test.assertNotEmptyObject(new Odin.Card().findId("-M8swNpKKC6Ujo0SvBel").obj);
+		return Odin.Test.assertNotEmptyObject(new Odin.Card().findId(_cardId_1).obj);
 	})
 
 	// Cards
@@ -409,7 +413,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// ------------------------------------------------------------------------
 
 	.add("Finds a token by id", true, () => {
-		//return Odin.Test.assertNotEmptyObject(new Odin.Token().findId("-M7lbGZnSu6SItqBzU4n").obj);
+		//return Odin.Test.assertNotEmptyObject(new Odin.Token().findId(_tokenId_1).obj);
 		return true;
 	})
 
@@ -424,7 +428,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// ------------------------------------------------------------------------
 
 	.add("Finds a character by id", false, () => {
-		return Odin.Test.assertNotEmptyObject(new Odin.Character().findId("-M7laLPHxEwBBvSma4gh").obj);
+		return Odin.Test.assertNotEmptyObject(new Odin.Character().findId(_characterId_1).obj);
 	})
 
 	;
