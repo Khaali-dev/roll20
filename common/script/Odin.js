@@ -1185,7 +1185,7 @@ var Odin = (function() {
 		constructor(order) {
 			this.order = order;
 		}
-	
+
 		/**
 		 * @return true if the turn order is displayed.
 		 */

@@ -223,17 +223,17 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 
 	.add("Sort poker cards", false, () => {
 		const turns = [
-			{"id":_tokenId_1, "pr":"6♣", "custom":"","_pageid":_pageId_1},
-			{"id":_tokenId_2,"pr":"RJo","custom":"","_pageid":_pageId_1},
-			{"id":_tokenId_1,"pr":"9♣","custom":"","_pageid":_pageId_1},
-			{"id":_tokenId_2,"pr":"4♥","custom":"","_pageid":_pageId_1},
-			{"id":_tokenId_2,"pr":"2♠","custom":"","_pageid":_pageId_1}];
+			{'id':_tokenId_1, 'pr':'6♣', 'custom':'', '_pageid':_pageId_1},
+			{'id':_tokenId_2, 'pr':'RJo', 'custom':'', '_pageid':_pageId_1},
+			{'id':_tokenId_1, 'pr':'9♣', 'custom':'', '_pageid':_pageId_1},
+			{'id':_tokenId_2, 'pr':'4♥', 'custom':'', '_pageid':_pageId_1},
+			{'id':_tokenId_2, 'pr':'2♠', 'custom':'', '_pageid':_pageId_1}];
 		const expected = [
-			{"id":_tokenId_2,"pr":"RJo","custom":"","_pageid":_pageId_1},
-			{"id":_tokenId_1,"pr":"9♣","custom":"","_pageid":_pageId_1},
-			{"id":_tokenId_1, "pr":"6♣", "custom":"","_pageid":_pageId_1},
-			{"id":_tokenId_2,"pr":"4♥","custom":"","_pageid":_pageId_1},
-			{"id":_tokenId_2,"pr":"2♠","custom":"","_pageid":_pageId_1}];
+			{'id':_tokenId_2, 'pr':'RJo', 'custom':'', '_pageid':_pageId_1},
+			{'id':_tokenId_1, 'pr':'9♣', 'custom':'', '_pageid':_pageId_1},
+			{'id':_tokenId_1, 'pr':'6♣', 'custom':'', '_pageid':_pageId_1},
+			{'id':_tokenId_2, 'pr':'4♥', 'custom':'', '_pageid':_pageId_1},
+			{'id':_tokenId_2, 'pr':'2♠', 'custom':'', '_pageid':_pageId_1}];
 		return Odin.Test.assertArrayEqual(
 			expected,
 			_.sortBy(turns, function(turn)
@@ -277,7 +277,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 				.add([new Odin.Turn(_tokenId_1, 20)])
 				.insert([new Odin.Turn(_tokenId_1, 10)])
 				.parse(),
-			[{"id":_tokenId_1,"pr":10,"custom":""},{"id":_tokenId_1,"pr":20,"custom":""}]);
+			[{'id':_tokenId_1,'pr':10,'custom':''},{'id':_tokenId_1,'pr':20,'custom':''}]);
 	})
 
 	// Players
@@ -288,8 +288,8 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	})
 
 	.add("Finds players by name", false, () => {
-		return Odin.Test.assertNotEmptyArray(new Odin.Players().findName("Marshall").objs) &&
-		       Odin.Test.assertEmptyArray(new Odin.Players().findName("Unknown").objs);
+		return Odin.Test.assertNotEmptyArray(new Odin.Players().findName('Marshall').objs) &&
+		       Odin.Test.assertEmptyArray(new Odin.Players().findName('Unknown').objs);
 	})
 
 	.add("Finds online players", false, () => {
@@ -313,8 +313,8 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	})
 
 	.add("Finds a player by name", false, () => {
-		return Odin.Test.assertNotEmptyObject(new Odin.Player().findName("Marshall").obj) &&
-		       Odin.Test.assertEmptyObject(new Odin.Player().findName("Unknown").obj);
+		return Odin.Test.assertNotEmptyObject(new Odin.Player().findName('Marshall').obj) &&
+		       Odin.Test.assertEmptyObject(new Odin.Player().findName('Unknown').obj);
 	})
 
 	.add("Player is game master", false, () => {
