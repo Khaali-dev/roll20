@@ -362,6 +362,16 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return maxSize === size + 2;
 	})
 
+	.add("Cards since last shuffle", false, () => {
+		const deck = new Odin.Deck().findName('Actions').recall().shuffle();
+		const maxSize = _.size(deck.lastShuffle().objs);
+		giveCardToPlayer(_cardId_1, _playerId_1);
+		giveCardToPlayer(_cardId_2, _playerId_1);
+		const before = _.size(deck.lastShuffle().objs);
+		const after = _.size(deck.shuffle().lastShuffle().objs);
+		return maxSize === before && maxSize === after + 2;
+	})
+
 	// Cards
 	// ------------------------------------------------------------------------
 

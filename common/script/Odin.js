@@ -755,6 +755,17 @@ var Odin = (function() {
 			return this;
 		}
 
+		/**
+		 * @return the cards in the deck just after the last shuffle.
+		 */
+		lastShuffle() {
+			return this.obj != null ? new Cards().setObjects(
+				_.chain(this.obj.get('currentDeck').split(/\s*,\s*/))
+				 .map(cardid => getObj('card', cardid))
+				 .reject(_.isUndefined)
+				 .value()) : null;
+		}
+
 	}
 
 	/**
