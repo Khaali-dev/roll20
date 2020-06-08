@@ -747,7 +747,7 @@ var Odin = (function() {
 		}
 
 		/**
-		 * Shuffles cards.
+		 * Shuffles deck.
 		 * @return the instance.
 		 */
 		shuffle() {
@@ -778,6 +778,15 @@ var Odin = (function() {
 		 */
 		constructor() {
 			super('deck', null);
+		}
+
+		/**
+		 * Shuffles all decks.
+		 * @return the instance.
+		 */
+		shuffle() {
+			_.each(this.objs, obj => shuffleDeck(obj.get('id')));
+			return this;
 		}
 
 	}

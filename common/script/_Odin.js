@@ -338,6 +338,18 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return Odin.Test.assertNotEmptyArray(new Odin.Decks().findAll().objs);
 	})
 
+	.add("Shuffle decks", false, () => {
+		const decks = new Odin.Decks().findAll();
+		const deck = new Odin.Deck().findName('Actions').recall();
+		decks.shuffle();
+		const maxSize = _.size(deck.obj.get('currentDeck').split(/\s*,\s*/));
+		giveCardToPlayer(_cardId_1, _playerId_1);
+		giveCardToPlayer(_cardId_2, _playerId_1);
+		decks.shuffle();
+		const size = _.size(deck.obj.get('currentDeck').split(/\s*,\s*/));
+		return maxSize === size + 2;
+	})
+
 	// Deck
 	// ------------------------------------------------------------------------
 
