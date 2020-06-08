@@ -830,24 +830,6 @@ var Odin = (function() {
 			return this;
 		}
 
-		/**
-		 * Finds all cards from the specified deck since the last shuffle.
-		 * @param id The identifier of the deck where to find cards.
-		 * @return the instance.
-		 */
-		findDeck(id) {
-			const deck = new Odin.Deck().findId(id);
-			if (deck != null && deck.obj != null) {
-				this.objs = _.chain(deck.obj.get('currentDeck').split(/\s*,\s*/))
-				             .map(cardid => getObj('card', cardid))
-				             .reject(_.isUndefined)
-				             .value();
-			} else {
-				this.objs = null;
-			}
-			return this;
-		}
-
 	}
 
 	/**
