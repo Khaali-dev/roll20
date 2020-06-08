@@ -480,7 +480,7 @@ var Odin = (function() {
 		/**
 		 * Filters the objects
 		 * @param predicate The predicate to realize.
-		 * @return filtered objects.
+		 * @return the instance.
 		 */
 		filter(predicate) {
 			this.objs = _.filter(this.objs, predicate);
@@ -510,7 +510,7 @@ var Odin = (function() {
 		 * Finds all the objects.
 		 * @param type    The type of the objects to get.
 		 * @param subtype The subtype of the objects to get.
-		 * @return the instance.
+		 * @return the matching objects.
 		 */
 		static _findAll(type, subtype) {
 			return subtype != null ?
@@ -524,7 +524,7 @@ var Odin = (function() {
 		 * @param subtype The subtype of the objects to get.
 		 * @param key     The name of property of the objects to get.
 		 * @param value   The value of property of the objects to get.
-		 * @return the instance.
+		 * @return the matching objects.
 		 */
 		static _findProperty(type, subtype, key, value) {
 			const query = subtype != null ? { _type: type, _subtype: subtype } : { _type: type };
@@ -592,16 +592,6 @@ var Odin = (function() {
 		}
 
 		/**
-		 * Finds the players with the specified name.
-		 * @param name The name to match.
-		 * @return the instance.
-		 */
-		findName(name) {
-			this.objs = Objects._findProperty(this.type, this.subtype, '_displayname', name);
-			return this;
-		}
-
-		/**
 		 * Finds the online or offline players.
 		 * @param online True if players must be online.
 		 * @return the instance.
@@ -612,17 +602,12 @@ var Odin = (function() {
 		}
 
 		/**
-		 * @return filtered game masters.
-		 */
-		filterMasters() {
-			return this.filter(function(obj) { return (playerIsGM(obj.get('id')) === true); });
-		}
-
-		/**
+		 * Finds the players or the game masters.
+		 * @param master True if players must be game master.
 		 * @return filtered players.
 		 */
-		filterPlayers() {
-			return this.filter(function(obj) { return (playerIsGM(obj.get('id')) === false); });
+		filterMaster(master) {
+			return this.filter(function(obj) { return (playerIsGM(obj.get('id')) === master); });
 		}
 
 	}

@@ -277,7 +277,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 				.add([new Odin.Turn(_tokenId_1, 20)])
 				.insert([new Odin.Turn(_tokenId_1, 10)])
 				.parse(),
-			[{'id':_tokenId_1,'pr':10,'custom':''},{'id':_tokenId_1,'pr':20,'custom':''}]);
+			[{'id':_tokenId_1, 'pr':10, 'custom':''}, {'id':_tokenId_1, 'pr':20, 'custom':''}]);
 	})
 
 	// Players
@@ -287,22 +287,14 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().objs);
 	})
 
-	.add("Finds players by name", false, () => {
-		return Odin.Test.assertNotEmptyArray(new Odin.Players().findName('Marshall').objs) &&
-		       Odin.Test.assertEmptyArray(new Odin.Players().findName('Unknown').objs);
-	})
-
 	.add("Finds online players", false, () => {
 		return Odin.Test.assertNotEmptyArray(new Odin.Players().findOnline(true).objs) &&
 		       Odin.Test.assertNotEmptyArray(new Odin.Players().findOnline(false).objs);
 	})
 
-	.add("filters game masters", false, () => {
-		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().filterMasters().objs);
-	})
-
-	.add("filters players", false, () => {
-		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().filterPlayers().objs);
+	.add("Filters players if game master", false, () => {
+		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().filterMaster(true).objs) &&
+		       Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().filterMaster(false).objs);
 	})
 
 	// Player
