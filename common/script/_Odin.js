@@ -287,6 +287,11 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().objs);
 	})
 
+	.add("Finds all players by name", false, () => {
+		return Odin.Test.assertNotEmptyArray(new Odin.Players().findName("Marshall").objs) &&
+		       Odin.Test.assertEmptyArray(new Odin.Players().findName("Unknown").objs);
+	})
+
 	.add("Filters online players", false, () => {
 		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().filterOnline().objs);
 	})
@@ -302,15 +307,17 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().filterPlayers().objs);
 	})
 
-	.add("Finds a players by name", false, () => {
-		return new Odin.Players().findName("Unknown").only() === null && Odin.Test.assertNotEmptyObject(new Odin.Players().findName("Marshall").only());
-	})
 
 	// Player
 	// ------------------------------------------------------------------------
 
 	.add("Finds a player by id", false, () => {
 		return Odin.Test.assertNotEmptyObject(new Odin.Player().findId(_playerId_1).obj);
+	})
+
+	.add("Finds a player by name", false, () => {
+		return Odin.Test.assertNotEmptyObject(new Odin.Player().findName("Marshall").obj) &&
+		       Odin.Test.assertEmptyObject(new Odin.Player().findName("Unknown").obj);
 	})
 
 	.add("Player is game master", false, () => {

@@ -214,6 +214,19 @@ var Odin = (function() {
 		}
 
 		/**
+		 * Checks the object is null or empty.
+		 * @param object The object to check.
+		 * @return true if object is empty or null;
+		 */
+		static assertEmptyObject(object) {
+			const assert = !_.isObject(object) || _.isEmpty(object);
+			if (!assert) {
+				log(assert);
+			}
+			return assert;
+		}
+
+		/**
 		 * Checks the object is not null or empty.
 		 * @param object The object to check.
 		 * @return true if object is not empty or null;
@@ -417,16 +430,25 @@ var Odin = (function() {
 		}
 
 		/**
-		 * Sets the specified object property.
-		 * @param name The name of the property to set.
-		 * @param value The value of the property to set.
+		 * Sets the specified object.
+		 * @param obj The object to set.
 		 * @return the instance.
 		 */
-		set(name, value) {
-			if (this.obj != null) {
-				this.obj.set(name, false);
-			}
+		setObject(obj) {
+			this.obj = obj;
 			return this;
+		}
+
+		/**
+		 * Finds the only object with the specified property. The object is reset if no or more than one object match.
+		 * @param type    The type of the objects to get.
+		 * @param subtype The subtype of the objects to get.
+		 * @param key     The name of the property used to query the object.
+		 * @param value   The value of the property used to query the object.
+		 * @return the instance.
+		 */
+		static _findProperty(type, subtype, key, value) {
+			return Objects._only(Objects._findProperty(type, subtype, key, value));
 		}
 
 	}
@@ -451,16 +473,7 @@ var Odin = (function() {
 		 * @return all objects.
 		 */
 		findAll() {
-			if (this.subtype != null) {
-				this.objs = findObjs({
-					_type: this.type,
-					_subtype: this.subtype
-				});
-			} else {
-				this.objs = findObjs({
-					_type: this.type
-				});
-			}
+			this.objs = Objects._findAll(this.type, this.subtype);
 			return this;
 		}
 
@@ -475,10 +488,48 @@ var Odin = (function() {
 		}
 
 		/**
-		 * @return the only object of the collection, or null if no or more than one object. 
+		 * Sets the specified objects.
+		 * @param objs The objects to set.
+		 * @return the instance.
 		 */
-		only() {
-			return _.isUndefined(this.objs) || _.size(this.objs) === 0 || _.size(this.objs) > 1 ? null : _.first(this.objs);
+		setObjects(objs) {
+			this.objs = objs;
+			return this;
+		}
+
+		/**
+		 * Gets the only objects of the specified collection.
+		 * @param objs The objects to watch.
+		 * @return the only object or null if none or more than one.
+		 */
+		static _only(objs) {
+			return _.isUndefined(objs) || _.size(objs) === 0 || _.size(objs) > 1 ? null : _.first(objs);
+		}
+
+		/**
+		 * Finds all the objects.
+		 * @param type    The type of the objects to get.
+		 * @param subtype The subtype of the objects to get.
+		 * @return the instance.
+		 */
+		static _findAll(type, subtype) {
+			return subtype != null ?
+				findObjs({_type: type, _subtype: subtype}) :
+				findObjs({_type: type});
+		}
+
+		/**
+		 * Finds the objects with the specified property.
+		 * @param type    The type of the objects to get.
+		 * @param subtype The subtype of the objects to get.
+		 * @param key     The name of property of the objects to get.
+		 * @param value   The value of property of the objects to get.
+		 * @return the instance.
+		 */
+		static _findProperty(type, subtype, key, value) {
+			const query = subtype != null ? { _type: type, _subtype: subtype } : { _type: type };
+			query[key] = value;
+			return findObjs(query);
 		}
 
 	}
@@ -493,6 +544,16 @@ var Odin = (function() {
 		 */
 		constructor() {
 			super('player', null);
+		}
+
+		/**
+		 * Finds the player with the specified name.
+		 * @param name The name to match.
+		 * @return the instance.
+		 */
+		findName(name) {
+			this.obj = Object._findProperty(this.type, this.subtype, '_displayname', name);
+			return this;
 		}
 
 		/**
@@ -536,10 +597,7 @@ var Odin = (function() {
 		 * @return the instance.
 		 */
 		findName(name) {
-			this.objs = findObjs({
-				_type: this.type,
-				_displayname: name
-			});
+			this.objs = Objects._findProperty(this.type, this.subtype, '_displayname', name);
 			return this;
 		}
 
