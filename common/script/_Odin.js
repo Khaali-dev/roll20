@@ -420,6 +420,10 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return Odin.Test.assertNotEmptyArray(new Odin.Characters().findAll().objs);
 	})
 
+	.add("Finds characters by name", false, () => {
+		return Odin.Test.assertNotEmptyArray(new Odin.Characters().findName('Lincoln').objs);
+	})
+
 	// Character
 	// ------------------------------------------------------------------------
 

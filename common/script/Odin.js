@@ -547,8 +547,8 @@ var Odin = (function() {
 		}
 
 		/**
-		 * Finds the player with the specified name.
-		 * @param name The name to match.
+		 * Finds the specified player.
+		 * @param name The name of the player to find.
 		 * @return the instance.
 		 */
 		findName(name) {
@@ -667,20 +667,18 @@ var Odin = (function() {
 		}
 
 		/**
-		 * Filters the characters by name.
-		 * @param name The name of the characters.
-		 * @return the filtered characters.
+		 * Finds the specified characters.
+		 * @param name The name of the characters to find.
+		 * @return the instance.
 		 */
 		findName(name) {
-			this.data = findObjs({type:'character', name: name});
+			this.objs = Objects._findProperty(this.type, this.subtype, 'name', name);
 			return this;
 		}
+	
+
 
 		/*
-		static charactersByName(name) {
-			return findObjs({type:'character', name: name});
-		}
-
 		static npc(name) {
 			return findObjs({type:'character', name: name, controlledby: ""});
 		}
