@@ -2,7 +2,8 @@ const _playerId_1 = "-M5rtkkXsEkckPk1v0DL";
 const _pageId_1 = "-M5xeoigOD2b0Vsz4stI";
 const _tokenId_1 = "-M7lbGZnSu6SItqBzU4n";
 const _tokenId_2 = "-M7lbEbIk_ER_Mt51qZF";
-const _characterId_1 = "-M7laLPHxEwBBvSma4gh";
+const _characterId_1 = "-M7laLPHxEwBBvSma4gh"; // Lincoln
+const _characterId_2 = "-M63mpWsG_c3BwN1b3DU"; // Sadie
 const _cardId_1 = "-M8swNpKKC6Ujo0SvBel";
 
 var _odin = _odin || new Odin.TestSuite("Odin")
@@ -429,6 +430,11 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 
 	.add("Finds a character by id", false, () => {
 		return Odin.Test.assertNotEmptyObject(new Odin.Character().findId(_characterId_1).obj);
+	})
+
+	.add("Character is a player character", false, () => {
+		return Odin.Test.assertFalse(new Odin.Character().findId(_characterId_1).isPlayerCharacter()) &&
+		       Odin.Test.assertTrue(new Odin.Character().findId(_characterId_2).isPlayerCharacter());
 	})
 
 	;

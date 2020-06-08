@@ -652,6 +652,13 @@ var Odin = (function() {
 			super('character', null);
 		}
 
+		/**
+		 * @return true if the character is a player character. 
+		 */
+		isPlayerCharacter() {
+			return this.obj != null && this.obj.get('controlledby') != '';
+		}
+
 	}
 
 	/**
