@@ -781,11 +781,20 @@ var Odin = (function() {
 		}
 
 		/**
-		 * Shuffles all decks.
+		 * Shuffles decks.
 		 * @return the instance.
 		 */
 		shuffle() {
 			_.each(this.objs, obj => shuffleDeck(obj.get('id')));
+			return this;
+		}
+
+		/**
+		 * Recalls cards.
+		 * @return the instance.
+		 */
+		recall() {
+			_.each(this.objs, obj => recallCards(obj.get('id')));
 			return this;
 		}
 
@@ -833,7 +842,7 @@ var Odin = (function() {
 		 */
 		findTable() {
 			this.objs = _.chain(this.findAll().objs)
-			             .map(obj => getObj(Property.GRAPHIC.CARD, obj.get('cardid')))
+			             .map(obj => getObj('card', obj.get('cardid')))
 			             .reject(_.isUndefined)
 			             .value();
 			return this;

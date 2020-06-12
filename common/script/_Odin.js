@@ -362,7 +362,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		       Odin.Test.assertEmptyObject(new Odin.Deck().findName('Unknown').obj);
 	})
 
-	.add("Recall cards and shuffle deck", false, () => {
+	.add("Recalls cards and shuffle deck", false, () => {
 		const deck = new Odin.Deck().findName('Actions');
 		deck.recall().shuffle();
 		const maxSize = _.size(deck.obj.get('currentDeck').split(/\s*,\s*/));
@@ -386,10 +386,10 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// Cards
 	// ------------------------------------------------------------------------
 
-	.add("Finds all cards on table", false, () => {
-		// new Odin.Decks().findAll().recall().shuffle();
-		// Plays N cards on the table
-		// Compare cards on the table by calling new Odin.Cards().findTable().objs 
+	.add("Finds all cards on table", true, () => {
+		// Recall cards
+		// Put cards on the table
+		// Find it
 		return true;
 	})
 
