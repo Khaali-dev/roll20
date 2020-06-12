@@ -85,62 +85,55 @@ on("sheet:opened", function(eventInfo){
     });
 });
 </script>
+<script type="text/javascript">
+function openPage(evt, pageName) {
+  // Declare all variables
+  var i, tabcontent, tablinks, pagetarget;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("sheet-tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("sheet-tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" sheet-active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+	pagetarget = document.getElementsByClassName(pageName);
+	for (i = 0; i < pagetarget.length; i++)	{
+		pagetarget[i].style.display = "block";
+	}  
+  evt.currentTarget.className += " sheet-active";
+};
+</script>
 
 <div class="sheet-wrapper">
-  <!-- Sheet Header -->
-  <div class="sheet-3colrow">
-    <div class="sheet-col">
-      <div>
-        <div class="sheet-row">
-            <h3>
-                <span data-i18n="name">Name:</span></h3>
-            <input type="text" name="attr_charname" /> <br />
-        </div>
-        <div class="sheet-row sheet-buttons sheet-big">
-            <h3>
-          <span data-i18n="gmRollToggle">GM Roll Toggle</span>
-            </h3>
-          <input type="radio" name="attr_gmtoggle" value="/w gm " /><span data-i18n="on">On</span>
-          <input type="radio" name="attr_gmtoggle" value="" checked="checked" /><span data-i18n="off">Off</span>
-        </div>
-      </div>
-    </div>
-    <div class="sheet-col">
-      <img src="http://i.imgur.com/IRCeOyE.png" alt="banner"/>
-    </div>
-    <div class="sheet-col">
-      <div>
-        <div class="sheet-row">
-          <h3><span data-i18n="occupation">Occupation</span></h3>
-        </div>
-        <div class="sheet-row sheet-big">
-          <input type="text" name="attr_charocc"/> <br />
-		  <h3><span data-i18n="bounty">Bounty</span> </h3>
-            <span style="font-size: xx-small;"></span><span data-i18n="unspent">unspent</span><br/>
-		  <span class="sheet-third"> <input type="text" name="attr_bountyunspent" class="sheet-third" /></span> /  <span class="sheet-third"><input type="text" name="attr_bountytotal" /></span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <br>
-  <!-- Navigation -->
-    <input type="radio" class="sheet-tab sheet-tab5" name="attr_core-tab" value="5" title="Core" checked="checked"/>
-    <span class="sheet-tab sheet-tab5" style="line-height: 40px;" data-i18n="core">Core</span>
-
-    <input type="radio" class="sheet-tab sheet-tab1" name="attr_core-tab" value="1" title="Traits &amp; Aptitudes" />
-    <span class="sheet-tab sheet-tab1" style="line-height: 40px;" data-i18n="traits">Traits &amp; Aptitudes</span>
-
-    <input type="radio" class="sheet-tab sheet-tab2" name="attr_core-tab" value="2" title="Combat Stuff"/>
-    <span class="sheet-tab sheet-tab2" style="line-height: 40px;" data-i18n="combat">Combat</span>
-
-    <input type="radio" class="sheet-tab sheet-tab3" name="attr_core-tab" value="3" title="Arcane Abilities"/>
-    <span class="sheet-tab sheet-tab3" style="line-height: 40px;" data-i18n="arcane">Arcane</span>
-
+	
+	<div class="sheet-nav">
+		
+  		<button class="sheet-tablinks sheet-core-tab sheet-active" onclick="openPage(event, 'sheet-section-core sheet-tabcontent')">
+	  		<span class="sheet-tab sheet-tab1" style="line-height: 40px;" data-i18n="core">Core</span>
+		</button>
+  		<button class="sheet-tablinks sheet-aptitudes-tab" onclick="openPage(event, 'sheet-section-traits')">
+			<span class="sheet-tab sheet-tab2" style="line-height: 40px;" data-i18n="traits">Aptitudes</span>
+		</button>
+		
+  		<button class="sheet-tablinks sheet-combat-tab" onclick="openPage(event, 'sheet-section-combat')">
+			<span class="sheet-tab sheet-tab3" style="line-height: 40px;" data-i18n="combat">Combat</span>
+		</button>
+  		<button class="sheet-tablinks sheet-arcane-tab" onclick="openPage(event, 'sheet-section-arcane')">
+			<span class="sheet-tab sheet-tab3" style="line-height: 40px;" data-i18n="arcane">Arcane</span>
+		</button>
+</div>
 
 
   <!-- Navigation -->
   <br><br>
-  <div class="sheet-section-core">
+  <div class="sheet-section-core sheet-tabcontent">
       <div class="sheet-2colrow">
           <div class="sheet-col">
               <div class="sheet-borderdiv">
@@ -360,12 +353,74 @@ on("sheet:opened", function(eventInfo){
     </div>
       
       <br/>
+      <div class="sheet-row">
+          <div class="sheet-2colrow">
+              <div class="sheet-col">
+                  <div class="sheet-row">
+                      <h2><span data-i18n="edges">Edges</span></h2>
+                  </div>
+                  <fieldset class="repeating_edges">
+                      <div class="sheet-row sheet-textarea">
+                          <input type="text" name="attr_edgename" placeholder="Edge name"><br>
+                          <textarea name="attr_edgesdesc" class="sheet-shorttextarea"></textarea>
+                      </div>
+                  </fieldset>
+              </div>
+              <div class="sheet-col">
+                  <div class="sheet-row">
+                      <h2><span data-i18n="hindrances">Hindrances</span></h2>
+                  </div>
+                  <fieldset class="repeating_hinds">
+                      <div class="sheet-row sheet-textarea">
+                          <input type="text" name="attr_hindname" placeholder="Hindrance name"><br>
+                          <textarea name="attr_hinddesc" class="sheet-shorttextarea"></textarea>
+                      </div>
+                  </fieldset>
+              </div>
+          </div>
+          <div class="sheet-2colrow">
+              <div class="sheet-col">
+                  <div class="sheet-row">
+                      <h2><span data-i18n="equipment">Equipment</span></h2>
+                  </div>
+                  <div class="sheet-row sheet-textarea">
+                      <textarea name="attr_equipment" class="sheet-textarea" placeholder="Equipment"></textarea>
+                  </div>
+              </div>
+              <div class="sheet-col">
+                  <div class="sheet-row">
+                      <h2><span data-i18n="money">Money</span></h2>
+                  </div>
+                  <div class="sheet-row sheet-textarea">
+                      <textarea name="attr_money" class="sheet-textarea" placeholder="Money"></textarea>
+                  </div>
+              </div>
+          </div>
+          <div class="sheet-2colrow">
+              <div class="sheet-col">
+                  <div class="sheet-row">
+                      <h2><span data-i18n="worstNightmare">Worst Nightmare</span></h2>
+                  </div>
+                  <div class="sheet-row sheet-textarea">
+                      <textarea name="attr_nightmare" class="sheet-textarea" placeholder="Elm Street"></textarea>
+                  </div>
+              </div>
+              <div class="sheet-col">
+                  <div class="sheet-row">
+                      <h2><span data-i18n="notes">Notes</span></h2>
+                  </div>
+                  <div class="sheet-row sheet-textarea">
+                      <textarea name="attr_notes" class="sheet-textarea" placeholder="Notes"></textarea>
+                  </div>
+              </div>
+          </div>
+      </div>
     
   </div>
   <!-- Sheet Header -->
 
     <!-- Traits & Aptitudes Tab -->
-    <div class="sheet-section-traits">
+    <div class="sheet-section-traits sheet-tabcontent">
 
         <!-- Ligne avec 2 colonnes -->
         <div class="sheet-2colrow">
@@ -1599,7 +1654,7 @@ on("sheet:opened", function(eventInfo){
   <!-- Traits & Aptitudes Tab -->
 
   <!-- Combat Stuff Tab -->
-  <div class="sheet-section-combat">
+  <div class="sheet-section-combat sheet-tabcontent">
     <div class="sheet-borderdiv">
       <div class="sheet-row">
         <div class="sheet-center">
@@ -1830,7 +1885,7 @@ on("sheet:opened", function(eventInfo){
     </div><!-- Combat Stuff Tab -->
 
   <!-- Arcane Ablities Tab -->
-  <div class="sheet-section-arcane">
+  <div class="sheet-section-arcane sheet-tabcontent">
     <div class="sheet-row">
         
         <div class="sheet-radios">
@@ -1908,72 +1963,6 @@ on("sheet:opened", function(eventInfo){
    <!-- -->
     <!---->
    <!-- Arcane Ablities Tab -->
-
-  <!-- Misc Tab -->
-  <div class="sheet-section-misc">
-    <div class="sheet-row">
-      <div class="sheet-2colrow">
-        <div class="sheet-col">
-          <div class="sheet-row">
-            <h2><span data-i18n="edges">Edges</span></h2>
-          </div>
-          <fieldset class="repeating_edges">
-            <div class="sheet-row sheet-textarea">
-              <input type="text" name="attr_edgename" placeholder="Edge name"><br>
-              <textarea name="attr_edgesdesc" class="sheet-shorttextarea"></textarea>
-            </div>
-          </fieldset>
-        </div>
-        <div class="sheet-col">
-          <div class="sheet-row">
-            <h2><span data-i18n="hindrances">Hindrances</span></h2>
-          </div>
-          <fieldset class="repeating_hinds">
-            <div class="sheet-row sheet-textarea">
-              <input type="text" name="attr_hindname" placeholder="Hindrance name"><br>
-              <textarea name="attr_hinddesc" class="sheet-shorttextarea"></textarea>
-            </div>
-          </fieldset>
-        </div>
-      </div>
-      <div class="sheet-2colrow">
-        <div class="sheet-col">
-          <div class="sheet-row">
-            <h2><span data-i18n="equipment">Equipment</span></h2>
-          </div>
-          <div class="sheet-row sheet-textarea">
-            <textarea name="attr_equipment" class="sheet-textarea" placeholder="Equipment"></textarea>
-          </div>
-        </div>
-        <div class="sheet-col">
-          <div class="sheet-row">
-          <h2><span data-i18n="money">Money</span></h2>
-          </div>
-          <div class="sheet-row sheet-textarea">
-            <textarea name="attr_money" class="sheet-textarea" placeholder="Money"></textarea>
-          </div>
-        </div>
-      </div>
-      <div class="sheet-2colrow">
-        <div class="sheet-col">
-          <div class="sheet-row">
-            <h2><span data-i18n="worstNightmare">Worst Nightmare</span></h2>
-          </div>
-          <div class="sheet-row sheet-textarea">
-            <textarea name="attr_nightmare" class="sheet-textarea" placeholder="Elm Street"></textarea>
-          </div>
-        </div>
-        <div class="sheet-col">
-          <div class="sheet-row">
-            <h2><span data-i18n="notes">Notes</span></h2>
-          </div>
-          <div class="sheet-row sheet-textarea">
-            <textarea name="attr_notes" class="sheet-textarea" placeholder="Notes"></textarea>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div><!-- Misc Tab -->
 
   
 </div>
