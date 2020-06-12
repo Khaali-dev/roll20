@@ -31,11 +31,9 @@
 /* ===== TABS ===== */
 
 .charsheet .sheet-nav {
-	background: url("img/banner.png") no-repeat;
+	background: url("https://raw.githubusercontent.com/rlepennec/roll20/ND-charsheet/deadlands/sheet/img/banner.png") no-repeat;
 	height:185px;
 }
-
-
 
 /*this hides the radio button for each tab, makes it 130px wide and 40px tall and makes sure it's above everything else*/
 .charsheet button.sheet-tablinks {
@@ -64,7 +62,7 @@
 }
 
 .charsheet .sheet-nav button.sheet-active {
-	background:url("img/crosshair.png") no-repeat center;
+	background:url("https://raw.githubusercontent.com/rlepennec/roll20/ND-charsheet/deadlands/sheet/img/crosshair.png") no-repeat center;
 }
 
 .charsheet .sheet-section-core {
