@@ -5,11 +5,9 @@
 <!-- Shooting & Perfomin-->
         <link href="assets/base.css" rel="stylesheet" type="text/css"/>
         <link href="assets/app.css" rel="stylesheet" type="text/css"/>
-        <link href="deadlandsclassic_anniversary.css" rel="stylesheet" type="text/css"/>        
+        <link href="deadlandsclassic_anniversary.css" rel="stylesheet" type="text/css"/>  
+		<script src="deadlands_anniversary.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <!--<script src="assets/app.js"></script>        
-         <script src="assets/base.js"></script>      
-        <script src="assets/firebase.2.4.0.js"></script>-->
 <script type="text/worker">
 
 on("sheet:opened", function(eventInfo){
@@ -89,54 +87,25 @@ on("sheet:opened", function(eventInfo){
             
             
 <div class="sheet-wrapper">
-  <!-- Sheet Header -->
-  <div class="sheet-3colrow">
-    <div class="sheet-col">
-      <div>
-        <div class="sheet-row">
-            <h3>
-                <span data-i18n="name">Name:</span></h3>
-            <input type="text" name="attr_charname" /> <br />
-        </div>
-        <div class="sheet-row sheet-buttons sheet-big">
-            <h3>
-          <span data-i18n="gmRollToggle">GM Roll Toggle</span>
-            </h3>
-          <input type="radio" name="attr_gmtoggle" value="/w gm " /><span data-i18n="on">On</span>
-          <input type="radio" name="attr_gmtoggle" value="" checked="checked" /><span data-i18n="off">Off</span>
-        </div>
-      </div>
-    </div>
-    <div class="sheet-col">
-      <img src="http://i.imgur.com/IRCeOyE.png" alt="banner"/>
-    </div>
-    <div class="sheet-col">
-      <div>
-        <div class="sheet-row">
-          <h3><span data-i18n="occupation">Occupation</span></h3>
-        </div>
-        <div class="sheet-row sheet-big">
-          <input type="text" name="attr_charocc"/> <br />
-		  <h3><span data-i18n="bounty">Bounty</span> </h3>
-            <span style="font-size: xx-small;"></span><span data-i18n="unspent">unspent</span><br/>
-		  <span class="sheet-third"> <input type="text" name="attr_bountyunspent" class="sheet-third" /></span> /  <span class="sheet-third"><input type="text" name="attr_bountytotal" /></span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <br>
-  <!-- Navigation -->
-    <input type="radio" class="sheet-tab sheet-tab5" name="attr_core-tab" value="5" title="Core" checked="checked"/>
-    <span class="sheet-tab sheet-tab5" style="line-height: 40px;" data-i18n="core">Core</span>
+	
+	<div class="sheet-nav">
+  <button class="tablinks" onclick="openCity(event, 'London')">London</button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+</div>
 
-    <input type="radio" class="sheet-tab sheet-tab1" name="attr_core-tab" value="1" title="Aptitudes" />
-    <span class="sheet-tab sheet-tab1" style="line-height: 40px;" data-i18n="traits">Aptitudes</span>
 
-    <input type="radio" class="sheet-tab sheet-tab2" name="attr_core-tab" value="2" title="Combat Stuff"/>
-    <span class="sheet-tab sheet-tab2" style="line-height: 40px;" data-i18n="combat">Combat</span>
+<input type="radio" class="sheet-tab sheet-tab5" name="attr_core-tab" value="5" title="Core" checked="checked"/>
+<span class="sheet-tab sheet-tab5" style="line-height: 40px;" data-i18n="core">Core</span>
 
-    <input type="radio" class="sheet-tab sheet-tab3" name="attr_core-tab" value="3" title="Arcane Abilities"/>
-    <span class="sheet-tab sheet-tab3" style="line-height: 40px;" data-i18n="arcane">Arcane</span>
+<input type="radio" class="sheet-tab sheet-tab1" name="attr_core-tab" value="1" title="Aptitudes" />
+<span class="sheet-tab sheet-tab1" style="line-height: 40px;" data-i18n="traits">Aptitudes</span>
+
+<input type="radio" class="sheet-tab sheet-tab2" name="attr_core-tab" value="2" title="Combat Stuff"/>
+<span class="sheet-tab sheet-tab2" style="line-height: 40px;" data-i18n="combat">Combat</span>
+
+<input type="radio" class="sheet-tab sheet-tab3" name="attr_core-tab" value="3" title="Arcane Abilities"/>
+<span class="sheet-tab sheet-tab3" style="line-height: 40px;" data-i18n="arcane">Arcane</span>
 
 
 
@@ -1986,6 +1955,6 @@ on("sheet:opened", function(eventInfo){
                                                                         
             
             
-        </div>
+        
     </body>
 </html>
