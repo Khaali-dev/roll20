@@ -6,7 +6,7 @@
         <link href="assets/base.css" rel="stylesheet" type="text/css"/>
         <link href="assets/app.css" rel="stylesheet" type="text/css"/>
         <link href="deadlandsclassic_anniversary.css" rel="stylesheet" type="text/css"/>  
-		<script src="deadlands_anniversary.js"></script>
+		<!--<script src="deadlands_anniversary.js"></script>-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/worker">
 
@@ -75,7 +75,33 @@ on("sheet:opened", function(eventInfo){
     
 });
 
+
 </script>
+<script type="text/javascript">
+		
+function openPage(evt, pageName) {
+  // Declare all variables
+  var i, tabcontent, tablinks, pagetarget;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("sheet-tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("sheet-tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" sheet-active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+	pagetarget = document.getElementsByClassName(pageName);
+	for (i = 0; i < pagetarget.length; i++)	{
+		pagetarget[i].style.display = "block";
+	}  
+  evt.currentTarget.className += " sheet-active";
+};</script>
     </head>
     <body class="ui-dialog">
         <div class="charsheet">
@@ -90,17 +116,17 @@ on("sheet:opened", function(eventInfo){
 	
 	<div class="sheet-nav">
 		
-  		<button class="sheet-tablinks sheet-core-tab" onclick="openCity(event, 'Core')">
+  		<button class="sheet-tablinks sheet-core-tab sheet-active" onclick="openPage(event, 'sheet-section-core sheet-tabcontent')">
 	  		<span class="sheet-tab sheet-tab1" style="line-height: 40px;" data-i18n="core">Core</span>
 		</button>
-  		<button class="sheet-tablinks sheet-aptitudes-tab" onclick="openCity(event, 'Aptitudes')">
+  		<button class="sheet-tablinks sheet-aptitudes-tab" onclick="openPage(event, 'sheet-section-traits')">
 			<span class="sheet-tab sheet-tab2" style="line-height: 40px;" data-i18n="traits">Aptitudes</span>
 		</button>
 		
-  		<button class="sheet-tablinks sheet-combat-tab" onclick="openCity(event, 'Combat')">
+  		<button class="sheet-tablinks sheet-combat-tab" onclick="openPage(event, 'sheet-section-combat')">
 			<span class="sheet-tab sheet-tab3" style="line-height: 40px;" data-i18n="combat">Combat</span>
 		</button>
-  		<button class="sheet-tablinks sheet-arcane-tab" onclick="openCity(event, 'Arcane')">
+  		<button class="sheet-tablinks sheet-arcane-tab" onclick="openPage(event, 'sheet-section-arcane')">
 			<span class="sheet-tab sheet-tab3" style="line-height: 40px;" data-i18n="arcane">Arcane</span>
 		</button>
 </div>
@@ -108,7 +134,7 @@ on("sheet:opened", function(eventInfo){
 
   <!-- Navigation -->
   <br><br>
-  <div class="sheet-section-core">
+  <div class="sheet-section-core sheet-tabcontent">
       <div class="sheet-2colrow">
           <div class="sheet-col">
               <div class="sheet-borderdiv">
@@ -395,7 +421,7 @@ on("sheet:opened", function(eventInfo){
   <!-- Sheet Header -->
 
     <!-- Traits & Aptitudes Tab -->
-    <div class="sheet-section-traits">
+    <div class="sheet-section-traits sheet-tabcontent">
 
         <!-- Ligne avec 2 colonnes -->
         <div class="sheet-2colrow">
@@ -1629,7 +1655,7 @@ on("sheet:opened", function(eventInfo){
   <!-- Traits & Aptitudes Tab -->
 
   <!-- Combat Stuff Tab -->
-  <div class="sheet-section-combat">
+  <div class="sheet-section-combat sheet-tabcontent">
     <div class="sheet-borderdiv">
       <div class="sheet-row">
         <div class="sheet-center">
@@ -1860,7 +1886,7 @@ on("sheet:opened", function(eventInfo){
     </div><!-- Combat Stuff Tab -->
 
   <!-- Arcane Ablities Tab -->
-  <div class="sheet-section-arcane">
+  <div class="sheet-section-arcane sheet-tabcontent">
     <div class="sheet-row">
         
         <div class="sheet-radios">

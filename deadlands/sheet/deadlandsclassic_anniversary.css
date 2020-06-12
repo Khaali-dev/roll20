@@ -35,15 +35,12 @@
 	height:185px;
 }
 
-/*this hides the contents of each tab by default*/
-.charsheet div[class^="sheet-section"] {
-  display: none;
-}
+
 
 /*this hides the radio button for each tab, makes it 130px wide and 40px tall and makes sure it's above everything else*/
 .charsheet button.sheet-tablinks {
  	width: 160px;
-  	height: 40px;
+  	height: 60px;
   	cursor: pointer;
   	position: relative;
 	border:0;
@@ -57,7 +54,7 @@
 }
 
 .charsheet .sheet-nav button{	
-	top:75px;
+	top:67px;
 	left:50px;
 }
 
@@ -66,12 +63,20 @@
 	left:200px;
 }
 
-
-/*this modifies the span color once the radio button is selected so you know which tab is selected*/
-.charsheet input.sheet-tab1:checked + span.sheet-tab1, .charsheet input.sheet-tab2:checked + span.sheet-tab2, .charsheet input.sheet-tab3:checked + span.sheet-tab3, .charsheet input.sheet-tab4:checked + span.sheet-tab4, .charsheet input.sheet-tab5:checked + span.sheet-tab5, .charsheet input.sheet-tab6:checked + span.sheet-tab6 {
-  color: #ffffff;
-  background-image: url('https://raw.githubusercontent.com/rlepennec/roll20/ND-charsheet/deadlands/sheet/img/sign2.png');
+.charsheet .sheet-nav button.sheet-active {
+	background:url("img/crosshair.png") no-repeat center;
 }
+
+.charsheet .sheet-section-core {
+	display:block;
+}
+
+.charsheet .sheet-section-traits,
+.charsheet .sheet-section-combat,
+.charsheet .sheet-section-arcane{
+	display:none;
+}
+
 /* ===== TABS ===== */
 /* ===== Sheet Update Notice ===== */
 .charsheet input.sheet-notice:checked ~ span.sheet-notice {
