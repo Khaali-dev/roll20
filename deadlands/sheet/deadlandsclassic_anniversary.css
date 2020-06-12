@@ -39,41 +39,34 @@
 .charsheet div[class^="sheet-section"] {
   display: none;
 }
-.charsheet input.sheet-tab1:checked ~ div.sheet-section-traits, .charsheet input.sheet-tab2:checked ~ div.sheet-section-combat, .charsheet input.sheet-tab3:checked ~ div.sheet-section-arcane, .charsheet input.sheet-tab4:checked ~ div.sheet-section-misc, .charsheet input.sheet-tab5:checked ~ div.sheet-section-core, .charsheet input.sheet-tab6:checked ~ div.sheet-section-obsolete {
-  display: block;
-  border-radius: 4px;
-  padding: 5px;
-}
+
 /*this hides the radio button for each tab, makes it 130px wide and 40px tall and makes sure it's above everything else*/
-.charsheet input.sheet-tab {
-  width: 160px;
-  height: 40px;
-  cursor: pointer;
-  opacity: 0;
-  z-index: 9999;
-  position: relative;
+.charsheet button.sheet-tablinks {
+ 	width: 160px;
+  	height: 40px;
+  	cursor: pointer;
+  	position: relative;
+	border:0;
+	outline:none;
+	background-color:transparent;
+	color: white;
+	font-family: 'Shadows into Light', cursive;
+	font-size:18pt;
+	text-transform: uppercase;
+	
 }
-/*this styles the span with the tab information and slides to the left, so it appears underneath the radio button*/
-.charsheet span.sheet-tab {
-  text-align: center;
-  font-size: 14pt;
-  color: black;
-  font-weight: bold;
-  cursor: pointer;
-  font-family: 'Shadows into Light', cursive;
-  text-transform: uppercase;
-  position: relative;
-  width: 140px;
-  height: 40px;
-  background: url('https://raw.githubusercontent.com/rlepennec/roll20/ND-charsheet/deadlands/sheet/img/sign.png') center no-repeat;
-  background-size: cover;
-  padding-left: 10px;
-  padding-right: 10px;
-  vertical-align: baseline;
-  display: inline-block;
-  margin-left: -162px;
-  top: -13px;
+
+.charsheet .sheet-nav button{	
+	top:75px;
+	left:50px;
 }
+
+.charsheet .sheet-nav button.sheet-combat-tab, 
+.charsheet .sheet-nav button.sheet-arcane-tab{
+	left:200px;
+}
+
+
 /*this modifies the span color once the radio button is selected so you know which tab is selected*/
 .charsheet input.sheet-tab1:checked + span.sheet-tab1, .charsheet input.sheet-tab2:checked + span.sheet-tab2, .charsheet input.sheet-tab3:checked + span.sheet-tab3, .charsheet input.sheet-tab4:checked + span.sheet-tab4, .charsheet input.sheet-tab5:checked + span.sheet-tab5, .charsheet input.sheet-tab6:checked + span.sheet-tab6 {
   color: #ffffff;

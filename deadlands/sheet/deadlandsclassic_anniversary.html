@@ -89,24 +89,21 @@ on("sheet:opened", function(eventInfo){
 <div class="sheet-wrapper">
 	
 	<div class="sheet-nav">
-  <button class="tablinks" onclick="openCity(event, 'London')">London</button>
-  <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
-  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+		
+  		<button class="sheet-tablinks sheet-core-tab" onclick="openCity(event, 'Core')">
+	  		<span class="sheet-tab sheet-tab1" style="line-height: 40px;" data-i18n="core">Core</span>
+		</button>
+  		<button class="sheet-tablinks sheet-aptitudes-tab" onclick="openCity(event, 'Aptitudes')">
+			<span class="sheet-tab sheet-tab2" style="line-height: 40px;" data-i18n="traits">Aptitudes</span>
+		</button>
+		
+  		<button class="sheet-tablinks sheet-combat-tab" onclick="openCity(event, 'Combat')">
+			<span class="sheet-tab sheet-tab3" style="line-height: 40px;" data-i18n="combat">Combat</span>
+		</button>
+  		<button class="sheet-tablinks sheet-arcane-tab" onclick="openCity(event, 'Arcane')">
+			<span class="sheet-tab sheet-tab3" style="line-height: 40px;" data-i18n="arcane">Arcane</span>
+		</button>
 </div>
-
-
-<input type="radio" class="sheet-tab sheet-tab5" name="attr_core-tab" value="5" title="Core" checked="checked"/>
-<span class="sheet-tab sheet-tab5" style="line-height: 40px;" data-i18n="core">Core</span>
-
-<input type="radio" class="sheet-tab sheet-tab1" name="attr_core-tab" value="1" title="Aptitudes" />
-<span class="sheet-tab sheet-tab1" style="line-height: 40px;" data-i18n="traits">Aptitudes</span>
-
-<input type="radio" class="sheet-tab sheet-tab2" name="attr_core-tab" value="2" title="Combat Stuff"/>
-<span class="sheet-tab sheet-tab2" style="line-height: 40px;" data-i18n="combat">Combat</span>
-
-<input type="radio" class="sheet-tab sheet-tab3" name="attr_core-tab" value="3" title="Arcane Abilities"/>
-<span class="sheet-tab sheet-tab3" style="line-height: 40px;" data-i18n="arcane">Arcane</span>
-
 
 
   <!-- Navigation -->
