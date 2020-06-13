@@ -85,55 +85,31 @@ on("sheet:opened", function(eventInfo){
     });
 });
 </script>
-<script type="text/javascript">
-function openPage(evt, pageName) {
-  // Declare all variables
-  var i, tabcontent, tablinks, pagetarget;
 
-  // Get all elements with class="tabcontent" and hide them
-  tabcontent = document.getElementsByClassName("sheet-tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-
-  // Get all elements with class="tablinks" and remove the class "active"
-  tablinks = document.getElementsByClassName("sheet-tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" sheet-active", "");
-  }
-
-  // Show the current tab, and add an "active" class to the button that opened the tab
-	pagetarget = document.getElementsByClassName(pageName);
-	for (i = 0; i < pagetarget.length; i++)	{
-		pagetarget[i].style.display = "block";
-	}  
-  evt.currentTarget.className += " sheet-active";
-};
-</script>
 
 <div class="sheet-wrapper">
-	
-	<div class="sheet-nav">
-		
-  		<button class="sheet-tablinks sheet-core-tab sheet-active" onclick="openPage(event, 'sheet-section-core sheet-tabcontent')">
-	  		<span class="sheet-tab sheet-tab1" style="line-height: 40px;" data-i18n="core">Core</span>
-		</button>
-  		<button class="sheet-tablinks sheet-aptitudes-tab" onclick="openPage(event, 'sheet-section-traits')">
-			<span class="sheet-tab sheet-tab2" style="line-height: 40px;" data-i18n="traits">Aptitudes</span>
-		</button>
-		
-  		<button class="sheet-tablinks sheet-combat-tab" onclick="openPage(event, 'sheet-section-combat')">
-			<span class="sheet-tab sheet-tab3" style="line-height: 40px;" data-i18n="combat">Combat</span>
-		</button>
-  		<button class="sheet-tablinks sheet-arcane-tab" onclick="openPage(event, 'sheet-section-arcane')">
-			<span class="sheet-tab sheet-tab3" style="line-height: 40px;" data-i18n="arcane">Arcane</span>
-		</button>
-</div>
+  <!-- Sheet Header -->
+  
+  <br>
+	<div class="sheet-banner"></div>
+  <!-- Navigation -->
+    <input type="radio" class="sheet-tab sheet-tab5" name="attr_core-tab" value="5" title="Core" checked="checked"/>
+    <span class="sheet-tab sheet-tab5" data-i18n="core">Core</span>
+
+    <input type="radio" class="sheet-tab sheet-tab1" name="attr_core-tab" value="1" title="Aptitudes" />
+    <span class="sheet-tab sheet-tab1" data-i18n="traits">Aptitudes</span>
+
+    <input type="radio" class="sheet-tab sheet-tab2" name="attr_core-tab" value="2" title="Combat Stuff"/>
+    <span class="sheet-tab sheet-tab2" data-i18n="combat">Combat</span>
+
+    <input type="radio" class="sheet-tab sheet-tab3" name="attr_core-tab" value="3" title="Arcane Abilities"/>
+    <span class="sheet-tab sheet-tab3" data-i18n="arcane">Arcane</span>
+
 
 
   <!-- Navigation -->
-  <br><br>
-  <div class="sheet-section-core sheet-tabcontent">
+  <br>
+  <div class="sheet-section-core">
       <div class="sheet-2colrow">
           <div class="sheet-col">
               <div class="sheet-borderdiv">
@@ -420,7 +396,7 @@ function openPage(evt, pageName) {
   <!-- Sheet Header -->
 
     <!-- Traits & Aptitudes Tab -->
-    <div class="sheet-section-traits sheet-tabcontent">
+    <div class="sheet-section-traits">
 
         <!-- Ligne avec 2 colonnes -->
         <div class="sheet-2colrow">
@@ -1522,6 +1498,7 @@ function openPage(evt, pageName) {
                         	<button type="roll" name="roll_Strength" value="!dl skill @{strlvl} @{strdtype} ?{Modifier|5}"></button>
                         	<!--
                             <button type="roll" name="roll_Strength" value="@{gmtoggle}&{template:simple}  {{rollname=@{strengthMacro}}} {{dice=[[@{strlvl}@{strdtype}!!k1]]}}"></button>
+
                         	-->
                         </div>
                     </div>
@@ -1654,7 +1631,7 @@ function openPage(evt, pageName) {
   <!-- Traits & Aptitudes Tab -->
 
   <!-- Combat Stuff Tab -->
-  <div class="sheet-section-combat sheet-tabcontent">
+  <div class="sheet-section-combat">
     <div class="sheet-borderdiv">
       <div class="sheet-row">
         <div class="sheet-center">
@@ -1885,7 +1862,7 @@ function openPage(evt, pageName) {
     </div><!-- Combat Stuff Tab -->
 
   <!-- Arcane Ablities Tab -->
-  <div class="sheet-section-arcane sheet-tabcontent">
+  <div class="sheet-section-arcane">
     <div class="sheet-row">
         
         <div class="sheet-radios">
