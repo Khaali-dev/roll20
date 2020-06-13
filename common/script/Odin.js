@@ -142,12 +142,32 @@ var Odin = (function() {
 			this.name = name;
 			this.wip = wip;
 			this.assert = assert;
+			this.async = false;
+		}
+
+		/**
+		 * @return the asynchronous test.
+		 */
+		async() {
+			this.async = true;
+			return this;
 		}
 
 		/**
 		 * @returns the specified test evaluation.
 		 */
 		evaluate() {
+			if (this.async == true) {
+				new Promise(() => this.logEvaluation());
+			} else {
+				this.logEvaluation();
+			}
+		}
+
+		/**
+		 * Logs the specified test result.
+		 */
+		logEvaluation() {
 			const inProgress = this.wip === true ? "[WIP] " : "[   ] ";
 			try {
 				log(inProgress + (this.assert() === true ? "[OK    ]" : "[   NOK]") + ": " + this.name);
