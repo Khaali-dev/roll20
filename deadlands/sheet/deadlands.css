@@ -35,7 +35,7 @@
 /* ===== TABS ===== */
 
 .charsheet .sheet-banner {
-	background: url("img/banner.png") center no-repeat;
+	background: url("https://raw.githubusercontent.com/rlepennec/roll20/ND-charsheet/deadlands/sheet/img/banner.png") center no-repeat;
 	height:170px;
 	width:950px;
 	z-index:0;
