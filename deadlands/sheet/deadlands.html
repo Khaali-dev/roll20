@@ -86,60 +86,29 @@ on("sheet:opened", function(eventInfo){
 });
 </script>
 
+
 <div class="sheet-wrapper">
   <!-- Sheet Header -->
-  <div class="sheet-3colrow">
-    <div class="sheet-col">
-      <div>
-        <div class="sheet-row">
-            <h3>
-                <span data-i18n="name">Name:</span></h3>
-            <input type="text" name="attr_charname" /> <br />
-        </div>
-        <div class="sheet-row sheet-buttons sheet-big">
-            <h3>
-          <span data-i18n="gmRollToggle">GM Roll Toggle</span>
-            </h3>
-          <input type="radio" name="attr_gmtoggle" value="/w gm " /><span data-i18n="on">On</span>
-          <input type="radio" name="attr_gmtoggle" value="" checked="checked" /><span data-i18n="off">Off</span>
-        </div>
-      </div>
-    </div>
-    <div class="sheet-col">
-      <img src="http://i.imgur.com/IRCeOyE.png" alt="banner"/>
-    </div>
-    <div class="sheet-col">
-      <div>
-        <div class="sheet-row">
-          <h3><span data-i18n="occupation">Occupation</span></h3>
-        </div>
-        <div class="sheet-row sheet-big">
-          <input type="text" name="attr_charocc"/> <br />
-		  <h3><span data-i18n="bounty">Bounty</span> </h3>
-            <span style="font-size: xx-small;"></span><span data-i18n="unspent">unspent</span><br/>
-		  <span class="sheet-third"> <input type="text" name="attr_bountyunspent" class="sheet-third" /></span> /  <span class="sheet-third"><input type="text" name="attr_bountytotal" /></span>
-        </div>
-      </div>
-    </div>
-  </div>
+  
   <br>
+	<div class="sheet-banner"></div>
   <!-- Navigation -->
     <input type="radio" class="sheet-tab sheet-tab5" name="attr_core-tab" value="5" title="Core" checked="checked"/>
-    <span class="sheet-tab sheet-tab5" style="line-height: 40px;" data-i18n="core">Core</span>
+    <span class="sheet-tab sheet-tab5" data-i18n="core">Core</span>
 
-    <input type="radio" class="sheet-tab sheet-tab1" name="attr_core-tab" value="1" title="Traits &amp; Aptitudes" />
-    <span class="sheet-tab sheet-tab1" style="line-height: 40px;" data-i18n="traits">Traits &amp; Aptitudes</span>
+    <input type="radio" class="sheet-tab sheet-tab1" name="attr_core-tab" value="1" title="Aptitudes" />
+    <span class="sheet-tab sheet-tab1" data-i18n="traits">Aptitudes</span>
 
     <input type="radio" class="sheet-tab sheet-tab2" name="attr_core-tab" value="2" title="Combat Stuff"/>
-    <span class="sheet-tab sheet-tab2" style="line-height: 40px;" data-i18n="combat">Combat</span>
+    <span class="sheet-tab sheet-tab2" data-i18n="combat">Combat</span>
 
     <input type="radio" class="sheet-tab sheet-tab3" name="attr_core-tab" value="3" title="Arcane Abilities"/>
-    <span class="sheet-tab sheet-tab3" style="line-height: 40px;" data-i18n="arcane">Arcane</span>
+    <span class="sheet-tab sheet-tab3" data-i18n="arcane">Arcane</span>
 
 
 
   <!-- Navigation -->
-  <br><br>
+  <br>
   <div class="sheet-section-core">
       <div class="sheet-2colrow">
           <div class="sheet-col">
@@ -360,6 +329,68 @@ on("sheet:opened", function(eventInfo){
     </div>
       
       <br/>
+      <div class="sheet-row">
+          <div class="sheet-2colrow">
+              <div class="sheet-col">
+                  <div class="sheet-row">
+                      <h2><span data-i18n="edges">Edges</span></h2>
+                  </div>
+                  <fieldset class="repeating_edges">
+                      <div class="sheet-row sheet-textarea">
+                          <input type="text" name="attr_edgename" placeholder="Edge name"><br>
+                          <textarea name="attr_edgesdesc" class="sheet-shorttextarea"></textarea>
+                      </div>
+                  </fieldset>
+              </div>
+              <div class="sheet-col">
+                  <div class="sheet-row">
+                      <h2><span data-i18n="hindrances">Hindrances</span></h2>
+                  </div>
+                  <fieldset class="repeating_hinds">
+                      <div class="sheet-row sheet-textarea">
+                          <input type="text" name="attr_hindname" placeholder="Hindrance name"><br>
+                          <textarea name="attr_hinddesc" class="sheet-shorttextarea"></textarea>
+                      </div>
+                  </fieldset>
+              </div>
+          </div>
+          <div class="sheet-2colrow">
+              <div class="sheet-col">
+                  <div class="sheet-row">
+                      <h2><span data-i18n="equipment">Equipment</span></h2>
+                  </div>
+                  <div class="sheet-row sheet-textarea">
+                      <textarea name="attr_equipment" class="sheet-textarea" placeholder="Equipment"></textarea>
+                  </div>
+              </div>
+              <div class="sheet-col">
+                  <div class="sheet-row">
+                      <h2><span data-i18n="money">Money</span></h2>
+                  </div>
+                  <div class="sheet-row sheet-textarea">
+                      <textarea name="attr_money" class="sheet-textarea" placeholder="Money"></textarea>
+                  </div>
+              </div>
+          </div>
+          <div class="sheet-2colrow">
+              <div class="sheet-col">
+                  <div class="sheet-row">
+                      <h2><span data-i18n="worstNightmare">Worst Nightmare</span></h2>
+                  </div>
+                  <div class="sheet-row sheet-textarea">
+                      <textarea name="attr_nightmare" class="sheet-textarea" placeholder="Elm Street"></textarea>
+                  </div>
+              </div>
+              <div class="sheet-col">
+                  <div class="sheet-row">
+                      <h2><span data-i18n="notes">Notes</span></h2>
+                  </div>
+                  <div class="sheet-row sheet-textarea">
+                      <textarea name="attr_notes" class="sheet-textarea" placeholder="Notes"></textarea>
+                  </div>
+              </div>
+          </div>
+      </div>
     
   </div>
   <!-- Sheet Header -->
@@ -532,7 +563,7 @@ on("sheet:opened", function(eventInfo){
                         <fieldset class="repeating_professional">
                             <div class="sheet-row">
                                 <div class="sheet-item sheet-large">&nbsp;</div>
-                                <div class="sheet-item sheet-third sheet-skill-specialization"><input type="text" name="attr_professionalname" placeholder="CarriÃ¨re"></div>
+                                <div class="sheet-item sheet-third sheet-skill-specialization"><input type="text" name="attr_professionalname" placeholder="Carrière"></div>
                                 <div class="sheet-item sheet-large"><input type="number" name="attr_professionallvl" placeholder="Niv"></div>
                                 <div class="sheet-item sheet-tiny">+</div>
                                 <div class="sheet-item sheet-large"><input type="text" name="attr_professionalmod" placeholder="Mod"></div>
@@ -638,7 +669,7 @@ on("sheet:opened", function(eventInfo){
                         </div>
                         <fieldset class="repeating_medicine">
                             <div class="sheet-item sheet-large">&nbsp;</div>
-                            <div class="sheet-item sheet-third sheet-skill-specialization"><input type="text" name="attr_medicineconc" placeholder="MÃ©decine"></div>
+                            <div class="sheet-item sheet-third sheet-skill-specialization"><input type="text" name="attr_medicineconc" placeholder="Médecine"></div>
                             <div class="sheet-item sheet-tiny">&nbsp;</div>
                             <div class="sheet-item sheet-large"><input type="number" name="attr_medicinelvl" placeholder="Niv"></div>
                             <div class="sheet-item sheet-tiny">+</div>
@@ -660,7 +691,7 @@ on("sheet:opened", function(eventInfo){
                         <fieldset class="repeating_trade">
                             <div class="sheet-row">
                                 <div class="sheet-item sheet-large">&nbsp;</div>
-                                <div class="sheet-item sheet-third sheet-skill-specialization"><input type="text" name="attr_tradename" placeholder="MÃ©tier"></div>
+                                <div class="sheet-item sheet-third sheet-skill-specialization"><input type="text" name="attr_tradename" placeholder="Métier"></div>
                                 <div class="sheet-item sheet-large"><input type="number" name="attr_tradelvl" placeholder="Niv"></div>
                                 <div class="sheet-item sheet-tiny">+</div>
                                 <div class="sheet-item sheet-large"><input type="text" name="attr_trademod" placeholder="Mod"></div>
@@ -1130,7 +1161,7 @@ on("sheet:opened", function(eventInfo){
                 </div>
                 <br/>
                 
-                <!-- AgilitÃ© -->
+                <!-- Agilité -->
                 <div class="sheet-borderdiv">
                     <!-- Attribut -->
                     <div class="sheet-row">
@@ -1467,6 +1498,7 @@ on("sheet:opened", function(eventInfo){
                         	<button type="roll" name="roll_Strength" value="!dl skill @{strlvl} @{strdtype} ?{Modifier|5}"></button>
                         	<!--
                             <button type="roll" name="roll_Strength" value="@{gmtoggle}&{template:simple}  {{rollname=@{strengthMacro}}} {{dice=[[@{strlvl}@{strdtype}!!k1]]}}"></button>
+
                         	-->
                         </div>
                     </div>
@@ -1908,72 +1940,6 @@ on("sheet:opened", function(eventInfo){
    <!-- -->
     <!---->
    <!-- Arcane Ablities Tab -->
-
-  <!-- Misc Tab -->
-  <div class="sheet-section-misc">
-    <div class="sheet-row">
-      <div class="sheet-2colrow">
-        <div class="sheet-col">
-          <div class="sheet-row">
-            <h2><span data-i18n="edges">Edges</span></h2>
-          </div>
-          <fieldset class="repeating_edges">
-            <div class="sheet-row sheet-textarea">
-              <input type="text" name="attr_edgename" placeholder="Edge name"><br>
-              <textarea name="attr_edgesdesc" class="sheet-shorttextarea"></textarea>
-            </div>
-          </fieldset>
-        </div>
-        <div class="sheet-col">
-          <div class="sheet-row">
-            <h2><span data-i18n="hindrances">Hindrances</span></h2>
-          </div>
-          <fieldset class="repeating_hinds">
-            <div class="sheet-row sheet-textarea">
-              <input type="text" name="attr_hindname" placeholder="Hindrance name"><br>
-              <textarea name="attr_hinddesc" class="sheet-shorttextarea"></textarea>
-            </div>
-          </fieldset>
-        </div>
-      </div>
-      <div class="sheet-2colrow">
-        <div class="sheet-col">
-          <div class="sheet-row">
-            <h2><span data-i18n="equipment">Equipment</span></h2>
-          </div>
-          <div class="sheet-row sheet-textarea">
-            <textarea name="attr_equipment" class="sheet-textarea" placeholder="Equipment"></textarea>
-          </div>
-        </div>
-        <div class="sheet-col">
-          <div class="sheet-row">
-          <h2><span data-i18n="money">Money</span></h2>
-          </div>
-          <div class="sheet-row sheet-textarea">
-            <textarea name="attr_money" class="sheet-textarea" placeholder="Money"></textarea>
-          </div>
-        </div>
-      </div>
-      <div class="sheet-2colrow">
-        <div class="sheet-col">
-          <div class="sheet-row">
-            <h2><span data-i18n="worstNightmare">Worst Nightmare</span></h2>
-          </div>
-          <div class="sheet-row sheet-textarea">
-            <textarea name="attr_nightmare" class="sheet-textarea" placeholder="Elm Street"></textarea>
-          </div>
-        </div>
-        <div class="sheet-col">
-          <div class="sheet-row">
-            <h2><span data-i18n="notes">Notes</span></h2>
-          </div>
-          <div class="sheet-row sheet-textarea">
-            <textarea name="attr_notes" class="sheet-textarea" placeholder="Notes"></textarea>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div><!-- Misc Tab -->
 
   
 </div>

@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap');@import url('https://fonts.googleapis.com/css?family=Alfa+Slab+One&display=swap');@import url('https://fonts.googleapis.com/css?family=Sancreek&display=swap');@import url('https://fonts.googleapis.com/css?family=Arbutus&display=swap');@import url('https://fonts.googleapis.com/css?family=Goudy+Bookletter+1911&display=swap');@import url('https://fonts.googleapis.com/css?family=Kotta+One&display=swap');@import url('https://fonts.googleapis.com/css?family=Reenie+Beanie&display=swap');
 
-.sheet-wrapper {
-  width: 950px;
-}
 
 /*  === GENERAL === */
 
@@ -10,6 +7,8 @@
 .charsheet .sheet-wrapper {
   width: 950px;
   overflow:auto;
+  position:relative;
+	background-image:url('https://raw.githubusercontent.com/rlepennec/roll20/ND-charsheet/deadlands/sheet/img/parchment3.jpg');
 }
 
 /* === FONTS === */
@@ -35,6 +34,17 @@
 
 /* ===== TABS ===== */
 
+.charsheet .sheet-banner {
+	background: url("https://raw.githubusercontent.com/rlepennec/roll20/ND-charsheet/deadlands/sheet/img/banner.png") center no-repeat;
+	height:170px;
+	width:950px;
+	z-index:0;
+	position:absolute;
+	top:0px;
+	left:0px;
+	
+}
+
 /*this hides the contents of each tab by default*/
 .charsheet div[class^="sheet-section"] {
   display: none;
@@ -54,45 +64,56 @@
 /*this hides the radio button for each tab, makes it 130px wide and 40px tall and makes sure it's above everything else*/
 .charsheet input.sheet-tab {
   width: 160px;
-  height: 40px;
+  height: 60px;
   cursor: pointer;
   opacity: 0;
-  z-index: 9999;
-  position: relative;
+  z-index: 2;
+	position: relative;
+	top:27px;
+	
 }
 
 /*this styles the span with the tab information and slides to the left, so it appears underneath the radio button*/
 .charsheet span.sheet-tab {
     text-align: center;
     font-size: 14pt;
-    color: black;
+    color: #ffffff;
     font-weight: bold;
     cursor: pointer;
     font-family:'Shadows into Light',cursive;
     text-transform:uppercase;
-    position: relative;
+	position: relative;
     width:140px;
-    height: 40px;
-    background:url('https://raw.githubusercontent.com/rlepennec/roll20/ND-charsheet/deadlands/sheet/img/sign.png') center no-repeat;
-    background-image:url("https://raw.githubusercontent.com/rlepennec/roll20/ND-charsheet/deadlands/sheet/img/sign2.png");
-    background-size:cover;
+    height: 60px;
     padding-left:10px;
     padding-right:10px;
-    vertical-align:baseline;
     display: inline-block;
     margin-left:-162px;
-    top:-13px;
+	z-index: 1;
+	line-height: 60px;
+}
+
+.charsheet .sheet-tab {
+
+	left:50px;
+	margin-top:16px;
+	margin-bottom:30px;
+	
+}
+
+.charsheet .sheet-tab2,
+.charsheet .sheet-tab3 {
+	left:230px;
 }
 
 /*this modifies the span color once the radio button is selected so you know which tab is selected*/
 .charsheet input.sheet-tab1:checked + span.sheet-tab1,
 .charsheet input.sheet-tab2:checked + span.sheet-tab2,
 .charsheet input.sheet-tab3:checked + span.sheet-tab3,
-.charsheet input.sheet-tab4:checked + span.sheet-tab4,
-.charsheet input.sheet-tab5:checked + span.sheet-tab5,
-.charsheet input.sheet-tab6:checked + span.sheet-tab6 {
+.charsheet input.sheet-tab5:checked + span.sheet-tab5 {
     color: #ffffff;
-    background-image:url('https://raw.githubusercontent.com/rlepennec/roll20/ND-charsheet/deadlands/sheet/img/sign2.png');
+    background:url('https://raw.githubusercontent.com/rlepennec/roll20/ND-charsheet/deadlands/sheet/img/crosshair.png') no-repeat;
+	background-position: center;
 }
 
 /* ===== TABS ===== */
@@ -181,9 +202,7 @@
 
 /* ===== Layout Controls ===== */
 
-.charsheet [class^="sheet-section"] {
-   background-image:url('https://raw.githubusercontent.com/rlepennec/roll20/ND-charsheet/deadlands/sheet/img/parchment3.jpg');
-}
+
 
 .charsheet [class^="sheet-section"]>div>.sheet-col {
     border-image-source:url('https://raw.githubusercontent.com/rlepennec/roll20/ND-charsheet/deadlands/sheet/img/border.png');
