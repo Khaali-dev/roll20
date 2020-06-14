@@ -252,27 +252,22 @@ var Deadlands = (function() {
 	/**
 	 * The EventHandler class is the main class to handle commands.
 	 */
-	class EventHandler extends Odin.AbstractEventHandler {
+	class EventHandler {
 
 		/**
 		 * @constructor
 		 */
 		constructor() {
-			super();
 			this.rolls = new Rolls();
 		}
 
 		/**
-		 * @Override
+		 * Processes the specified command.
+		 * @param cmd     The command to process.
+		 * @param args    The command arguments.
+		 * @param handler The ovbject which handle the command.
 		 */
-		handleMessage(msg) {
-			this.handleCommand(msg);
-		}
-
-		/**
-		 * @Override
-		 */
-		processCommand(cmd, args) {
+		static processCommand(cmd, args, handler) {
 			if (cmd != 'dl') return;
 			if (args.length > 0) {
 
@@ -282,20 +277,20 @@ var Deadlands = (function() {
 					const dice = parseInt(args[2], 10);
 					const tn = parseInt(args[3], 10);
 					log(size + "d" + dice + " SD:" + tn);
-					this.openRoll(size, dice, 0, tn);
+					handler.openRoll(size, dice, 0, tn);
 
 				} else if (args[0] === 'attribute') {
 					const size = parseInt(args[1], 10);
 					const dice = parseInt(args[2], 10);
 					const tn = parseInt(args[3], 10);
 					log(size + "d" + dice + " SD:" + tn);
-					this.openRoll(size, dice, 0, tn);
+					handler.openRoll(size, dice, 0, tn);
 
 				} else if (args[0] === 'rolls') {
 					const attribute = args[1];
 					const skill = null;
 					const tn = parseInt(args[2], 5);
-					this.rolls.attribute(attribute, tn);
+					handler.rolls.attribute(attribute, tn);
 				}
 
 			}
@@ -347,15 +342,7 @@ var Deadlands = (function() {
 	/**
 	 * The message handler.
 	 */
-	const _handler = new EventHandler();
-
-	/**
-	 * Handles the specified message.
-	 * @param msg The message to handle.
-	 */
-	function handleMessage(msg) {
-		_handler.handleMessage(msg);
-	}
+	const handler = new EventHandler();
 
 	/**
 	 * @return the public elements.
@@ -364,17 +351,16 @@ var Deadlands = (function() {
 		RollInterpreter : RollInterpreter,
 		Rolls: Rolls,
 		TurnOrder: TurnOrder,
-		handleMessage : handleMessage
+		EventHandler: EventHandler,
+		handler: handler,
 	};
 
 })();
 
-/**
- * Registers the Deadlands module.
- */
+//The API message subscribtion.
 on('ready',function() {
 	'use strict';
 	on('chat:message', (msg) => {
-		Deadlands.handleMessage(msg);
+		Odin.EventHandler.handleCommand(msg, Deadlands.EventHandler.processCommand, Deadlands.handler);
 	});
 });

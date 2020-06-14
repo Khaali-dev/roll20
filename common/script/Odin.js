@@ -84,45 +84,21 @@ var Odin = (function() {
 	}
 
 	/**
-	 * The AbstractEventHandler class is the base class to define a message handler.
+	 * The EventHandler class provices static methods to handle event.
 	 */
-	class AbstractEventHandler {
-
-		/**
-		 * @constructor
-		 */
-		constructor() {
-			if (this.constructor === AbstractEventHandler) {
-				throw new TypeError("Abstract class AbstractEventHandler cannot be instantiated directly");
-			}
-		}
-
-		/**
-		 * Handles the specified message. This method must be implemented.
-		 * @param msg The message to handle.
-		 */
-		handleMessage(msg) {
-			throw new Error("Method 'handleMessage' must be implemented");
-		}
+	class EventHandler {
 
 		/**
 		 * Handles the api message.
-		 * @param msg The message to handle.
+		 * @param msg     The message to handle.
+		 * @param process The static method which process the command.
+		 * @param handler The object which handles the message processing.
 		 */
-		handleCommand(msg) {
+		static handleCommand(msg, process, handler) {
 			if (msg.type != 'api') return;
 			var args = msg.content.split(/\s+/);
 			var cmd = args.shift().substring(1);
-			this.processCommand(cmd, args);
-		}
-
-		/**
-		 * Processes the specified command.
-		 * @param cmd The name of the command to process.
-		 * @param args The arguments of the command to process.
-		 */
-		processCommand(msg) {
-			throw new Error("Method 'handleMessage' must be implemented");
+			process(cmd, args, handler);
 		}
 
 	}
@@ -274,32 +250,27 @@ var Odin = (function() {
 	/**
 	 * The AbstractTestSuite class is the base class to define a testsuite.
 	 */
-	class TestSuite extends AbstractEventHandler {
+	class TestSuite {
 
 		/**
-		 * @constructor
+		 * @constructor.
 		 * @param name The name of the testsuite.
 		 */
 		constructor(name) {
-			super();
 			this.name = name;
 			this.tests = [];
 		}
 
 		/**
-		 * @Override
+		 * Processes the specified command.
+		 * @param cmd   The command to process.
+		 * @param args  The command arguments.
+		 * @param suite The test suite for which to handle the command.
 		 */
-		handleMessage(msg) {
-			this.handleCommand(msg);
-		}
-
-		/**
-		 * @Override
-		 */
-		processCommand(cmd, args) {
-			if (cmd != 'test' || args[0] != this.name) return;
-			log("--------> Launch all tests for module " + this.name);
-			this.tests.forEach(t => t.evaluate());
+		static processCommand(cmd, args, suite) {
+			if (cmd != suite.name || args[0] != 'test') return;
+			log("--------> Launch all tests for module " + suite.name);
+			suite.tests.forEach(t => t.evaluate());
 		}
 
 		/**
@@ -322,7 +293,7 @@ var Odin = (function() {
 	class PokerColor extends Rankable {
 
 		/**
-		 * @constructor
+		 * @constructor.
 		 * @param name The name of the poker color.
 		 * @param rank The rank of the color, from 1 to the lower priority.
 		 * 
@@ -339,7 +310,7 @@ var Odin = (function() {
 	class PokerCard extends Rankable {
 
 		/**
-		 * @constructor
+		 * @constructor.
 		 * @param name The name of the poker card.
 		 * @param rank The rank of the card, from 1 to the lower priority.
 		 * 
@@ -1319,7 +1290,7 @@ var Odin = (function() {
 		Rankables: Rankables,
 		Test: Test,
 		TestSuite: TestSuite,
-		AbstractEventHandler: AbstractEventHandler,
+		EventHandler: EventHandler,
 		Player: Player,
 		Players: Players,
 		Page: Page,

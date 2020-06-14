@@ -245,6 +245,6 @@ var _deadlands = _deadlands || new Odin.TestSuite("Deadlands")
 on('ready',function() {
 	'use strict';
 	on('chat:message', (msg) => {
-		_deadlands.handleMessage(msg);
+		Odin.EventHandler.handleCommand(msg, Odin.TestSuite.processCommand, _deadlands);
 	});
 });

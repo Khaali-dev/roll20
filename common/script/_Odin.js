@@ -480,7 +480,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 on('ready',function() {
 	'use strict';
 	on('chat:message', (msg) => {
-		_odin.handleMessage(msg);
+		Odin.EventHandler.handleCommand(msg, Odin.TestSuite.processCommand, _odin);
 	});
 	on("add:graphic", function(obj) {
 		log(obj);
