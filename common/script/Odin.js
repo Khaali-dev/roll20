@@ -868,6 +868,18 @@ var Odin = (function() {
 			return this;
 		}
 
+		/**
+		 * Fetches all cards on the table regardless of the decks.
+		 * @param The cards collection to update. 
+		 * @return the instance.
+		 */
+		static async fetchTable(cards) {
+			await new Promise(resolve => {
+				setTimeout(() => resolve(cards.findTable()), 100);
+			});
+			return cards;
+		}
+
 	}
 
 	/**
