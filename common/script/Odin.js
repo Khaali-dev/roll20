@@ -94,7 +94,7 @@ var Odin = (function() {
 		 * @param process The static method which process the command.
 		 * @param handler The object which handles the message processing.
 		 */
-		static handleCommand(msg, process, handler) {
+		static async handleCommand(msg, process, handler) {
 			if (msg.type != 'api') return;
 			var args = msg.content.split(/\s+/);
 			var cmd = args.shift().substring(1);
@@ -118,32 +118,12 @@ var Odin = (function() {
 			this.name = name;
 			this.wip = wip;
 			this.assert = assert;
-			this.async = false;
-		}
-
-		/**
-		 * @return the asynchronous test.
-		 */
-		async() {
-			this.async = true;
-			return this;
 		}
 
 		/**
 		 * @returns the specified test evaluation.
 		 */
 		evaluate() {
-			if (this.async == true) {
-				new Promise(() => this.logEvaluation());
-			} else {
-				this.logEvaluation();
-			}
-		}
-
-		/**
-		 * Logs the specified test result.
-		 */
-		logEvaluation() {
 			const inProgress = this.wip === true ? "[WIP] " : "[   ] ";
 			try {
 				log(inProgress + (this.assert() === true ? "[OK    ]" : "[   NOK]") + ": " + this.name);
@@ -267,10 +247,14 @@ var Odin = (function() {
 		 * @param args  The command arguments.
 		 * @param suite The test suite for which to handle the command.
 		 */
-		static processCommand(cmd, args, suite) {
+		static async processCommand(cmd, args, suite) {
 			if (cmd != suite.name || args[0] != 'test') return;
 			log("--------> Launch all tests for module " + suite.name);
-			suite.tests.forEach(t => t.evaluate());
+			suite.tests.forEach(async t => {
+				await new Promise(resolve => {
+					resolve(t.evaluate());
+				});
+			})
 		}
 
 		/**
