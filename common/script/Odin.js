@@ -242,18 +242,6 @@ var Odin = (function() {
 		}
 
 		/**
-		 * Logs the specified test result.
-		 * @param name    The name of the test.
-		 * @param wip     True if work in progress.
-		 * @param success The test result.
-		 * @param post    The optional post fix.
-		 */
-		static log(name, wip, success, post) {
-			const progress = wip === true ? "[WIP] " : "[   ] ";
-			log(progress + (success === true ? "[OK    ]" : "[   NOK]") + ": " + name + " ");
-		}
-
-		/**
 		 * Processes the specified command.
 		 * @param cmd   The command to process.
 		 * @param args  The command arguments.
@@ -263,14 +251,11 @@ var Odin = (function() {
 			if (cmd != suite.name || args[0] != 'test') return;
 			log("--------> Launch all tests for module " + suite.name);
 			suite.tests.forEach(async t => {
-				if (t.async === true) {
-					TestSuite.log(t.name, t.wip, await t.assert(), "");
-				} else {
-					try {
-						TestSuite.log(t.name, t.wip, t.assert(), "");
-					} catch (exception) {
-						TestSuite.log(t.name, t.wip, false, " because exception has been raised");
-					}
+				const wip = t.wip === true ? "[WIP] " : "[   ] ";
+				try {
+					log(wip + ((t.async === true ? await t.assert() : t.assert()) === true ? "[OK    ]" : "[   NOK]") + ": " + t.name + " ");
+				} catch (exception) {
+					log(wip + "[   NOK] because exception has been raised");
 				}
 			})
 		}
