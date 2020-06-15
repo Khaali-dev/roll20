@@ -246,10 +246,11 @@ var Odin = (function() {
 		 * @param name    The name of the test.
 		 * @param wip     True if work in progress.
 		 * @param success The test result.
+		 * @param post    The optional post fix.
 		 */
-		static log(name, wip, success) {
+		static log(name, wip, success, post) {
 			const progress = wip === true ? "[WIP] " : "[   ] ";
-			log("---" + progress + (success === true ? "[OK    ]" : "[   NOK]") + ": " + name);
+			log(progress + (success === true ? "[OK    ]" : "[   NOK]") + ": " + name + " ");
 		}
 
 		/**
@@ -263,13 +264,12 @@ var Odin = (function() {
 			log("--------> Launch all tests for module " + suite.name);
 			suite.tests.forEach(async t => {
 				if (t.async === true) {
-					TestSuite.log(t.name, t.wip, await t.assert());
+					TestSuite.log(t.name, t.wip, await t.assert(), "");
 				} else {
-					const wip = t.wip === true ? "[WIP] " : "[   ] ";
 					try {
-						log(wip + (t.assert() === true ? "[OK    ]" : "[   NOK]") + ": " + t.name);
+						TestSuite.log(t.name, t.wip, t.assert(), "");
 					} catch (exception) {
-						log(wip + "[   NOK]: " + t.name + " because exception has been raised");
+						TestSuite.log(t.name, t.wip, false, " because exception has been raised");
 					}
 				}
 			})
