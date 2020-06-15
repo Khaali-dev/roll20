@@ -386,11 +386,15 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// Cards
 	// ------------------------------------------------------------------------
 
-	.async().add("Finds all cards on table", true, () => {
-		// Recall cards
-		// Put cards on the table
-		// Find it
-		return true;
+	.async().add("Finds all cards on table", true, async () => {
+		const decks = new Odin.Decks().recall();
+		const deck = new Odin.Deck().findName('Actions').shuffle();
+		const cards = new Odin.Cards();
+		playCardToTable(_cardId_1);
+		await Odin.Cards.fetchTable(cards);
+		const success = cards.objs.length === 1;
+		Odin.TestSuite.log("Finds all cards on table", true, success);
+		return success;
 	})
 
 	.add("Recall cards", true, () => {

@@ -242,6 +242,17 @@ var Odin = (function() {
 		}
 
 		/**
+		 * Logs the specified test result.
+		 * @param name    The name of the test.
+		 * @param wip     True if work in progress.
+		 * @param success The test result.
+		 */
+		static log(name, wip, success) {
+			const progress = wip === true ? "[WIP] " : "[   ] ";
+			log(progress + (success === true ? "[OK    ]" : "[   NOK]") + ": " + name);
+		}
+
+		/**
 		 * Processes the specified command.
 		 * @param cmd   The command to process.
 		 * @param args  The command arguments.
@@ -251,14 +262,20 @@ var Odin = (function() {
 			if (cmd != suite.name || args[0] != 'test') return;
 			log("--------> Launch all tests for module " + suite.name);
 			suite.tests.forEach(async t => {
-				await new Promise(() => {
-					const wip = t.wip === true ? "[WIP] " : "[   ] ";
-					try {
-						log(wip + (t.assert() === true ? "[OK    ]" : "[   NOK]") + ": " + t.name);
-					} catch (exception) {
-						log(wip + "[   NOK]: " + t.name + " because exception has been raised");
-					}
-				});
+				if (t.async === true) {
+					await new Promise(() => {
+						t.assert();
+					});
+				} else {
+					await new Promise(() => {
+						const wip = t.wip === true ? "[WIP] " : "[   ] ";
+						try {
+							log(wip + (t.assert() === true ? "[OK    ]" : "[   NOK]") + ": " + t.name);
+						} catch (exception) {
+							log(wip + "[   NOK]: " + t.name + " because exception has been raised");
+						}
+					});
+				}
 			})
 		}
 
