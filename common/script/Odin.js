@@ -249,7 +249,7 @@ var Odin = (function() {
 		 */
 		static log(name, wip, success) {
 			const progress = wip === true ? "[WIP] " : "[   ] ";
-			log(progress + (success === true ? "[OK    ]" : "[   NOK]") + ": " + name);
+			log("---" + progress + (success === true ? "[OK    ]" : "[   NOK]") + ": " + name);
 		}
 
 		/**
@@ -263,7 +263,7 @@ var Odin = (function() {
 			log("--------> Launch all tests for module " + suite.name);
 			suite.tests.forEach(async t => {
 				if (t.async === true) {
-					await t.assert();
+					TestSuite.log(t.name, t.wip, await t.assert());
 				} else {
 					const wip = t.wip === true ? "[WIP] " : "[   ] ";
 					try {

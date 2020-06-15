@@ -393,7 +393,6 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		playCardToTable(_cardId_1);
 		await Odin.Cards.fetchTable(cards);
 		const success = cards.objs.length === 1;
-		Odin.TestSuite.log("Finds all cards on table", true, success);
 		return success;
 	})
 
