@@ -121,18 +121,6 @@ var Odin = (function() {
 		}
 
 		/**
-		 * @returns the specified test evaluation.
-		 */
-		evaluate() {
-			const inProgress = this.wip === true ? "[WIP] " : "[   ] ";
-			try {
-				log(inProgress + (this.assert() === true ? "[OK    ]" : "[   NOK]") + ": " + this.name);
-			} catch (exception) {
-				log(inProgress + "[   NOK]: " + this.name + " because exception has been raised");
-			}
-		}
-
-		/**
 		 * Asserts the specified assertion is true.
 		 * @param assertion The assertion to evaluate.
 		 * @return true if the specified assertion is true.
@@ -251,8 +239,13 @@ var Odin = (function() {
 			if (cmd != suite.name || args[0] != 'test') return;
 			log("--------> Launch all tests for module " + suite.name);
 			suite.tests.forEach(async t => {
-				await new Promise(resolve => {
-					resolve(t.evaluate());
+				await new Promise(() => {
+					const wip = t.wip === true ? "[WIP] " : "[   ] ";
+					try {
+						log(wip + (t.assert() === true ? "[OK    ]" : "[   NOK]") + ": " + t.name);
+					} catch (exception) {
+						log(wip + "[   NOK]: " + t.name + " because exception has been raised");
+					}
 				});
 			})
 		}
