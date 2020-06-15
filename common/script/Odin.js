@@ -263,18 +263,14 @@ var Odin = (function() {
 			log("--------> Launch all tests for module " + suite.name);
 			suite.tests.forEach(async t => {
 				if (t.async === true) {
-					await new Promise(() => {
-						t.assert();
-					});
+					await t.assert();
 				} else {
-					await new Promise(() => {
-						const wip = t.wip === true ? "[WIP] " : "[   ] ";
-						try {
-							log(wip + (t.assert() === true ? "[OK    ]" : "[   NOK]") + ": " + t.name);
-						} catch (exception) {
-							log(wip + "[   NOK]: " + t.name + " because exception has been raised");
-						}
-					});
+					const wip = t.wip === true ? "[WIP] " : "[   ] ";
+					try {
+						log(wip + (t.assert() === true ? "[OK    ]" : "[   NOK]") + ": " + t.name);
+					} catch (exception) {
+						log(wip + "[   NOK]: " + t.name + " because exception has been raised");
+					}
 				}
 			})
 		}
