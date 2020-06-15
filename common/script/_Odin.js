@@ -13,6 +13,10 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// Dice
 	// ------------------------------------------------------------------------
 
+
+	// Dice
+	// ------------------------------------------------------------------------
+
 	.add("Dice serialization", false, () => {
 		return new Odin.Dice(6).toString() === "d6";
 	})
@@ -338,10 +342,9 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return Odin.Test.assertNotEmptyArray(new Odin.Decks().findAll().objs);
 	})
 
-	.add("Shuffle decks", false, () => {
-		const decks = new Odin.Decks().findAll();
-		const deck = new Odin.Deck().findName('Actions').recall();
-		decks.shuffle();
+	.add("Recallw and shuffles decks", false, () => {
+		const decks = new Odin.Decks().findAll().recall().shuffle();
+		const deck = new Odin.Deck().findName('Actions');
 		const maxSize = _.size(deck.obj.get('currentDeck').split(/\s*,\s*/));
 		giveCardToPlayer(_cardId_1, _playerId_1);
 		giveCardToPlayer(_cardId_2, _playerId_1);
@@ -356,7 +359,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	.add("Finds a deck by id", false, () => {
 		return Odin.Test.assertNotEmptyObject(new Odin.Deck().findId(_deckId_1).obj);
 	})
-
+	
 	.add("Finds a deck by name", false, () => {
 		return Odin.Test.assertNotEmptyObject(new Odin.Deck().findName('Actions').obj) &&
 		       Odin.Test.assertEmptyObject(new Odin.Deck().findName('Unknown').obj);
