@@ -386,7 +386,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// Cards
 	// ------------------------------------------------------------------------
 
-	.add("Finds all cards on table", true, () => {
+	.async().add("Finds all cards on table", true, () => {
 		// Recall cards
 		// Put cards on the table
 		// Find it
