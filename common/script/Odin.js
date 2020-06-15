@@ -249,7 +249,7 @@ var Odin = (function() {
 		 */
 		static async processCommand(cmd, args, suite) {
 			if (cmd != suite.name || args[0] != 'test') return;
-			log("--------> Launch all tests for module " + suite.name);
+			log("Launch all tests for module " + suite.name);
 			suite.tests.forEach(async t => {
 				const wip = t.wip === true ? "[WIP] " : "[   ] ";
 				try {
