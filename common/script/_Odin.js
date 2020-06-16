@@ -342,11 +342,13 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// Decks
 	// ------------------------------------------------------------------------
 
-	.add("Finds all decks", false, () => {
-		return Odin.Test.assertNotEmptyArray(new Odin.Decks().findAll().objs);
+	.async().add("Finds all decks", false, async () => {
+		const decks = new Odin.Decks();
+		await Odin.Decks.fetchAll(decks);
+		return Odin.Test.assertNotEmptyArray(decks.objs);
 	})
 
-	.add("Recallw and shuffles decks", false, () => {
+	.add("Recalls and shuffles decks", false, () => {
 		const decks = new Odin.Decks().findAll().recall().shuffle();
 		const deck = new Odin.Deck().findName('Actions');
 		const maxSize = _.size(deck.obj.get('currentDeck').split(/\s*,\s*/));
