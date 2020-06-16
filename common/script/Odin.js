@@ -425,6 +425,17 @@ var Odin = (function() {
 		}
 
 		/**
+		 * Finds the object with the specified property.
+		 * @param key   The name of the property used to query the object.
+		 * @param value The value of the property used to query the object.
+		 * @return the instance.
+		 */
+		findProperty(key, value) {
+			this.obj = Collections.only(Objects._findProperty(this.type, this.subtype, key, value));
+			return this;
+		}
+
+		/**
 		 * Sets the specified object.
 		 * @param obj The object to set.
 		 * @return the instance.
@@ -432,18 +443,6 @@ var Odin = (function() {
 		setObject(obj) {
 			this.obj = obj;
 			return this;
-		}
-
-		/**
-		 * Finds the only object with the specified property. The object is reset if no or more than one object match.
-		 * @param type    The type of the objects to get.
-		 * @param subtype The subtype of the objects to get.
-		 * @param key     The name of the property used to query the object.
-		 * @param value   The value of the property used to query the object.
-		 * @return the instance.
-		 */
-		static _findProperty(type, subtype, key, value) {
-			return Collections.only(Objects._findProperty(type, subtype, key, value));
 		}
 
 		/**
@@ -553,7 +552,7 @@ var Odin = (function() {
 		 * @return the instance.
 		 */
 		findName(name) {
-			this.obj = Object._findProperty(this.type, this.subtype, '_displayname', name);
+			this.findProperty('_displayname', name);
 			return this;
 		}
 
@@ -747,7 +746,7 @@ var Odin = (function() {
 		 * @return the instance.
 		 */
 		findName(name) {
-			this.obj = Object._findProperty(this.type, this.subtype, 'name', name);
+			this.findProperty('name', name);
 			return this;
 		}
 
