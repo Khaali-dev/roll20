@@ -342,7 +342,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// Decks
 	// ------------------------------------------------------------------------
 
-	.async().add("Finds all decks", false, async () => {
+	.async().add("Fetches all decks", false, async () => {
 		const decks = new Odin.Decks();
 		await Odin.Decks.fetchAll(decks);
 		return Odin.Test.assertNotEmptyArray(decks.objs);
