@@ -601,6 +601,19 @@ var Odin = (function() {
 			return this.filter(function(obj) { return (playerIsGM(obj.get('id')) === master); });
 		}
 
+		/**
+		 * Fetches online or offline players.
+		 * @param players The players to update.
+		 * @param online  True if players must be online.
+		 * @return the players.
+		 */
+		static async fetchOnline(players, online) {
+			await new Promise(resolve => {
+				setTimeout(() => resolve(players.findOnline(online)), 100);
+			});
+			return players;
+		}
+
 	}
 
 	/**

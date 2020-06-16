@@ -296,9 +296,12 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return Odin.Test.assertNotEmptyArray(players.objs);
 	})
 
-	.add("Finds online players", false, () => {
-		return Odin.Test.assertNotEmptyArray(new Odin.Players().findOnline(true).objs) &&
-		       Odin.Test.assertNotEmptyArray(new Odin.Players().findOnline(false).objs);
+	.async().add("Fetches online players", false, async () => {
+		const online = new Odin.Players();
+		const offline = new Odin.Players();
+		await Odin.Players.fetchOnline(online, true);
+		await Odin.Players.fetchOnline(offline, false);
+		return Odin.Test.assertNotEmptyArray(online.objs) && Odin.Test.assertNotEmptyArray(offline.objs);
 	})
 
 	.add("Filters players if game master", false, () => {
