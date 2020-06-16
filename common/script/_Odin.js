@@ -327,9 +327,10 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		       Odin.Test.assertEmptyObject(new Odin.Player().findName('Unknown').obj);
 	})
 
-	.add("Player is game master", false, () => {
-		return Odin.Test.assertTrue(new Odin.Player().findId(_playerId_1).isMaster()) &&
-		       Odin.Test.assertFalse(new Odin.Player().findId(_playerId_1).isPlayer());
+	.async().add("Player is game master", false, async () => {
+		const player = new Odin.Player();
+		await Odin.Player.fetchId(player, _playerId_1);
+		return Odin.Test.assertTrue(player.isMaster()) && Odin.Test.assertFalse(player.isPlayer());
 	})
 
 	// Pages
