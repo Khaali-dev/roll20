@@ -383,7 +383,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return Odin.Test.assertNotEmptyObject(deck.obj);
 	})
 
-	.async().add("Finds a deck by name", false, async () => {
+	.async().add("Fetches a deck by name", false, async () => {
 		const actions = new Odin.Deck();
 		const unknown = new Odin.Deck();
 		await Odin.Deck.fetchName(actions, 'Actions');
