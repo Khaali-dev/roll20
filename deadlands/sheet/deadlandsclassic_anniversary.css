@@ -169,7 +169,7 @@
     margin-left:-162px;
 	z-index: 1;
 	line-height: 46px;
-	background: url("img/leather-tab.png");
+	background: url("https://raw.githubusercontent.com/rlepennec/roll20/ND-charsheet/deadlands/sheet/img/leather-tab.png");
 }
 
 .charsheet .sheet-subtab {
@@ -189,7 +189,7 @@
 .charsheet input.sheet-subtab3:checked + span.sheet-subtab3,
 .charsheet input.sheet-subtab4:checked + span.sheet-subtab4 {
     color: #ffffff;
-    background:url('https://raw.githubusercontent.com/rlepennec/roll20/ND-charsheet/deadlands/sheet/img/crosshair.png') no-repeat;
+    background:url('https://raw.githubusercontent.com/rlepennec/roll20/ND-charsheet/deadlands/sheet/img/leather-tab-shot.png') no-repeat;
 	background-position: center;
 }
 
