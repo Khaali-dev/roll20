@@ -178,11 +178,6 @@
 	
 }
 
-.charsheet .sheet-tab2,
-.charsheet .sheet-tab3 {
-	left:230px;
-}
-
 /*this modifies the span color once the radio button is selected so you know which tab is selected*/
 .charsheet input.sheet-subtab1:checked + span.sheet-subtab1,
 .charsheet input.sheet-subtab2:checked + span.sheet-subtab2,
