@@ -465,7 +465,9 @@ var Odin = (function() {
 		 * @return all objects.
 		 */
 		findAll() {
-			this.objs = Objects._findAll(this.type, this.subtype);
+			this.objs = this.subtype != null ?
+				findObjs({_type: this.type, _subtype: this.subtype}) :
+				findObjs({_type: this.type});
 			return this;
 		}
 
@@ -508,18 +510,6 @@ var Odin = (function() {
 		 */
 		static _only(objs) {
 			return _.isUndefined(objs) || _.size(objs) === 0 || _.size(objs) > 1 ? null : _.first(objs);
-		}
-
-		/**
-		 * Finds all the objects.
-		 * @param type    The type of the objects to get.
-		 * @param subtype The subtype of the objects to get.
-		 * @return the matching objects.
-		 */
-		static _findAll(type, subtype) {
-			return subtype != null ?
-				findObjs({_type: type, _subtype: subtype}) :
-				findObjs({_type: type});
 		}
 
 		/**
