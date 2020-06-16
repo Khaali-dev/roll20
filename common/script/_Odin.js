@@ -395,7 +395,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// Cards
 	// ------------------------------------------------------------------------
 
-	.async().add("Finds all cards on table", true, async () => {
+	.async().add("Fetches all cards on table", false, async () => {
 		const decks = new Odin.Decks().recall();
 		const deck = new Odin.Deck().findName('Actions').shuffle();
 		const cards = new Odin.Cards();
@@ -435,8 +435,10 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// Hands
 	// ------------------------------------------------------------------------
 
-	.add("Finds all hands", false, () => {
-		return Odin.Test.assertNotEmptyArray(new Odin.Hands().findAll().objs);
+	.async().add("Fetches all hands", false, async () => {
+		const hands = new Odin.Hands();
+		await Odin.Hands.fetchAll(hands);
+		return Odin.Test.assertNotEmptyArray(hands.objs);
 	})
 
 	// Hand
@@ -466,8 +468,10 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// Characters
 	// ------------------------------------------------------------------------
 
-	.add("Finds all characters", false, () => {
-		return Odin.Test.assertNotEmptyArray(new Odin.Characters().findAll().objs);
+	.async().add("Fetches all characters", false, async () => {
+		const characters = new Odin.Characters();
+		await Odin.Characters.fetchAll(characters);
+		return Odin.Test.assertNotEmptyArray(characters.objs);
 	})
 
 	.add("Finds characters by name", false, () => {
