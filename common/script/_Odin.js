@@ -290,8 +290,10 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// Players
 	// ------------------------------------------------------------------------
 
-	.add("Finds all players", false, () => {
-		return Odin.Test.assertNotEmptyArray(new Odin.Players().findAll().objs);
+	.async().add("Finds all players", false, async () => {
+		const players = new Odin.Players();
+		await Odin.Players.fetchAll(players);
+		return Odin.Test.assertNotEmptyArray(players.objs);
 	})
 
 	.add("Finds online players", false, () => {

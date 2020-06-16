@@ -457,6 +457,18 @@ var Odin = (function() {
 		}
 
 		/**
+		 * Fetches all objects of the specified collection.
+		 * @param collection The collection to update. 
+		 * @return the instance.
+		 */
+		static async fetchAll(collection) {
+			await new Promise(resolve => {
+				setTimeout(() => resolve(collection.findAll()), 100);
+			});
+			return collection;
+		}
+
+		/**
 		 * Filters the objects
 		 * @param predicate The predicate to realize.
 		 * @return the instance.
