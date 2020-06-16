@@ -322,9 +322,12 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return Odin.Test.assertNotEmptyObject(player.obj);
 	})
 
-	.add("Finds a player by name", false, () => {
-		return Odin.Test.assertNotEmptyObject(new Odin.Player().findName('Marshall').obj) &&
-		       Odin.Test.assertEmptyObject(new Odin.Player().findName('Unknown').obj);
+	.async().add("Fetches a player by name", false, async () => {
+		const marshall = new Odin.Player();
+		const unknown = new Odin.Player();
+		await Odin.Player.fetchName(marshall, 'Marshall');
+		await Odin.Player.fetchName(unknown, 'Unknown');
+		return Odin.Test.assertNotEmptyObject(marshall.obj) && Odin.Test.assertEmptyObject(unknown.obj);
 	})
 
 	.async().add("Player is game master", false, async () => {

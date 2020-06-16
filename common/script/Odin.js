@@ -461,6 +461,19 @@ var Odin = (function() {
 			return object;
 		}
 
+		/**
+		 * Fetches the object with the specified property.
+		 * @param key   The name of the property used to query the object.
+		 * @param value The value of the property used to query the object.
+		 * @return the instance.
+		 */
+		static async fetchProperty(object, key, value) {
+			await new Promise(resolve => {
+				setTimeout(() => resolve(object.findProperty(key, value)), 100);
+			});
+			return object;
+		}
+
 	}
 
 	/**
@@ -577,6 +590,16 @@ var Odin = (function() {
 		 */
 		isPlayer() {
 			return this.obj != null && playerIsGM(this.obj.get('id')) === false;
+		}
+
+		/**
+		 * Fetches the object with the specified property.
+		 * @param key   The name of the property used to query the object.
+		 * @param value The value of the property used to query the object.
+		 * @return the instance.
+		 */
+		static async fetchName(object, name) {
+			return Object.fetchProperty(object, '_displayname', name)
 		}
 
 	}
