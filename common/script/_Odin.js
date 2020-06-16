@@ -499,9 +499,12 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return Odin.Test.assertNotEmptyObject(character.obj);
 	})
 
-	.add("Character is a player character", false, () => {
-		return Odin.Test.assertFalse(new Odin.Character().findId(_characterId_1).isPlayerCharacter()) &&
-		       Odin.Test.assertTrue(new Odin.Character().findId(_characterId_2).isPlayerCharacter());
+	.async().add("Character is a player character", false, async () => {
+		const pc = new Odin.Character();
+		const npc = new Odin.Character();
+		await Odin.Character.fetchId(pc, _characterId_1);
+		await Odin.Character.fetchId(npc, _characterId_2);
+		return Odin.Test.assertFalse(pc.isPlayerCharacter()) && Odin.Test.assertTrue(npc.isPlayerCharacter());
 	})
 
 	;
