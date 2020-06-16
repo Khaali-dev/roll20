@@ -290,7 +290,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// Players
 	// ------------------------------------------------------------------------
 
-	.async().add("Finds all players", false, async () => {
+	.async().add("Fetches all players", false, async () => {
 		const players = new Odin.Players();
 		await Odin.Players.fetchAll(players);
 		return Odin.Test.assertNotEmptyArray(players.objs);
@@ -326,8 +326,10 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// Pages
 	// ------------------------------------------------------------------------
 
-	.add("Finds all pages", false, () => {
-		return Odin.Test.assertNotEmptyArray(new Odin.Pages().findAll().objs);
+	.async().add("Fetches all pages", false, async () => {
+		const pages = new Odin.Pages();
+		await Odin.Pages.fetchAll(pages);
+		return Odin.Test.assertNotEmptyArray(pages.objs);
 	})
 
 	// Page
