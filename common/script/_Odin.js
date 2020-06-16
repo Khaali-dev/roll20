@@ -297,26 +297,28 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	})
 
 	.async().add("Fetches online players", false, async () => {
-		const online = new Odin.Players();
-		const offline = new Odin.Players();
-		await Odin.Players.fetchOnline(online, true);
-		await Odin.Players.fetchOnline(offline, false);
-		return Odin.Test.assertNotEmptyArray(online.objs) && Odin.Test.assertNotEmptyArray(offline.objs);
+		const onlines = new Odin.Players();
+		const offlines = new Odin.Players();
+		await Odin.Players.fetchOnline(onlines, true);
+		await Odin.Players.fetchOnline(offlines, false);
+		return Odin.Test.assertNotEmptyArray(onlines.objs) && Odin.Test.assertNotEmptyArray(offlines.objs);
 	})
 
 	.async().add("Filters players if game master", false, async () => {
-		const master = new Odin.Players();
-		const player = new Odin.Players();
-		await Odin.Players.fetchAll(master);
-		await Odin.Players.fetchAll(player);
-		return Odin.Test.assertNotEmptyArray(master.filterMaster(true).objs) && Odin.Test.assertNotEmptyArray(player.filterMaster(false).objs);
+		const masters = new Odin.Players();
+		const players = new Odin.Players();
+		await Odin.Players.fetchAll(masters);
+		await Odin.Players.fetchAll(players);
+		return Odin.Test.assertNotEmptyArray(masters.filterMaster(true).objs) && Odin.Test.assertNotEmptyArray(players.filterMaster(false).objs);
 	})
 
 	// Player
 	// ------------------------------------------------------------------------
 
-	.add("Finds a player by id", false, () => {
-		return Odin.Test.assertNotEmptyObject(new Odin.Player().findId(_playerId_1).obj);
+	.async().add("Fetches a player by id", false, async () => {
+		const player = new Odin.Player();
+		await Odin.Player.fetchId(player, _playerId_1);
+		return Odin.Test.assertNotEmptyObject(player.obj);
 	})
 
 	.add("Finds a player by name", false, () => {

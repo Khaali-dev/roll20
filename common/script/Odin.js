@@ -430,6 +430,19 @@ var Odin = (function() {
 			return Objects._only(Objects._findProperty(type, subtype, key, value));
 		}
 
+		/**
+		 * Fetches the object with the specified identifier.
+		 * @param object The object to update.
+		 * @param id     The identifier of the object to find.
+		 * @return the instance.
+		 */
+		static async fetchId(object, id) {
+			await new Promise(resolve => {
+				setTimeout(() => resolve(object.findId(id)), 100);
+			});
+			return object;
+		}
+
 	}
 
 	/**
@@ -479,7 +492,7 @@ var Odin = (function() {
 		/**
 		 * Fetches all objects of the specified collection.
 		 * @param collection The collection to update. 
-		 * @return the instance.
+		 * @return the collection.
 		 */
 		static async fetchAll(collection) {
 			await new Promise(resolve => {
