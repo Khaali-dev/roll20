@@ -30,6 +30,22 @@ var Odin = (function() {
 	}
 
 	/**
+	 * The Collections class is an utility class with static methods to manage collections.
+	 */
+	class Collections {
+
+		/**
+		 * Gets the only object of the specified collection.
+		 * @param collection The collection to watch.
+		 * @return the only object of the collection or null if none or more than one.
+		 */
+		static only(collection) {
+			return _.isUndefined(collection) || _.size(collection) === 0 || _.size(collection) > 1 ? null : _.first(collection);
+		}
+
+	}
+
+	/**
 	 * The Rankable class defines rankable object.
 	 */
 	class Rankable {
@@ -427,7 +443,7 @@ var Odin = (function() {
 		 * @return the instance.
 		 */
 		static _findProperty(type, subtype, key, value) {
-			return Objects._only(Objects._findProperty(type, subtype, key, value));
+			return Collections.only(Objects._findProperty(type, subtype, key, value));
 		}
 
 		/**
@@ -501,15 +517,6 @@ var Odin = (function() {
 				setTimeout(() => resolve(collection.findAll()), 100);
 			});
 			return collection;
-		}
-
-		/**
-		 * Gets the only objects of the specified collection.
-		 * @param objs The objects to watch.
-		 * @return the only object or null if none or more than one.
-		 */
-		static _only(objs) {
-			return _.isUndefined(objs) || _.size(objs) === 0 || _.size(objs) > 1 ? null : _.first(objs);
 		}
 
 		/**
