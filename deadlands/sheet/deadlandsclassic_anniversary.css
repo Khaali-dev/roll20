@@ -122,6 +122,79 @@
 
 /* ===== TABS ===== */
 
+/* ===== SUBTABS ===== */
+
+
+/*this hides the contents of each tab by default*/
+.charsheet div[class^="sheet-subsection"] {
+  display: none;
+}
+
+.charsheet input.sheet-subtab1:checked ~ div.sheet-subsection-werewolf,
+.charsheet input.sheet-subtab2:checked ~ div.sheet-subsection-huckster,
+.charsheet input.sheet-subtab3:checked ~ div.sheet-subsection-voodoo,
+.charsheet input.sheet-subtab4:checked ~ div.sheet-subsection-martial_arts {
+  display: block;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+/*this hides the radio button for each tab, makes it 130px wide and 40px tall and makes sure it's above everything else*/
+.charsheet input.sheet-subtab {
+  width: 131px;
+  height: 46px;
+  cursor: pointer;
+  opacity: 0;
+  z-index: 2;
+	position: relative;
+	top:27px;
+	
+}
+
+/*this styles the span with the tab information and slides to the left, so it appears underneath the radio button*/
+.charsheet span.sheet-subtab {
+    text-align: center;
+    font-size: 12pt;
+    color: #ffdcb0;
+    cursor: pointer;
+    font-family:'Sancreek',cursive;
+	position: relative;
+    width:111px;
+    height: 46px;
+    padding-left:10px;
+    padding-right:10px;
+	margin-left:40px;
+	margin-right:40px;
+    display: inline-block;
+    margin-left:-162px;
+	z-index: 1;
+	line-height: 46px;
+	background: url("img/leather-tab.png");
+}
+
+.charsheet .sheet-subtab {
+
+	left:100px;
+	
+}
+
+.charsheet .sheet-tab2,
+.charsheet .sheet-tab3 {
+	left:230px;
+}
+
+/*this modifies the span color once the radio button is selected so you know which tab is selected*/
+.charsheet input.sheet-subtab1:checked + span.sheet-subtab1,
+.charsheet input.sheet-subtab2:checked + span.sheet-subtab2,
+.charsheet input.sheet-subtab3:checked + span.sheet-subtab3,
+.charsheet input.sheet-subtab4:checked + span.sheet-subtab4 {
+    color: #ffffff;
+    background:url('https://raw.githubusercontent.com/rlepennec/roll20/ND-charsheet/deadlands/sheet/img/crosshair.png') no-repeat;
+	background-position: center;
+}
+
+/* ===== SUBTABS ===== */
+
 /* ===== Sheet Update Notice ===== */
 .charsheet input.sheet-notice:checked ~ span.sheet-notice {
   display: none;
