@@ -490,6 +490,19 @@ var Odin = (function() {
 		}
 
 		/**
+		 * Finds the objects with the specified property.
+		 * @param key   The name of property of the objects to get.
+		 * @param value The value of property of the objects to get.
+		 * @return the matching objects.
+		 */
+		findProperty(key, value) {
+			const query = this.subtype != null ? { _type: this.type, _subtype: this.subtype } : { _type: this.type };
+			query[key] = value;
+			this.objs = findObjs(query);
+			return this;
+		}
+
+		/**
 		 * Filters the objects
 		 * @param predicate The predicate to realize.
 		 * @return the instance.
@@ -519,20 +532,6 @@ var Odin = (function() {
 				setTimeout(() => resolve(collection.findAll()), 100);
 			});
 			return collection;
-		}
-
-		/**
-		 * Finds the objects with the specified property.
-		 * @param type    The type of the objects to get.
-		 * @param subtype The subtype of the objects to get.
-		 * @param key     The name of property of the objects to get.
-		 * @param value   The value of property of the objects to get.
-		 * @return the matching objects.
-		 */
-		static _findProperty(type, subtype, key, value) {
-			const query = subtype != null ? { _type: type, _subtype: subtype } : { _type: type };
-			query[key] = value;
-			return findObjs(query);
 		}
 
 	}
@@ -600,7 +599,7 @@ var Odin = (function() {
 		 * @return the instance.
 		 */
 		findOnline(online) {
-			this.objs = Objects._findProperty(this.type, this.subtype, '_online', online);
+			this.findProperty('_online', online);
 			return this;
 		}
 
@@ -695,7 +694,7 @@ var Odin = (function() {
 		 * @return the instance.
 		 */
 		findName(name) {
-			this.objs = Objects._findProperty(this.type, this.subtype, 'name', name);
+			this.findProperty('name', name);
 			return this;
 		}
 
