@@ -7,6 +7,7 @@ const _characterId_2 = "-M63mpWsG_c3BwN1b3DU"; // Sadie
 const _deckId_1 = "-M8pqKN-SnT3CwJJqRcz"; // Actions
 const _cardId_1 = "-M8swNpKKC6Ujo0SvBel";
 const _cardId_2 = "-M8r0TYwIpBy2pqUmWDT";
+const _handId_1 = "-M7ie833VkosbYjj8rbX";
 
 var _odin = _odin || new Odin.TestSuite("Odin")
 
@@ -343,8 +344,10 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// Page
 	// ------------------------------------------------------------------------
 
-	.add("Finds a page by id", false, () => {
-		return Odin.Test.assertNotEmptyObject(new Odin.Page().findId(_pageId_1).obj);
+	.async().add("Fetches a page by id", false, async () => {
+		const page = new Odin.Page();
+		await Odin.Page.fetchId(page, _pageId_1);
+		return Odin.Test.assertNotEmptyObject(page.obj);
 	})
 
 	// Decks
@@ -370,10 +373,12 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// Deck
 	// ------------------------------------------------------------------------
 
-	.add("Finds a deck by id", false, () => {
-		return Odin.Test.assertNotEmptyObject(new Odin.Deck().findId(_deckId_1).obj);
+	.async().add("Fetches a deck by id", false, async () => {
+		const deck = new Odin.Deck();
+		await Odin.Deck.fetchId(deck, _deckId_1);
+		return Odin.Test.assertNotEmptyObject(deck.obj);
 	})
-	
+
 	.add("Finds a deck by name", false, () => {
 		return Odin.Test.assertNotEmptyObject(new Odin.Deck().findName('Actions').obj) &&
 		       Odin.Test.assertEmptyObject(new Odin.Deck().findName('Unknown').obj);
@@ -431,14 +436,11 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// Card
 	// ------------------------------------------------------------------------
 
-	.add("Finds a card by id", false, () => {
-		return Odin.Test.assertNotEmptyObject(new Odin.Card().findId(_cardId_1).obj);
+	.async().add("Fetches a card by id", false, async () => {
+		const card = new Odin.Card();
+		await Odin.Card.fetchId(card, _cardId_1);
+		return Odin.Test.assertNotEmptyObject(card.obj);
 	})
-
-	// Cards
-	// ------------------------------------------------------------------------
-
-
 
 	// Hands
 	// ------------------------------------------------------------------------
@@ -452,9 +454,10 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// Hand
 	// ------------------------------------------------------------------------
 
-	.add("Finds a hand by id", true, () => {
-		//return Odin.Test.assertNotEmptyObject(new Odin.Hand().findId("-M8r15WD7wDam7lAX_bW").obj);
-		return true;
+	.async().add("Fetches a hand by id", false, async () => {
+		const hand = new Odin.Hand();
+		await Odin.Hand.fetchId(hand, _handId_1);
+		return Odin.Test.assertNotEmptyObject(hand.obj);
 	})
 
 	// Tokens
@@ -489,8 +492,10 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// Character
 	// ------------------------------------------------------------------------
 
-	.add("Finds a character by id", false, () => {
-		return Odin.Test.assertNotEmptyObject(new Odin.Character().findId(_characterId_1).obj);
+	.async().add("Fetches a character by id", false, async () => {
+		const character = new Odin.Character();
+		await Odin.Character.fetchId(character, _characterId_1);
+		return Odin.Test.assertNotEmptyObject(character.obj);
 	})
 
 	.add("Character is a player character", false, () => {
