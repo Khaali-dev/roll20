@@ -431,7 +431,10 @@ var Odin = (function() {
 		 * @return the instance.
 		 */
 		findProperty(key, value) {
-			this.obj = Collections.only(Objects._findProperty(this.type, this.subtype, key, value));
+			const query = this.subtype != null ? { _type: this.type, _subtype: this.subtype } : { _type: this.type };
+			query[key] = value;
+			const objs = findObjs(query);
+			this.obj = Collections.only(objs);
 			return this;
 		}
 
