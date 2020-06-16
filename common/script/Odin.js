@@ -593,13 +593,13 @@ var Odin = (function() {
 		}
 
 		/**
-		 * Fetches the object with the specified property.
-		 * @param key   The name of the property used to query the object.
-		 * @param value The value of the property used to query the object.
+		 * Fetches the player with the specified name.
+		 * @param player The player to fetch.
+		 * @param name   The name of the player to fetch.
 		 * @return the instance.
 		 */
-		static async fetchName(object, name) {
-			return Object.fetchProperty(object, '_displayname', name)
+		static async fetchName(player, name) {
+			return Object.fetchProperty(player, '_displayname', name)
 		}
 
 	}
@@ -802,6 +802,16 @@ var Odin = (function() {
 				 .map(cardid => getObj('card', cardid))
 				 .reject(_.isUndefined)
 				 .value()) : null;
+		}
+
+		/**
+		 * Fetches the deck with the specified name.
+		 * @param deck The deck to fetch.
+		 * @param name The name of the deck to fetch.
+		 * @return the instance.
+		 */
+		static async fetchName(deck, name) {
+			return Object.fetchProperty(deck, 'name', name)
 		}
 
 	}

@@ -383,9 +383,12 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return Odin.Test.assertNotEmptyObject(deck.obj);
 	})
 
-	.add("Finds a deck by name", false, () => {
-		return Odin.Test.assertNotEmptyObject(new Odin.Deck().findName('Actions').obj) &&
-		       Odin.Test.assertEmptyObject(new Odin.Deck().findName('Unknown').obj);
+	.async().add("Finds a deck by name", false, async () => {
+		const actions = new Odin.Deck();
+		const unknown = new Odin.Deck();
+		await Odin.Deck.fetchName(actions, 'Actions');
+		await Odin.Deck.fetchName(unknown, 'Unknown');
+		return Odin.Test.assertNotEmptyObject(actions.obj) && Odin.Test.assertEmptyObject(unknown.obj);
 	})
 
 	.add("Recalls cards and shuffle deck", false, () => {
