@@ -492,10 +492,6 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return Odin.Test.assertNotEmptyArray(characters.objs);
 	})
 
-	.add("Finds characters by name", false, () => {
-		return Odin.Test.assertNotEmptyArray(new Odin.Characters().findName('Lincoln').objs);
-	})
-
 	// Character
 	// ------------------------------------------------------------------------
 
@@ -503,6 +499,14 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		const character = new Odin.Character();
 		await Odin.Character.fetchId(character, _characterId_1);
 		return Odin.Test.assertNotEmptyObject(character.obj);
+	})
+
+	.async().add("Fetches a character by name", false, async () => {
+		const lincoln = new Odin.Character();
+		const unknown = new Odin.Character();
+		await Odin.Character.fetchName(lincoln, 'Lincoln');
+		await Odin.Character.fetchName(unknown, 'Unknown');
+		return Odin.Test.assertNotEmptyObject(lincoln.obj) && Odin.Test.assertEmptyObject(unknown.obj);
 	})
 
 	.async().add("Character is a player character", false, async () => {

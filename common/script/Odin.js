@@ -691,10 +691,30 @@ var Odin = (function() {
 		}
 
 		/**
+		 * Finds the specified character.
+		 * @param name The name of the character to find.
+		 * @return the instance.
+		 */
+		findName(name) {
+			this.findProperty('name', name);
+			return this;
+		}
+
+		/**
 		 * @return true if the character is a player character. 
 		 */
 		isPlayerCharacter() {
 			return this.obj != null && this.obj.get('controlledby') != '';
+		}
+
+		/**
+		 * Fetches the character with the specified name.
+		 * @param character The character to fetch.
+		 * @param name      The name of the character to fetch.
+		 * @return the instance.
+		 */
+		static async fetchName(character, name) {
+			return Object.fetchProperty(character, 'name', name)
 		}
 
 	}
@@ -709,16 +729,6 @@ var Odin = (function() {
 		 */
 		constructor() {
 			super('character', null);
-		}
-
-		/**
-		 * Finds the specified characters.
-		 * @param name The name of the characters to find.
-		 * @return the instance.
-		 */
-		findName(name) {
-			this.findProperty('name', name);
-			return this;
 		}
 
 	}
