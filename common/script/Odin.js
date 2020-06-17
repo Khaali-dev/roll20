@@ -137,6 +137,23 @@ var Odin = (function() {
 		}
 
 		/**
+		 * Runs the specified test.
+		 * @param test The test to run.
+		 * @return the test result;
+		 */
+		static async run(test) {
+			if (test.wip === true) {
+				return "[   WIP]";
+			} else {
+				try {
+					return await test.assert() === true ? "[OK    ]" : "[   NOK]";
+				} catch (exception) {
+					return "[   EXP]";
+				}
+			}
+		}
+
+		/**
 		 * Asserts the specified assertion is true.
 		 * @param assertion The assertion to evaluate.
 		 * @return true if the specified assertion is true.
@@ -253,15 +270,11 @@ var Odin = (function() {
 		 */
 		static async processCommand(cmd, args, suite) {
 			if (cmd != suite.name || args[0] != 'test') return;
-			log("Launch all tests for module " + suite.name);
-			suite.tests.forEach(async t => {
-				const wip = t.wip === true ? "[WIP] " : "[   ] ";
-				try {
-					log(wip + (await t.assert() === true ? "[OK    ]" : "[   NOK]") + ": " + t.name + " ");
-				} catch (exception) {
-					log(wip + "[   NOK] because exception has been raised");
-				}
-			})
+			log("Launch " + _.size(suite.tests) + " tests for module " + suite.name);
+			for (let i=0; i<suite.tests.length; i++) {
+				const test = suite.tests[i];
+				log(await Odin.Test.run(test) + ": " + test.name);
+			}
 		}
 
 		/**

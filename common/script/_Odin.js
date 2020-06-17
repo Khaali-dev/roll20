@@ -14,10 +14,6 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// Dice
 	// ------------------------------------------------------------------------
 
-
-	// Dice
-	// ------------------------------------------------------------------------
-
 	.add("Dice serialization", false, async () => {
 		return new Odin.Dice(6).toString() === "d6";
 	})
