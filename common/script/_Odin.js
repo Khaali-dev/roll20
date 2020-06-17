@@ -18,11 +18,11 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// Dice
 	// ------------------------------------------------------------------------
 
-	.add("Dice serialization", false, () => {
+	.async().add("Dice serialization", false, async () => {
 		return new Odin.Dice(6).toString() === "d6";
 	})
 
-	.add("Open dice roll value", false, () => {
+	.async().add("Open dice roll value", false, async () => {
 		const dice = new Odin.Dice(4);
 		let min = 100;
 		let max = 0;
@@ -38,7 +38,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return min>0 && max>4 && min<100 && max<100;
 	})
 
-	.add("Close dice roll value", false, () => {
+	.async().add("Close dice roll value", false, async () => {
 		const dice = new Odin.Dice(4).close();
 		let min = 5;
 		let max = 0;
@@ -54,21 +54,21 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return min>0 && max>0 && min<5 && max<5;
 	})
 
-	.add("Dice roll", false, () => {
+	.async().add("Dice roll", false, async () => {
 		return new RegExp('\\d+\\(d\\d+\\)').test(new Odin.Dice(6).roll().toString());
 	})
 
 	// Roll
 	// ------------------------------------------------------------------------
 
-	.add("Roll serialization", false, () => {
+	.async().add("Roll serialization", false, async () => {
 		return new Odin.Roll(new Odin.Dice(10), 15).toString() === "15(d10)";
 	})
 
 	// Dices
 	// ------------------------------------------------------------------------
 
-	.add("Dices serialization", false, () => {
+	.async().add("Dices serialization", false, async () => {
 		return new Odin.Dices()
 			.add(new Odin.Dice(4), 2)
 			.add(new Odin.Dice(6), 3)
@@ -78,7 +78,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// Rolls
 	// ------------------------------------------------------------------------
 
-	.add("Rolls serialization", false, () => {
+	.async().add("Rolls serialization", false, async () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -88,7 +88,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return rolls.toString() === "1(d4), 3(d4), 1(d6), 6(d6), 2(d6)";
 	})
 
-	.add("Number of rolls", false, () => {
+	.async().add("Number of rolls", false, async () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -98,7 +98,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return rolls.size() === 5;
 	})
 
-	.add("Roll values", false, () => {
+	.async().add("Roll values", false, async () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -108,7 +108,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return Odin.Test.assertArrayEqual([1, 3, 1, 6, 2], rolls.values());
 	})
 
-	.add("Min of rolls", false, () => {
+	.async().add("Min of rolls", false, async () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -118,7 +118,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return rolls.min() === 1;
 	})
 
-	.add("Max of rolls", false, () => {
+	.async().add("Max of rolls", false, async () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -128,7 +128,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return rolls.max() === 6;
 	})
 
-	.add("Sum of rolls", false, () => {
+	.async().add("Sum of rolls", false, async () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -138,7 +138,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return rolls.sum() === 13;
 	})
 
-	.add("Transform rolls", false, () => {
+	.async().add("Transform rolls", false, async () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -149,7 +149,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return Odin.Test.assertArrayEqual([2, 4, 2, 7, 3], rolls.values());
 	})
 
-	.add("Reject rolls", false, () => {
+	.async().add("Reject rolls", false, async () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -160,7 +160,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return Odin.Test.assertArrayEqual([3, 6, 2], rolls.values());
 	})
 
-	.add("Filter rolls", false, () => {
+	.async().add("Filter rolls", false, async () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -171,7 +171,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return Odin.Test.assertArrayEqual([3, 6, 2], rolls.values());
 	})
 
-	.add("Some rolls", false, () => {
+	.async().add("Some rolls", false, async () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -182,7 +182,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		       Odin.Test.assertFalse(rolls.some(function (r) { return r.value === 5; }));
 	})
 
-	.add("Count rolls", false, () => {
+	.async().add("Count rolls", false, async () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -193,7 +193,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		       rolls.count(function (r) { return r.value === 5; }) === 0;
 	})
 
-	.add("Number of rolls", false, () => {
+	.async().add("Number of rolls", false, async () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -203,7 +203,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return rolls.numberOf(1) === 2 && rolls.numberOf(5) === 0;
 	})
 
-	.add("One roll at least", false, () => {
+	.async().add("One roll at least", false, async () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -214,7 +214,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		       Odin.Test.assertFalse(rolls.atLeast(5));
 	})
 
-	.add("Replace some rolls", false, () => {
+	.async().add("Replace some rolls", false, async () => {
 		const rolls = new Odin.Rolls()
 			.add(new Odin.Roll(new Odin.Dice(4), 1))
 			.add(new Odin.Roll(new Odin.Dice(4), 3))
@@ -229,7 +229,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// Poker cards
 	// ------------------------------------------------------------------------
 
-	.add("Sort poker cards", false, () => {
+	.async().add("Sort poker cards", false, async () => {
 		const turns = [
 			{'id':_tokenId_1, 'pr':'6♣', 'custom':'', '_pageid':_pageId_1},
 			{'id':_tokenId_2, 'pr':'RJo', 'custom':'', '_pageid':_pageId_1},
@@ -252,15 +252,15 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// Turn order
 	// ------------------------------------------------------------------------
 
-	.add("Parse the current turn order", false, () => {
+	.async().add("Parse the current turn order", false, async () => {
 		return Odin.Test.assertNotEmptyArray(new Odin.TurnOrder(null).parse());
 	})
 
-	.add("Clears the turn order", false, () => {
+	.async().add("Clears the turn order", false, async () => {
 		return Odin.Test.assertEmptyArray(new Odin.TurnOrder().clear().parse());
 	})
 
-	.add("Add some turns to the turn order", false, () => {
+	.async().add("Add some turns to the turn order", false, async () => {
 		const turns = [
 			new Odin.Turn(_tokenId_1, 1),
 			new Odin.Turn(_tokenId_1, 2),
@@ -271,14 +271,14 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return _.size(new Odin.TurnOrder().clear().add(turns).parse()) === 5
 	})
 
-	.add("Pop first turn from turn order", false, () => {
+	.async().add("Pop first turn from turn order", false, async () => {
 		return Odin.Test.assertNotNull(new Odin.TurnOrder()
 			.clear()
 			.add([new Odin.Turn(_tokenId_1, 10)])
 			.pop());
 	})
 
-	.add("Insert turns to turn order", false, () => {
+	.async().add("Insert turns to turn order", false, async () => {
 		return Odin.Test.assertArrayEqual(
 			new Odin.TurnOrder()
 				.clear()
