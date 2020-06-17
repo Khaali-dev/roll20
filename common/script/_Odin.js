@@ -363,7 +363,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return Odin.Test.assertNotEmptyArray(decks.objs);
 	})
 
-	.add("Recalls and shuffles decks", false, () => {
+	.async().add("Recalls and shuffles decks", false, async () => { //TODO
 		const decks = new Odin.Decks().findAll().recall().shuffle();
 		const deck = new Odin.Deck().findName('Actions');
 		const maxSize = _.size(deck.obj.get('currentDeck').split(/\s*,\s*/));
@@ -391,7 +391,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return Odin.Test.assertNotEmptyObject(actions.obj) && Odin.Test.assertEmptyObject(unknown.obj);
 	})
 
-	.add("Recalls cards and shuffle deck", false, () => {
+	.async().add("Recalls cards and shuffle deck", false, async () => { //TODO
 		const deck = new Odin.Deck().findName('Actions');
 		deck.recall().shuffle();
 		const maxSize = _.size(deck.obj.get('currentDeck').split(/\s*,\s*/));
@@ -402,7 +402,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return maxSize === size + 2;
 	})
 
-	.add("Cards since last shuffle", false, () => {
+	.async().add("Cards since last shuffle", false, () => { //TODO
 		const deck = new Odin.Deck().findName('Actions').recall().shuffle();
 		const maxSize = _.size(deck.lastShuffle().objs);
 		giveCardToPlayer(_cardId_1, _playerId_1);
@@ -425,17 +425,17 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 		return success;
 	})
 
-	.add("Recall cards", true, () => {
+	.async().add("Recall cards", true, async () => { //TODO
 		// Test: new Odin.Decks().recall()
 		return true;
 	})
 
-	.add("Shuffle cards", true, () => {
+	.async().add("Shuffle cards", true, async () => {
 		// Test: new Odin.Decks().shuffle()
 		return true;
 	})
 
-	.add("Finds all cards", true, () => {
+	.async().add("Finds all cards", true, async () => { //TODO
 		//return Odin.Test.assertNotEmptyArray(new Odin.Cards().findAll().objs);
 		return true;
 	})
@@ -470,7 +470,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// Tokens
 	// ------------------------------------------------------------------------
 
-	.add("Finds all tokens", true, () => {
+	.async().add("Finds all tokens", true, async () => { //TODO
 		//return Odin.Test.assertNotEmptyArray(new Odin.Tokens().findAll().objs);
 		return true;
 	})
@@ -478,7 +478,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// Token
 	// ------------------------------------------------------------------------
 
-	.add("Finds a token by id", true, () => {
+	.async().add("Finds a token by id", true, async () => { //TODO
 		//return Odin.Test.assertNotEmptyObject(new Odin.Token().findId(_tokenId_1).obj);
 		return true;
 	})
