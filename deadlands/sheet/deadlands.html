@@ -563,7 +563,7 @@ on("sheet:opened", function(eventInfo){
                         <fieldset class="repeating_professional">
                             <div class="sheet-row">
                                 <div class="sheet-item sheet-large">&nbsp;</div>
-                                <div class="sheet-item sheet-third sheet-skill-specialization"><input type="text" name="attr_professionalname" placeholder="Carrière"></div>
+                                <div class="sheet-item sheet-third sheet-skill-specialization"><input type="text" name="attr_professionalname" placeholder="CarriÃ¨re"></div>
                                 <div class="sheet-item sheet-large"><input type="number" name="attr_professionallvl" placeholder="Niv"></div>
                                 <div class="sheet-item sheet-tiny">+</div>
                                 <div class="sheet-item sheet-large"><input type="text" name="attr_professionalmod" placeholder="Mod"></div>
@@ -669,7 +669,7 @@ on("sheet:opened", function(eventInfo){
                         </div>
                         <fieldset class="repeating_medicine">
                             <div class="sheet-item sheet-large">&nbsp;</div>
-                            <div class="sheet-item sheet-third sheet-skill-specialization"><input type="text" name="attr_medicineconc" placeholder="Médecine"></div>
+                            <div class="sheet-item sheet-third sheet-skill-specialization"><input type="text" name="attr_medicineconc" placeholder="MÃ©decine"></div>
                             <div class="sheet-item sheet-tiny">&nbsp;</div>
                             <div class="sheet-item sheet-large"><input type="number" name="attr_medicinelvl" placeholder="Niv"></div>
                             <div class="sheet-item sheet-tiny">+</div>
@@ -691,7 +691,7 @@ on("sheet:opened", function(eventInfo){
                         <fieldset class="repeating_trade">
                             <div class="sheet-row">
                                 <div class="sheet-item sheet-large">&nbsp;</div>
-                                <div class="sheet-item sheet-third sheet-skill-specialization"><input type="text" name="attr_tradename" placeholder="Métier"></div>
+                                <div class="sheet-item sheet-third sheet-skill-specialization"><input type="text" name="attr_tradename" placeholder="MÃ©tier"></div>
                                 <div class="sheet-item sheet-large"><input type="number" name="attr_tradelvl" placeholder="Niv"></div>
                                 <div class="sheet-item sheet-tiny">+</div>
                                 <div class="sheet-item sheet-large"><input type="text" name="attr_trademod" placeholder="Mod"></div>
@@ -1161,7 +1161,7 @@ on("sheet:opened", function(eventInfo){
                 </div>
                 <br/>
                 
-                <!-- Agilité -->
+                <!-- AgilitÃ© -->
                 <div class="sheet-borderdiv">
                     <!-- Attribut -->
                     <div class="sheet-row">
@@ -1863,29 +1863,19 @@ on("sheet:opened", function(eventInfo){
 
   <!-- Arcane Ablities Tab -->
   <div class="sheet-section-arcane">
-    <div class="sheet-row">
+    <div class="sheet-row"> 
+		
+		  <input type="radio" name="attr_subtab" value="1" class="sheet-subtab sheet-subtab1" title="Werewolf" checked="checked"/>
+		<span class="sheet-subtab sheet-subtab1">Werewolf</span>
+	  <input type="radio" name="attr_subtab" value="2" class="sheet-subtab sheet-subtab2" title="Huckster"/>
+		<span class="sheet-subtab sheet-subtab2">Huckster</span>
+	<input type="radio" name="attr_subtab" value="3" class="sheet-subtab sheet-subtab3" title="Voodoo"/>
+		<span class="sheet-subtab sheet-subtab3">Voodoo</span>
+			<input type="radio" name="attr_subtab" value="4" class="sheet-subtab sheet-subtab4" title="Martial arts"/>
+		<span class="sheet-subtab sheet-subtab4">Martial arts</span>
         
-        <div class="sheet-radios">
-            <input type="hidden" class="sheet-radio" name="attr_level" value="1" />
-            <button type="action" name="act_level_1" class="sheet-radio sheet-radio-1">
-                <span class="checked"></span>
-            </button>
-            <button type="action" name="act_level_2" class="sheet-radio sheet-radio-2">
-                <span class="sheet-checked"></span>
-            </button>
-            <button type="action" name="act_level_3" class="sheet-radio sheet-radio-3">
-                <span class="sheet-checked"></span>
-            </button>
-            <button type="action" name="act_level_4" class="sheet-radio sheet-radio-4">
-                <span class="checked"></span>
-            </button>
-            <button type="action" name="act_level_5" class="sheet-radio sheet-radio-5">
-                <span class="sheet-checked"></span>
-            </button>
-        </div> 
-        
-      <div class="sheet-center">
-          <h2><span data-i18n="arcaneAbilities">Arcane</span></h2></div>
+      <div class="sheet-subsection-werewolf">
+          <h2><span data-i18n="arcaneAbilities">Werewolf</span></h2>
         <div class="sheet-row">
             <div class="sheet-item sheet-large"><label><b><span data-i18n="skill">Skill</span></b></label></div>
             <div class="sheet-item sheet-small"><input type="number" min="0" name="attr_hexslinginlvl"></div>
@@ -1934,12 +1924,248 @@ on("sheet:opened", function(eventInfo){
             <div class="repcontainer" data-groupname="repeating_spells"></div>
         </div>
     </div>
+      <div class="sheet-subsection-huckster">
+        <h2><span data-i18n="arcaneAbilities">Huckster</span></h2>
+        <div class="sheet-row">
+          <div class="sheet-item sheet-large">
+            <label><b><span data-i18n="skill">Skill</span></b></label>
+          </div>
+          <div class="sheet-item sheet-small">
+            <input type="number" min="0" name="attr_hexslinginlvl2">
+          </div>
+          <div class="sheet-item sheet-large"><b><span data-i18n="ritual">Ritual</span></b></div>
+          <div class="sheet-item sheet-small">
+            <input type="number" name="attr_rituallvl2">
+          </div>
+          <div class="sheet-item sheet-large"><b><span data-i18n="rituals">Rituals</span></b></div>
+          <div class="sheet-item sheet-huge">
+            <input type="text" name="attr_rituals2">
+          </div>
+        </div>
+        <br/>
+        <div class="sheet-row">
+          <div class="sheet-item sheet-large">
+            <label><b><span data-i18n="name">Name</span></b></label>
+          </div>
+          <div class="sheet-item sheet-small">
+            <label><b><span data-i18n="speed">Speed</span></b></label>
+          </div>
+          <div class="sheet-item sheet-large">
+            <label><b><span data-i18n="duration">Duration</span></b></label>
+          </div>
+          <div class="sheet-item sheet-small">
+            <label><b><span data-i18n="range">Range</span></b></label>
+          </div>
+          <div class="sheet-item sheet-small">
+            <label><b><span data-i18n="dice">Dice</span></b></label>
+          </div>
+          <div class="sheet-item sheet-small">&nbsp;</div>
+          <div class="sheet-item sheet-small">
+            <label><b><span data-i18n="tn">TN</span></b></label>
+          </div>
+          <div class="sheet-item sheet-large">
+            <label><b><span data-i18n="notes">Notes</span></b></label>
+          </div>
+          <fieldset class="repeating_spells" style="display: none;">
+            <div class="arcane-row">
+              <div class="sheet-item sheet-large">
+                <input type="text" name="attr_spellname2" placeholder="Shadow Man">
+              </div>
+              <div class="sheet-item sheet-small">
+                <input type="number" name="attr_spellspeed2" placeholder="2">
+              </div>
+              <div class="sheet-item sheet-large">
+                <input type="text" name="attr_spelldur2" placeholder="Concentration">
+              </div>
+              <div class="sheet-item sheet-small">
+                <input type="text" name="attr_spellran2" placeholder="Self">
+              </div>
+              <div class="sheet-item sheet-large">
+                <select name="attr_magtype2" class="dtype" style="margin-bottom: 0px; width: 60px">
+                  <option select="selected" value="d4">4</option>
+                  <option value="d6">6</option>
+                  <option value="d8">8</option>
+                  <option value="d10">10</option>
+                  <option value="d12">12</option>
+                </select>
+              </div>
+              <div class="sheet-item sheet-small">
+                <input type="text" name="attr_spelltn2" placeholder="#">
+              </div>
+              <div class="sheet-item sheet-huge" style="width: 30%;">
+                <textarea name="attr_spellnotes2" class="sheet-shorttextarea" placeholder="Notes"></textarea>
+              </div>
+              <button type="roll" name="Magie/Wunder" value="@{gmtoggle}&{template:simple}  {{rollname=Magie/Wunder}} {{dice=[[@{hexslinginlvl}@{magtype}!!k1]]}}"></button>
+            </div>
+          </fieldset>
+          <div class="repcontainer" data-groupname="repeating_spells"></div>
+        </div>
+      </div>
+      <div class="sheet-subsection-voodoo">
+        <h2><span data-i18n="arcaneAbilities">Voodoo</span></h2>
+        <div class="sheet-row">
+          <div class="sheet-item sheet-large">
+            <label><b><span data-i18n="skill">Skill</span></b></label>
+          </div>
+          <div class="sheet-item sheet-small">
+            <input type="number" min="0" name="attr_hexslinginlvl2">
+          </div>
+          <div class="sheet-item sheet-large"><b><span data-i18n="ritual">Ritual</span></b></div>
+          <div class="sheet-item sheet-small">
+            <input type="number" name="attr_rituallvl2">
+          </div>
+          <div class="sheet-item sheet-large"><b><span data-i18n="rituals">Rituals</span></b></div>
+          <div class="sheet-item sheet-huge">
+            <input type="text" name="attr_rituals2">
+          </div>
+        </div>
+        <br/>
+        <div class="sheet-row">
+          <div class="sheet-item sheet-large">
+            <label><b><span data-i18n="name">Name</span></b></label>
+          </div>
+          <div class="sheet-item sheet-small">
+            <label><b><span data-i18n="speed">Speed</span></b></label>
+          </div>
+          <div class="sheet-item sheet-large">
+            <label><b><span data-i18n="duration">Duration</span></b></label>
+          </div>
+          <div class="sheet-item sheet-small">
+            <label><b><span data-i18n="range">Range</span></b></label>
+          </div>
+          <div class="sheet-item sheet-small">
+            <label><b><span data-i18n="dice">Dice</span></b></label>
+          </div>
+          <div class="sheet-item sheet-small">&nbsp;</div>
+          <div class="sheet-item sheet-small">
+            <label><b><span data-i18n="tn">TN</span></b></label>
+          </div>
+          <div class="sheet-item sheet-large">
+            <label><b><span data-i18n="notes">Notes</span></b></label>
+          </div>
+          <fieldset class="repeating_spells" style="display: none;">
+            <div class="arcane-row">
+              <div class="sheet-item sheet-large">
+                <input type="text" name="attr_spellname2" placeholder="Shadow Man">
+              </div>
+              <div class="sheet-item sheet-small">
+                <input type="number" name="attr_spellspeed2" placeholder="2">
+              </div>
+              <div class="sheet-item sheet-large">
+                <input type="text" name="attr_spelldur2" placeholder="Concentration">
+              </div>
+              <div class="sheet-item sheet-small">
+                <input type="text" name="attr_spellran2" placeholder="Self">
+              </div>
+              <div class="sheet-item sheet-large">
+                <select name="attr_magtype2" class="dtype" style="margin-bottom: 0px; width: 60px">
+                  <option select="selected" value="d4">4</option>
+                  <option value="d6">6</option>
+                  <option value="d8">8</option>
+                  <option value="d10">10</option>
+                  <option value="d12">12</option>
+                </select>
+              </div>
+              <div class="sheet-item sheet-small">
+                <input type="text" name="attr_spelltn2" placeholder="#">
+              </div>
+              <div class="sheet-item sheet-huge" style="width: 30%;">
+                <textarea name="attr_spellnotes2" class="sheet-shorttextarea" placeholder="Notes"></textarea>
+              </div>
+              <button type="roll" name="Magie/Wunder" value="@{gmtoggle}&{template:simple}  {{rollname=Magie/Wunder}} {{dice=[[@{hexslinginlvl}@{magtype}!!k1]]}}"></button>
+            </div>
+          </fieldset>
+          <div class="repcontainer" data-groupname="repeating_spells"></div>
+        </div>
+      </div>
+      <div class="sheet-subsection-martial_arts">
+        <h2><span data-i18n="arcaneAbilities">Martial arts</span></h2>
+        <div class="sheet-row">
+          <div class="sheet-item sheet-large">
+            <label><b><span data-i18n="skill">Skill</span></b></label>
+          </div>
+          <div class="sheet-item sheet-small">
+            <input type="number" min="0" name="attr_hexslinginlvl2">
+          </div>
+          <div class="sheet-item sheet-large"><b><span data-i18n="ritual">Ritual</span></b></div>
+          <div class="sheet-item sheet-small">
+            <input type="number" name="attr_rituallvl2">
+          </div>
+          <div class="sheet-item sheet-large"><b><span data-i18n="rituals">Rituals</span></b></div>
+          <div class="sheet-item sheet-huge">
+            <input type="text" name="attr_rituals2">
+          </div>
+        </div>
+        <br/>
+        <div class="sheet-row">
+          <div class="sheet-item sheet-large">
+            <label><b><span data-i18n="name">Name</span></b></label>
+          </div>
+          <div class="sheet-item sheet-small">
+            <label><b><span data-i18n="speed">Speed</span></b></label>
+          </div>
+          <div class="sheet-item sheet-large">
+            <label><b><span data-i18n="duration">Duration</span></b></label>
+          </div>
+          <div class="sheet-item sheet-small">
+            <label><b><span data-i18n="range">Range</span></b></label>
+          </div>
+          <div class="sheet-item sheet-small">
+            <label><b><span data-i18n="dice">Dice</span></b></label>
+          </div>
+          <div class="sheet-item sheet-small">&nbsp;</div>
+          <div class="sheet-item sheet-small">
+            <label><b><span data-i18n="tn">TN</span></b></label>
+          </div>
+          <div class="sheet-item sheet-large">
+            <label><b><span data-i18n="notes">Notes</span></b></label>
+          </div>
+          <fieldset class="repeating_spells" style="display: none;">
+            <div class="arcane-row">
+              <div class="sheet-item sheet-large">
+                <input type="text" name="attr_spellname2" placeholder="Shadow Man">
+              </div>
+              <div class="sheet-item sheet-small">
+                <input type="number" name="attr_spellspeed2" placeholder="2">
+              </div>
+              <div class="sheet-item sheet-large">
+                <input type="text" name="attr_spelldur2" placeholder="Concentration">
+              </div>
+              <div class="sheet-item sheet-small">
+                <input type="text" name="attr_spellran2" placeholder="Self">
+              </div>
+              <div class="sheet-item sheet-large">
+                <select name="attr_magtype2" class="dtype" style="margin-bottom: 0px; width: 60px">
+                  <option select="selected" value="d4">4</option>
+                  <option value="d6">6</option>
+                  <option value="d8">8</option>
+                  <option value="d10">10</option>
+                  <option value="d12">12</option>
+                </select>
+              </div>
+              <div class="sheet-item sheet-small">
+                <input type="text" name="attr_spelltn2" placeholder="#">
+              </div>
+              <div class="sheet-item sheet-huge" style="width: 30%;">
+                <textarea name="attr_spellnotes2" class="sheet-shorttextarea" placeholder="Notes"></textarea>
+              </div>
+              <button type="roll" name="Magie/Wunder" value="@{gmtoggle}&{template:simple}  {{rollname=Magie/Wunder}} {{dice=[[@{hexslinginlvl}@{magtype}!!k1]]}}"></button>
+            </div>
+          </fieldset>
+          <div class="repcontainer" data-groupname="repeating_spells"></div>
+        </div>
+      </div>
      
       
-  </div>
+    </div>
    <!-- -->
     <!---->
    <!-- Arcane Ablities Tab -->
 
   
+</div>
+  
+                                                                <!-- END -->
+            
+            
 </div>
