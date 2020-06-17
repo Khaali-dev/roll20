@@ -773,6 +773,17 @@ var Odin = (function() {
 		 */
 		constructor() {
 			super('deck', null);
+			this.size = null;
+		}
+
+		/**
+		 * Sets the specified number of cards.
+		 * @param size The size of the deck.
+		 * @return the instance.
+		 */
+		setSize(size) {
+			this.size = size;
+			return this;
 		}
 
 		/**
@@ -812,6 +823,28 @@ var Odin = (function() {
 				 .map(cardid => getObj('card', cardid))
 				 .reject(_.isUndefined)
 				 .value()) : null;
+		}
+
+		/**
+		 * Recalls all cards, shuffle the specified deck.
+		 * @param deck The deck for which to recall the cards.
+		 * @return the deck.
+		 */
+		static async recallCards(deck) {
+			await new Promise(resolve => {
+				setTimeout(() => resolve(deck.recall(), 100));
+			});
+			deck.shuffle();
+			if (deck.size != null) {
+				let iter = 0;
+				await Deck.fetchId(deck, deck.obj.get('id'));
+				while (_.size(deck.obj.get('currentDeck').split(/\s*,\s*/)) != deck.size && iter < 20) {
+					log("sss = " + _.size(deck.obj.get('currentDeck').split(/\s*,\s*/)));
+					iter++;
+					await Deck.fetchId(deck, deck.obj.get('id'));
+				}
+			}
+			return deck;
 		}
 
 		/**
