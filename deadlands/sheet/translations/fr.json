@@ -128,6 +128,9 @@
 	"money": "Argent",
 	"worstNightmare": "Pire Cauchemars",
 	"mental": "Mental",
-	"physique": "Physique"
-	
+	"physique": "Physique",
+	"Werewolf": "Garou",
+	"Huckster": "Huckster",
+	"Voodoo": "Vaudou",
+	"Martial arts": "Arts martiaux"
 }
