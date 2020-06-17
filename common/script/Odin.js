@@ -129,13 +129,11 @@ var Odin = (function() {
 		 * @param name   The name of the test.
 		 * @param wip    True if work in progress.
 		 * @param assert The function which defines the assertion to satisfy.
-		 * @param async  True if the test is asynchronous.
 		 */
-		constructor(name, wip, assert, async) {
+		constructor(name, wip, assert) {
 			this.name = name;
 			this.wip = wip;
 			this.assert = assert;
-			this.async = async;
 		}
 
 		/**
@@ -245,16 +243,6 @@ var Odin = (function() {
 		constructor(name) {
 			this.name = name;
 			this.tests = [];
-			this.nextAsync = false;
-		}
-
-		/**
-		 * Defines the next test to add as asynchronous.
-		 * @return the instance.
-		 */
-		async() {
-			this.nextAsync = true;
-			return this;
 		}
 
 		/**
@@ -269,7 +257,7 @@ var Odin = (function() {
 			suite.tests.forEach(async t => {
 				const wip = t.wip === true ? "[WIP] " : "[   ] ";
 				try {
-					log(wip + ((t.async === true ? await t.assert() : t.assert()) === true ? "[OK    ]" : "[   NOK]") + ": " + t.name + " ");
+					log(wip + (await t.assert() === true ? "[OK    ]" : "[   NOK]") + ": " + t.name + " ");
 				} catch (exception) {
 					log(wip + "[   NOK] because exception has been raised");
 				}
@@ -284,8 +272,7 @@ var Odin = (function() {
 		 * @return the instance.
 		 */
 		add(name, wip, assert) {
-			this.tests.push(new Test(name, wip, assert, this.nextAsync));
-			this.nextAsync = false;
+			this.tests.push(new Test(name, wip, assert));
 			return this;
 		}
 
