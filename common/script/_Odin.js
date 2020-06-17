@@ -377,9 +377,7 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	})
 
 	.add("Recalls cards and shuffle deck", false, async () => { //TODO
-		const decks = new Odin.Decks().recall().shuffle();
 		const deck = new Odin.Deck().setSize(4);
-		await Odin.Decks.fetchAll(decks);
 		await Odin.Deck.fetchName(deck, 'Actions');
 		await Odin.Deck.recallCards(deck);
 		const maxSize = _.size(deck.obj.get('currentDeck').split(/\s*,\s*/));
@@ -409,7 +407,6 @@ var _odin = _odin || new Odin.TestSuite("Odin")
 	// ------------------------------------------------------------------------
 
 	.add("Fetches all cards on table", false, async () => {
-		const decks = new Odin.Decks().recall();
 		const deck = new Odin.Deck().setSize(4);
 		await Odin.Deck.fetchName(deck, 'Actions');
 		await Odin.Deck.recallCards(deck);
