@@ -99,7 +99,7 @@ var Symbaroum = (function() {
 			}
 			return families;
 		}
-		
+
 		/**
 		 * Gets the specified family definition.
 		 * @param family The family to get.
