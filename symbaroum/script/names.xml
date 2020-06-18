@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<names>
+    <family id="ambrienMasculin">
+        <parts>
+            <part>Der</part>
+            <part>Dr</part>
+            <part>El</part>
+        </parts>
+        <parts>
+            <part>i</part>
+            <part>ia</part>
+            <part>le</part>
+            <part>io</part>
+        </parts>
+        <parts>
+            <part>ld</part>
+            <part>lf</part>
+            <part>lg</part>
+            <part>m</part>
+        </parts>
+        <parts>
+            <part>e</part>
+            <part>e</part>
+            <part>e</part>
+            <part>e</part>
+        </parts>
+        <parts>
+            <part>g</part>
+            <part>j</part>
+            <part>k</part>
+            <part>k</part>
+        </parts>
+        <parts>
+            <part>a</part>
+            <part>en</part>
+            <part>o</part>
+            <part>ar</part>
+            <part>e</part>
+        </parts>
+    </family>
+    <family id="ambrienNoble">
+        <parts>
+            <part>Ag</part>
+            <part>Al</part>
+            <part>Am</part>
+        </parts>
+        <parts>
+            <part>abag</part>
+            <part>adan</part>
+            <part>afin</part>
+            <part>agar</part>
+        </parts> 
+    </family>
+    
+</names>
