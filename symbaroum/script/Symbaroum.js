@@ -10,7 +10,7 @@ var Symbaroum = (function() {
 		 * @constructor
 		 */
 		constructor() {
-			this.data = {"names": {"family": [
+			this.data = {"names": [
 			    {
 			        "id": "ambrienMasculin",
 			        "parts": [
@@ -68,7 +68,7 @@ var Symbaroum = (function() {
 			            ]}
 			        ]
 			    }
-			]}};
+			]};
 		}
 
 		/**
@@ -107,8 +107,8 @@ var Symbaroum = (function() {
 		 */
 		definition(family) {
 			for (let i=0; i<this.data["names"].length; i++) {
-				if (this.data["names"][i] === family) {
-					return this.data["names"][i];
+				if (this.data["names"][i]['id'] === family) {
+					return this.data["names"][i]['parts'];
 				}
 			}
 			return null;
@@ -122,12 +122,12 @@ var Symbaroum = (function() {
 		generate(family) {
 			const definition = this.definition(family);
 			if (definition === null) {
-				return "Family not found [" + this.toString(this.families(), ', ') + "]";
+				return "Family '" + family + "' not found, use one of [" + this.toString(this.families(), ', ') + "]";
 			}
 			let name = "";
-			for (let i=0; i<this.data["parts"].length; i++) {
-				const part = this.data["parts"][i]["part"];
-				name = name + part[part.length() - 1];
+			for (let i=0; i<definition.length; i++) {
+				const part = definition[i]["part"];
+				name = name + part[randomInteger(part.length) - 1];
 			}
 			return name;
 		}
@@ -148,11 +148,10 @@ var Symbaroum = (function() {
 
 		/**
 		 * Processes the specified command.
-		 * @param cmd     The command to process.
-		 * @param args    The command arguments.
-		 * @param handler The ovbject which handle the command.
+		 * @param cmd  The command to process.
+		 * @param args The command arguments.
 		 */
-		static processCommand(cmd, args, handler) {
+		processCommand(cmd, args) {
 			if (cmd != 'symb') return;
 
 			if (args.length > 0) {
@@ -163,25 +162,17 @@ var Symbaroum = (function() {
 						args.length === 2 ?
 							this.names.generate(args[1]) :
 							"Invalid command to generate name, use !symb name [family]");
+
 				}
+
+			} else {
+
+				sendChat("Summary", "Use !symb name");
 
 			}
 
 		}
 
-	}
-
-	/**
-	 * Handles the api message.
-	 * @param msg     The message to handle.
-	 * @param process The static method which process the command.
-	 * @param handler The object which handles the message processing.
-	 */
-	static async handleCommand(msg, process, handler) {
-		if (msg.type != 'api') return;
-		var args = msg.content.split(/\s+/);
-		var cmd = args.shift().substring(1);
-		process(cmd, args, handler);
 	}
 
 	/**
@@ -193,8 +184,6 @@ var Symbaroum = (function() {
 	 * @return the public elements.
 	 */
 	return  {
-		handleCommand : handleCommand,
-		EventHandler: EventHandler,
 		handler: handler,
 	};
 
@@ -204,9 +193,9 @@ var Symbaroum = (function() {
 on('ready',function() {
 	'use strict';
 	on('chat:message', (msg) => {
-		Symbaroum.handleCommand(
-			msg,
-			Symbaroum.EventHandler.processCommand,
-			Symbaroum.handler);
+		if (msg.type != 'api') return;
+		var args = msg.content.split(/\s+/);
+		var cmd = args.shift().substring(1);
+		Symbaroum.handler.processCommand(cmd, args);
 	});
 });
