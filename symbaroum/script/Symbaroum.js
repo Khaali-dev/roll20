@@ -78,7 +78,7 @@ var Symbaroum = (function() {
 		 * @return the string.
 		 */
 		toString(items, separator) {
-			var string = "";
+			let string = "";
 			if (items.length > 0) {
 				string += items[0];
 				for (let i=1; i<items.length; i++) {
@@ -133,7 +133,7 @@ var Symbaroum = (function() {
 		}
 
 	}
-	
+
 	/**
 	 * The EventHandler class is the main class to handle commands.
 	 */

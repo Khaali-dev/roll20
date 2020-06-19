@@ -310,7 +310,7 @@ var Deadlands = (function() {
 				.add(new Odin.Dice(dice), size)
 				.roll();
 
-			var result = null;
+			let result = null;
 			if (RollInterpreter.isFumble(rolls) === true) {
 				result = "Tu t'es planté !";
 			} else if (rolls.atLeast(tn) === false) {
@@ -319,7 +319,7 @@ var Deadlands = (function() {
 				result = "Tu réussis avec " + RollInterpreter.getSuccess(rolls.max(), tn) + " degré(s)"
 			}
 
-			var html = "";
+			let html = "";
 			html += "<div class='sheet-rolltemplate-default'>";
 			html += "<table>";
 			html += "<caption>Jet " + size + "d" + dice + " SD:" + tn + "</caption>";

@@ -16,7 +16,7 @@ var Odin = (function() {
 		 * @return the string.
 		 */
 		static toString(items, separator) {
-			var string = "";
+			let string = "";
 			if (items.length > 0) {
 				string += items[0];
 				for (let i=1; i<items.length; i++) {
@@ -112,8 +112,8 @@ var Odin = (function() {
 		 */
 		static async handleCommand(msg, process, handler) {
 			if (msg.type != 'api') return;
-			var args = msg.content.split(/\s+/);
-			var cmd = args.shift().substring(1);
+			const args = msg.content.split(/\s+/);
+			const cmd = args.shift().substring(1);
 			process(cmd, args, handler);
 		}
 
@@ -1017,7 +1017,7 @@ var Odin = (function() {
 		 * @return a dice roll value.
 		 */
 		value() {
-			var value = randomInteger(this.side);
+			const value = randomInteger(this.side);
 			return this.open === true && this.side === value ? value + this.value() : value;
 		}
 
@@ -1073,7 +1073,7 @@ var Odin = (function() {
 		 * @return a new rolls.
 		 */
 		roll() {
-			var rolls = new Rolls();
+			const rolls = new Rolls();
 			for (let [dice,size] of this.dices) {
 				for (let i=0; i<size; i++) {
 					rolls.add(dice.roll());
@@ -1086,7 +1086,7 @@ var Odin = (function() {
 		 * @return the textual expression of the dices.
 		 */
 		toString() {
-			var dices = [];
+			const dices = [];
 			for (let [dice,size] of this.dices) {
 				dices.push(size + dice.toString());
 			}
