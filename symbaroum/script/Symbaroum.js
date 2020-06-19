@@ -72,24 +72,6 @@ var Symbaroum = (function() {
 		}
 
 		/**
-		 * Creates a string with ordered items. Each item will be separated by the specified separator.
-		 * @param items     The items to serialize.
-		 * @param separator The item separator.
-		 * @return the string.
-		 */
-		toString(items, separator) {
-			let string = "";
-			if (items.length > 0) {
-				string += items[0];
-				for (let i=1; i<items.length; i++) {
-					string += separator;
-					string += items[i];
-				}
-			}
-			return string;
-		}
-
-		/**
 		 * @return all families.
 		 */
 		families() {
@@ -122,7 +104,7 @@ var Symbaroum = (function() {
 		generate(family) {
 			const definition = this.definition(family);
 			if (definition === null) {
-				return "Family '" + family + "' not found, use one of [" + this.toString(this.families(), '|') + "]";
+				return "Family '" + family + "' not found, use one of [" + this.families().join('|') + "]";
 			}
 			let name = "";
 			for (let i=0; i<definition.length; i++) {
@@ -175,7 +157,7 @@ var Symbaroum = (function() {
 		 * @return the command usage.
 		 */
 		usage() {
-			return "Use !symb name [" + this.names.toString(this.names.families(), '|') + "]";
+			return "Use !symb name [" + this.names.families().join('|') + "]";
 		}
 
 	}

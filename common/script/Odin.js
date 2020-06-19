@@ -5,31 +5,6 @@ var Odin = (function() {
 	'use strict';
 
 	/**
-	 * The Strings class is an utility class with static methods to manage textual expressions.
-	 */
-	class Strings {
-
-		/**
-		 * Creates a string with ordered items. Each item will be separated by the specified separator.
-		 * @param items     The items to serialize.
-		 * @param separator The item separator.
-		 * @return the string.
-		 */
-		static toString(items, separator) {
-			let string = "";
-			if (items.length > 0) {
-				string += items[0];
-				for (let i=1; i<items.length; i++) {
-					string += separator;
-					string += items[i];
-				}
-			}
-			return string;
-		}
-
-	}
-
-	/**
 	 * The Collections class is an utility class with static methods to manage collections.
 	 */
 	class Collections {
@@ -1090,7 +1065,7 @@ var Odin = (function() {
 			for (let [dice,size] of this.dices) {
 				dices.push(size + dice.toString());
 			}
-			return Strings.toString(dices, ", ");
+			return dices.join(", ");
 		}
 
 	}
@@ -1246,7 +1221,7 @@ var Odin = (function() {
 		 * @return the textual expression of the rolls.
 		 */
 		toString() {
-			return Strings.toString(this.rolls, ", ");
+			return this.rolls.join(", ");
 		}
 
 		/**
@@ -1385,7 +1360,6 @@ var Odin = (function() {
 	 * @return the public elements.
 	 */
 	return  {
-		Strings: Strings,
 		Rankable: Rankable,
 		Rankables: Rankables,
 		Test: Test,
