@@ -122,7 +122,7 @@ var Symbaroum = (function() {
 		generate(family) {
 			const definition = this.definition(family);
 			if (definition === null) {
-				return "Family '" + family + "' not found, use one of [" + this.toString(this.families(), ', ') + "]";
+				return "Family '" + family + "' not found, use one of [" + this.toString(this.families(), '|') + "]";
 			}
 			let name = "";
 			for (let i=0; i<definition.length; i++) {
@@ -147,30 +147,35 @@ var Symbaroum = (function() {
 		}
 
 		/**
-		 * Processes the specified command.
-		 * @param cmd  The command to process.
-		 * @param args The command arguments.
+		 * Processes the specified message.
+		 * @param msg The message to process.
 		 */
-		processCommand(cmd, args) {
+		processMessage(msg) {
+
+			const args = msg.content.split(/\s+/);
+			const cmd = args.shift().substring(1);
+
 			if (cmd != 'symb') return;
 
-			if (args.length > 0) {
+			if (args.length > 0 && args[0] === 'name') {
 
-				if (args[0] === 'name') {
-					sendChat(
-						"Summary",
-						args.length === 2 ?
-							this.names.generate(args[1]) :
-							"Invalid command to generate name, use !symb name [family]");
-
-				}
+				sendChat(
+					msg.who,
+					args.length === 2 ? this.names.generate(args[1]) : this.usage());
 
 			} else {
 
-				sendChat("Summary", "Use !symb name");
+				sendChat(msg.who, this.usage());
 
 			}
 
+		}
+
+		/**
+		 * @return the command usage.
+		 */
+		usage() {
+			return "Use !symb name [" + this.names.toString(this.names.families(), '|') + "]";
 		}
 
 	}
@@ -194,8 +199,6 @@ on('ready',function() {
 	'use strict';
 	on('chat:message', (msg) => {
 		if (msg.type != 'api') return;
-		var args = msg.content.split(/\s+/);
-		var cmd = args.shift().substring(1);
-		Symbaroum.handler.processCommand(cmd, args);
+		Symbaroum.handler.processMessage(msg);
 	});
 });
